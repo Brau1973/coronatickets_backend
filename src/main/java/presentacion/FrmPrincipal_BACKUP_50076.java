@@ -21,9 +21,17 @@ import javax.swing.KeyStroke;
 public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
      private Container contenedor;
      private JMenuBar barraMenu;
+<<<<<<< HEAD
+     private JMenu menuInicio, menuRegristros, menuConsultas;
+     private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItConsultaEsp, menuItPlataforma;
+     String retorno = ""; // SGL
+     // private JDesktopPane desktopPane;
+     private JInternalFrame internalFrame, internalFrameEsp;
+=======
      private JMenu menuInicio, menuRegristros, menuConsultas, menuAyuda;
      private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItConsultaEspectaculo;
      private JInternalFrame internalFrame, internalFrameEspectaculo;
+>>>>>>> 981454dab987a48dbfb6536a4a7e1c0f54715051
      private JPanel miPanel;
      private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento;
      private JTextField txtNickname, txtNombre, txtApellido, txtEmail;
