@@ -22,7 +22,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{
      private Container contenedor;
      private JMenuBar barraMenu;
      private JMenu menuInicio, menuRegristros, menuConsultas;
-     private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItConsultaEsp;
+     private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItConsultaEsp, menuItPlataforma;
      String retorno = ""; // SGL
      // private JDesktopPane desktopPane;
      private JInternalFrame internalFrame, internalFrameEsp;
