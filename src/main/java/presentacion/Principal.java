@@ -6,6 +6,4 @@ public class Principal{
 	   FrmPrincipal frmInicio = new FrmPrincipal();
 	   frmInicio.setVisible(true);
      }
-
 }
-
