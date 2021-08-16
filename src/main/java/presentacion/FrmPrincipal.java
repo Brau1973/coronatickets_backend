@@ -18,26 +18,24 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
 @SuppressWarnings("serial")
-public class FrmPrincipal extends JFrame implements ActionListener{
+public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
      private Container contenedor;
      private JMenuBar barraMenu;
-     private JMenu menuInicio, menuRegristros, menuConsultas;
-     private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItConsultaEsp;
-     String retorno = ""; // SGL
-     // private JDesktopPane desktopPane;
-     private JInternalFrame internalFrame, internalFrameEsp;
+     private JMenu menuInicio, menuRegristros, menuConsultas, menuAyuda;
+     private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItConsultaEspectaculo;
+     private JInternalFrame internalFrame, internalFrameEspectaculo;
      private JPanel miPanel;
      private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento;
      private JTextField txtNickname, txtNombre, txtApellido, txtEmail;
-     private JButton btnAceptar, btnCancelar;
      private JSpinner spinDia, spinMes, spinAnio;
-     private ConsultarUsuario inFrmConsultaUsuario;
+     private JButton btnAceptar, btnCancelar;
+     private ConsultarUsuario internalFrameConsultaUsuario;
 
      // Constructor
      public FrmPrincipal(){
 	   inicializar();
 	   setTitle("coronaTickets.uy");
-	   setSize(530, 490);
+	   setSize(530, 547);
 	   setLocationRelativeTo(null);
 	   setResizable(false);
 	   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,54 +49,63 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	   menuInicio = new JMenu();
 	   menuRegristros = new JMenu();
 	   menuConsultas = new JMenu();
+	   menuAyuda = new JMenu();
 
 	   menuInicio.setText("Inicio");
 	   menuRegristros.setText("Registros");
 	   menuConsultas.setText("Consultas");
+	   menuAyuda.setText("Ayuda");
 
 	   barraMenu = new JMenuBar();
 	   barraMenu.add(menuInicio);
 	   barraMenu.add(menuRegristros);
 	   barraMenu.add(menuConsultas);
+	   barraMenu.add(menuAyuda);
+	   setJMenuBar(barraMenu);
 
 	   // Menu Item
 	   menuItAltaUsuario = new JMenuItem();
 	   menuItAltaEspectaculo = new JMenuItem();
 	   menuItConsultaUsuario = new JMenuItem();
-	   menuItConsultaEsp = new JMenuItem();
+	   menuItConsultaEspectaculo = new JMenuItem();
 
 	   // Menu Item Registrar
 	   menuItAltaUsuario.setText("Registrar Usuario");
 	   menuItAltaEspectaculo.setText("Registrar Espectaculo");
 	   menuItAltaUsuario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));
 	   menuItAltaEspectaculo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
+
 	   menuRegristros.add(menuItAltaUsuario);
 	   menuRegristros.addSeparator();
 	   menuRegristros.add(menuItAltaEspectaculo);
+
 	   menuItAltaUsuario.addActionListener(this);
 	   menuItAltaEspectaculo.addActionListener(this);
 
 	   // Menu Item Consultar
-	   menuItConsultaUsuario.setText("Consultar	 Usuario");
-	   menuItConsultaEsp.setText("Consultar Espectaculo");
+	   menuItConsultaUsuario.setText("Consultar Usuario");
+	   menuItConsultaEspectaculo.setText("Consultar Espectaculo");
 	   menuItConsultaUsuario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
-	   menuItConsultaEsp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+	   menuItConsultaEspectaculo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+
 	   menuConsultas.add(menuItConsultaUsuario);
 	   menuConsultas.addSeparator();
-	   menuConsultas.add(menuItConsultaEsp);
-	   menuItConsultaUsuario.addActionListener(this);
-	   menuItConsultaEsp.addActionListener(this);
+	   menuConsultas.add(menuItConsultaEspectaculo);
 
-	   setJMenuBar(barraMenu);
+	   menuItConsultaUsuario.addActionListener(this);
+	   menuItConsultaEspectaculo.addActionListener(this);
+
+	   // InternalFrame
 	   inFrmRegistrarUsuario();
 	   inFrmRegistrarEspectaculo();
-
-	   // InternalFrame Consultar Usuario
-	   inFrmConsultaUsuario = new ConsultarUsuario();
-	   inFrmConsultaUsuario.setVisible(false);
-	   contenedor.add(inFrmConsultaUsuario);
+	   inFrmConsultaUsuario();
      }
 
+     private void inFrmConsultaUsuario(){
+	   internalFrameConsultaUsuario = new ConsultarUsuario();
+	   internalFrameConsultaUsuario.setVisible(false);
+	   contenedor.add(internalFrameConsultaUsuario);
+     }
 
      // InternalFrame Registrar Usuario
      private void inFrmRegistrarUsuario(){
@@ -107,8 +114,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 
 	   internalFrame = new JInternalFrame("Registrar Usuario");
 	   internalFrame.add(miPanel);
-	   internalFrame.setBounds(30, 30, 460, 500);
-	   internalFrame.setResizable(false); // Permite redimencionar la ventana interna
+	   internalFrame.setBounds(30, 15, 460, 500);
+	   internalFrame.setResizable(false);
 	   internalFrame.setClosable(false);
 	   internalFrame.setIconifiable(false);
 	   internalFrame.setBorder(null);
@@ -127,7 +134,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	   lblNombre.setText("Nombre:");
 	   lblApellido.setText("Apellido:");
 	   lblEmail.setText("Email:");
-	   lblfNacimiento.setText("Fecha nacimiento:");
+	   lblfNacimiento.setText("Fecha de nacimiento:");
 
 	   lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 20));
 	   lblNickname.setFont(new java.awt.Font("Verdana", 1, 12));
@@ -136,12 +143,12 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	   lblEmail.setFont(new java.awt.Font("Verdana", 1, 12));
 	   lblfNacimiento.setFont(new java.awt.Font("Verdana", 1, 12));
 
-	   lblTitulo.setBounds(10, 3, 280, 35);
-	   lblNickname.setBounds(10, 70, 80, 25);
-	   lblNombre.setBounds(10, 110, 80, 25);
-	   lblApellido.setBounds(10, 150, 80, 25);
-	   lblEmail.setBounds(10, 190, 80, 25);
-	   lblfNacimiento.setBounds(10, 230, 150, 25);
+	   lblTitulo.setBounds(10, 1, 280, 25);
+	   lblNickname.setBounds(10, 50, 80, 25);
+	   lblNombre.setBounds(10, 90, 80, 25);
+	   lblApellido.setBounds(10, 130, 80, 25);
+	   lblEmail.setBounds(10, 170, 80, 25);
+	   lblfNacimiento.setBounds(10, 210, 150, 25);
 
 	   miPanel.add(lblTitulo);
 	   miPanel.add(lblNickname);
@@ -158,13 +165,13 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	   spinMes = new JSpinner();
 	   spinAnio = new JSpinner();
 
-	   txtNickname.setBounds(179, 68, 260, 25);
-	   txtNombre.setBounds(179, 108, 260, 25);
-	   txtApellido.setBounds(179, 148, 260, 25);
-	   txtEmail.setBounds(179, 188, 260, 25);
-	   spinDia.setBounds(179, 228, 45, 25);
-	   spinMes.setBounds(239, 228, 45, 25);
-	   spinAnio.setBounds(299, 228, 45, 25);
+	   txtNickname.setBounds(179, 48, 260, 25);
+	   txtNombre.setBounds(179, 88, 260, 25);
+	   txtApellido.setBounds(179, 128, 260, 25);
+	   txtEmail.setBounds(179, 168, 260, 25);
+	   spinDia.setBounds(179, 208, 45, 25);
+	   spinMes.setBounds(239, 208, 45, 25);
+	   spinAnio.setBounds(299, 208, 45, 25);
 
 	   miPanel.add(txtNickname);
 	   miPanel.add(txtNombre);
@@ -177,33 +184,35 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	   // Boton Aceptar
 	   btnAceptar = new JButton();
 	   btnAceptar.setText("Aceptar");
-	   btnAceptar.setBounds(230, 330, 100, 23);
+	   btnAceptar.setBounds(200, 270, 115, 25);
 	   miPanel.add(btnAceptar);
 	   btnAceptar.addActionListener(this);
 
 	   // Boton Cancelar
 	   btnCancelar = new JButton();
 	   btnCancelar.setText("Cancelar");
-	   btnCancelar.setBounds(337, 330, 100, 23);
+	   btnCancelar.setBounds(322, 270, 115, 25);
 	   miPanel.add(btnCancelar);
 	   btnCancelar.addActionListener(this);
      }
 
      // InternalFrame Registrar Espectaculo
      private void inFrmRegistrarEspectaculo(){
-	   JLabel lblArtista, lblPlataforma, lblNombre, lblDescripcion, lblDuracion;
+	   JLabel lblArtista, lblPlataforma, lblNombre, lblDescripcion, lblDuracion, lblCantEsp, lblCantMinEsp, lblCantMaxEsp, lblUrl, lblCosto, lblRegistro;
+	   JTextField txtArtista, txtPlataforma, txtNombre, txtDescripcion, txtDuracion, txtUrl, txtCosto, ltxtRegistro;
+	   JSpinner spinDia, spinMes, spinAnio, spinMin, spinMax;
 	   miPanel = new JPanel();
 	   miPanel.setLayout(null);
 
-	   internalFrameEsp = new JInternalFrame("Registrar Espectaculo");
-	   internalFrameEsp.add(miPanel);
-	   internalFrameEsp.setBounds(30, 30, 460, 500);
-	   internalFrameEsp.setResizable(false);
-	   internalFrameEsp.setClosable(false);
-	   internalFrameEsp.setIconifiable(false);
-	   internalFrameEsp.setBorder(null);
-	   ((javax.swing.plaf.basic.BasicInternalFrameUI) internalFrameEsp.getUI()).setNorthPane(null);
-	   contenedor.add(internalFrameEsp);
+	   internalFrameEspectaculo = new JInternalFrame("Registrar Espectaculo");
+	   internalFrameEspectaculo.add(miPanel);
+	   internalFrameEspectaculo.setBounds(30, 15, 460, 500);
+	   internalFrameEspectaculo.setResizable(false);
+	   internalFrameEspectaculo.setClosable(false);
+	   internalFrameEspectaculo.setIconifiable(false);
+	   internalFrameEspectaculo.setBorder(null);
+	   ((javax.swing.plaf.basic.BasicInternalFrameUI) internalFrameEspectaculo.getUI()).setNorthPane(null);
+	   contenedor.add(internalFrameEspectaculo);
 
 	   lblTitulo = new JLabel();
 	   lblArtista = new JLabel();
@@ -211,6 +220,12 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	   lblNombre = new JLabel();
 	   lblDescripcion = new JLabel();
 	   lblDuracion = new JLabel();
+	   lblCantEsp = new JLabel();
+	   lblCantMinEsp = new JLabel();
+	   lblCantMaxEsp = new JLabel();
+	   lblUrl = new JLabel();
+	   lblCosto = new JLabel();
+	   lblRegistro = new JLabel();
 
 	   lblTitulo.setText("Registrar Espectaculo");
 	   lblArtista.setText("Artista:");
@@ -218,6 +233,12 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	   lblNombre.setText("Nombre:");
 	   lblDescripcion.setText("Descripcion:");
 	   lblDuracion.setText("Duracion:");
+	   lblCantEsp.setText("Cant. espectadores:");
+	   lblCantMinEsp.setText("Minimo");
+	   lblCantMaxEsp.setText("Maximo");
+	   lblUrl.setText("URL:");
+	   lblCosto.setText("Costo:");
+	   lblRegistro.setText("Fecha de alta:");
 
 	   lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 20));
 	   lblArtista.setFont(new java.awt.Font("Verdana", 1, 12));
@@ -225,13 +246,25 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	   lblNombre.setFont(new java.awt.Font("Verdana", 1, 12));
 	   lblDescripcion.setFont(new java.awt.Font("Verdana", 1, 12));
 	   lblDuracion.setFont(new java.awt.Font("Verdana", 1, 12));
+	   lblCantEsp.setFont(new java.awt.Font("Verdana", 1, 12));
+	   lblCantMinEsp.setFont(new java.awt.Font("Verdana", 1, 12));
+	   lblCantMaxEsp.setFont(new java.awt.Font("Verdana", 1, 12));
+	   lblUrl.setFont(new java.awt.Font("Verdana", 1, 12));
+	   lblCosto.setFont(new java.awt.Font("Verdana", 1, 12));
+	   lblRegistro.setFont(new java.awt.Font("Verdana", 1, 12));
 
-	   lblTitulo.setBounds(10, 3, 350, 35);
-	   lblArtista.setBounds(10, 70, 110, 25);
-	   lblPlataforma.setBounds(10, 110, 110, 25);
-	   lblNombre.setBounds(10, 150, 110, 25);
-	   lblDescripcion.setBounds(10, 190, 110, 25);
-	   lblDuracion.setBounds(10, 230, 150, 25);
+	   lblTitulo.setBounds(10, 1, 350, 25);
+	   lblArtista.setBounds(10, 50, 110, 25);
+	   lblPlataforma.setBounds(10, 90, 110, 25);
+	   lblNombre.setBounds(10, 130, 110, 25);
+	   lblDescripcion.setBounds(10, 170, 110, 25);
+	   lblDuracion.setBounds(10, 210, 150, 25);
+	   lblCantEsp.setBounds(10, 250, 180, 25);
+	   lblCantMinEsp.setBounds(183, 250, 110, 25);
+	   lblCantMaxEsp.setBounds(320, 250, 110, 25);
+	   lblUrl.setBounds(10, 290, 150, 25);
+	   lblCosto.setBounds(10, 330, 150, 25);
+	   lblRegistro.setBounds(10, 370, 150, 25);
 
 	   miPanel.add(lblTitulo);
 	   miPanel.add(lblArtista);
@@ -239,6 +272,65 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	   miPanel.add(lblNombre);
 	   miPanel.add(lblDescripcion);
 	   miPanel.add(lblDuracion);
+	   miPanel.add(lblCantEsp);
+	   miPanel.add(lblCantMinEsp);
+	   miPanel.add(lblCantMaxEsp);
+	   miPanel.add(lblUrl);
+	   miPanel.add(lblCosto);
+	   miPanel.add(lblRegistro);
+
+	   txtArtista = new JTextField();
+	   txtPlataforma = new JTextField();
+	   txtNombre = new JTextField();
+	   txtDescripcion = new JTextField();
+	   txtDuracion = new JTextField();
+	   spinMin = new JSpinner();
+	   spinMax = new JSpinner();
+	   txtUrl = new JTextField();
+	   txtCosto = new JTextField();
+	   spinDia = new JSpinner();
+	   spinMes = new JSpinner();
+	   spinAnio = new JSpinner();
+
+	   txtArtista.setBounds(183, 48, 260, 25);
+	   txtPlataforma.setBounds(183, 88, 260, 25);
+	   txtNombre.setBounds(183, 128, 260, 25);
+	   txtDescripcion.setBounds(183, 168, 260, 25);
+	   txtDuracion.setBounds(183, 208, 260, 25);
+	   spinMin.setBounds(237, 246, 65, 25);
+	   spinMax.setBounds(376, 246, 65, 25);
+	   txtUrl.setBounds(183, 286, 260, 25);
+	   txtCosto.setBounds(183, 326, 260, 25);
+	   spinDia.setBounds(183, 366, 45, 25);
+	   spinMes.setBounds(243, 366, 45, 25);
+	   spinAnio.setBounds(303, 366, 45, 25);
+
+	   miPanel.add(txtArtista);
+	   miPanel.add(txtPlataforma);
+	   miPanel.add(txtNombre);
+	   miPanel.add(txtDescripcion);
+	   miPanel.add(txtDuracion);
+	   miPanel.add(spinMin);
+	   miPanel.add(spinMax);
+	   miPanel.add(txtUrl);
+	   miPanel.add(txtCosto);
+	   miPanel.add(spinDia);
+	   miPanel.add(spinMes);
+	   miPanel.add(spinAnio);
+
+	   // Boton Aceptar
+	   btnAceptar = new JButton();
+	   btnAceptar.setText("Aceptar");
+	   btnAceptar.setBounds(200, 418, 115, 25);
+	   miPanel.add(btnAceptar);
+	   btnAceptar.addActionListener(this);
+
+	   // Boton Cancelar
+	   btnCancelar = new JButton();
+	   btnCancelar.setText("Cancelar");
+	   btnCancelar.setBounds(322, 418, 115, 25);
+	   miPanel.add(btnCancelar);
+	   btnCancelar.addActionListener(this);
      }
 
      // Limpia Formulario
@@ -252,20 +344,22 @@ public class FrmPrincipal extends JFrame implements ActionListener{
      // Eventos
      public void actionPerformed(ActionEvent e){
 	   if(e.getSource() == menuItAltaUsuario){
-		 internalFrameEsp.setVisible(false);
-		 inFrmConsultaUsuario.setVisible(false);
+		 this.setSize(530, 390);
+		 internalFrameEspectaculo.setVisible(false);
+		 internalFrameConsultaUsuario.setVisible(false);
 		 internalFrame.setVisible(true);
 	   }
 	   if(e.getSource() == menuItAltaEspectaculo){
+		 this.setSize(530, 547);
 		 internalFrame.setVisible(false);
-		 inFrmConsultaUsuario.setVisible(false);
-		 internalFrameEsp.setVisible(true);
+		 internalFrameConsultaUsuario.setVisible(false);
+		 internalFrameEspectaculo.setVisible(true);
 	   }
 
 	   if(e.getSource() == menuItConsultaUsuario){
 		 internalFrame.setVisible(false);
-		 internalFrameEsp.setVisible(false);
-		 inFrmConsultaUsuario.setVisible(true);
+		 internalFrameEspectaculo.setVisible(false);
+		 internalFrameConsultaUsuario.setVisible(true);
 	   }
 
 	   if(e.getSource() == btnAceptar){
@@ -273,19 +367,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	   }
 	   if(e.getSource() == btnCancelar){
 		 internalFrame.setVisible(false);
-		 internalFrameEsp.setVisible(false);
-		 inFrmConsultaUsuario.setVisible(false);
+		 internalFrameEspectaculo.setVisible(false);
+		 internalFrameConsultaUsuario.setVisible(false);
 	   }
      }
 }
-
-
-// if(e.getSource() == menuItAltaUsuario){
-// if(internalFrameEsp.isVisible() == true){
-// internalFrameEsp.setVisible(false);
-// }
-// internalFrame.setVisible(true);
-// }
-// retorno = "AltaUsuario";
-// JOptionPane.showMessageDialog(null, retorno, "Informacion", JOptionPane.INFORMATION_MESSAGE);
-// this.dispose();
