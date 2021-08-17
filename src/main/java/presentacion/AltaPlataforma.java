@@ -4,15 +4,16 @@ import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class ConsultarUsuario extends JInternalFrame{
+public class AltaPlataforma extends JInternalFrame{
      private JButton btnAceptar, btnCancelar;
      private JPanel miPanel;
-     private JLabel lblTitulo;
-
+     private JLabel lblNombre, lblDescripcion, lblUrl;
+     private JTextField txtNombre;
      // Constructor
-     public ConsultarUsuario(){
+     public AltaPlataforma(){
 	   miPanel = new JPanel();
 	   miPanel.setLayout(null);
 
@@ -24,12 +25,22 @@ public class ConsultarUsuario extends JInternalFrame{
 	   setBorder(null);
 	   // setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	   ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
-	   lblTitulo = new JLabel();
-	   lblTitulo.setText("Registrar Usuario");
-	   lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 20));
-	   lblTitulo.setBounds(10, 1, 280, 25);
-	   miPanel.add(lblTitulo);
+//	   lblTitulo = new JLabel();
+//	   lblTitulo.setText("Alta plataforma");
+//	   lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 20));
+//	   lblTitulo.setBounds(10, 1, 280, 25);
+//	   miPanel.add(lblTitulo);
 
+	   
+	   lblNombre = new JLabel();
+	   lblNombre.setText("Nombre"); 
+	   lblNombre.setBounds(10,0,100,25);
+	   miPanel.add(lblNombre);
+	   
+	   txtNombre = new JTextField();
+	   txtNombre.setBounds(120,0,200,25);
+	   miPanel.add(txtNombre);
+	   
 	   // Boton Aceptar
 	   btnAceptar = new JButton();
 	   btnAceptar.setText("Aceptar");

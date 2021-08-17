@@ -1,1 +1,8 @@
 /target/
+<<<<<<< HEAD
+=======
+/bin/
+*.classpath
+/.settings/
+.gitignore
+>>>>>>> aa7cc2e68ac08df264eb84feeb04ed68f1c2e4ba
