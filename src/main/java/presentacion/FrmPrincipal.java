@@ -22,7 +22,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{
      private Container contenedor;
      private JMenuBar barraMenu;
      private JMenu menuInicio, menuRegristros, menuConsultas;
-     private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItConsultaEsp;
+     private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItAltaFuncionEspectaculo, menuItConsultaUsuario, menuItConsultaEsp;
      String retorno = ""; // SGL
      // private JDesktopPane desktopPane;
      private JInternalFrame internalFrame, internalFrameEsp;
@@ -64,19 +64,25 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	   // Menu Item
 	   menuItAltaUsuario = new JMenuItem();
 	   menuItAltaEspectaculo = new JMenuItem();
+	   menuItAltaFuncionEspectaculo = new JMenuItem();
 	   menuItConsultaUsuario = new JMenuItem();
 	   menuItConsultaEsp = new JMenuItem();
 
 	   // Menu Item Registrar
 	   menuItAltaUsuario.setText("Registrar Usuario");
 	   menuItAltaEspectaculo.setText("Registrar Espectaculo");
+	   menuItAltaFuncionEspectaculo.setText("Registrar Funcion De Espectaculo");
 	   menuItAltaUsuario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));
 	   menuItAltaEspectaculo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
+	   menuItAltaFuncionEspectaculo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
 	   menuRegristros.add(menuItAltaUsuario);
 	   menuRegristros.addSeparator();
 	   menuRegristros.add(menuItAltaEspectaculo);
+	   menuRegristros.addSeparator();
+	   menuRegristros.add(menuItAltaFuncionEspectaculo);
 	   menuItAltaUsuario.addActionListener(this);
 	   menuItAltaEspectaculo.addActionListener(this);
+	   menuItAltaFuncionEspectaculo.addActionListener(this);
 
 	   // Menu Item Consultar
 	   menuItConsultaUsuario.setText("Consultar	 Usuario");
@@ -92,6 +98,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	   setJMenuBar(barraMenu);
 	   inFrmRegistrarUsuario();
 	   inFrmRegistrarEspectaculo();
+	  // inFrmRegistrarAltaFuncionEspectaculo();
 
 	   // InternalFrame Consultar Usuario
 	   inFrmConsultaUsuario = new ConsultarUsuario();
