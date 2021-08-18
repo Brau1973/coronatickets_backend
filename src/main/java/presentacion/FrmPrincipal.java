@@ -57,8 +57,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
 	 menuAyuda = new JMenu();
 
 	 menuInicio.setText("Inicio");
-	 menuRegristros.setText("Registros");
-	 menuConsultas.setText("Consultas");
+	 menuRegristros.setText("Usuario");
+	 menuConsultas.setText("Espectaculo");
 	 menuPlataforma.setText("Plataforma");
 	 menuFuncion.setText("Funciones");
 	 menuAyuda.setText("Ayuda");
