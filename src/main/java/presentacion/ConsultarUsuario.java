@@ -21,6 +21,9 @@ public class ConsultarUsuario extends JInternalFrame{
     private JPanel miPanel;
     private JTextField txtBuscar;
     // private JLabel lblTitulo;
+    private String[] header = {"Nickname", "Nombre", "Apellido"};
+    private String[][] data = {{"sebagl", "Sebastian", "Gonzalez"}, {"aldrinkpo", "Aldrin", "Rebella"}, {"leito", "Leonardo", "Mesa"}, {"lucs12", "Lucas", "Sugo"}};
+    private String retorno;
 
     // Constructor
     public ConsultarUsuario(){
@@ -38,8 +41,6 @@ public class ConsultarUsuario extends JInternalFrame{
 	 lblTitulo.setBounds(10, 1, 280, 25);
 	 miPanel.add(lblTitulo);*/
 
-	 String[] header = {"Nickname", "Nombre", "Apellido"};
-	 String[][] data = {{"sebagl", "Sebastian", "Gonzalez"}, {"aldrinkpo", "Aldrin", "Rebella"}, {"leito", "Leonardo", "Mesa"}, {"lucs12", "Lucas", "Sugo"}};
 	 DefaultTableModel model = new DefaultTableModel(data, header);
 	 JTable tabUsuario = new JTable(model);
 	 tabUsuario.setPreferredScrollableViewportSize(new Dimension(40, 290));
@@ -59,12 +60,15 @@ public class ConsultarUsuario extends JInternalFrame{
 	 btnConsulta.setBounds(300, 20, 90, 25);
 	 btnConsulta.addActionListener(new ActionListener(){
 	     public void actionPerformed(ActionEvent e){
-		  String name = JOptionPane.showInputDialog("Otro buscar");
+		  retorno = "Nickname:  " + data[1][0].toString() + "\n";
+		  retorno += "Nombre:  " + data[1][1].toString() + "\n";
+		  retorno += "Apellido:  " + data[1][2].toString() + "\n";
+		  JOptionPane.showMessageDialog(null, retorno, "Informacion", JOptionPane.PLAIN_MESSAGE);
 	     }
 	 });
 	 miPanel.add(btnConsulta);
-
     }
+
 
 }
 
