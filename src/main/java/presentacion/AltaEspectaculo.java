@@ -22,10 +22,12 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
-	 setBounds(2, 2, 475, 485);
+	 setBounds(20, 20, 475, 485);
 	 setResizable(false);
 	 setClosable(true);
 	 setIconifiable(false);
+	 setBorder(null);
+	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
 
 	 lblTitulo = new JLabel();
 	 lblArtista = new JLabel();

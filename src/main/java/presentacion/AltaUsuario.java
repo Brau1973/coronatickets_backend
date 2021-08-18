@@ -22,10 +22,12 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
-	 setBounds(2, 2, 460, 420);
+	 setBounds(20, 20, 460, 420);
 	 setResizable(false);
 	 setClosable(true);
 	 setIconifiable(false);
+	 setBorder(null);
+	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
 
 	 // Label
 	 lblTitulo = new JLabel();

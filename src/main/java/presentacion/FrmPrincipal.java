@@ -24,9 +24,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     public FrmPrincipal(){
 	 inicializar();
 	 setTitle("coronaTickets.uy");
-	 // setSize(530, 547);
-	 setSize(550, 550);
-
+	 setSize(800, 600);
 	 setLocationRelativeTo(null);
 	 setResizable(false);
 	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,13 +49,11 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 barraMenu.add(menuConsultas);
 	 barraMenu.add(menuAyuda);
 	 setJMenuBar(barraMenu);
-
 	 // Menu Item
 	 menuItAltaUsuario = new JMenuItem();
 	 menuItAltaEspectaculo = new JMenuItem();
 	 menuItConsultaUsuario = new JMenuItem();
 	 menuItConsultaEspectaculo = new JMenuItem();
-
 	 // Menu Item Registrar
 	 menuItAltaUsuario.setText("Registrar Usuario");
 	 menuItAltaEspectaculo.setText("Registrar Espectaculo");
@@ -66,7 +62,6 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 menuRegristros.add(menuItAltaEspectaculo);
 	 menuItAltaUsuario.addActionListener(this);
 	 menuItAltaEspectaculo.addActionListener(this);
-
 	 // Menu Item Consultar
 	 menuItConsultaUsuario.setText("Consultar Usuario");
 	 menuItConsultaEspectaculo.setText("Consultar Espectaculo");
