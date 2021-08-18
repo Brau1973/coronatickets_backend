@@ -21,21 +21,22 @@ import javax.swing.KeyStroke;
 public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
      private Container contenedor;
      private JMenuBar barraMenu;
-     private JMenu menuInicio, menuRegristros, menuConsultas, menuAyuda;
-     private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItConsultaEspectaculo;
-     private JInternalFrame internalFrame, internalFrameEspectaculo;
+     private JMenu menuInicio, menuRegristros, menuConsultas, menuAyuda, menuPlataforma, menuFuncion;
+     private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItConsultaEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
+     private JInternalFrame internalFrameAltaUsuario, internalFrameEspectaculo, internalFrameAltaPlataforma, internalFrameAltaFuncion, internalFrameConsultaFuncion, internalFrameRegistroFuncion;
+
      private JPanel miPanel;
      private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento;
      private JTextField txtNickname, txtNombre, txtApellido, txtEmail;
      private JSpinner spinDia, spinMes, spinAnio;
      private JButton btnAceptar, btnCancelar;
-     private ConsultarUsuario internalFrameConsultaUsuario;
+     private ConsultarUsuario internalFrameConsultaUsuario;// porque esta aparte??? aldrin
 
      // Constructor
      public FrmPrincipal(){
 	   inicializar();
 	   setTitle("coronaTickets.uy");
-	   setSize(530, 547);
+	   setSize(800, 600);
 	   setLocationRelativeTo(null);
 	   setResizable(false);
 	   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,17 +50,23 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
 	   menuInicio = new JMenu();
 	   menuRegristros = new JMenu();
 	   menuConsultas = new JMenu();
+	   menuPlataforma = new JMenu();
+	   menuFuncion = new JMenu();
 	   menuAyuda = new JMenu();
 
 	   menuInicio.setText("Inicio");
 	   menuRegristros.setText("Registros");
 	   menuConsultas.setText("Consultas");
+	   menuPlataforma.setText("Plataforma");
+	   menuFuncion.setText("Funciones");
 	   menuAyuda.setText("Ayuda");
 
 	   barraMenu = new JMenuBar();
 	   barraMenu.add(menuInicio);
 	   barraMenu.add(menuRegristros);
 	   barraMenu.add(menuConsultas);
+	   barraMenu.add(menuPlataforma);
+	   barraMenu.add(menuFuncion);
 	   barraMenu.add(menuAyuda);
 	   setJMenuBar(barraMenu);
 
@@ -68,6 +75,10 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
 	   menuItAltaEspectaculo = new JMenuItem();
 	   menuItConsultaUsuario = new JMenuItem();
 	   menuItConsultaEspectaculo = new JMenuItem();
+	   menuItAltaPlataforma = new JMenuItem();
+	   menuItAltaFuncion = new JMenuItem();
+	   menuItConsultaFuncion = new JMenuItem();
+	   menuItRegistroFuncion = new JMenuItem();
 
 	   // Menu Item Registrar
 	   menuItAltaUsuario.setText("Registrar Usuario");
@@ -79,48 +90,94 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
 	   menuRegristros.addSeparator();
 	   menuRegristros.add(menuItAltaEspectaculo);
 
+
 	   menuItAltaUsuario.addActionListener(this);
 	   menuItAltaEspectaculo.addActionListener(this);
+
 
 	   // Menu Item Consultar
 	   menuItConsultaUsuario.setText("Consultar Usuario");
 	   menuItConsultaEspectaculo.setText("Consultar Espectaculo");
 	   menuItConsultaUsuario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
 	   menuItConsultaEspectaculo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
-
 	   menuConsultas.add(menuItConsultaUsuario);
 	   menuConsultas.addSeparator();
 	   menuConsultas.add(menuItConsultaEspectaculo);
-
 	   menuItConsultaUsuario.addActionListener(this);
 	   menuItConsultaEspectaculo.addActionListener(this);
 
+	   // Menu Plataforma
+	   menuItAltaPlataforma.setText("Alta Plataforma");
+	   menuPlataforma.add(menuItAltaPlataforma);
+	   menuItAltaPlataforma.addActionListener(this);
+	   
+	// Menu Funcion
+	   menuItAltaFuncion.setText("Alta Funcion");
+	   menuFuncion.add(menuItAltaFuncion);
+	   menuItAltaFuncion.addActionListener(this);
+	   
+	   menuItConsultaFuncion.setText("Consulta Funcion");
+	   menuFuncion.add(menuItConsultaFuncion);
+	   menuItConsultaFuncion.addActionListener(this);
+	   
+	   menuItRegistroFuncion.setText("Registro Funcion");
+	   menuFuncion.add(menuItRegistroFuncion);
+	   menuItRegistroFuncion.addActionListener(this);
+	   
 	   // InternalFrame
 	   inFrmRegistrarUsuario();
 	   inFrmRegistrarEspectaculo();
-	   inFrmConsultaUsuario();
-     }
 
+	   inFrmConsultaUsuario();
+	   inFrmAltaPlataforma();
+	   inFrmAltaFuncion();
+	   inFrmConsultaFuncion();
+	   inFrmRegistroFuncion();
+     }
+     
      private void inFrmConsultaUsuario(){
 	   internalFrameConsultaUsuario = new ConsultarUsuario();
 	   internalFrameConsultaUsuario.setVisible(false);
 	   contenedor.add(internalFrameConsultaUsuario);
      }
+     
+     private void inFrmAltaPlataforma() {
+    	 internalFrameAltaPlataforma = new AltaPlataforma();
+    	 internalFrameAltaPlataforma.setVisible(false);
+	  	 contenedor.add(internalFrameAltaPlataforma);
 
+     }
+     private void inFrmAltaFuncion() {
+    	 internalFrameAltaFuncion = new AltaFuncion();
+    	 internalFrameAltaFuncion.setVisible(false);
+	  	 contenedor.add(internalFrameAltaFuncion);
+
+     }
+     private void inFrmConsultaFuncion() {
+    	 internalFrameConsultaFuncion = new ConsultaFuncion();
+    	 internalFrameConsultaFuncion.setVisible(false);
+	  	 contenedor.add(internalFrameConsultaFuncion);
+    	 
+     }
+     private void inFrmRegistroFuncion() {
+    	 internalFrameRegistroFuncion = new RegistroFuncion();
+    	 internalFrameRegistroFuncion.setVisible(false);
+	  	 contenedor.add(internalFrameRegistroFuncion);
+     }
      // InternalFrame Registrar Usuario
      private void inFrmRegistrarUsuario(){
 	   miPanel = new JPanel();
 	   miPanel.setLayout(null);
 
-	   internalFrame = new JInternalFrame("Registrar Usuario");
-	   internalFrame.add(miPanel);
-	   internalFrame.setBounds(30, 15, 460, 500);
-	   internalFrame.setResizable(false);
-	   internalFrame.setClosable(false);
-	   internalFrame.setIconifiable(false);
-	   internalFrame.setBorder(null);
-	   ((javax.swing.plaf.basic.BasicInternalFrameUI) internalFrame.getUI()).setNorthPane(null);
-	   contenedor.add(internalFrame);
+	   internalFrameAltaUsuario = new JInternalFrame("Registrar Usuario");
+	   internalFrameAltaUsuario.add(miPanel);
+	   internalFrameAltaUsuario.setBounds(30, 15, 460, 500);
+	   internalFrameAltaUsuario.setResizable(false);
+	   internalFrameAltaUsuario.setClosable(false);
+	   internalFrameAltaUsuario.setIconifiable(false);
+	   internalFrameAltaUsuario.setBorder(null);
+	   ((javax.swing.plaf.basic.BasicInternalFrameUI) internalFrameAltaUsuario.getUI()).setNorthPane(null);
+	   contenedor.add(internalFrameAltaUsuario);
 
 	   lblTitulo = new JLabel();
 	   lblNickname = new JLabel();
@@ -197,7 +254,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
      }
 
      // InternalFrame Registrar Espectaculo
-     private void inFrmRegistrarEspectaculo(){
+     private void inFrmRegistrarEspectaculo(){// mirar error. Aldrin
 	   JLabel lblArtista, lblPlataforma, lblNombre, lblDescripcion, lblDuracion, lblCantEsp, lblCantMinEsp, lblCantMaxEsp, lblUrl, lblCosto, lblRegistro;
 	   JTextField txtArtista, txtPlataforma, txtNombre, txtDescripcion, txtDuracion, txtUrl, txtCosto, ltxtRegistro;
 	   JSpinner spinDia, spinMes, spinAnio, spinMin, spinMax;
@@ -343,32 +400,43 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
 
      // Eventos
      public void actionPerformed(ActionEvent e){
+    	 internalFrameEspectaculo.setVisible(false);
+    	 internalFrameConsultaUsuario.setVisible(false);
+    	 internalFrameAltaUsuario.setVisible(false);
+    	 internalFrameAltaPlataforma.setVisible(false);
+    	 internalFrameAltaFuncion.setVisible(false);
+    	 
 	   if(e.getSource() == menuItAltaUsuario){
-		 this.setSize(530, 390);
-		 internalFrameEspectaculo.setVisible(false);
-		 internalFrameConsultaUsuario.setVisible(false);
-		 internalFrame.setVisible(true);
+		 internalFrameAltaUsuario.setVisible(true);
 	   }
 	   if(e.getSource() == menuItAltaEspectaculo){
-		 this.setSize(530, 547);
-		 internalFrame.setVisible(false);
-		 internalFrameConsultaUsuario.setVisible(false);
 		 internalFrameEspectaculo.setVisible(true);
 	   }
 
 	   if(e.getSource() == menuItConsultaUsuario){
-		 internalFrame.setVisible(false);
-		 internalFrameEspectaculo.setVisible(false);
 		 internalFrameConsultaUsuario.setVisible(true);
 	   }
-
+	  
 	   if(e.getSource() == btnAceptar){
 		 limpiarPantalla();
 	   }
-	   if(e.getSource() == btnCancelar){
-		 internalFrame.setVisible(false);
-		 internalFrameEspectaculo.setVisible(false);
-		 internalFrameConsultaUsuario.setVisible(false);
+//	   if(e.getSource() == btnCancelar){
+//		 internalFrame.setVisible(false);
+//		 internalFrameEspectaculo.setVisible(false);
+//		 internalFrameConsultaUsuario.setVisible(false);
+//	   }
+	   if(e.getSource() == menuItAltaPlataforma){
+		 internalFrameAltaPlataforma.setVisible(true);
 	   }
+	   if(e.getSource() == menuItAltaFuncion){
+			 internalFrameAltaFuncion.setVisible(true);
+		   }
+	   if(e.getSource() == menuItConsultaFuncion){
+			 internalFrameConsultaFuncion.setVisible(true);
+		   }
+	   if(e.getSource() == menuItRegistroFuncion){
+			 internalFrameRegistroFuncion.setVisible(true);
+		   }
+
      }
 }
