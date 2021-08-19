@@ -54,7 +54,6 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 lblApellido.setBounds(10, 130, 80, 25);
 	 lblEmail.setBounds(10, 170, 80, 25);
 	 lblfNacimiento.setBounds(10, 210, 150, 25);
-
 	 // Agrego label al Panel
 	 miPanel.add(lblTitulo);
 	 miPanel.add(lblNickname);
@@ -78,7 +77,6 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 spinDia.setBounds(179, 208, 45, 25);
 	 spinMes.setBounds(239, 208, 45, 25);
 	 spinAnio.setBounds(299, 208, 45, 25);
-
 	 // Agrego JTextField al Panel
 	 miPanel.add(txtNickname);
 	 miPanel.add(txtNombre);
@@ -94,6 +92,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 btnAceptar.setBounds(200, 270, 115, 25);
 	 miPanel.add(btnAceptar);
 	 btnAceptar.addActionListener(this);
+
 	 // Boton Cancelar
 	 btnCancelar = new JButton();
 	 btnCancelar.setText("Cancelar");
@@ -118,5 +117,4 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	     System.out.println("Cancelar");
 	 }
     }
-
 }

@@ -3,36 +3,25 @@ package presentacion;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 
 @SuppressWarnings("serial")
-public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
+public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia nombre de algunas variables, ej Registro por Alta. 79S
     private Container contenedor;
     private JMenuBar barraMenu;
-    private JMenu menuInicio, menuRegristros, menuConsultas, menuAyuda, menuPlataforma, menuFuncion;
+    private JMenu menuInicio, menuUsuario, menuEspectaculo, menuAyuda, menuPlataforma, menuFuncion;
     private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItConsultaEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
-    private JInternalFrame inFrameEspectaculo, internalFrameAltaPlataforma, internalFrameAltaFuncion, internalFrameConsultaFuncion, internalFrameRegistroFuncion;
+    private JInternalFrame internalFrameAltaPlataforma, internalFrameAltaFuncion, internalFrameConsultaFuncion, internalFrameRegistroFuncion;
 
-    private JPanel miPanel;
-    private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento;
-    private JTextField txtNickname, txtNombre, txtApellido, txtEmail;
-    private JSpinner spinDia, spinMes, spinAnio;
-    private JButton btnAceptar, btnCancelar;
-    private ConsultarUsuario internalFrameConsultaUsuario;// porque esta aparte??? aldrin
     private AltaUsuario internalFrameAltaUsuario;
+    private ConsultarUsuario internalFrameConsultaUsuario;
     private AltaEspectaculo internalFrameAltaEspectaculo;
+
 
     // Constructor
     public FrmPrincipal(){
@@ -47,32 +36,30 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
     private void inicializar(){
 	 contenedor = getContentPane();
 	 contenedor.setLayout(null);
-
-	 // Menu
+	 // JMenu
 	 menuInicio = new JMenu();
-	 menuRegristros = new JMenu();
-	 menuConsultas = new JMenu();
+	 menuUsuario = new JMenu();
+	 menuEspectaculo = new JMenu();
 	 menuPlataforma = new JMenu();
 	 menuFuncion = new JMenu();
 	 menuAyuda = new JMenu();
-
+	 // Se realizan los cambios que hablamos en el menu. 79S
 	 menuInicio.setText("Inicio");
-	 menuRegristros.setText("Usuario");
-	 menuConsultas.setText("Espectaculo");
+	 menuUsuario.setText("Usuario");
+	 menuEspectaculo.setText("Espectaculo");
 	 menuPlataforma.setText("Plataforma");
 	 menuFuncion.setText("Funciones");
 	 menuAyuda.setText("Ayuda");
-
 	 barraMenu = new JMenuBar();
 	 barraMenu.add(menuInicio);
-	 barraMenu.add(menuRegristros);
-	 barraMenu.add(menuConsultas);
+	 barraMenu.add(menuUsuario);
+	 barraMenu.add(menuEspectaculo);
 	 barraMenu.add(menuPlataforma);
 	 barraMenu.add(menuFuncion);
 	 barraMenu.add(menuAyuda);
 	 setJMenuBar(barraMenu);
 
-	 // Menu Item
+	 // MenuItem
 	 menuItAltaUsuario = new JMenuItem();
 	 menuItAltaEspectaculo = new JMenuItem();
 	 menuItConsultaUsuario = new JMenuItem();
@@ -82,53 +69,45 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
 	 menuItConsultaFuncion = new JMenuItem();
 	 menuItRegistroFuncion = new JMenuItem();
 
-	 // Menu Item Registrar
-	 menuItAltaUsuario.setText("Registrar Usuario");
-	 menuItAltaEspectaculo.setText("Registrar Espectaculo");
-	 menuItAltaUsuario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));
-	 menuItAltaEspectaculo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
-
-	 menuRegristros.add(menuItAltaUsuario);
-	 menuRegristros.addSeparator();
-	 menuRegristros.add(menuItAltaEspectaculo);
-
-	 menuItAltaUsuario.addActionListener(this);
-	 menuItAltaEspectaculo.addActionListener(this);
-
-	 // Menu Item Consultar
+	 // Menu Item Usuario
+	 menuItAltaUsuario.setText("Alta Usuario");
 	 menuItConsultaUsuario.setText("Consultar Usuario");
-	 menuItConsultaEspectaculo.setText("Consultar Espectaculo");
-	 menuItConsultaUsuario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
-	 menuItConsultaEspectaculo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
-	 menuConsultas.add(menuItConsultaUsuario);
-	 menuConsultas.addSeparator();
-	 menuConsultas.add(menuItConsultaEspectaculo);
+	 menuUsuario.add(menuItAltaUsuario);
+	 menuUsuario.addSeparator();
+	 menuUsuario.add(menuItConsultaUsuario);
+	 menuItAltaUsuario.addActionListener(this);
 	 menuItConsultaUsuario.addActionListener(this);
+
+	 // Menu Item Espectaculo
+	 menuItAltaEspectaculo.setText("Alta Espectaculo");
+	 menuItConsultaEspectaculo.setText("Consultar Espectaculo");
+	 menuEspectaculo.add(menuItAltaEspectaculo);
+	 menuEspectaculo.addSeparator();
+	 menuEspectaculo.add(menuItConsultaEspectaculo);
+	 menuItAltaEspectaculo.addActionListener(this);
 	 menuItConsultaEspectaculo.addActionListener(this);
 
-	 // Menu Plataforma
+	 // Menu Item Plataforma
 	 menuItAltaPlataforma.setText("Alta Plataforma");
 	 menuPlataforma.add(menuItAltaPlataforma);
 	 menuItAltaPlataforma.addActionListener(this);
 
-	 // Menu Funcion
+	 // Menu Item Funcion
 	 menuItAltaFuncion.setText("Alta Funcion");
 	 menuFuncion.add(menuItAltaFuncion);
 	 menuItAltaFuncion.addActionListener(this);
-
 	 menuItConsultaFuncion.setText("Consulta Funcion");
 	 menuFuncion.add(menuItConsultaFuncion);
 	 menuItConsultaFuncion.addActionListener(this);
-
-	 menuItRegistroFuncion.setText("Registro Funcion");
+	 menuItRegistroFuncion.setText("Registro Funcion"); // La funcion se registra en espectaculo, no seria mejor que este en el menuEspectaculo ??. 79S
 	 menuFuncion.add(menuItRegistroFuncion);
 	 menuItRegistroFuncion.addActionListener(this);
 
-	 // InternalFrame
-
+	 // Casos de uso
 	 inFrmAltaUsuario();
-	 inFrmAltaEspectaculo();
 	 inFrmConsultaUsuario();
+	 inFrmAltaEspectaculo();
+	 // inFrmConsultaEspectaculo
 	 inFrmAltaPlataforma();
 	 inFrmAltaFuncion();
 	 inFrmConsultaFuncion();
@@ -142,6 +121,13 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
 	 contenedor.add(internalFrameAltaUsuario);
     }
 
+    // InternalFrame Consulta Usuario
+    private void inFrmConsultaUsuario(){
+	 internalFrameConsultaUsuario = new ConsultarUsuario();
+	 internalFrameConsultaUsuario.setVisible(false);
+	 contenedor.add(internalFrameConsultaUsuario);
+    }
+
     // InternalFrame Alta Espectaculo
     private void inFrmAltaEspectaculo(){
 	 internalFrameAltaEspectaculo = new AltaEspectaculo();
@@ -149,12 +135,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
 	 contenedor.add(internalFrameAltaEspectaculo);
     }
 
-    private void inFrmConsultaUsuario(){
-	 internalFrameConsultaUsuario = new ConsultarUsuario();
-	 internalFrameConsultaUsuario.setVisible(false);
-	 contenedor.add(internalFrameConsultaUsuario);
-    }
-
+    // InternalFrame Alta Plataforma
     private void inFrmAltaPlataforma(){
 	 internalFrameAltaPlataforma = new AltaPlataforma();
 	 internalFrameAltaPlataforma.setVisible(false);
@@ -162,62 +143,56 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
 
     }
 
+    // InternalFrame Alta Funcion
     private void inFrmAltaFuncion(){
 	 internalFrameAltaFuncion = new AltaFuncion();
 	 internalFrameAltaFuncion.setVisible(false);
 	 contenedor.add(internalFrameAltaFuncion);
     }
 
+    // InternalFrame Consulta Funcion
     private void inFrmConsultaFuncion(){
 	 internalFrameConsultaFuncion = new ConsultaFuncion();
 	 internalFrameConsultaFuncion.setVisible(false);
 	 contenedor.add(internalFrameConsultaFuncion);
     }
 
+    // InternalFrame Registro Funcion
     private void inFrmRegistroFuncion(){
 	 internalFrameRegistroFuncion = new RegistroFuncion();
 	 internalFrameRegistroFuncion.setVisible(false);
 	 contenedor.add(internalFrameRegistroFuncion);
     }
 
-    // Limpia Formulario
-    private void limpiarPantalla(){
-	 txtNickname.setText("");
-	 txtNombre.setText("");
-	 txtApellido.setText("");
-	 txtEmail.setText("");
-    }
 
     // Eventos
     public void actionPerformed(ActionEvent e){
-	 // internalFrameEspectaculo.setVisible(false);
-	 internalFrameConsultaUsuario.setVisible(false);
 	 internalFrameAltaUsuario.setVisible(false);
+	 internalFrameConsultaUsuario.setVisible(false);
+	 internalFrameAltaEspectaculo.setVisible(false);
 	 internalFrameAltaPlataforma.setVisible(false);
 	 internalFrameAltaFuncion.setVisible(false);
+	 internalFrameConsultaFuncion.setVisible(false);
+	 internalFrameRegistroFuncion.setVisible(false);
 
 	 if(e.getSource() == menuItAltaUsuario){
 	     internalFrameAltaUsuario.setVisible(true);
 	 }
-	 if(e.getSource() == menuItAltaEspectaculo){
-	     // internalFrameEspectaculo.setVisible(true);
-	 }
-
 	 if(e.getSource() == menuItConsultaUsuario){
 	     internalFrameConsultaUsuario.setVisible(true);
 	 }
 
-	 if(e.getSource() == btnAceptar){
-	     limpiarPantalla();
+	 if(e.getSource() == menuItAltaEspectaculo){
+	     internalFrameAltaEspectaculo.setVisible(true);
 	 }
-	 // if(e.getSource() == btnCancelar){
-	 // internalFrame.setVisible(false);
-	 // internalFrameEspectaculo.setVisible(false);
-	 // internalFrameConsultaUsuario.setVisible(false);
-	 // }
+	 if(e.getSource() == menuItConsultaEspectaculo){
+	     // internalFrameConsultaEspectaculo.setVisible(true);
+	 }
+
 	 if(e.getSource() == menuItAltaPlataforma){
 	     internalFrameAltaPlataforma.setVisible(true);
 	 }
+
 	 if(e.getSource() == menuItAltaFuncion){
 	     internalFrameAltaFuncion.setVisible(true);
 	 }
@@ -227,6 +202,5 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
 	 if(e.getSource() == menuItRegistroFuncion){
 	     internalFrameRegistroFuncion.setVisible(true);
 	 }
-
     }
 }
