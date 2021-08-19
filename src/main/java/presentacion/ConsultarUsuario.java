@@ -38,7 +38,7 @@ public class ConsultarUsuario extends JInternalFrame{
 	 setBorder(null);
 	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
 	 lblTitulo = new JLabel();
-	 lblTitulo.setText("Consulta Usuario");
+	 lblTitulo.setText("Lista de Usuarios");
 	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 20));
 	 lblTitulo.setBounds(10, 1, 280, 25);
 	 miPanel.add(lblTitulo);
