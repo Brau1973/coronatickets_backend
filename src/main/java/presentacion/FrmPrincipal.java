@@ -125,7 +125,6 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 19S
 	 menuItRegistroFuncion.addActionListener(this);
 
 	 // InternalFrame
-
 	 inFrmAltaUsuario();
 	 inFrmAltaEspectaculo();
 	 inFrmConsultaUsuario();
