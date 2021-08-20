@@ -9,19 +9,21 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia nombre de algunas variables, ej Registro por Alta. 79S
     private Container contenedor;
     private JMenuBar barraMenu;
     private JMenu menuInicio, menuUsuario, menuEspectaculo, menuAyuda, menuPlataforma, menuFuncion;
-    private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItConsultaEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
+    private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItModificarDatosUsuario, menuItConsultaEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
     private JInternalFrame internalFrameAltaPlataforma, internalFrameAltaFuncion, internalFrameConsultaFuncion, internalFrameRegistroFuncion;
 
     private AltaUsuario internalFrameAltaUsuario;
     private ConsultarUsuario internalFrameConsultaUsuario;
     private AltaEspectaculo internalFrameAltaEspectaculo;
-
+    private ConsultaEspectaculo internalFrameConsultaEspectaculo;
+    private ModificarDatosUsuario internalFrameModificarDatosUsuario;
 
     // Constructor
     public FrmPrincipal(){
@@ -61,8 +63,9 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 
 	 // MenuItem
 	 menuItAltaUsuario = new JMenuItem();
-	 menuItAltaEspectaculo = new JMenuItem();
 	 menuItConsultaUsuario = new JMenuItem();
+	 menuItModificarDatosUsuario = new JMenuItem();
+	 menuItAltaEspectaculo = new JMenuItem();
 	 menuItConsultaEspectaculo = new JMenuItem();
 	 menuItAltaPlataforma = new JMenuItem();
 	 menuItAltaFuncion = new JMenuItem();
@@ -72,11 +75,15 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 // Menu Item Usuario
 	 menuItAltaUsuario.setText("Alta Usuario");
 	 menuItConsultaUsuario.setText("Consultar Usuario");
+	 menuItModificarDatosUsuario.setText("Modificar Datos Usuario");
 	 menuUsuario.add(menuItAltaUsuario);
 	 menuUsuario.addSeparator();
 	 menuUsuario.add(menuItConsultaUsuario);
+	 menuUsuario.addSeparator();
+	 menuUsuario.add(menuItModificarDatosUsuario);
 	 menuItAltaUsuario.addActionListener(this);
 	 menuItConsultaUsuario.addActionListener(this);
+	 menuItModificarDatosUsuario.addActionListener(this);
 
 	 // Menu Item Espectaculo
 	 menuItAltaEspectaculo.setText("Alta Espectaculo");
@@ -106,8 +113,9 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 // Casos de uso
 	 inFrmAltaUsuario();
 	 inFrmConsultaUsuario();
+	 inFrmModificarDatosUsuario();
 	 inFrmAltaEspectaculo();
-	 // inFrmConsultaEspectaculo
+	 inFrmConsultaEspectaculo();
 	 inFrmAltaPlataforma();
 	 inFrmAltaFuncion();
 	 inFrmConsultaFuncion();
@@ -128,6 +136,13 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 contenedor.add(internalFrameConsultaUsuario);
     }
 
+    // InternalFrame Modificar Datos Usuario
+    private void inFrmModificarDatosUsuario(){
+	 internalFrameModificarDatosUsuario = new ModificarDatosUsuario();
+	 internalFrameModificarDatosUsuario.setVisible(false);
+	 contenedor.add(internalFrameModificarDatosUsuario);
+    }
+
     // InternalFrame Alta Espectaculo
     private void inFrmAltaEspectaculo(){
 	 internalFrameAltaEspectaculo = new AltaEspectaculo();
@@ -135,12 +150,18 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 contenedor.add(internalFrameAltaEspectaculo);
     }
 
+    // InternalFrame Consulta Espectaculo
+    private void inFrmConsultaEspectaculo(){
+	 internalFrameConsultaEspectaculo = new ConsultaEspectaculo();
+	 internalFrameConsultaEspectaculo.setVisible(false);
+	 contenedor.add(internalFrameConsultaEspectaculo);
+    }
+
     // InternalFrame Alta Plataforma
     private void inFrmAltaPlataforma(){
 	 internalFrameAltaPlataforma = new AltaPlataforma();
 	 internalFrameAltaPlataforma.setVisible(false);
 	 contenedor.add(internalFrameAltaPlataforma);
-
     }
 
     // InternalFrame Alta Funcion
@@ -164,29 +185,52 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 contenedor.add(internalFrameRegistroFuncion);
     }
 
-
     // Eventos
     public void actionPerformed(ActionEvent e){
 	 internalFrameAltaUsuario.setVisible(false);
 	 internalFrameConsultaUsuario.setVisible(false);
+	 internalFrameModificarDatosUsuario.setVisible(false);
 	 internalFrameAltaEspectaculo.setVisible(false);
+	 internalFrameConsultaEspectaculo.setVisible(false);
 	 internalFrameAltaPlataforma.setVisible(false);
 	 internalFrameAltaFuncion.setVisible(false);
 	 internalFrameConsultaFuncion.setVisible(false);
 	 internalFrameRegistroFuncion.setVisible(false);
 
-	 if(e.getSource() == menuItAltaUsuario){
+	 if(e.getSource() == menuItAltaUsuario){ // 79S ver
+	     Object tipoUsuario = JOptionPane.showInputDialog(null, "Tipo de Usuario", "Alta Usuario", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Seleccione", "Espectador", "Artista"}, "Seleccione");
+	     boolean vof;
+	     if(tipoUsuario.toString() == "Artista"){
+		  vof = true;
+		  internalFrameAltaUsuario.btnAceptar.setBounds(200, 380, 115, 25);
+		  internalFrameAltaUsuario.btnCancelar.setBounds(322, 380, 115, 25);
+	     }else{
+		  vof = false;
+		  internalFrameAltaUsuario.btnAceptar.setBounds(200, 260, 115, 25);
+		  internalFrameAltaUsuario.btnCancelar.setBounds(322, 260, 115, 25);
+	     }
+	     internalFrameAltaUsuario.lblDescripcion.setVisible(vof);
+	     internalFrameAltaUsuario.lblBiografia.setVisible(vof);
+	     internalFrameAltaUsuario.lblLink.setVisible(vof);
+	     internalFrameAltaUsuario.txtDescripcion.setVisible(vof);
+	     internalFrameAltaUsuario.txtBiografia.setVisible(vof);
+	     internalFrameAltaUsuario.txtLink.setVisible(vof);
 	     internalFrameAltaUsuario.setVisible(true);
 	 }
+
+
 	 if(e.getSource() == menuItConsultaUsuario){
 	     internalFrameConsultaUsuario.setVisible(true);
+	 }
+	 if(e.getSource() == menuItModificarDatosUsuario){
+	     internalFrameModificarDatosUsuario.setVisible(true);
 	 }
 
 	 if(e.getSource() == menuItAltaEspectaculo){
 	     internalFrameAltaEspectaculo.setVisible(true);
 	 }
 	 if(e.getSource() == menuItConsultaEspectaculo){
-	     // internalFrameConsultaEspectaculo.setVisible(true);
+	     internalFrameConsultaEspectaculo.setVisible(true);
 	 }
 
 	 if(e.getSource() == menuItAltaPlataforma){

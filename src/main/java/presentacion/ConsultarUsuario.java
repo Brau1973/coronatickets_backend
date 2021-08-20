@@ -61,16 +61,18 @@ public class ConsultarUsuario extends JInternalFrame{
 	 btnConsulta.setBounds(295, 45, 95, 25);
 	 btnConsulta.addActionListener(new ActionListener(){
 	     public void actionPerformed(ActionEvent e){
-		  retorno = "Nickname:  " + data[1][0].toString() + "\n";
+		  retorno = "\nNickname:  " + data[1][0].toString() + "\n";
 		  retorno += "Nombre:  " + data[1][1].toString() + "\n";
-		  retorno += "Apellido:  " + data[1][2].toString() + "\n";
-		  JOptionPane.showMessageDialog(null, retorno, "Informacion", JOptionPane.PLAIN_MESSAGE);
+		  retorno += "Apellido:  " + data[1][2].toString() + "\n\n";
+		  JOptionPane.showMessageDialog(null, retorno, "Información", JOptionPane.PLAIN_MESSAGE);
 	     }
 	 });
 	 miPanel.add(btnConsulta);
     }
 }
-
+/*
+Object color = JOptionPane.showInputDialog(null, "Seleccione Un Color", "COLORES", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Seleccione", "Amarillo", "Azul", "Rojo"}, "Seleccione");
+JOptionPane.showMessageDialog(null, "Color Seleccionado " + color);*/
 // String s = JOptionPane.showInputDialog(null, "Digite un caracter: ");
 // char ch = s.charAt(0);
 // micoordinador.proceso3(ch);
