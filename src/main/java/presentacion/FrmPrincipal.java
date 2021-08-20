@@ -9,7 +9,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia nombre de algunas variables, ej Registro por Alta. 79S
@@ -197,27 +196,9 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 internalFrameConsultaFuncion.setVisible(false);
 	 internalFrameRegistroFuncion.setVisible(false);
 
-	 if(e.getSource() == menuItAltaUsuario){ // 79S ver
-	     Object tipoUsuario = JOptionPane.showInputDialog(null, "Tipo de Usuario", "Alta Usuario", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Seleccione", "Espectador", "Artista"}, "Seleccione");
-	     boolean vof;
-	     if(tipoUsuario.toString() == "Artista"){
-		  vof = true;
-		  internalFrameAltaUsuario.btnAceptar.setBounds(200, 380, 115, 25);
-		  internalFrameAltaUsuario.btnCancelar.setBounds(322, 380, 115, 25);
-	     }else{
-		  vof = false;
-		  internalFrameAltaUsuario.btnAceptar.setBounds(200, 260, 115, 25);
-		  internalFrameAltaUsuario.btnCancelar.setBounds(322, 260, 115, 25);
-	     }
-	     internalFrameAltaUsuario.lblDescripcion.setVisible(vof);
-	     internalFrameAltaUsuario.lblBiografia.setVisible(vof);
-	     internalFrameAltaUsuario.lblLink.setVisible(vof);
-	     internalFrameAltaUsuario.txtDescripcion.setVisible(vof);
-	     internalFrameAltaUsuario.txtBiografia.setVisible(vof);
-	     internalFrameAltaUsuario.txtLink.setVisible(vof);
+	 if(e.getSource() == menuItAltaUsuario){
 	     internalFrameAltaUsuario.setVisible(true);
 	 }
-
 
 	 if(e.getSource() == menuItConsultaUsuario){
 	     internalFrameConsultaUsuario.setVisible(true);

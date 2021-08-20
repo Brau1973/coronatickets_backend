@@ -8,17 +8,19 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class AltaUsuario extends JInternalFrame implements ActionListener{
-    public String tipoUsuario;
+    private boolean vof;
     private JPanel miPanel;
-    JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblDescripcion, lblBiografia, lblLink;
-    JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtDescripcion, txtBiografia, txtLink;
+    private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblDescripcion, lblBiografia, lblLink;
+    private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtDescripcion, txtBiografia, txtLink;
     private JSpinner spinDia, spinMes, spinAnio;
-    JButton btnAceptar, btnCancelar;
+    private JButton btnAceptar, btnCancelar;
+    private JRadioButton rbtnEspectador, rbtnArtista;
 
     public AltaUsuario(){
 	 miPanel = new JPanel();
@@ -30,6 +32,18 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 setIconifiable(false);
 	 setBorder(null);
 	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
+
+	 // JRadioButton
+	 rbtnEspectador = new JRadioButton("Espectador");
+	 rbtnEspectador.setFont(new java.awt.Font("Verdana", 1, 13));
+	 rbtnEspectador.setBounds(179, 8, 120, 25);
+	 miPanel.add(rbtnEspectador);
+	 rbtnEspectador.addActionListener(this);
+	 rbtnArtista = new JRadioButton("Artista");
+	 rbtnArtista.setFont(new java.awt.Font("Verdana", 1, 13));
+	 rbtnArtista.setBounds(300, 8, 120, 25);
+	 miPanel.add(rbtnArtista);
+	 rbtnArtista.addActionListener(this);
 
 	 // Label
 	 lblTitulo = new JLabel();
@@ -78,6 +92,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 miPanel.add(lblDescripcion);
 	 miPanel.add(lblBiografia);
 	 miPanel.add(lblLink);
+
 	 // JTextField
 	 txtNickname = new JTextField();
 	 txtNombre = new JTextField();
@@ -114,14 +129,14 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 // Boton Aceptar
 	 btnAceptar = new JButton();
 	 btnAceptar.setText("Aceptar");
-	 // btnAceptar.setBounds(200, 370, 115, 25);
+	 btnAceptar.setBounds(179, 380, 127, 25);
 	 miPanel.add(btnAceptar);
 	 btnAceptar.addActionListener(this);
 
 	 // Boton Cancelar
 	 btnCancelar = new JButton();
 	 btnCancelar.setText("Cancelar");
-	 btnCancelar.setBounds(322, 370, 115, 25);
+	 btnCancelar.setBounds(310, 380, 127, 25);
 	 miPanel.add(btnCancelar);
 	 btnCancelar.addActionListener(this);
     }
@@ -136,12 +151,38 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
 	 if(e.getSource() == btnAceptar){
-	     JOptionPane.showMessageDialog(null, tipoUsuario);
+	     JOptionPane.showMessageDialog(null, "El usuario se ha creado con éxito");
 	     limpiarPantalla();
 	 }
 	 if(e.getSource() == btnCancelar){
-	     System.out.println("Cancelar");
 	     limpiarPantalla();
+	 }
+
+	 if(e.getSource() == rbtnEspectador){
+	     if(rbtnEspectador.isSelected()){
+		  btnAceptar.setBounds(179, 260, 127, 25);
+		  btnCancelar.setBounds(310, 260, 127, 25);
+		  lblDescripcion.setVisible(false);
+		  lblBiografia.setVisible(false);
+		  lblLink.setVisible(false);
+		  txtDescripcion.setVisible(false);
+		  txtBiografia.setVisible(false);
+		  txtLink.setVisible(false);
+		  rbtnArtista.setSelected(false);
+	     }
+	 }
+	 if(e.getSource() == rbtnArtista){
+	     if(rbtnArtista.isSelected()){
+		  btnAceptar.setBounds(179, 380, 127, 25);
+		  btnCancelar.setBounds(310, 380, 127, 25);
+		  lblDescripcion.setVisible(true);
+		  lblBiografia.setVisible(true);
+		  lblLink.setVisible(true);
+		  txtDescripcion.setVisible(true);
+		  txtBiografia.setVisible(true);
+		  txtLink.setVisible(true);
+		  rbtnEspectador.setSelected(false);
+	     }
 	 }
     }
 }
