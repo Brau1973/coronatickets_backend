@@ -9,18 +9,18 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
+
+import com.toedter.calendar.JDateChooser;
 
 @SuppressWarnings("serial")
 public class AltaUsuario extends JInternalFrame implements ActionListener{
-    private boolean vof;
     private JPanel miPanel;
+    private JRadioButton rbtnEspectador, rbtnArtista;
     private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblDescripcion, lblBiografia, lblLink;
     private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtDescripcion, txtBiografia, txtLink;
-    private JSpinner spinDia, spinMes, spinAnio;
+    private JDateChooser dateFechaNac;
     private JButton btnAceptar, btnCancelar;
-    private JRadioButton rbtnEspectador, rbtnArtista;
 
     public AltaUsuario(){
 	 miPanel = new JPanel();
@@ -44,7 +44,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 rbtnArtista.setBounds(300, 8, 120, 25);
 	 miPanel.add(rbtnArtista);
 	 rbtnArtista.addActionListener(this);
-
+	 rbtnArtista.setSelected(true); // x defecto
 	 // Label
 	 lblTitulo = new JLabel();
 	 lblNickname = new JLabel();
@@ -82,6 +82,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 lblDescripcion.setBounds(10, 250, 150, 25);
 	 lblBiografia.setBounds(10, 290, 150, 25);
 	 lblLink.setBounds(10, 330, 150, 25);
+
 	 // Agrego label al Panel
 	 miPanel.add(lblTitulo);
 	 miPanel.add(lblNickname);
@@ -98,9 +99,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 txtNombre = new JTextField();
 	 txtApellido = new JTextField();
 	 txtEmail = new JTextField();
-	 spinDia = new JSpinner();
-	 spinMes = new JSpinner();
-	 spinAnio = new JSpinner();
+	 dateFechaNac = new JDateChooser();
 	 txtDescripcion = new JTextField();
 	 txtBiografia = new JTextField();
 	 txtLink = new JTextField();
@@ -108,20 +107,17 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 txtNombre.setBounds(179, 88, 260, 25);
 	 txtApellido.setBounds(179, 128, 260, 25);
 	 txtEmail.setBounds(179, 168, 260, 25);
-	 spinDia.setBounds(179, 208, 45, 25);
-	 spinMes.setBounds(239, 208, 45, 25);
-	 spinAnio.setBounds(299, 208, 45, 25);
+	 dateFechaNac.setBounds(179, 208, 260, 25);
 	 txtDescripcion.setBounds(179, 248, 260, 25);
 	 txtBiografia.setBounds(179, 288, 260, 25);
 	 txtLink.setBounds(179, 328, 260, 25);
+
 	 // Agrego JTextField al Panel
 	 miPanel.add(txtNickname);
 	 miPanel.add(txtNombre);
 	 miPanel.add(txtApellido);
 	 miPanel.add(txtEmail);
-	 miPanel.add(spinDia);
-	 miPanel.add(spinMes);
-	 miPanel.add(spinAnio);
+	 miPanel.add(dateFechaNac);
 	 miPanel.add(txtDescripcion);
 	 miPanel.add(txtBiografia);
 	 miPanel.add(txtLink);
