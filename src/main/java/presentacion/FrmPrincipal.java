@@ -116,9 +116,9 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 inFrmAltaUsuario();
 	 inFrmConsultaUsuario();
 	 inFrmAltaEspectaculo();
-	 inFrmConsultaEspectaculo();
+	 // inFrmConsultaEspectaculo();
 	 inFrmAltaPlataforma();
-	 // inFrmAltaFuncion();
+	 inFrmAltaFuncion();
 	 inFrmConsultaFuncion();
 	 inFrmRegistroFuncion();
 	 inFrmConsultaPaqueteEspectaculos();
@@ -188,7 +188,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 internalFrameConsultaUsuario.setVisible(false);
 	 internalFrameAltaEspectaculo.setVisible(false);
 	 internalFrameAltaPlataforma.setVisible(false);
-	 // internalFrameAltaFuncion.setVisible(false);
+	 internalFrameAltaFuncion.setVisible(false);
 	 internalFrameConsultaFuncion.setVisible(false);
 	 internalFrameRegistroFuncion.setVisible(false);
 	 internalFrameConsultaPaqueteEspectaculo.setVisible(false);
@@ -203,7 +203,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	     internalFrameAltaEspectaculo.setVisible(true);
 	     break;
 	 case "Consulta Espectaculo":
-	     internalFrameConsultaEspectaculo.setVisible(true);
+	     // internalFrameConsultaEspectaculo.setVisible(true);
 	     break;
 	 case "Alta Plataforma":
 	     internalFrameAltaPlataforma.setVisible(true);
