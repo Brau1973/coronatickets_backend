@@ -22,11 +22,8 @@
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.eclipse.m2e.core.maven2Nature</nature>
-<<<<<<< HEAD
 		<nature>org.eclipse.jdt.core.javanature</nature>
-=======
+		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
->>>>>>> 62c5749f2c5de5dba84f1460fe523d8b2f9dc1be
 	</natures>
 </projectDescription>
