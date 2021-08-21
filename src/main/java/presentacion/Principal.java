@@ -1,8 +1,8 @@
 package presentacion;
 
 public class Principal{
-     public static void main(String[] args){
-	   FrmPrincipal frmInicio = new FrmPrincipal();
-	   frmInicio.setVisible(true);
-     }
+    public static void main(String[] args){
+	 FrmPrincipal frmInicio = new FrmPrincipal();
+	 frmInicio.setVisible(true);
+    }
 }
