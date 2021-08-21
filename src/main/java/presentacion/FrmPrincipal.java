@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -17,7 +16,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
     private JMenu menuInicio, menuUsuario, menuEspectaculo, menuAyuda, menuPlataforma, menuFuncion, menuPaquete;
     private JMenuItem menuItAltaUsuario, menuItAltaEspectaculo, menuItConsultaUsuario, menuItConsultaEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
     private JMenuItem menuItConsultaPaqueteEspectaculo;
-    
+
     private AltaUsuario internalFrameAltaUsuario;
     private ConsultarUsuario internalFrameConsultaUsuario;
     private AltaEspectaculo internalFrameAltaEspectaculo;
@@ -26,6 +25,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
     private AltaFuncion internalFrameAltaFuncion;
     private ConsultaFuncion internalFrameConsultaFuncion;
     private RegistroFuncion internalFrameRegistroFuncion;
+
     // Constructor
     public FrmPrincipal(){
 	 inicializar();
@@ -72,7 +72,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 menuItAltaFuncion = new JMenuItem();
 	 menuItConsultaFuncion = new JMenuItem();
 	 menuItRegistroFuncion = new JMenuItem();
-	 
+
 	 // Menu Item Usuario
 	 menuItAltaUsuario.setText("Alta Usuario");
 	 menuItConsultaUsuario.setText("Consultar Usuario");
@@ -95,7 +95,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 menuItAltaPlataforma = new JMenuItem("Alta Plataforma");
 	 menuPlataforma.add(menuItAltaPlataforma);
 	 menuItAltaPlataforma.addActionListener(this);
-	 
+
 	 // Menu Paquete
 	 menuItConsultaPaqueteEspectaculo = new JMenuItem("Consultar Paquete de Espectaculo");
 	 menuPaquete.add(menuItConsultaPaqueteEspectaculo);
@@ -116,9 +116,9 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 inFrmAltaUsuario();
 	 inFrmConsultaUsuario();
 	 inFrmAltaEspectaculo();
-//	 inFrmConsultaEspectaculo();
+	 inFrmConsultaEspectaculo();
 	 inFrmAltaPlataforma();
-//	 inFrmAltaFuncion();
+	 // inFrmAltaFuncion();
 	 inFrmConsultaFuncion();
 	 inFrmRegistroFuncion();
 	 inFrmConsultaPaqueteEspectaculos();
@@ -159,7 +159,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 contenedor.add(internalFrameConsultaPaqueteEspectaculo);
 
     }
-    
+
     // InternalFrame Alta Funcion
     private void inFrmAltaFuncion(){
 	 internalFrameAltaFuncion = new AltaFuncion();
@@ -188,40 +188,40 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 internalFrameConsultaUsuario.setVisible(false);
 	 internalFrameAltaEspectaculo.setVisible(false);
 	 internalFrameAltaPlataforma.setVisible(false);
-	 //internalFrameAltaFuncion.setVisible(false);
+	 // internalFrameAltaFuncion.setVisible(false);
 	 internalFrameConsultaFuncion.setVisible(false);
 	 internalFrameRegistroFuncion.setVisible(false);
 	 internalFrameConsultaPaqueteEspectaculo.setVisible(false);
-	 switch (e.getActionCommand()) {
-		case "Alta Usuario":
-			internalFrameAltaUsuario.setVisible(true);
-			break;
-		case "Consultar Usuario":
-			internalFrameConsultaUsuario.setVisible(true);
-			break;
-		case "Alta Espectaculo":
-			internalFrameAltaEspectaculo.setVisible(true);
-			break;	
-		case "Consulta Espectaculo":
-			// internalFrameConsultaEspectaculo.setVisible(true);
-			break;
-		case "Alta Plataforma":
-			internalFrameAltaPlataforma.setVisible(true);
-			break;
-		case "Alta Funcion":
-			internalFrameAltaFuncion.setVisible(true);
-			break;
-		case "Consulta Funcion":
-			internalFrameConsultaFuncion.setVisible(true);
-			break;
-		case "Registro Funcion":
-			internalFrameRegistroFuncion.setVisible(true);
-			break;
-		case "Consultar Paquete de Espectaculo":
-			internalFrameConsultaPaqueteEspectaculo.setVisible(true);
-			break;
-		default:
-			break;
+	 switch(e.getActionCommand()){
+	 case "Alta Usuario":
+	     internalFrameAltaUsuario.setVisible(true);
+	     break;
+	 case "Consultar Usuario":
+	     internalFrameConsultaUsuario.setVisible(true);
+	     break;
+	 case "Alta Espectaculo":
+	     internalFrameAltaEspectaculo.setVisible(true);
+	     break;
+	 case "Consulta Espectaculo":
+	     internalFrameConsultaEspectaculo.setVisible(true);
+	     break;
+	 case "Alta Plataforma":
+	     internalFrameAltaPlataforma.setVisible(true);
+	     break;
+	 case "Alta Funcion":
+	     internalFrameAltaFuncion.setVisible(true);
+	     break;
+	 case "Consulta Funcion":
+	     internalFrameConsultaFuncion.setVisible(true);
+	     break;
+	 case "Registro Funcion":
+	     internalFrameRegistroFuncion.setVisible(true);
+	     break;
+	 case "Consultar Paquete de Espectaculo":
+	     internalFrameConsultaPaqueteEspectaculo.setVisible(true);
+	     break;
+	 default:
+	     break;
 	 }
     }
 }
