@@ -5,52 +5,72 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class AltaPlataforma extends JInternalFrame{
-    private JButton btnAceptar, btnCancelar;
+    private JButton btnGuardar, btnCancelar;
     private JPanel miPanel;
-    private JLabel lblNombre, lblDescripcion, lblUrl;
-    private JTextField txtNombre;
+    private JLabel lblTitulo, lblNombre, lblDescripcion, lblUrl;
+    private JTextField txtNombre, txtDescripcion, txtUrl;
+    static final int X_LABEL = 10;
+    static final int X_TEXT = 200;
+    static final int Y_DIST = 30;
+    static final int WIDTH_LABEL = 180;
+    static final int WIDTH_TEXT = 200;
+    static final int HEIGHT_FIELD = 25;
 
     // Constructor
-    public AltaPlataforma(){
-	 miPanel = new JPanel();
-	 miPanel.setLayout(null);
-	 add(miPanel);
-	 setBounds(30, 30, 460, 500);
-	 setResizable(false);
-	 setClosable(false);
-	 setIconifiable(false);
-	 setBorder(null);
-	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
-	 // lblTitulo = new JLabel();
-	 // lblTitulo.setText("Alta plataforma");
-	 // lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 20));
-	 // lblTitulo.setBounds(10, 1, 280, 25);
-	 // miPanel.add(lblTitulo);
+	public AltaPlataforma() {
+		miPanel = new JPanel();
+		miPanel.setLayout(null);
+		add(miPanel);
+		setBounds(30, 30, 800, 600);
+		setResizable(false);
+		setClosable(false);
+		setIconifiable(false);
+		setBorder(null);
+		((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
 
-	 lblNombre = new JLabel();
-	 lblNombre.setText("Nombre");
-	 lblNombre.setBounds(10, 0, 100, 25);
-	 miPanel.add(lblNombre);
+		
+		// Titulo
+		lblTitulo = new JLabel("Alta Plataforma");
+		lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 20));
+		lblTitulo.setBounds(10, 0, 800, 25);
+		miPanel.add(lblTitulo);
 
-	 txtNombre = new JTextField();
-	 txtNombre.setBounds(120, 0, 200, 25);
-	 miPanel.add(txtNombre);
+		// Nombre
+		lblNombre = new JLabel("Nombre", SwingConstants.RIGHT);
+		lblNombre.setBounds(X_LABEL, Y_DIST*2, WIDTH_LABEL, HEIGHT_FIELD);
+		miPanel.add(lblNombre);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(X_TEXT, Y_DIST*2, WIDTH_TEXT, HEIGHT_FIELD);
+		miPanel.add(txtNombre);
 
-	 // Boton Aceptar
-	 btnAceptar = new JButton();
-	 btnAceptar.setText("Aceptar");
-	 btnAceptar.setBounds(200, 270, 115, 25);
-	 miPanel.add(btnAceptar);
-	 /// btnAceptar.addActionListener(this);
+		// Descripcion
+		lblDescripcion = new JLabel("Descripcion", SwingConstants.RIGHT);
+		lblDescripcion.setBounds(X_LABEL, Y_DIST*3, WIDTH_LABEL, HEIGHT_FIELD);
+		miPanel.add(lblDescripcion);
+		txtDescripcion = new JTextField();
+		txtDescripcion.setBounds(X_TEXT, Y_DIST*3, WIDTH_TEXT, HEIGHT_FIELD);
+		miPanel.add(txtDescripcion);
 
-	 // Boton Cancelar
-	 btnCancelar = new JButton();
-	 btnCancelar.setText("Cancelar");
-	 btnCancelar.setBounds(322, 270, 115, 25);
-	 miPanel.add(btnCancelar);
-	 // btnCancelar.addActionListener(this);
-    }
+		// Url
+		lblUrl = new JLabel("Url", SwingConstants.RIGHT);
+		lblUrl.setBounds(X_LABEL, Y_DIST*4, WIDTH_LABEL, HEIGHT_FIELD);
+		miPanel.add(lblUrl);
+		txtUrl = new JTextField();
+		txtUrl.setBounds(X_TEXT, Y_DIST*4, WIDTH_TEXT, HEIGHT_FIELD);
+		miPanel.add(txtUrl);
+
+		// Boton Guardar
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.setBounds(200, Y_DIST*6, 115, 25);
+		miPanel.add(btnGuardar);
+		
+		// Boton Guardar
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(325, Y_DIST*6, 115, 25);
+		miPanel.add(btnCancelar);
+	}
 }
