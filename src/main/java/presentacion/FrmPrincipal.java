@@ -46,6 +46,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 menuUsuario = new JMenu();
 	 menuEspectaculo = new JMenu();
 	 menuPlataforma = new JMenu();
+	 menuPaquete = new JMenu("Paquete");
 	 menuFuncion = new JMenu();
 	 menuAyuda = new JMenu();
 	 // Se realizan los cambios que hablamos en el menu. 79S
@@ -61,6 +62,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 barraMenu.add(menuEspectaculo);
 	 barraMenu.add(menuPlataforma);
 	 barraMenu.add(menuFuncion);
+	 barraMenu.add(menuPaquete);
 	 barraMenu.add(menuAyuda);
 	 setJMenuBar(barraMenu);
 
@@ -111,7 +113,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 menuItAltaFuncion.setText("Alta Funcion");
 	 menuFuncion.add(menuItAltaFuncion);
 	 menuItAltaFuncion.addActionListener(this);
-	 menuItConsultaFuncion.setText("Consulta Funcion");
+	 menuItConsultaFuncion.setText("Consultar Funcion");
 	 menuFuncion.add(menuItConsultaFuncion);
 	 menuItConsultaFuncion.addActionListener(this);
 	 menuItRegistroFuncion.setText("Registro Funcion"); // La funcion se registra en espectaculo, no seria mejor que este en el menuEspectaculo ??. 79S
@@ -227,7 +229,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 case "Alta Espectaculo":
 	     internalFrameAltaEspectaculo.setVisible(true);
 	     break;
-	 case "Consulta Espectaculo":
+	 case "Consultar Espectaculo":
 	     internalFrameConsultaEspectaculo.setVisible(true);
 	     break;
 	 case "Alta Plataforma":
@@ -236,7 +238,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 case "Alta Funcion":
 	     internalFrameAltaFuncion.setVisible(true);
 	     break;
-	 case "Consulta Funcion":
+	 case "Consultar Funcion":
 	     internalFrameConsultaFuncion.setVisible(true);
 	     break;
 	 case "Registro Funcion":
