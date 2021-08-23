@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import jdk.nashorn.internal.scripts.JS;
+//import jdk.nashorn.internal.scripts.JS;
 
 @SuppressWarnings("serial")
 public class ConsultaPaqueteEspectaculos extends JInternalFrame{
