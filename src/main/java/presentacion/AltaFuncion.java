@@ -1,12 +1,18 @@
 package presentacion;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JList;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JCalendar;
@@ -14,13 +20,15 @@ import com.toedter.calendar.JDateChooser;
 
 @SuppressWarnings("serial")
 public class AltaFuncion extends JInternalFrame{
-    private JButton btnAceptar, btnCancelar;
+    private JButton btnAceptar, btnCancelar, btnCopiar;
     private JPanel miPanel;
     private JLabel lblPlataforma, lblEspectaculos, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta, lblDots, lblTitulo;
     private JTextField  txtNombre;
     private JSpinner spinHora, spinMin;
     private JDateChooser calendar;
     private JComboBox<String> comboArtistas, comboEspectaculos, comboPlataforma;
+    private JList listaArtistas, listaArtistasCopia;
+    private String nombresArtistas[] = {"1","2","3","4"};
 
     // Constructor
     public AltaFuncion(){
@@ -101,35 +109,60 @@ public class AltaFuncion extends JInternalFrame{
 	 spinMin.setBounds(295, 180, 45, 20);
 	 miPanel.add(spinMin);
 	 
-	 lblArtistasInv = new JLabel();
-	 lblArtistasInv.setText("Artistas Invitados");
-	 lblArtistasInv.setBounds(10, 180, 200, 20);
+	 lblArtistasInv= new JLabel();
+	 lblArtistasInv.setText("Artistas invitados");
+	 lblArtistasInv.setBounds(10, 210, 150, 20);
 	 miPanel.add(lblArtistasInv);
+	 
+	 listaArtistas = new JList<String>(nombresArtistas);
+	 listaArtistas.setBounds(220, 210, 100, 100);
+	 listaArtistas.setVisibleRowCount(4);
+	 listaArtistas.setSelectionMode( 
+			 ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+	 miPanel.add( listaArtistas );
 
-	 comboArtistas = new JComboBox<String>();
-	 comboArtistas.setBounds(220, 180, 200, 20);
-	 miPanel.add(comboArtistas);
-/*
+	 btnCopiar = new JButton( ">>>" );
+	 btnCopiar.setBounds(330, 210, 70, 25);
+	 btnCopiar.addActionListener(
+	 
+	          new ActionListener() {  
+	             public void actionPerformed( ActionEvent evento ){
+	                listaArtistasCopia.setListData( listaArtistas.getSelectedValues() );
+	             }
+	          } 
+	 ); 
+	 
+	 miPanel.add(btnCopiar);
+	 
+	 listaArtistasCopia = new JList();
+	 listaArtistasCopia.setBounds(410, 210, 100, 100);
+	 listaArtistasCopia.setVisibleRowCount( 4 );
+     //listaArtistasCopia.setFixedCellWidth( 100 );
+     //listaArtistasCopia.setFixedCellHeight( 25 );
+     listaArtistasCopia.setSelectionMode( 
+     ListSelectionModel.SINGLE_INTERVAL_SELECTION );
+     miPanel.add( listaArtistasCopia );
+	 
 	 lblFechaAlta = new JLabel();
 	 lblFechaAlta.setText("Fecha de Alta");
-	 lblFechaAlta.setBounds(10, 210, 200, 20);
+	 lblFechaAlta.setBounds(10, 330, 200, 20);
 	 miPanel.add(lblFechaAlta);
 
-	 calendar = new JCalendar();
-	 calendar.setBounds(220, 210, 200, 20);
+	 calendar = new JDateChooser();
+	 calendar.setBounds(220, 330, 200, 20);
 	 miPanel.add(calendar);
-	 */
+	 
 	 // Boton Aceptar
 	 btnAceptar = new JButton();
 	 btnAceptar.setText("Aceptar");
-	 btnAceptar.setBounds(200, 270, 115, 25);
+	 btnAceptar.setBounds(200, 400, 115, 25);
 	 miPanel.add(btnAceptar);
 	 /// btnAceptar.addActionListener(this);
 
 	 // Boton Cancelar
 	 btnCancelar = new JButton();
 	 btnCancelar.setText("Cancelar");
-	 btnCancelar.setBounds(322, 270, 115, 25);
+	 btnCancelar.setBounds(322, 400, 115, 25);
 	 miPanel.add(btnCancelar);
 	 // btnCancelar.addActionListener(this);
     }

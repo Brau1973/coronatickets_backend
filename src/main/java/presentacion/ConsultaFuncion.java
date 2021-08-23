@@ -1,18 +1,27 @@
 package presentacion;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 public class ConsultaFuncion extends JInternalFrame{
     private JButton btnAceptar, btnCancelar;
     private JPanel miPanel;
-    private JLabel lblPlataforma, lblEspectaculos, lblFunciones, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta;
+    private JLabel lblTitulo, lblPlataforma, lblEspectaculos, lblFunciones, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta;
     private JComboBox<String> comboEspectaculos, comboPlataforma, comboFunciones;
-
+    private JTable tabFuncion;
+    private String[] header = {"Plataforma", "Espectaculo"};
+    private String[][] data = {{"1", "las aventuras de seba"}, {"2", "seba por el tiempo"}, {"3", "sebalandia"}, {"4", "la cocina de seba"}};
+    
     // Constructor
     public ConsultaFuncion(){
 	 miPanel = new JPanel();
@@ -30,62 +39,55 @@ public class ConsultaFuncion extends JInternalFrame{
 	 // lblTitulo.setBounds(10, 1, 280, 25);
 	 // miPanel.add(lblTitulo);
 
-	 lblPlataforma = new JLabel();
+	 lblTitulo = new JLabel(); 
+	 lblTitulo.setText("Consulta de Funcion de Espectaculo");
+	 lblTitulo.setBounds(10, 0, 400, 20);
+	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 17));
+	 miPanel.add(lblTitulo);
+	 
+	 lblPlataforma = new JLabel(); 
 	 lblPlataforma.setText("Plataforma");
-	 lblPlataforma.setBounds(10, 0, 200, 20);
+	 lblPlataforma.setBounds(10, 30, 200, 20);
 	 miPanel.add(lblPlataforma);
-
+	 
 	 comboPlataforma = new JComboBox<String>();
-	 comboPlataforma.setBounds(220, 0, 200, 20);
+	 comboPlataforma.addItem("Seleccione Plataforma");
+	 comboPlataforma.setBounds(220, 30, 200, 20);
 	 miPanel.add(comboPlataforma);
-
+	
 	 lblEspectaculos = new JLabel();
 	 lblEspectaculos.setText("Espectaculos");
-	 lblEspectaculos.setBounds(10, 30, 200, 20);
+	 lblEspectaculos.setBounds(10, 60, 200, 20);
 	 miPanel.add(lblEspectaculos);
 
 	 comboEspectaculos = new JComboBox<String>();
-	 comboEspectaculos.setBounds(220, 30, 200, 20);
+	 comboEspectaculos.addItem("Seleccione Espectaculo");
+	 comboEspectaculos.setBounds(220, 60, 200, 20);
 	 miPanel.add(comboEspectaculos);
+	 
 
 	 lblFunciones = new JLabel();
 	 lblFunciones.setText("Funciones");
-	 lblFunciones.setBounds(10, 60, 200, 20);
+	 lblFunciones.setBounds(10, 90, 200, 20);
 	 miPanel.add(lblFunciones);
 
 	 comboFunciones = new JComboBox<String>();
-	 comboFunciones.setBounds(220, 60, 200, 20);
+	 comboFunciones.addItem("Seleccione Funcion");
+	 comboFunciones.setBounds(220, 90, 200, 20);
 	 miPanel.add(comboFunciones);
 
 	 lblPlataforma = new JLabel();
 	 lblPlataforma.setText("Datos De La Funcion");
-	 lblPlataforma.setBounds(10, 90, 250, 20);
+	 lblPlataforma.setBounds(10, 120, 250, 20);
 	 miPanel.add(lblPlataforma);
-
-	 lblNombre = new JLabel();
-	 lblNombre.setText("Nombre");
-	 lblNombre.setBounds(10, 120, 200, 20);
-	 miPanel.add(lblNombre);
-
-	 lblFecha = new JLabel();
-	 lblFecha.setText("Fecha de la Funcion");
-	 lblFecha.setBounds(10, 150, 200, 20);
-	 miPanel.add(lblFecha);
-
-	 lblHora = new JLabel();
-	 lblHora.setText("Hora de Inicio");
-	 lblHora.setBounds(10, 180, 100, 20);
-	 miPanel.add(lblHora);
-
-	 lblArtistasInv = new JLabel();
-	 lblArtistasInv.setText("Artistas Invitados");
-	 lblArtistasInv.setBounds(10, 210, 200, 20);
-	 miPanel.add(lblArtistasInv);
-
-	 lblFechaAlta = new JLabel();
-	 lblFechaAlta.setText("Fecha de Alta");
-	 lblFechaAlta.setBounds(10, 240, 200, 20);
-	 miPanel.add(lblFechaAlta);
+	 
+	 DefaultTableModel model = new DefaultTableModel(data, header);
+	 tabFuncion = new JTable(model);
+	 tabFuncion.setPreferredScrollableViewportSize(new Dimension(40, 290));
+	 JScrollPane jsPane = new JScrollPane(tabFuncion);
+	 jsPane.setBounds(10, 150, 365, 118);
+	 jsPane.setVisible(true);
+	 miPanel.add(jsPane, BorderLayout.SOUTH);
 
 	 // Boton Aceptar
 	 btnAceptar = new JButton();
