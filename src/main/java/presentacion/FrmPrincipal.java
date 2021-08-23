@@ -15,7 +15,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
     private JMenuBar barraMenu;
     private JMenu menuInicio, menuUsuario, menuEspectaculo, menuAyuda, menuPlataforma, menuFuncion, menuPaquete;
     private JMenuItem menuItAltaUsuario, menuItModificarDatosUsuario, menuItConsultaUsuario, menuItAltaEspectaculo, menuItConsultaEspectaculo;
-    private JMenuItem menuItConsultaPaqueteEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
+    private JMenuItem menuItConsultaPaqueteEspectaculo, menuItCreaPaqueteEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
 
     private AltaUsuario internalFrameAltaUsuario;
     private ConsultarUsuario internalFrameConsultaUsuario;
@@ -27,6 +27,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
     private AltaFuncion internalFrameAltaFuncion;
     private ConsultaFuncion internalFrameConsultaFuncion;
     private RegistroFuncion internalFrameRegistroFuncion;
+    private CreaPaqueteEspectaculo internalFrameCreaPaqueteEspectaculo;
 
     // Constructor
     public FrmPrincipal(){
@@ -76,6 +77,9 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 menuItAltaFuncion = new JMenuItem();
 	 menuItConsultaFuncion = new JMenuItem();
 	 menuItRegistroFuncion = new JMenuItem();
+	 menuItCreaPaqueteEspectaculo = new JMenuItem();
+	 menuItConsultaPaqueteEspectaculo = new JMenuItem();
+	 
 
 	 // Menu Item Usuario
 	 menuItAltaUsuario.setText("Alta Usuario");
@@ -105,8 +109,13 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 menuItAltaPlataforma.addActionListener(this);
 
 	 // Menu Paquete
-	 menuItConsultaPaqueteEspectaculo = new JMenuItem("Consultar Paquete de Espectaculo");
+	 menuItCreaPaqueteEspectaculo.setText("Crear Paquete de Espectaculo");
+	 menuItConsultaPaqueteEspectaculo.setText("Consultar Paquete de Espectaculo");
+	 menuPaquete.add(menuItCreaPaqueteEspectaculo);
+	 menuPaquete.addSeparator();
 	 menuPaquete.add(menuItConsultaPaqueteEspectaculo);
+	 menuPaquete.addSeparator();
+	 menuItCreaPaqueteEspectaculo.addActionListener(this);
 	 menuItConsultaPaqueteEspectaculo.addActionListener(this);
 
 	 // Menu Item Funcion
@@ -131,6 +140,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 inFrmConsultaFuncion();
 	 inFrmRegistroFuncion();
 	 inFrmConsultaPaqueteEspectaculos();
+	 inFrmCreaPaqueteEspectaculo();
     }
 
     // InternalFrame Alta Usuario
@@ -160,7 +170,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 internalFrameAltaEspectaculo.setVisible(false);
 	 contenedor.add(internalFrameAltaEspectaculo);
     }
-
+    
     // InternalFrame Consulta Espectaculo
     private void inFrmConsultaEspectaculo(){
 	 internalFrameConsultaEspectaculo = new ConsultaEspectaculo();
@@ -168,6 +178,13 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 contenedor.add(internalFrameConsultaEspectaculo);
     }
 
+ // InternalFrame Crear Paquete de espectaculo
+    private void inFrmCreaPaqueteEspectaculo(){
+	 internalFrameCreaPaqueteEspectaculo = new CreaPaqueteEspectaculo();
+	 internalFrameCreaPaqueteEspectaculo.setVisible(false);
+	 contenedor.add(internalFrameCreaPaqueteEspectaculo);
+    }
+    
     // InternalFrame Consultar Paquete de espectaculo
     private void inFrmConsultaPaqueteEspectaculos(){
 	 internalFrameConsultaPaqueteEspectaculo = new ConsultaPaqueteEspectaculos();
@@ -202,6 +219,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 internalFrameRegistroFuncion.setVisible(false);
 	 contenedor.add(internalFrameRegistroFuncion);
     }
+    
+    
 
     // Eventos
     public void actionPerformed(ActionEvent e){
@@ -215,6 +234,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 internalFrameConsultaFuncion.setVisible(false);
 	 internalFrameRegistroFuncion.setVisible(false);
 	 internalFrameConsultaPaqueteEspectaculo.setVisible(false);
+	 internalFrameCreaPaqueteEspectaculo.setVisible(false);
 
 	 switch(e.getActionCommand()){
 	 case "Alta Usuario":
@@ -244,6 +264,9 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 case "Registro Funcion":
 	     internalFrameRegistroFuncion.setVisible(true);
 	     break;
+	 case "Crear Paquete de Espectaculo":
+		 internalFrameCreaPaqueteEspectaculo.setVisible(true);
+		 break;
 	 case "Consultar Paquete de Espectaculo":
 	     internalFrameConsultaPaqueteEspectaculo.setVisible(true);
 	     break;
