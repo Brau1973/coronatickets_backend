@@ -1,6 +1,5 @@
 package presentacion;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,7 +21,6 @@ public class ConsultaEspectaculo extends JInternalFrame{
     private JLabel lblTitulo, lblPlataforma;
     private String[] header = {"Nombre", "Descripcion", "Duracion"};
     private String[][] data = {{"sebagl", "Sebastian", "Gonzalez"}, {"aldrinkpo", "Aldrin", "Rebella"}, {"leito", "Leonardo", "Mesa"}, {"lucs12", "Lucas", "Sugo"}};
-    private String retorno;
     private JComboBox<String> comboPlataforma;
 
     // Constructor
@@ -50,10 +47,9 @@ public class ConsultaEspectaculo extends JInternalFrame{
 
 	 comboPlataforma = new JComboBox<String>();
 	 comboPlataforma.setBounds(200, 40, 250, 20);
-	 comboPlataforma.addItem("Plataforma 1");
-	 comboPlataforma.addItem("Plataforma 2");
+	 comboPlataforma.addItem("Sebastian");
+	 comboPlataforma.addItem("Sebastian Gonzalez");
 	 comboPlataforma.addItem("Plataforma 3");
-
 	 miPanel.add(comboPlataforma);
 
 	 DefaultTableModel model = new DefaultTableModel(data, header);
@@ -62,8 +58,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 JScrollPane jsPane = new JScrollPane(tabUsuario);
 	 jsPane.setBorder(new EmptyBorder(0, 90, 0, 20));
 	 jsPane.setVisible(true);
-	 add(jsPane, BorderLayout.SOUTH);
-
+	 // add(jsPane, BorderLayout.SOUTH);
 
 	 // Boton Buscar
 	 btnConsulta = new JButton();
@@ -71,10 +66,10 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 btnConsulta.setBounds(295, 65, 95, 25);
 	 btnConsulta.addActionListener(new ActionListener(){
 	     public void actionPerformed(ActionEvent e){
-		  retorno = "Nickname:  " + data[1][0].toString() + "\n";
+		  /*  retorno = "Nickname:  " + data[1][0].toString() + "\n";
 		  retorno += "Nombre:  " + data[1][1].toString() + "\n";
 		  retorno += "Apellido:  " + data[1][2].toString() + "\n";
-		  JOptionPane.showMessageDialog(null, retorno, "Informacion", JOptionPane.PLAIN_MESSAGE);
+		  JOptionPane.showMessageDialog(null, retorno, "Informacion", JOptionPane.PLAIN_MESSAGE);*/
 	     }
 	 });
 	 // miPanel.add(btnConsulta);

@@ -1,23 +1,21 @@
 package presentacion;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.RowFilter;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -25,13 +23,17 @@ import com.toedter.calendar.JDateChooser;
 public class ConsultarUsuario extends JInternalFrame{
     private JButton btnConsulta;
     private JPanel miPanel;
-    private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento;
+    private JScrollPane panel;
+    private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblBuscar;
     private JTextField txtBuscar, txtNickname, txtNombre, txtApellido, txtEmail;
     private JDateChooser dateFechaNac;
     private JTable tabUsuario;
-    private String[] header = {"Nombre", "Apellido"};
-    private String[][] data = {{"Sebastian", "Gonzalez"}, {"Aldrin", "Rebella"}, {"Leonardo", "Mesa"}, {"Lucas", "Sugo"}, {"Luisito", "Suarez"}, {"Colorado", "DeOmar"}, {"Colorado", "DeOmar"}, {"Gruffi ", "Gummi"}};
+    private JComboBox<String> comboUsuarios;
+    JTextArea jtextarea = new JTextArea();
+    private String[] header = {"Artista", "Nombre", "Descripcion", "Duracion",};
+    private String[][] data = {{"Sebastian", "Gonzalez", "Prueba tabla", "va duracion"}, {"Aldrin", "Rebella", "Descripcion"}, {"Leonardo", "Mesa"}, {"Lucas", "Sugo"}, {"Luisito", "Suarez"}, {"Colorado", "DeOmar"}, {"Gruffi ", "Gummi"}};
 
+    // Tabla muestra todos los datos basicos.
     // Constructor
     public ConsultarUsuario(){
 	 miPanel = new JPanel();
@@ -43,43 +45,48 @@ public class ConsultarUsuario extends JInternalFrame{
 	 setIconifiable(false);
 	 setBorder(null);
 	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
+
 	 // JLabel Titulo
 	 lblTitulo = new JLabel();
-	 lblTitulo.setText("Lista de Usuarios");
-	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 19));
+	 lblTitulo.setText("Consulta de Usuario");
+	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 18));
 	 lblTitulo.setBounds(10, 1, 270, 25);
 	 miPanel.add(lblTitulo);
 
-	 // JTextField Buscar
-	 txtBuscar = new JTextField();
-	 txtBuscar.setBounds(10, 38, 286, 25);
-	 miPanel.add(txtBuscar);
-	 // Boton Buscar
-	 btnConsulta = new JButton();
-	 btnConsulta.setText("Buscar");
-	 btnConsulta.setBounds(300, 38, 75, 24);
-	 miPanel.add(btnConsulta);
+	 lblBuscar = new JLabel();
+	 lblBuscar.setText("Nickname:");
+	 lblBuscar.setFont(new java.awt.Font("Verdana", 1, 12));
+	 lblBuscar.setBounds(10, 35, 150, 25);
+	 miPanel.add(lblBuscar);
 
-	 // Tabla Usuarios
+	 comboUsuarios = new JComboBox<String>();
+	 comboUsuarios.addItem("Seleccionar... ");
+	 comboUsuarios.addItem("sebastiangl7");
+	 comboUsuarios.addItem("leonut563");
+	 comboUsuarios.addItem("oldrin526u");
+	 comboUsuarios.setBounds(120, 38, 255, 20);
+	 miPanel.add(comboUsuarios);
+
+	 JTextArea jtextarea = new JTextArea(20, 58);
+	 Border border = BorderFactory.createLineBorder(Color.GRAY);
+	 jtextarea.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+	 jtextarea.setBounds(10, 70, 365, 90);
+	 jtextarea.setFont(new java.awt.Font("Verdana", 1, 12));
+	 jtextarea.setText("Nombre: Sebastian\nApellido: Gonzalez\nEmail: sebastian@gmail.com\nFecha: 20/10/1989");
+	 jtextarea.setEditable(false);
+	 miPanel.add(jtextarea);
+
+	 // Tabla Funciones de espectulos
 	 DefaultTableModel model = new DefaultTableModel(data, header);
 	 tabUsuario = new JTable(model);
 	 tabUsuario.setPreferredScrollableViewportSize(new Dimension(40, 290));
 	 JScrollPane jsPane = new JScrollPane(tabUsuario);
-	 jsPane.setBounds(10, 78, 365, 118);
+	 jsPane.setBounds(10, 180, 365, 118);
 	 jsPane.setVisible(true);
 	 miPanel.add(jsPane, BorderLayout.SOUTH);
 
-	 // Filtrar
-	 btnConsulta.addActionListener(new ActionListener(){
-	     public void actionPerformed(ActionEvent e){
-		  TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) tabUsuario.getModel()));
-		  sorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtBuscar.getText()));
-		  tabUsuario.setRowSorter(sorter);
-	     }
-	 });
-
 	 // Label
-	 lblNickname = new JLabel();
+	 /* lblNickname = new JLabel();
 	 lblNombre = new JLabel();
 	 lblApellido = new JLabel();
 	 lblEmail = new JLabel();
@@ -98,17 +105,10 @@ public class ConsultarUsuario extends JInternalFrame{
 	 lblNombre.setBounds(10, 250, 80, 25);
 	 lblApellido.setBounds(10, 280, 80, 25);
 	 lblEmail.setBounds(10, 310, 80, 25);
-	 lblfNacimiento.setBounds(10, 340, 150, 25);
-
-	 // Agrego label al Panel
-	 miPanel.add(lblNickname);
-	 miPanel.add(lblNombre);
-	 miPanel.add(lblApellido);
-	 miPanel.add(lblEmail);
-	 miPanel.add(lblfNacimiento);
+	 lblfNacimiento.setBounds(10, 340, 150, 25);*/
 
 	 // JTextField
-	 txtNickname = new JTextField();
+	 /* txtNickname = new JTextField();
 	 txtNombre = new JTextField();
 	 txtApellido = new JTextField();
 	 txtEmail = new JTextField();
@@ -117,26 +117,28 @@ public class ConsultarUsuario extends JInternalFrame{
 	 txtNombre.setBounds(140, 248, 240, 25);
 	 txtApellido.setBounds(140, 278, 240, 25);
 	 txtEmail.setBounds(140, 308, 240, 25);
-	 dateFechaNac.setBounds(140, 338, 240, 25);
+	 dateFechaNac.setBounds(140, 338, 240, 25);*/
 
 	 // Agrego JTextField al Panel
-	 miPanel.add(txtNickname);
+	 /*	 miPanel.add(txtNickname);
 	 miPanel.add(txtNombre);
 	 miPanel.add(txtApellido);
 	 miPanel.add(txtEmail);
-	 miPanel.add(dateFechaNac);
+	 miPanel.add(dateFechaNac);*/
 
 	 // Click en tabUsuario
-	 tabUsuario.addMouseListener(new MouseAdapter(){
+	 /* tabUsuario.addMouseListener(new MouseAdapter(){
 	     public void mouseClicked(MouseEvent evt){
-		  int fila = tabUsuario.rowAtPoint(evt.getPoint());
-		  txtNombre.setText(String.valueOf(tabUsuario.getValueAt(fila, 0)));
-		  txtApellido.setText(String.valueOf(tabUsuario.getValueAt(fila, 1)));
+	   int fila = tabUsuario.rowAtPoint(evt.getPoint());
+	   txtNombre.setText(String.valueOf(tabUsuario.getValueAt(fila, 0)));
+	   txtApellido.setText(String.valueOf(tabUsuario.getValueAt(fila, 1)));
 	     }
-	 });
+	 });*/
 
     }
 }
+
+
 // String s = JOptionPane.showInputDialog(null, "Digite un caracter: ");
 // char ch = s.charAt(0);
 // micoordinador.proceso3(ch);
