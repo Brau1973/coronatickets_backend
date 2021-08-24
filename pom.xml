@@ -3,39 +3,37 @@
   <groupId>com.coronaTickets</groupId>
   <artifactId>coronaTickets</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>LaboratorioPap1</name>
  
-  <properties>
-  <maven.copiler.source>1.8</maven.copiler.source>
-  <maven.copiler.target>1.8</maven.copiler.target>
-  <hibernate.version>5.4.4.Final</hibernate.version>
-  </properties>
+<properties>
+	<maven.copiler.source>1.8</maven.copiler.source>
+  	<maven.copiler.target>1.8</maven.copiler.target>
+  	<hibernate.version>5.4.21.Final</hibernate.version>
+ </properties>
   
  <dependencies>
-  <dependency>
-    <groupId>com.toedter</groupId>
-    <artifactId>jcalendar</artifactId>
-    <version>1.4</version>
+    <dependency>
+   		<groupId>com.toedter</groupId>
+    	<artifactId>jcalendar</artifactId>
+    	<version>1.4</version>
+    </dependency>
    
-</dependency>
-<dependency>
-    <groupId>org.postgresql</groupId>
-    <artifactId>postgresql</artifactId>
-    <version>42.2.6</version>
-</dependency>
-<dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-entitymanager</artifactId>
-    <version>${hibernate.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-core</artifactId>
-    <version>${hibernate.version}</version>
-</dependency>
-   </dependencies>
-  <description>Laboratorio Programacion de Aplicaciones 2021</description>
-
- 
-  
+    <dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+		<version>42.2.16</version>
+	</dependency>
+		
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-entitymanager</artifactId>
+		<version>${hibernate.version}</version>
+	</dependency>
+		
+	<dependency>
+	 	<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>${hibernate.version}</version>
+	</dependency>
+	
+</dependencies>
 </project>
