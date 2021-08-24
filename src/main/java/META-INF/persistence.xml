@@ -5,13 +5,14 @@
              http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
-	<persistence-unit name="Conexion">
+	<persistence-unit name="CoronaTickets">
+		<class>logica.Plataforma</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://pgsql-ti.esi.edu.uy:5432/gymbd" /> 
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://pgsql-ti.esi.edu.uy:5432/bd_coronaTickets" /> 
 			<property name="javax.persistence.jdbc.user" value="postgres" />
-			<property name="javax.persistence.jdbc.password" value="root" /> 
+			<property name="javax.persistence.jdbc.password" value="lapass" /> 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
