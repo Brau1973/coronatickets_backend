@@ -137,7 +137,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 	 inFrmAltaEspectaculo();
 	 inFrmConsultaEspectaculo();
 	 inFrmAltaPlataforma();
-//	 inFrmAltaFuncion();
+	 inFrmAltaFuncion();
 	 inFrmConsultaFuncion();
 	 inFrmRegistroFuncion();
 	 inFrmConsultaPaqueteEspectaculos();
