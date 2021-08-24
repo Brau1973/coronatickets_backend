@@ -1,8 +1,12 @@
 package presentacion;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -67,10 +71,20 @@ public class AltaPlataforma extends JInternalFrame{
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.setBounds(200, Y_DIST*6, 115, 25);
 		miPanel.add(btnGuardar);
+		btnGuardar.addActionListener(this::actionListenerGuardar);
 		
 		// Boton Guardar
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(325, Y_DIST*6, 115, 25);
 		miPanel.add(btnCancelar);
+	}
+	
+	
+	private void actionListenerGuardar(ActionEvent al) {
+		if(!txtNombre.getText().isEmpty() && !txtDescripcion.getText().isEmpty() && !txtUrl.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "La Plataforma se ha creado con exito");
+		}else {
+			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+		}
 	}
 }
