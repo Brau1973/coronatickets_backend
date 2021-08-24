@@ -7,7 +7,7 @@
 
 	<persistence-unit name="Conexion">
 	
-		<properties>
+		<properties> 
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://pgsql-ti.esi.edu.uy:5432/gymbd" /> 
 			<property name="javax.persistence.jdbc.user" value="postgres" />
