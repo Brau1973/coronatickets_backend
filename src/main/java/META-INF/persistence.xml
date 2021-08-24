@@ -5,13 +5,9 @@
              http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
-	<persistence-unit name="Conexion">
+	<persistence-unit name="CoronaTickets">
+		<class>logica.Plataforma</class>
 
-		<class>logica.Socio</class>
-		<class>logica.Clase</class>
-		<class>logica.Entrenamiento</class>
-		<class>logica.Spinning</class>
-		<class>logica.Inscripcion</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://pgsql-ti.esi.edu.uy:5432/bd_coronaTickets" /> 
