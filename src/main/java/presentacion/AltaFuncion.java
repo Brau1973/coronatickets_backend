@@ -28,7 +28,7 @@ public class AltaFuncion extends JInternalFrame{
     private JDateChooser calendar;
     private JComboBox<String> comboArtistas, comboEspectaculos, comboPlataforma;
     private JList listaArtistas, listaArtistasCopia;
-    private String nombresArtistas[] = {"1","2","3","4"};
+    private String nombresArtistas[] = {"1","2","3","4","1","2","3","4","1","2","3","4"};
 
     // Constructor
     public AltaFuncion(){
@@ -116,10 +116,10 @@ public class AltaFuncion extends JInternalFrame{
 	 
 	 listaArtistas = new JList<String>(nombresArtistas);
 	 listaArtistas.setBounds(220, 210, 100, 100);
-	 listaArtistas.setVisibleRowCount(4);
+	 listaArtistas.setVisibleRowCount(5);
 	 listaArtistas.setSelectionMode( 
 			 ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-	 miPanel.add( listaArtistas );
+	 miPanel.add( new JScrollPane(listaArtistas) );
 
 	 btnCopiar = new JButton( ">>>" );
 	 btnCopiar.setBounds(330, 210, 70, 25);
@@ -135,13 +135,15 @@ public class AltaFuncion extends JInternalFrame{
 	 miPanel.add(btnCopiar);
 	 
 	 listaArtistasCopia = new JList();
-	 listaArtistasCopia.setBounds(410, 210, 100, 100);
-	 listaArtistasCopia.setVisibleRowCount( 4 );
+	 //listaArtistasCopia.setBounds(410, 210, 100, 100);
+	 listaArtistasCopia.setVisibleRowCount( 5);
      //listaArtistasCopia.setFixedCellWidth( 100 );
      //listaArtistasCopia.setFixedCellHeight( 25 );
      listaArtistasCopia.setSelectionMode( 
      ListSelectionModel.SINGLE_INTERVAL_SELECTION );
-     miPanel.add( listaArtistasCopia );
+     JScrollPane algo = new JScrollPane(listaArtistasCopia );
+     algo.setBounds(410, 210, 100, 100);
+     miPanel.add( algo );
 	 
 	 lblFechaAlta = new JLabel();
 	 lblFechaAlta.setText("Fecha de Alta");
