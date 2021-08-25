@@ -1,19 +1,19 @@
 package logica;
 
-import datatypes.DtFecha;
+import java.util.Date;
 
 public class Compra{
-    private DtFecha fecha;
+    private Date fecha;
 
-    public Compra(DtFecha fecha){
+    public Compra(Date fecha){
 	 this.fecha = fecha;
     }
 
-    public DtFecha getfecha(){
+    public Date getfecha(){
 	 return fecha;
     }
 
-    public void setfecha(DtFecha fecha){
+    public void setfecha(Date fecha){
 	 this.fecha = fecha;
     }
 }
