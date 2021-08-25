@@ -1,10 +1,9 @@
 package logica;
 
-import java.util.Date;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import datatypes.DtEspectaculo;
 import interfaces.IControlador;
 
 public class Controlador implements IControlador{
@@ -15,9 +14,9 @@ public class Controlador implements IControlador{
 	 super();
     }
 
-    public void altaEspectaculo(String artista, String plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
+    public void altaEspectaculo(DtEspectaculo dte){
 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-	 Espectaculo espectaculo = new Espectaculo(artista, plataforma, nombre, descripcion, duracion, cantMinEsp, cantMaxEsp, url, costo, registro);
+	 Espectaculo espectaculo = new Espectaculo(dte.getArtista(), dte.getPlataforma(), dte.getNombre(), dte.getDescripcion(), dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
 	 mE.agregarEspectaculo(espectaculo);
     }
 }

@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import datatypes.DtEspectaculo;
 import interfaces.IControlador;
 
 @SuppressWarnings("serial")
@@ -157,16 +158,16 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 String strnombre = this.txtNombre.getText();
 	 String strdescripcion = this.txtDescripcion.getText();
 	 int duracion = Integer.parseInt(this.txtDuracion.getText());
-	 int canMin = (Integer) spinMin.getValue();
-	 int canMax = (Integer) spinMax.getValue();
+	 int cantMin = (Integer) spinMin.getValue();
+	 int cantMax = (Integer) spinMax.getValue();
 	 String strurl = this.txtUrl.getText();
 	 int costo = Integer.parseInt(this.txtCosto.getText());
 	 Date dateRegistro = this.dateFechaNac.getDate();
-
 	 if(e.getSource() == btnAceptar){
 	     if(checkFormulario()){
 		  try{
-		      this.icon.altaEspectaculo(strartista, strplataforma, strnombre, strdescripcion, duracion, canMin, canMax, strurl, costo, dateRegistro);
+		      DtEspectaculo dte = new DtEspectaculo(strartista, strplataforma, strnombre, strdescripcion, duracion, cantMin, cantMax, strurl, costo, dateRegistro);
+		      this.icon.altaEspectaculo(dte);
 		      JOptionPane.showMessageDialog(this, "El Espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
 		      limpiarFormulario();
 		  }catch(Exception ex){
