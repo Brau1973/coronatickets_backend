@@ -27,15 +27,9 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-<<<<<<< HEAD
-//import jdk.nashorn.internal.scripts.JS;
-=======
-import jdk.nashorn.internal.scripts.JS;
-import logica.DtEsp;
 import logica.DtFecha;
 import logica.Espectaculo;
 import logica.PaqEspectaculos;
->>>>>>> 77fddc67c383b480870e46c9bdca8f33122a7294
 
 @SuppressWarnings("serial")
 public class ConsultaPaqueteEspectaculos extends JInternalFrame{

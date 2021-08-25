@@ -15,12 +15,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
     private JMenuBar barraMenu;
     private JMenu menuInicio, menuUsuario, menuEspectaculo, menuAyuda, menuPlataforma, menuFuncion, menuPaquete;
     private JMenuItem menuItAltaUsuario, menuItModificarDatosUsuario, menuItConsultaUsuario, menuItAltaEspectaculo, menuItConsultaEspectaculo;
-<<<<<<< HEAD
     private JMenuItem menuItConsultaPaqueteEspectaculo, menuItCreaPaqueteEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
 
-=======
-    private JMenuItem menuItConsultaPaqueteEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
->>>>>>> 77fddc67c383b480870e46c9bdca8f33122a7294
     private AltaUsuario internalFrameAltaUsuario;
     private ConsultarUsuario internalFrameConsultaUsuario;
     private ModificarDatosUsuario internalFrameModificarDatosUsuario;
