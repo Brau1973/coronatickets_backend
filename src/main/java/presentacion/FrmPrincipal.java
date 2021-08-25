@@ -9,6 +9,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import interfaces.Fabrica;
+import interfaces.IControlador;
+
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia nombre de algunas variables, ej Registro por Alta. 79S
     private Container contenedor;
@@ -33,6 +36,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
     // Constructor
     public FrmPrincipal(){
 	 inicializar();
+
 	 setTitle("coronaTickets.uy");
 	 setSize(800, 600);
 	 setLocationRelativeTo(null);
@@ -41,6 +45,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
     }
 
     private void inicializar(){
+
 	 contenedor = getContentPane();
 	 contenedor.setLayout(null);
 	 // JMenu
@@ -167,7 +172,9 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 
     // InternalFrame Alta Espectaculo
     private void inFrmAltaEspectaculo(){
-	 internalFrameAltaEspectaculo = new AltaEspectaculo();
+	 Fabrica fabrica = Fabrica.getInstancia();
+	 IControlador icon = fabrica.getIControlador();
+	 internalFrameAltaEspectaculo = new AltaEspectaculo(icon);
 	 internalFrameAltaEspectaculo.setVisible(false);
 	 contenedor.add(internalFrameAltaEspectaculo);
     }
