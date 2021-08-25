@@ -73,15 +73,15 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 lblDescripcion.setFont(new java.awt.Font("Verdana", 1, 12));
 	 lblBiografia.setFont(new java.awt.Font("Verdana", 1, 12));
 	 lblLink.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblTitulo.setBounds(10, 10, 280, 25);
+	 lblTitulo.setBounds(10, 6, 280, 25);
 	 lblNickname.setBounds(10, 50, 80, 25);
-	 lblNombre.setBounds(10, 90, 80, 25);
-	 lblApellido.setBounds(10, 130, 80, 25);
-	 lblEmail.setBounds(10, 170, 80, 25);
-	 lblfNacimiento.setBounds(10, 210, 150, 25);
-	 lblDescripcion.setBounds(10, 250, 150, 25);
-	 lblBiografia.setBounds(10, 290, 150, 25);
-	 lblLink.setBounds(10, 330, 150, 25);
+	 lblNombre.setBounds(10, 80, 80, 25);
+	 lblApellido.setBounds(10, 110, 80, 25);
+	 lblEmail.setBounds(10, 140, 80, 25);
+	 lblfNacimiento.setBounds(10, 170, 150, 25);
+	 lblDescripcion.setBounds(10, 200, 150, 25);
+	 lblBiografia.setBounds(10, 230, 150, 25);
+	 lblLink.setBounds(10, 260, 150, 25);
 
 	 // Agrego label al Panel
 	 miPanel.add(lblTitulo);
@@ -103,6 +103,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 txtDescripcion = new JTextField();
 	 txtBiografia = new JTextField();
 	 txtLink = new JTextField();
+<<<<<<< HEAD
 	 txtNickname.setBounds(155, 51, 260, 25);
 	 txtNombre.setBounds(155, 88, 260, 25);
 	 txtApellido.setBounds(155, 128, 260, 25);
@@ -111,6 +112,16 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 txtDescripcion.setBounds(155, 248, 260, 25);
 	 txtBiografia.setBounds(155, 288, 260, 25);
 	 txtLink.setBounds(155, 328, 260, 25);
+=======
+	 txtNickname.setBounds(155, 48, 260, 25);
+	 txtNombre.setBounds(155, 78, 260, 25);
+	 txtApellido.setBounds(155, 108, 260, 25);
+	 txtEmail.setBounds(155, 138, 260, 25);
+	 dateFechaNac.setBounds(155, 168, 260, 25);
+	 txtDescripcion.setBounds(155, 198, 260, 25);
+	 txtBiografia.setBounds(155, 228, 260, 25);
+	 txtLink.setBounds(155, 258, 260, 25);
+>>>>>>> 8ee11c7f8c1aca47f6113ebd546c1c272605d2ab
 
 	 // Agrego JTextField al Panel
 	 miPanel.add(txtNickname);
@@ -125,14 +136,14 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 // Boton Aceptar
 	 btnAceptar = new JButton();
 	 btnAceptar.setText("Aceptar");
-	 btnAceptar.setBounds(155, 380, 127, 25);
+	 btnAceptar.setBounds(155, 300, 127, 25);
 	 miPanel.add(btnAceptar);
 	 btnAceptar.addActionListener(this);
 
 	 // Boton Cancelar
 	 btnCancelar = new JButton();
 	 btnCancelar.setText("Cancelar");
-	 btnCancelar.setBounds(286, 380, 127, 25);
+	 btnCancelar.setBounds(286, 300, 127, 25);
 	 miPanel.add(btnCancelar);
 	 btnCancelar.addActionListener(this);
     }
@@ -156,8 +167,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 
 	 if(e.getSource() == rbtnEspectador){
 	     if(rbtnEspectador.isSelected()){
-		  btnAceptar.setBounds(155, 260, 127, 25);
-		  btnCancelar.setBounds(286, 260, 127, 25);
+		  btnAceptar.setBounds(155, 210, 127, 25);
+		  btnCancelar.setBounds(286, 210, 127, 25);
 		  lblDescripcion.setVisible(false);
 		  lblBiografia.setVisible(false);
 		  lblLink.setVisible(false);
@@ -169,8 +180,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 }
 	 if(e.getSource() == rbtnArtista){
 	     if(rbtnArtista.isSelected()){
-		  btnAceptar.setBounds(155, 380, 127, 25);
-		  btnCancelar.setBounds(286, 380, 127, 25);
+		  btnAceptar.setBounds(155, 300, 127, 25);
+		  btnCancelar.setBounds(286, 300, 127, 25);
 		  lblDescripcion.setVisible(true);
 		  lblBiografia.setVisible(true);
 		  lblLink.setVisible(true);
