@@ -183,7 +183,9 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // Se cambia
 
     // InternalFrame Alta Plataforma
     private void inFrmAltaPlataforma(){
-	 internalFrameAltaPlataforma = new AltaPlataforma();
+    Fabrica fabrica = Fabrica.getInstancia();
+    IControlador icon = fabrica.getIControlador();
+	 internalFrameAltaPlataforma = new AltaPlataforma(icon);
 	 internalFrameAltaPlataforma.setVisible(false);
 	 contenedor.add(internalFrameAltaPlataforma);
     }
