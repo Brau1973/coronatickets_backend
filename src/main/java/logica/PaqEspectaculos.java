@@ -3,90 +3,93 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaqEspectaculos {
-	private String nombre;
-	private String descripcion;
-	private DtEsp espectaculo;
-	private List<Espectaculo> espectaculos;
-	private DtFecha fechaInicio;
-	private DtFecha fechaFin;
-	private int descuento;
+import datatypes.DtEsp;
+import datatypes.DtFecha;
 
-	public PaqEspectaculos(String nombre, String descripcion, DtEsp espectaculo, DtFecha fechaInicio, DtFecha fechaFin, int descuento) {
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.espectaculo = espectaculo;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.descuento = descuento;
-	}
+public class PaqEspectaculos{
+    private String nombre;
+    private String descripcion;
+    private DtEsp espectaculo;
+    private List<Espectaculo> espectaculos;
+    private DtFecha fechaInicio;
+    private DtFecha fechaFin;
+    private int descuento;
 
-	public PaqEspectaculos(String nombre, String descripcion, DtFecha fechaInicio, DtFecha fechaFin, int descuento) {
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.descuento = descuento;
-		this.espectaculos = new ArrayList<Espectaculo>();
-	}
+    public PaqEspectaculos(String nombre, String descripcion, DtEsp espectaculo, DtFecha fechaInicio, DtFecha fechaFin, int descuento){
+	 this.nombre = nombre;
+	 this.descripcion = descripcion;
+	 this.espectaculo = espectaculo;
+	 this.fechaInicio = fechaInicio;
+	 this.fechaFin = fechaFin;
+	 this.descuento = descuento;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public PaqEspectaculos(String nombre, String descripcion, DtFecha fechaInicio, DtFecha fechaFin, int descuento){
+	 this.nombre = nombre;
+	 this.descripcion = descripcion;
+	 this.fechaInicio = fechaInicio;
+	 this.fechaFin = fechaFin;
+	 this.descuento = descuento;
+	 this.espectaculos = new ArrayList<Espectaculo>();
+    }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    public String getNombre(){
+	 return nombre;
+    }
 
-	public DtEsp getEspectaculo() {
-		return espectaculo;
-	}
+    public String getDescripcion(){
+	 return descripcion;
+    }
 
-	public DtFecha getFechaInicio() {
-		return fechaInicio;
-	}
+    public DtEsp getEspectaculo(){
+	 return espectaculo;
+    }
 
-	public DtFecha getFechaFin() {
-		return fechaFin;
-	}
+    public DtFecha getFechaInicio(){
+	 return fechaInicio;
+    }
 
-	public int getDescuento() {
-		return descuento;
-	}
+    public DtFecha getFechaFin(){
+	 return fechaFin;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public int getDescuento(){
+	 return descuento;
+    }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    public void setNombre(String nombre){
+	 this.nombre = nombre;
+    }
 
-	public void setEspectaculo(DtEsp espectaculo) {
-		this.espectaculo = espectaculo;
-	}
+    public void setDescripcion(String descripcion){
+	 this.descripcion = descripcion;
+    }
 
-	public void setFechaInicio(DtFecha fechaInicio) {
-		this.fechaInicio = fechaInicio;
-	}
+    public void setEspectaculo(DtEsp espectaculo){
+	 this.espectaculo = espectaculo;
+    }
 
-	public void setFechaFin(DtFecha fechaFin) {
-		this.fechaFin = fechaFin;
-	}
+    public void setFechaInicio(DtFecha fechaInicio){
+	 this.fechaInicio = fechaInicio;
+    }
 
-	public void setDescuento(int descuento) {
-		this.descuento = descuento;
-	}
+    public void setFechaFin(DtFecha fechaFin){
+	 this.fechaFin = fechaFin;
+    }
 
-	public List<Espectaculo> getEspectaculos() {
-		return espectaculos;
-	}
+    public void setDescuento(int descuento){
+	 this.descuento = descuento;
+    }
 
-	public void setEspectaculos(List<Espectaculo> espectaculos) {
-		this.espectaculos = espectaculos;
-	}
-	
-	public void addEspectaculo(Espectaculo esp) {
-		this.espectaculos.add(esp);
-	}
+    public List<Espectaculo> getEspectaculos(){
+	 return espectaculos;
+    }
+
+    public void setEspectaculos(List<Espectaculo> espectaculos){
+	 this.espectaculos = espectaculos;
+    }
+
+    public void addEspectaculo(Espectaculo esp){
+	 this.espectaculos.add(esp);
+    }
 }
