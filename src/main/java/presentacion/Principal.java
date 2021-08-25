@@ -13,7 +13,7 @@ public class Principal{
     public static void main(String[] args){
 	 emf = Persistence.createEntityManagerFactory("bd_coronaTickets");
 	 em = emf.createEntityManager();
-	 Plataforma plataforma = new Plataforma("Plataforma1s", "Apto18", "nuit.com");
+	 Plataforma plataforma = new Plataforma("Plataforma", "Apto18", "nuit.com");
 	 em.getTransaction().begin();
 	 em.persist(plataforma);
 	 em.getTransaction().commit();
