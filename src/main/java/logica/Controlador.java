@@ -14,8 +14,8 @@ public class Controlador implements IControlador{
 	 super();
     }
 
-    public void agregarEspectaculo(String artista, String plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo){
-	 emf = Persistence.createEntityManagerFactory("Conexion");
+    public void altaEspectaculo(String artista, String plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo){
+	 emf = Persistence.createEntityManagerFactory("bd_coronaTickets");
 	 em = emf.createEntityManager();
 	 em.getTransaction().begin();
 	 Espectaculo espectaculo = new Espectaculo(artista, plataforma, nombre, descripcion, duracion, cantMinEsp, cantMaxEsp, url, costo);

@@ -6,14 +6,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import interfaces.IControlador;
+
 @SuppressWarnings("serial")
 public class AltaEspectaculo extends JInternalFrame implements ActionListener{
+    private IControlador icon;
     private JLabel lblTitulo, lblArtista, lblPlataforma, lblNombre, lblDescripcion, lblDuracion, lblCantEsp, lblCantMinEsp, lblCantMaxEsp, lblUrl, lblCosto, lblRegistro;
     private JTextField txtArtista, txtPlataforma, txtNombre, txtDescripcion, txtDuracion, txtUrl, txtCosto;
     private JSpinner spinMin, spinMax;
@@ -21,7 +25,8 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
     private JDateChooser dateFechaNac;
     private JButton btnAceptar, btnCancelar;
 
-    public AltaEspectaculo(){
+    public AltaEspectaculo(IControlador icon){
+	 this.icon = icon;
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -139,7 +144,22 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e){
+	 String strartista = this.txtArtista.getText();
+	 String strplataforma = this.txtPlataforma.getText();
+	 String strnombre = this.txtNombre.getText();
+	 String strdescripcion = this.txtDescripcion.getText();
+	 String strduracion = this.txtDuracion.getText();
+	 int duracion = Integer.parseInt(strduracion);
 	 if(e.getSource() == btnAceptar){
+	     if(checkFormulario()){
+		  try{
+		      this.icon.altaEspectaculo(strartista, strplataforma, strnombre, strdescripcion, duracion, 3, 4, "a", 2);
+		      JOptionPane.showMessageDialog(this, "El Espectaculo  se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
+		  }catch(Exception ex){
+		      JOptionPane.showMessageDialog(this, ex.getMessage(), "Agregar Espectaculo", JOptionPane.ERROR_MESSAGE);
+		  }
+		  setVisible(false);
+	     }
 
 	 }
 	 if(e.getSource() == btnCancelar){
@@ -147,4 +167,12 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
 	 }
     }
 
+    private boolean checkFormulario(){
+	 String strid = this.txtNombre.getText();
+	 if(strid.isEmpty()){
+	     JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Agregar Espectaculo", JOptionPane.ERROR_MESSAGE);
+	     return false;
+	 }
+	 return true;
+    }
 }
