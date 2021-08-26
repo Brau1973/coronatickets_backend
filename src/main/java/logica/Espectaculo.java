@@ -1,5 +1,7 @@
 package logica;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -15,7 +17,7 @@ public class Espectaculo{
     private int cantMaxEsp;
     private String url;
     private int costo;
-    // private DtFecha registro;
+    private Date registro;
 
     // @OneToMany(mappedBy = "funciones", cascade = CascadeType.ALL, orphanRemoval = true)
     // private List<Funcion> funciones = new ArrayList<>();
@@ -25,7 +27,7 @@ public class Espectaculo{
 	 super();
     }
 
-    public Espectaculo(String artista, String plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo){
+    public Espectaculo(String artista, String plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
 	 super();
 	 this.artista = artista;
 	 this.plataforma = plataforma;
@@ -36,7 +38,7 @@ public class Espectaculo{
 	 this.cantMaxEsp = cantMaxEsp;
 	 this.url = url;
 	 this.costo = costo;
-	 // this.registro = registro;
+	 this.registro = registro;
     }
 
     public String getArtista(){
@@ -75,11 +77,11 @@ public class Espectaculo{
 	 return costo;
     }
 
-    /*
-    public DtFecha getRegistro(){
-    	 return registro;
+
+    public Date getRegistro(){
+	 return registro;
     }
-    */
+
     public void setArtista(String artista){
 	 this.artista = artista;
     }
@@ -115,9 +117,9 @@ public class Espectaculo{
     public void setCosto(int costo){
 	 this.costo = costo;
     }
-    /*
-    public void setRegistro(DtFecha registro){
-    	 this.registro = registro;
-    }*/
+
+    public void setRegistro(Date registro){
+	 this.registro = registro;
+    }
 
 }

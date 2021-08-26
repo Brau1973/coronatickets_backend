@@ -22,7 +22,6 @@ public class Plataforma{
 	 this.url = url;
     }
 
-
     public String getNombre(){
 	 return nombre;
     }

@@ -27,7 +27,7 @@ public class Conexion{
     }
 
     @SuppressWarnings("static-access")
-	public void close(){
+    public void close(){
 	 this.em.close();
 	 this.emf.close();
     }
