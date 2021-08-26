@@ -163,6 +163,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     // InternalFrame Alta de Espectaculo // 79S
     private void inFrmAltaEspectaculo(){
 	 internalFrameAltaEspectaculo = new AltaEspectaculo(icon);
+
 	 internalFrameAltaEspectaculo.setVisible(false);
 	 contenedor.add(internalFrameAltaEspectaculo);
     }
@@ -183,8 +184,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Alta Plataforma
     private void inFrmAltaPlataforma(){
-    Fabrica fabrica = Fabrica.getInstancia();
-    IControlador icon = fabrica.getIControlador();
+	 Fabrica fabrica = Fabrica.getInstancia();
+	 IControlador icon = fabrica.getIControlador();
 	 internalFrameAltaPlataforma = new AltaPlataforma(icon);
 	 internalFrameAltaPlataforma.setVisible(false);
 	 contenedor.add(internalFrameAltaPlataforma);
@@ -235,6 +236,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameConsultaUsuario.setVisible(true);
 	     break;
 	 case "Alta de Espectáculo":
+	     internalFrameAltaEspectaculo.iniciarlizarComboBox();
 	     internalFrameAltaEspectaculo.setVisible(true);
 	     break;
 	 case "Consulta de Espectáculo":

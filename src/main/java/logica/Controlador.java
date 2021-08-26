@@ -1,5 +1,7 @@
 package logica;
 
+import java.util.ArrayList;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -22,6 +24,19 @@ public class Controlador implements IControlador{
 	 mE.agregarEspectaculo(espectaculo);
     }
 
+    public String[] listarPlataformas(){
+	 ArrayList<String> plataforma;
+	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
+	 plataforma = mP.obtenerPlataforma();
+	 String[] retorno = new String[plataforma.size()];
+	 int i = 0;
+	 for(String p :plataforma){
+	     retorno[i] = p;
+	     i++;
+	 }
+	 return retorno;
+    }
+
     public void altaPlataforma(String nombre, String descripcion, String url) throws PlataformaRepetidaExcepcion{
 	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 	 Plataforma plataforma = mP.buscarPlataforma(nombre);
@@ -29,6 +44,6 @@ public class Controlador implements IControlador{
 	     throw new PlataformaRepetidaExcepcion("la plataforma " + nombre + " ya esta existe");
 	 plataforma = new Plataforma(nombre, descripcion, url);
 	 mP.altaPlataforma(plataforma);
-
     }
+
 }
