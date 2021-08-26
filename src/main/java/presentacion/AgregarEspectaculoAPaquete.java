@@ -39,14 +39,14 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame{
     private String[][] data = {};
 
     private PaqEspectaculos paqueteSelected;
-    // TODO borrar lista que es solo para prueba
+    
     List<PaqEspectaculos> lstPaquetes = new ArrayList<PaqEspectaculos>();
     private JTable table;
 
 
     // Constructor
     public AgregarEspectaculoAPaquete(){
-	 // TODO borrar que es solo para pruebas hasta tener la BD
+	
 	 //cargarDatosPrueba();
 
 	 miPanel = new JPanel();
@@ -117,18 +117,20 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame{
 	 }
     }
 
-    //private void cargarDatosPrueba(){
-	 //PaqEspectaculos pq = new PaqEspectaculos("Paquete 1", "primer Paq", new Date(1, 1, 1), new Date(2, 1, 1), 10);
-	 //Espectaculo e = new Espectaculo("El Seba", "Twitch", "StandUp - Seba", "Tremendo StandUp de El Seba", 60, 1, 10, "laUrl", 5);
-	 //pq.addEspectaculo(e);
-	 //lstPaquetes.add(pq);
-	 //pq = new PaqEspectaculos("Paquete 2", "segundo Paq", new Date(1, 1, 1), new Date(2, 1, 1), 15);
-	 //pq.addEspectaculo(e);
-	 //e = new Espectaculo("El aviador", "Telefonica", "Servidores y Aviones", "Terminaremos hablando de Telefonica", 60, 1, 10, "laUrl", 5);
-	 //pq.addEspectaculo(e);
 
-	 //lstPaquetes.add(pq);
-	 //pq = new PaqEspectaculos("Paquete 3", "tercer Paq", new Date(1, 1, 1), new Date(2, 1, 1), 20);
-	 //lstPaquetes.add(pq);
-    //}
+//    private void cargarDatosPrueba(){
+//	 PaqEspectaculos pq = new PaqEspectaculos("Paquete 1", "primer Paq", new Date(1, 1, 1), new Date(2, 1, 1), 10);
+//	 Espectaculo e = new Espectaculo("El Seba", "Twitch", "StandUp - Seba", "Tremendo StandUp de El Seba", 60, 1, 10, "laUrl", new Date (2,8,2020));
+//	 pq.addEspectaculo(e);
+//	 lstPaquetes.add(pq);
+//	 pq = new PaqEspectaculos("Paquete 2", "segundo Paq", new Date(1, 1, 1), new Date(2, 1, 1), 15);
+//	 pq.addEspectaculo(e);
+//	 e = new Espectaculo("El aviador", "Telefonica", "Servidores y Aviones", "Terminaremos hablando de Telefonica", 60, 1, 10, "laUrl", 5);
+//	 pq.addEspectaculo(e);
+//
+//	 lstPaquetes.add(pq);
+//	 pq = new PaqEspectaculos("Paquete 3", "tercer Paq", new Date(1, 1, 1), new Date(2, 1, 1), 20);
+//	 lstPaquetes.add(pq);
+//   }
+
 }
