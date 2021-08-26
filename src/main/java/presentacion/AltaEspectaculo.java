@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,6 +27,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
     private JSpinner spinMin, spinMax;
     private JDateChooser dateFechaNac;
     private JButton btnAceptar, btnCancelar;
+    private JComboBox<String> comboPlataforma;
 
     public AltaEspectaculo(IControlador icon){
 	 this.icon = icon;
@@ -104,9 +107,15 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 txtArtista.setBounds(155, 48, 260, 25);
 	 miPanel.add(txtArtista);
 
-	 txtPlataforma = new JTextField();
-	 txtPlataforma.setBounds(155, 78, 260, 25);
-	 miPanel.add(txtPlataforma);
+	 // txtPlataforma = new JTextField();
+	 // txtPlataforma.setBounds(155, 78, 260, 25);
+	 // miPanel.add(txtPlataforma);
+	 comboPlataforma = new JComboBox<String>();
+	 // comboPlataforma.addItem("Seleccione Plataforma");
+	 // comboPlataforma.addItem("SI");
+	 // comboPlataforma.addItem("NO");
+	 comboPlataforma.setBounds(155, 78, 260, 25);
+	 miPanel.add(comboPlataforma);
 
 	 txtNombre = new JTextField();
 	 txtNombre.setBounds(155, 108, 260, 25);
@@ -152,9 +161,14 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 btnCancelar.addActionListener(this);
     }
 
+    public void iniciarlizarComboBox(){
+	 DefaultComboBoxModel<String> modelPlataformas = new DefaultComboBoxModel<String>(icon.listarPlataformas());
+	 comboPlataforma.setModel(modelPlataformas);
+    }
+
     public void actionPerformed(ActionEvent e){
 	 String strartista = this.txtArtista.getText();
-	 String strplataforma = this.txtPlataforma.getText();
+	 String strplataforma = (String) this.comboPlataforma.getSelectedItem();
 	 String strnombre = this.txtNombre.getText();
 	 String strdescripcion = this.txtDescripcion.getText();
 	 int duracion = Integer.parseInt(this.txtDuracion.getText());
@@ -194,7 +208,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 
     private void limpiarFormulario(){
 	 txtArtista.setText("");
-	 txtPlataforma.setText("");
+	 // comboPlataforma.setSelectedItem("Seleccione Plataforma");
 	 txtNombre.setText("");
 	 txtDescripcion.setText("");
 	 txtDuracion.setText("");
