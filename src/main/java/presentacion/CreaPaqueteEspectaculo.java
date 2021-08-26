@@ -1,7 +1,5 @@
 package presentacion;
 
-import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -9,11 +7,14 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import com.toedter.calendar.JDateChooser;
+
+import interfaces.Fabrica;
+import interfaces.IControladorPaquete;
+import logica.PaqueteEspectaculos;
 
 @SuppressWarnings({ "serial"})
 public class CreaPaqueteEspectaculo extends JInternalFrame {
@@ -25,37 +26,18 @@ public class CreaPaqueteEspectaculo extends JInternalFrame {
 	private JScrollPane scrollDescripcion;
 	private JDateChooser dateFechaInicio, dateFechaFin, dateFechaAlta;
 	
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CreaPaqueteEspectaculo frame = new CreaPaqueteEspectaculo();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	IControladorPaquete iControladorPaquete = Fabrica.getInstancia().getIControladorPaquete();
 	
 	public CreaPaqueteEspectaculo() {
 		setBorder(null);
 		setClosable(true);
-		setBounds(10, 10, 457, 464);
+		setBounds(10, 10, 800, 600);
 		getContentPane().setLayout(null);
 		((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
 		
 		lblTitulo = new JLabel("Crear Paquete de Espectaculo");
 		lblTitulo.setFont(new Font("Comic Sans MS", Font.BOLD, 19));
-		lblTitulo.setBounds(10, 11, 288, 27);
+		lblTitulo.setBounds(10, 11, 600, 27);
 		getContentPane().add(lblTitulo);
 		
 		lblNombre = new JLabel("Nombre:");
@@ -80,7 +62,7 @@ public class CreaPaqueteEspectaculo extends JInternalFrame {
 		
 		lblDescuento = new JLabel("Descuento:");
 		lblDescuento.setFont(new Font("Verdana", Font.BOLD, 12));
-		lblDescuento.setBounds(10, 307, 79, 14);
+		lblDescuento.setBounds(10, 307, 90, 14);
 		getContentPane().add(lblDescuento);
 		
 		lblFechaAlta = new JLabel("Fecha Alta:");
@@ -97,11 +79,7 @@ public class CreaPaqueteEspectaculo extends JInternalFrame {
 		getContentPane().add(txtDescuento);
 		
 		btnCancelar = new JButton();
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				limpiarPantalla();
-			}
-		});
+		btnCancelar.addActionListener((e) -> cancelar(e));
 		btnCancelar.setText("Cancelar");
 		btnCancelar.setBounds(279, 394, 127, 25);
 		getContentPane().add(btnCancelar);
@@ -109,12 +87,7 @@ public class CreaPaqueteEspectaculo extends JInternalFrame {
 		
 		
 		btnAceptar = new JButton();
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "El paquete ha sido creado con exito!");
-				limpiarPantalla();
-			}
-		});
+		btnAceptar.addActionListener((e) -> guardar(e));
 		btnAceptar.setText("Aceptar");
 		btnAceptar.setBounds(148, 394, 127, 25);
 		getContentPane().add(btnAceptar);
@@ -140,8 +113,6 @@ public class CreaPaqueteEspectaculo extends JInternalFrame {
 		dateFechaAlta.setBounds(148, 350, 260, 20);
 		getContentPane().add(dateFechaAlta);
 		
-		
-		
 	}
 	
 	// Limpia Formulario
@@ -152,5 +123,42 @@ public class CreaPaqueteEspectaculo extends JInternalFrame {
 		dateFechaFin.setCalendar(null);
 		dateFechaAlta.setCalendar(null);
 		txtDescuento.setText("");
+    }
+    
+    private Boolean validateForm() {
+    	if(!txtNombre.getText().isEmpty() &&
+    			!txtDescripcion.getText().isEmpty() &&
+    			dateFechaInicio.getDate() != null &&
+    			dateFechaFin.getDate() != null &&
+    			dateFechaAlta.getDate() != null &&
+    			!txtDescuento.getText().isEmpty()) {
+    		if(iControladorPaquete.existePaquete(txtNombre.getText())) {
+    			JOptionPane.showMessageDialog(null, "Ya existe un paquete con ese nombre", "Error" , JOptionPane.ERROR_MESSAGE);
+    			return false;
+    		}
+    	}else {
+    		JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error" , JOptionPane.ERROR_MESSAGE);
+    		return false;
+    	}
+    	return true;
+    }
+    
+    private void guardar(ActionEvent a) {
+		if(validateForm()) {
+			 Integer.parseInt(this.txtDescuento.getText());
+				PaqueteEspectaculos pe = new PaqueteEspectaculos(this.txtNombre.getText(), 
+																this.txtDescripcion.getText(),
+																this.dateFechaInicio.getDate(),
+																this.dateFechaFin.getDate(),
+																this.dateFechaAlta.getDate(),
+																Integer.parseInt(this.txtDescuento.getText()));
+				iControladorPaquete.altaPaquete(pe);
+				JOptionPane.showMessageDialog(null, "Paquete creado correctamente", "Alta Paquete" , JOptionPane.INFORMATION_MESSAGE);
+				limpiarPantalla();
+		}
+	}
+
+    private void cancelar(ActionEvent a) {
+    	limpiarPantalla();
     }
 }

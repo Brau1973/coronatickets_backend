@@ -105,8 +105,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 menuItModificarDatosUsuario.addActionListener(this);
 
 	 // Menu Item Espectaculo
-	 menuItAltaEspectaculo.setText("Alta de Espectáculo");
-	 menuItConsultaEspectaculo.setText("Consulta de Espectáculo");
+	 menuItAltaEspectaculo.setText("Alta de Espectï¿½culo");
+	 menuItConsultaEspectaculo.setText("Consulta de Espectï¿½culo");
 	 menuEspectaculo.add(menuItAltaEspectaculo);
 	 menuEspectaculo.addSeparator();
 	 menuEspectaculo.add(menuItConsultaEspectaculo);
@@ -123,7 +123,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 menuItConsultaPaqueteEspectaculo.setText("Consultar Paquete de Espectaculo");
 	 menuPaquete.add(menuItCreaPaqueteEspectaculo);
 	 menuPaquete.addSeparator();
-	 menuItConsultaPaqueteEspectaculo = new JMenuItem("Consulta de Paquete de Espectáculos");
+	 menuItConsultaPaqueteEspectaculo = new JMenuItem("Consulta de Paquete de EspectÃ¡culos");
 	 
 	 menuItAgregarEspectaculoAPaquete.setText("Agregar Espectaculo a Paquete");
 	 menuPaquete.add(menuItAgregarEspectaculoAPaquete);
@@ -137,13 +137,13 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 menuItAgregarEspectaculoAPaquete.addActionListener(this);
 
 	 // Menu Item Funcion
-	 menuItAltaFuncion.setText("Alta de Función de Espectáculo");
+	 menuItAltaFuncion.setText("Alta de FunciÃ³n de EspectÃ¡culo");
 	 menuFuncion.add(menuItAltaFuncion);
 	 menuItAltaFuncion.addActionListener(this);
-	 menuItConsultaFuncion.setText("Consulta de Función de Espectáculo");
+	 menuItConsultaFuncion.setText("Consulta de FunciÃ³n de EspectÃ¡culo");
 	 menuFuncion.add(menuItConsultaFuncion);
 	 menuItConsultaFuncion.addActionListener(this);
-	 menuItRegistroFuncion.setText("Registro a Función de Espectáculo");
+	 menuItRegistroFuncion.setText("Registro a FunciÃ³n de EspectÃ¡culo");
 	 menuFuncion.add(menuItRegistroFuncion);
 	 menuItRegistroFuncion.addActionListener(this);
 
@@ -277,23 +277,23 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 case "Consulta de Usuario":
 	     internalFrameConsultaUsuario.setVisible(true);
 	     break;
-	 case "Alta de Espectáculo":
+	 case "Alta de Espectï¿½culo":
 	     internalFrameAltaEspectaculo.iniciarlizarComboBox();
 	     internalFrameAltaEspectaculo.setVisible(true);
 	     break;
-	 case "Consulta de Espectáculo":
+	 case "Consulta de Espectï¿½culo":
 	     internalFrameConsultaEspectaculo.setVisible(true);
 	     break;
 	 case "Alta de Plataforma":
 	     internalFrameAltaPlataforma.setVisible(true);
 	     break;
-	 case "Alta de Función de Espectáculo":
+	 case "Alta de Funciï¿½n de Espectï¿½culo":
 	     internalFrameAltaFuncion.setVisible(true);
 	     break;
-	 case "Consulta de Función de Espectáculo":
+	 case "Consulta de Funciï¿½n de Espectï¿½culo":
 	     internalFrameConsultaFuncion.setVisible(true);
 	     break;
-	 case "Registro a Función de Espectáculo":
+	 case "Registro a Funciï¿½n de Espectï¿½culo":
 	     internalFrameRegistroFuncion.setVisible(true);
 	     break;
 	 case "Crear Paquete de Espectaculo":
