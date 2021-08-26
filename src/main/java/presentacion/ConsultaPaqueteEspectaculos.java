@@ -5,6 +5,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -16,9 +17,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-
-
-import datatypes.DtFecha;
 
 import logica.Espectaculo;
 import logica.PaqEspectaculos;
@@ -129,17 +127,17 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
     }
 
     private void cargarDatosPrueba(){
-	 PaqEspectaculos pq = new PaqEspectaculos("Paquete 1", "primer Paq", new DtFecha(1, 1, 1), new DtFecha(2, 1, 1), 10);
-	 Espectaculo e = new Espectaculo("El Seba", "Twitch", "StandUp - Seba", "Tremendo StandUp de El Seba", 60, 1, 10, "laUrl", 5);
+	 PaqEspectaculos pq = new PaqEspectaculos("Paquete 1", "primer Paq", new Date(1, 1, 1), new Date(2, 1, 1), 10);
+	 Espectaculo e = new Espectaculo("El Seba", "Twitch", "StandUp - Seba", "Tremendo StandUp de El Seba", 60, 1, 10, "laUrl", 5, null);
 	 pq.addEspectaculo(e);
 	 lstPaquetes.add(pq);
-	 pq = new PaqEspectaculos("Paquete 2", "segundo Paq", new DtFecha(1, 1, 1), new DtFecha(2, 1, 1), 15);
+	 pq = new PaqEspectaculos("Paquete 2", "segundo Paq", new Date(1, 1, 1), new Date(2, 1, 1), 15);
 	 pq.addEspectaculo(e);
-	 e = new Espectaculo("El aviador", "Telefonica", "Servidores y Aviones", "Terminaremos hablando de Telefonica", 60, 1, 10, "laUrl", 5);
+	 e = new Espectaculo("El aviador", "Telefonica", "Servidores y Aviones", "Terminaremos hablando de Telefonica", 60, 1, 10, "laUrl", 5, null);
 	 pq.addEspectaculo(e);
 
 	 lstPaquetes.add(pq);
-	 pq = new PaqEspectaculos("Paquete 3", "tercer Paq", new DtFecha(1, 1, 1), new DtFecha(2, 1, 1), 20);
+	 pq = new PaqEspectaculos("Paquete 3", "tercer Paq", new Date(1, 1, 1), new Date(2, 1, 1), 20);
 	 lstPaquetes.add(pq);
     }
 }

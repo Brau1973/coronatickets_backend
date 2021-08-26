@@ -1,21 +1,21 @@
 package logica;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import datatypes.DtEsp;
-import datatypes.DtFecha;
 
 public class PaqEspectaculos{
     private String nombre;
     private String descripcion;
     private DtEsp espectaculo;
     private List<Espectaculo> espectaculos;
-    private DtFecha fechaInicio;
-    private DtFecha fechaFin;
+    private Date fechaInicio;
+    private Date fechaFin;
     private int descuento;
 
-    public PaqEspectaculos(String nombre, String descripcion, DtEsp espectaculo, DtFecha fechaInicio, DtFecha fechaFin, int descuento){
+    public PaqEspectaculos(String nombre, String descripcion, DtEsp espectaculo, Date fechaInicio, Date fechaFin, int descuento){
 	 this.nombre = nombre;
 	 this.descripcion = descripcion;
 	 this.espectaculo = espectaculo;
@@ -24,7 +24,7 @@ public class PaqEspectaculos{
 	 this.descuento = descuento;
     }
 
-    public PaqEspectaculos(String nombre, String descripcion, DtFecha fechaInicio, DtFecha fechaFin, int descuento){
+    public PaqEspectaculos(String nombre, String descripcion, Date fechaInicio, Date fechaFin, int descuento){
 	 this.nombre = nombre;
 	 this.descripcion = descripcion;
 	 this.fechaInicio = fechaInicio;
@@ -45,11 +45,11 @@ public class PaqEspectaculos{
 	 return espectaculo;
     }
 
-    public DtFecha getFechaInicio(){
+    public Date getFechaInicio(){
 	 return fechaInicio;
     }
 
-    public DtFecha getFechaFin(){
+    public Date getFechaFin(){
 	 return fechaFin;
     }
 
@@ -69,11 +69,11 @@ public class PaqEspectaculos{
 	 this.espectaculo = espectaculo;
     }
 
-    public void setFechaInicio(DtFecha fechaInicio){
+    public void setFechaInicio(Date fechaInicio){
 	 this.fechaInicio = fechaInicio;
     }
 
-    public void setFechaFin(DtFecha fechaFin){
+    public void setFechaFin(Date fechaFin){
 	 this.fechaFin = fechaFin;
     }
 

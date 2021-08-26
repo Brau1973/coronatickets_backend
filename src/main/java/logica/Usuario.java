@@ -1,15 +1,15 @@
 package logica;
 
-import datatypes.DtFecha;
+import java.util.Date;
 
 public class Usuario{
     private String nickname;
     private String nombre;
     private String apellido;
     private String email;
-    private DtFecha fNacimiento;
+    private Date fNacimiento;
 
-    public Usuario(String nickname, String nombre, String apellido, String email, DtFecha fNacimiento){
+    public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento){
 	 super();
 	 this.nickname = nickname;
 	 this.nombre = nombre;
@@ -34,7 +34,7 @@ public class Usuario{
 	 return email;
     }
 
-    public DtFecha getfNacimiento(){
+    public Date getfNacimiento(){
 	 return fNacimiento;
     }
 
@@ -54,7 +54,7 @@ public class Usuario{
 	 this.email = email;
     }
 
-    public void setfNacimiento(DtFecha fNacimiento){
+    public void setfNacimiento(Date fNacimiento){
 	 this.fNacimiento = fNacimiento;
     }
 }

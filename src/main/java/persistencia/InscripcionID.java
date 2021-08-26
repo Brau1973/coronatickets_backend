@@ -2,6 +2,8 @@ package persistencia;
 
 import java.io.Serializable;
 
+//********   Ver **********//  79S 
+
 // No es una entidad, debe implementar serializable
 public class InscripcionID implements Serializable{
     private static final long serialVersionUID = 1L;
