@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 
 import interfaces.Fabrica;
 import interfaces.IControlador;
+import interfaces.IControladorEspectaculo;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
@@ -36,6 +37,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     private Fabrica fabrica = Fabrica.getInstancia(); // 79S
     private IControlador icon = fabrica.getIControlador();
+    private IControladorEspectaculo iconE = fabrica.getIControladorEspectaculo();
 
     // Constructor
     public FrmPrincipal(){
@@ -182,7 +184,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Alta de Espectaculo // 79S
     private void inFrmAltaEspectaculo(){
-	 internalFrameAltaEspectaculo = new AltaEspectaculo(icon);
+	 internalFrameAltaEspectaculo = new AltaEspectaculo(iconE);
 	 internalFrameAltaEspectaculo.setVisible(false);
 	 contenedor.add(internalFrameAltaEspectaculo);
     }

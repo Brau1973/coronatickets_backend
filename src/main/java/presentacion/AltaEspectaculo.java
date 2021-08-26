@@ -17,20 +17,20 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import datatypes.DtEspectaculo;
-import interfaces.IControlador;
+import interfaces.IControladorEspectaculo;
 
 @SuppressWarnings("serial")
 public class AltaEspectaculo extends JInternalFrame implements ActionListener{ // 79S
-    private IControlador icon;
+    private IControladorEspectaculo iconE;
     private JPanel miPanel;
-    private JTextField txtArtista, txtPlataforma, txtNombre, txtDescripcion, txtDuracion, txtUrl, txtCosto;
+    private JTextField txtArtista, txtNombre, txtDescripcion, txtDuracion, txtUrl, txtCosto;
     private JSpinner spinMin, spinMax;
     private JDateChooser dateFechaNac;
     private JButton btnAceptar, btnCancelar;
     private JComboBox<String> comboPlataforma;
 
-    public AltaEspectaculo(IControlador icon){
-	 this.icon = icon;
+    public AltaEspectaculo(IControladorEspectaculo iconE){
+	 this.iconE = iconE;
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -47,27 +47,27 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 lblTitulo.setBounds(10, 1, 350, 25);
 	 miPanel.add(lblTitulo);
 
-	 JLabel lblArtista = new JLabel("Artista:");
-	 lblArtista.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblArtista.setBounds(10, 50, 110, 25);
-	 miPanel.add(lblArtista);
-
 	 JLabel lblPlataforma = new JLabel("Plataforma:");
 	 lblPlataforma.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblPlataforma.setBounds(10, 80, 110, 25);
+	 lblPlataforma.setBounds(10, 50, 110, 25);
 	 miPanel.add(lblPlataforma);
+
+	 JLabel lblArtista = new JLabel("Artista:");
+	 lblArtista.setFont(new java.awt.Font("Verdana", 1, 12));
+	 lblArtista.setBounds(10, 80, 110, 25);
+	 miPanel.add(lblArtista);
 
 	 JLabel lblNombre = new JLabel("Nombre:");
 	 lblNombre.setFont(new java.awt.Font("Verdana", 1, 12));
 	 lblNombre.setBounds(10, 110, 110, 25);
 	 miPanel.add(lblNombre);
 
-	 JLabel lblDescripcion = new JLabel("Descripción:");
+	 JLabel lblDescripcion = new JLabel("Descripcion:");
 	 lblDescripcion.setFont(new java.awt.Font("Verdana", 1, 12));
 	 lblDescripcion.setBounds(10, 140, 110, 25);
 	 miPanel.add(lblDescripcion);
 
-	 JLabel lblDuracion = new JLabel("Duración:");
+	 JLabel lblDuracion = new JLabel("Duracion:");
 	 lblDuracion.setFont(new java.awt.Font("Verdana", 1, 12));
 	 lblDuracion.setBounds(10, 170, 150, 25);
 	 miPanel.add(lblDuracion);
@@ -103,19 +103,13 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 miPanel.add(lblRegistro);
 
 	 // JTextField
-	 txtArtista = new JTextField();
-	 txtArtista.setBounds(155, 48, 260, 25);
-	 miPanel.add(txtArtista);
-
-	 // txtPlataforma = new JTextField();
-	 // txtPlataforma.setBounds(155, 78, 260, 25);
-	 // miPanel.add(txtPlataforma);
 	 comboPlataforma = new JComboBox<String>();
-	 // comboPlataforma.addItem("Seleccione Plataforma");
-	 // comboPlataforma.addItem("SI");
-	 // comboPlataforma.addItem("NO");
-	 comboPlataforma.setBounds(155, 78, 260, 25);
+	 comboPlataforma.setBounds(155, 48, 260, 25);
 	 miPanel.add(comboPlataforma);
+
+	 txtArtista = new JTextField();
+	 txtArtista.setBounds(155, 78, 260, 25);
+	 miPanel.add(txtArtista);
 
 	 txtNombre = new JTextField();
 	 txtNombre.setBounds(155, 108, 260, 25);
@@ -162,7 +156,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
     }
 
     public void iniciarlizarComboBox(){
-	 DefaultComboBoxModel<String> modelPlataformas = new DefaultComboBoxModel<String>(icon.listarPlataformas());
+	 DefaultComboBoxModel<String> modelPlataformas = new DefaultComboBoxModel<String>(iconE.listarPlataformas());
 	 comboPlataforma.setModel(modelPlataformas);
     }
 
@@ -177,11 +171,12 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 String strurl = this.txtUrl.getText();
 	 int costo = Integer.parseInt(this.txtCosto.getText());
 	 Date dateRegistro = this.dateFechaNac.getDate();
+
 	 if(e.getSource() == btnAceptar){
 	     if(checkFormulario()){
 		  try{
 		      DtEspectaculo dte = new DtEspectaculo(strartista, strplataforma, strnombre, strdescripcion, duracion, cantMin, cantMax, strurl, costo, dateRegistro);
-		      this.icon.altaEspectaculo(dte);
+		      this.iconE.altaEspectaculo(dte);
 		      JOptionPane.showMessageDialog(this, "El Espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
 		      limpiarFormulario();
 		  }catch(Exception ex){
@@ -198,8 +193,8 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
     }
 
     private boolean checkFormulario(){
-	 String strid = this.txtNombre.getText();
-	 if(strid.isEmpty()){
+	 String strName = this.txtNombre.getText();
+	 if(strName.isEmpty()){
 	     JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Agregar Espectaculo", JOptionPane.ERROR_MESSAGE);
 	     return false;
 	 }
@@ -208,7 +203,6 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 
     private void limpiarFormulario(){
 	 txtArtista.setText("");
-	 // comboPlataforma.setSelectedItem("Seleccione Plataforma");
 	 txtNombre.setText("");
 	 txtDescripcion.setText("");
 	 txtDuracion.setText("");
