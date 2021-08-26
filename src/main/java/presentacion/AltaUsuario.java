@@ -31,8 +31,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
     public AltaUsuario(){
 	 miPanel = new JPanel(); 
 	 miPanel.setLayout(null);
-	 add(miPanel);
-	 setBounds(15, 15, 460, 420);
+	 getContentPane().add(miPanel);
+	 setBounds(15, 15, 469, 434);
 	 setResizable(false);
 	 setClosable(true);
 	 setIconifiable(false);
@@ -163,21 +163,20 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 txtEmail.setText("");
     }
 
-/*
- // Boton Aceptar
- 	 btnAceptar = new JButton();
- 	 btnAceptar.setText("Aceptar");
- 	 btnAceptar.setBounds(155, 300, 127, 25);
- 	 miPanel.add(btnAceptar);
- 	 btnAceptar.addActionListener(new ActionListener() {}
- 	 public void actionPerformed(ActionEvent e) {
-		agregarUsuarioAceptarActionPerformed(e);
- 	 );
+    /*
+     // Boton Aceptar
+     	 btnAceptar = new JButton();
+     	 btnAceptar.setText("Aceptar");
+     	 btnAceptar.setBounds(155, 300, 127, 25);
+     	 miPanel.add(btnAceptar);
+     	 btnAceptar.addActionListener(new ActionListener() {}
+     	 public void actionPerformed(ActionEvent e) {
+    		agregarUsuarioAceptarActionPerformed(e);
+     	 );
     
- 	 
-
- 	protected void agregarUsuarioAceptarActionPerformed(ActionEvent arg0) {
- 		 String nombre = this.textFieldNombre.getText();
+     	
+     	protected void agregarUsuarioAceptarActionPerformed(ActionEvent arg0) {
+     		 String nombre = this.textFieldNombre.getText();
          String ci = this.textFieldCI.getText();
          if (checkFormulario()) {
              try {
@@ -190,12 +189,11 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
              limpiarFormulario();
              setVisible(false);
          }
- 		
- 	} 
- 	 */
- 	 
- 	 
-    
+     		
+     	} 
+     	 */
+
+
     public void actionPerformed(ActionEvent e){
 	 if(e.getSource() == btnAceptar){
 	     JOptionPane.showMessageDialog(null, "El usuario se ha creado con �xito");
