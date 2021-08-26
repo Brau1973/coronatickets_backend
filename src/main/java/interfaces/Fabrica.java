@@ -1,20 +1,25 @@
 package interfaces;
 
+import Controladores.ControladorPaquete;
 import logica.Controlador;
 
-public class Fabrica{
-    private static Fabrica instancia = null;
+public class Fabrica {
+	private static Fabrica instancia = null;
 
-    private Fabrica(){
-    }
+	private Fabrica() {
+	}
 
-    public static Fabrica getInstancia(){
-	 if(instancia == null)
-	     instancia = new Fabrica();
-	 return instancia;
-    }
+	public static Fabrica getInstancia() {
+		if (instancia == null)
+			instancia = new Fabrica();
+		return instancia;
+	}
 
-    public IControlador getIControlador(){
-	 return new Controlador();
-    }
+	public IControlador getIControlador() {
+		return new Controlador();
+	}
+
+	public IControladorPaquete getIControladorPaquete() {
+		return new ControladorPaquete();
+	}
 }

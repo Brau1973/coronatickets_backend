@@ -18,11 +18,11 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import logica.Espectaculo;
-import logica.PaqEspectaculos;
+import logica.PaqueteEspectaculos;
 
 @SuppressWarnings("serial")
 public class ConsultaPaqueteEspectaculos extends JInternalFrame{
-    private JPanel miPanel, panelEspectaculo;
+    private JPanel miPanel;
     private JLabel lblTitulo, lblPaquete, lblEspectaculo;
     private JTable tablaEspectaculos;
     private JComboBox<String> comboPaquetes;
@@ -37,16 +37,11 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
     private String[] header = {"Nombre", "Descripcion", "etc,"};
     private String[][] data = {};
 
-    private PaqEspectaculos paqueteSelected;
-    // TODO borrar lista que es solo para prueba
-    List<PaqEspectaculos> lstPaquetes = new ArrayList<PaqEspectaculos>();
-
+    private PaqueteEspectaculos paqueteSelected;
+    List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
 
     // Constructor
     public ConsultaPaqueteEspectaculos(){
-	 // TODO borrar que es solo para pruebas hasta tener la BD
-	 cargarDatosPrueba();
-
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 miPanel.setBounds(0, 0, 800, 100);
@@ -125,18 +120,4 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
 	 }
     }
 
-    private void cargarDatosPrueba(){
-	 /* PaqEspectaculos pq = new PaqEspectaculos("Paquete 1", "primer Paq", new Date(1, 1, 1), new Date(2, 1, 1), 10);
-	 Espectaculo e = new Espectaculo("El Seba", "Twitch", "StandUp - Seba", "Tremendo StandUp de El Seba", 60, 1, 10, "laUrl", 5, null);
-	 pq.addEspectaculo(e);
-	 lstPaquetes.add(pq);
-	 pq = new PaqEspectaculos("Paquete 2", "segundo Paq", new Date(1, 1, 1), new Date(2, 1, 1), 15);
-	 pq.addEspectaculo(e);
-	 e = new Espectaculo("El aviador", "Telefonica", "Servidores y Aviones", "Terminaremos hablando de Telefonica", 60, 1, 10, "laUrl", 5, null);
-	 pq.addEspectaculo(e);
-	 
-	 lstPaquetes.add(pq);
-	 pq = new PaqEspectaculos("Paquete 3", "tercer Paq", new Date(1, 1, 1), new Date(2, 1, 1), 20);
-	 lstPaquetes.add(pq);*/
-    }
 }

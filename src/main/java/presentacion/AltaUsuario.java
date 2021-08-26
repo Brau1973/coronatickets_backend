@@ -110,7 +110,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 miPanel.add(dateFechaNac);
 
 	 lblDescripcion = new JLabel();
-	 lblDescripcion.setText("Descripción:");
+	 lblDescripcion.setText("DescripciÃ³n:");
 	 lblDescripcion.setFont(new java.awt.Font("Verdana", 1, 12));
 	 lblDescripcion.setBounds(10, 200, 150, 25);
 	 miPanel.add(lblDescripcion);
@@ -181,7 +181,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
          if (checkFormulario()) {
              try {
                  this.icon.agregarSocio(ci,nombre);
-                 JOptionPane.showMessageDialog(this, "El Socio se ha creado con éxito", "Agregar Socio",
+                 JOptionPane.showMessageDialog(this, "El Socio se ha creado con ï¿½xito", "Agregar Socio",
                          JOptionPane.INFORMATION_MESSAGE);
              } catch (SocioRepetidoExcepcion e) {
                  JOptionPane.showMessageDialog(this, e.getMessage(), "Agregar Socio", JOptionPane.ERROR_MESSAGE);
