@@ -18,11 +18,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     private JMenuBar barraMenu;
     private JMenu menuInicio, menuUsuario, menuEspectaculo, menuAyuda, menuPlataforma, menuFuncion, menuPaquete;
     private JMenuItem menuItAltaUsuario, menuItModificarDatosUsuario, menuItConsultaUsuario, menuItAltaEspectaculo, menuItConsultaEspectaculo;
-<<<<<<< HEAD
     private JMenuItem menuItConsultaPaqueteEspectaculo, menuItCreaPaqueteEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
-=======
-    private JMenuItem menuItConsultaPaqueteEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
->>>>>>> 83d42b6e6954fe4252d6dd7e1a947fbd21750dd8
+
 
     private AltaUsuario internalFrameAltaUsuario;
     private ConsultarUsuario internalFrameConsultaUsuario;
@@ -119,14 +116,11 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 menuItAltaPlataforma.addActionListener(this);
 
 	 // Menu Paquete
-<<<<<<< HEAD
 	 menuItCreaPaqueteEspectaculo.setText("Crear Paquete de Espectaculo");
 	 menuItConsultaPaqueteEspectaculo.setText("Consultar Paquete de Espectaculo");
 	 menuPaquete.add(menuItCreaPaqueteEspectaculo);
 	 menuPaquete.addSeparator();
-=======
 	 menuItConsultaPaqueteEspectaculo = new JMenuItem("Consulta de Paquete de Espectáculos");
->>>>>>> 83d42b6e6954fe4252d6dd7e1a947fbd21750dd8
 	 menuPaquete.add(menuItConsultaPaqueteEspectaculo);
 	 menuPaquete.addSeparator();
 	 menuItCreaPaqueteEspectaculo.addActionListener(this);
@@ -280,14 +274,10 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 case "Registro a Función de Espectáculo":
 	     internalFrameRegistroFuncion.setVisible(true);
 	     break;
-<<<<<<< HEAD
 	 case "Crear Paquete de Espectaculo":
 		 internalFrameCreaPaqueteEspectaculo.setVisible(true);
 		 break;
 	 case "Consultar Paquete de Espectaculo":
-=======
-	 case "Consulta Paquete de Espectaculo":
->>>>>>> 83d42b6e6954fe4252d6dd7e1a947fbd21750dd8
 	     internalFrameConsultaPaqueteEspectaculo.setVisible(true);
 	     break;
 	 default:
