@@ -5,7 +5,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -127,7 +126,7 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
     }
 
     private void cargarDatosPrueba(){
-	 PaqEspectaculos pq = new PaqEspectaculos("Paquete 1", "primer Paq", new Date(1, 1, 1), new Date(2, 1, 1), 10);
+	 /* PaqEspectaculos pq = new PaqEspectaculos("Paquete 1", "primer Paq", new Date(1, 1, 1), new Date(2, 1, 1), 10);
 	 Espectaculo e = new Espectaculo("El Seba", "Twitch", "StandUp - Seba", "Tremendo StandUp de El Seba", 60, 1, 10, "laUrl", 5, null);
 	 pq.addEspectaculo(e);
 	 lstPaquetes.add(pq);
@@ -135,9 +134,9 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
 	 pq.addEspectaculo(e);
 	 e = new Espectaculo("El aviador", "Telefonica", "Servidores y Aviones", "Terminaremos hablando de Telefonica", 60, 1, 10, "laUrl", 5, null);
 	 pq.addEspectaculo(e);
-
+	 
 	 lstPaquetes.add(pq);
 	 pq = new PaqEspectaculos("Paquete 3", "tercer Paq", new Date(1, 1, 1), new Date(2, 1, 1), 20);
-	 lstPaquetes.add(pq);
+	 lstPaquetes.add(pq);*/
     }
 }
