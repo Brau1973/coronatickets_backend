@@ -28,8 +28,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
     public AltaUsuario(){
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
-	 add(miPanel);
-	 setBounds(15, 15, 460, 420);
+	 getContentPane().add(miPanel);
+	 setBounds(15, 15, 469, 434);
 	 setResizable(false);
 	 setClosable(true);
 	 setIconifiable(false);
@@ -102,18 +102,11 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 txtNombre = new JTextField();
 	 txtApellido = new JTextField();
 	 txtEmail = new JTextField();
-	 dateFechaNac = new JDateChooser();
+	 dateFechaNac =  new JDateChooser();
 	 txtDescripcion = new JTextField();
 	 txtBiografia = new JTextField();
 	 txtLink = new JTextField();
-	 txtNickname.setBounds(155, 48, 260, 25);
-	 txtNombre.setBounds(155, 78, 260, 25);
-	 txtApellido.setBounds(155, 108, 260, 25);
-	 txtEmail.setBounds(155, 138, 260, 25);
-	 dateFechaNac.setBounds(155, 168, 260, 25);
-	 txtDescripcion.setBounds(155, 198, 260, 25);
-	 txtBiografia.setBounds(155, 228, 260, 25);
-	 txtLink.setBounds(155, 258, 260, 25);
+
 
 	 // Agrego JTextField al Panel
 	 miPanel.add(txtNickname);
