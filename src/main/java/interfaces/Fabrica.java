@@ -1,8 +1,8 @@
 package interfaces;
 
-import controladores.Controlador;
 import controladores.ControladorEspectaculo;
 import controladores.ControladorPaquete;
+import controladores.ControladorPlataforma;
 
 public class Fabrica{
     private static Fabrica instancia = null;
@@ -16,8 +16,8 @@ public class Fabrica{
 	 return instancia;
     }
 
-    public IControlador getIControlador(){
-	 return new Controlador();
+    public IControladorPlataforma getIControladorPlataforma(){
+	 return new ControladorPlataforma();
     }
 
     public IControladorPaquete getIControladorPaquete(){

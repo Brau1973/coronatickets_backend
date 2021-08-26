@@ -36,5 +36,4 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 	 return retorno;
     }
 
-
 }

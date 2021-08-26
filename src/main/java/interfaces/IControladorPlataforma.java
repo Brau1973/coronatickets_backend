@@ -2,6 +2,6 @@ package interfaces;
 
 import excepciones.PlataformaRepetidaExcepcion;
 
-public interface IControlador{
+public interface IControladorPlataforma{
     public void altaPlataforma(String nombre, String descripcion, String url) throws PlataformaRepetidaExcepcion;
 }

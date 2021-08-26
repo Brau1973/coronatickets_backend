@@ -10,8 +10,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import interfaces.Fabrica;
-import interfaces.IControlador;
 import interfaces.IControladorEspectaculo;
+import interfaces.IControladorPlataforma;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
@@ -36,7 +36,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     private JMenuItem menuItAgregarEspectaculoAPaquete;
 
     private Fabrica fabrica = Fabrica.getInstancia(); // 79S
-    private IControlador icon = fabrica.getIControlador();
+    private IControladorPlataforma iconP = fabrica.getIControladorPlataforma();
     private IControladorEspectaculo iconE = fabrica.getIControladorEspectaculo();
 
     // Constructor
@@ -90,7 +90,6 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 menuItCreaPaqueteEspectaculo = new JMenuItem();
 	 menuItConsultaPaqueteEspectaculo = new JMenuItem();
 	 menuItAgregarEspectaculoAPaquete = new JMenuItem();
-
 
 	 // Menu Item Usuario
 	 menuItAltaUsuario.setText("Alta de Usuario");
@@ -212,9 +211,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Alta Plataforma
     private void inFrmAltaPlataforma(){
-	 Fabrica fabrica = Fabrica.getInstancia();
-	 IControlador icon = fabrica.getIControlador();
-	 internalFrameAltaPlataforma = new AltaPlataforma(icon);
+	 internalFrameAltaPlataforma = new AltaPlataforma(iconP);
 	 internalFrameAltaPlataforma.setVisible(false);
 	 contenedor.add(internalFrameAltaPlataforma);
     }

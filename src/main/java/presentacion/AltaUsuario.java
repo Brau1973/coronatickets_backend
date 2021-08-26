@@ -13,14 +13,12 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-import interfaces.IControlador;
-
 //import excepciones.SocioRepetidoExcepcion;
 
 
 @SuppressWarnings("serial")
 public class AltaUsuario extends JInternalFrame implements ActionListener{
-    private IControlador icon;
+    // private IControlador icon;
     private JPanel miPanel;
     private JRadioButton rbtnEspectador, rbtnArtista;
     private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblDescripcion, lblBiografia, lblLink;
