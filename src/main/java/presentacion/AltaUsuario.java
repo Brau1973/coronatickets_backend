@@ -103,25 +103,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 txtDescripcion = new JTextField();
 	 txtBiografia = new JTextField();
 	 txtLink = new JTextField();
-<<<<<<< HEAD
-	 txtNickname.setBounds(155, 51, 260, 25);
-	 txtNombre.setBounds(155, 88, 260, 25);
-	 txtApellido.setBounds(155, 128, 260, 25);
-	 txtEmail.setBounds(155, 168, 260, 25);
-	 dateFechaNac.setBounds(155, 208, 260, 25);
-	 txtDescripcion.setBounds(155, 248, 260, 25);
-	 txtBiografia.setBounds(155, 288, 260, 25);
-	 txtLink.setBounds(155, 328, 260, 25);
-=======
-	 txtNickname.setBounds(155, 48, 260, 25);
-	 txtNombre.setBounds(155, 78, 260, 25);
-	 txtApellido.setBounds(155, 108, 260, 25);
-	 txtEmail.setBounds(155, 138, 260, 25);
-	 dateFechaNac.setBounds(155, 168, 260, 25);
-	 txtDescripcion.setBounds(155, 198, 260, 25);
-	 txtBiografia.setBounds(155, 228, 260, 25);
-	 txtLink.setBounds(155, 258, 260, 25);
->>>>>>> 8ee11c7f8c1aca47f6113ebd546c1c272605d2ab
+
 
 	 // Agrego JTextField al Panel
 	 miPanel.add(txtNickname);

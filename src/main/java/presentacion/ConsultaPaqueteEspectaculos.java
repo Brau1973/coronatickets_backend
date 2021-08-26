@@ -17,11 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-<<<<<<< HEAD
-import logica.DtFecha;
-=======
 import datatypes.DtFecha;
->>>>>>> 8ee11c7f8c1aca47f6113ebd546c1c272605d2ab
 import logica.Espectaculo;
 import logica.PaqEspectaculos;
 
