@@ -67,45 +67,4 @@ public class DtEspectaculo{
     public Date getRegistro(){
 	 return registro;
     }
-
-    /*
-    public void setArtista(String artista){
-    	 this.artista = artista;
-    }
-    
-    public void setPlataforma(String plataforma){
-    	 this.plataforma = plataforma;
-    }
-    
-    public void setNombre(String nombre){
-    	 this.nombre = nombre;
-    }
-    
-    public void setDescripcion(String descripcion){
-    	 this.descripcion = descripcion;
-    }
-    
-    public void setDuracion(int duracion){
-    	 this.duracion = duracion;
-    }
-    
-    public void setCantMinEsp(int cantMinEsp){
-    	 this.cantMinEsp = cantMinEsp;
-    }
-    
-    public void setCantMaxEsp(int cantMaxEsp){
-    	 this.cantMaxEsp = cantMaxEsp;
-    }
-    
-    public void setUrl(String url){
-    	 this.url = url;
-    }
-    
-    public void setCosto(int costo){
-    	 this.costo = costo;
-    }
-    
-    public void setRegistro(Date registro){
-    	 this.registro = registro;
-    }*/
 }
