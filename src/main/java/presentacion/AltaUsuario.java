@@ -13,6 +13,9 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+//import excepciones.SocioRepetidoExcepcion;
+
+
 @SuppressWarnings("serial")
 public class AltaUsuario extends JInternalFrame implements ActionListener{
     private JPanel miPanel;
@@ -61,7 +64,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 lblApellido.setText("Apellido:");
 	 lblEmail.setText("Email:");
 	 lblfNacimiento.setText("Fecha nacimiento:");
-	 lblDescripcion.setText("Descripción:");
+	 lblDescripcion.setText("Descripciï¿½n:");
 	 lblBiografia.setText("Biografia:");
 	 lblLink.setText("Link:");
 	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 19));
@@ -138,14 +141,48 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 txtEmail.setText("");
     }
 
+/*
+ // Boton Aceptar
+ 	 btnAceptar = new JButton();
+ 	 btnAceptar.setText("Aceptar");
+ 	 btnAceptar.setBounds(155, 300, 127, 25);
+ 	 miPanel.add(btnAceptar);
+ 	 btnAceptar.addActionListener(new ActionListener() {}
+ 	 public void actionPerformed(ActionEvent e) {
+		agregarUsuarioAceptarActionPerformed(e);
+ 	 );
+    
+ 	 
+
+ 	protected void agregarUsuarioAceptarActionPerformed(ActionEvent arg0) {
+ 		 String nombre = this.textFieldNombre.getText();
+         String ci = this.textFieldCI.getText();
+         if (checkFormulario()) {
+             try {
+                 this.icon.agregarSocio(ci,nombre);
+                 JOptionPane.showMessageDialog(this, "El Socio se ha creado con Ã©xito", "Agregar Socio",
+                         JOptionPane.INFORMATION_MESSAGE);
+             } catch (SocioRepetidoExcepcion e) {
+                 JOptionPane.showMessageDialog(this, e.getMessage(), "Agregar Socio", JOptionPane.ERROR_MESSAGE);
+             }
+             limpiarFormulario();
+             setVisible(false);
+         }
+ 		
+ 	} 
+ 	 */
+ 	 
+ 	 
+    
     public void actionPerformed(ActionEvent e){
 	 if(e.getSource() == btnAceptar){
-	     JOptionPane.showMessageDialog(null, "El usuario se ha creado con éxito");
+	     JOptionPane.showMessageDialog(null, "El usuario se ha creado con ï¿½xito");
 	     limpiarPantalla();
 	 }
 	 if(e.getSource() == btnCancelar){
 	     limpiarPantalla();
 	 }
+
 
 	 if(e.getSource() == rbtnEspectador){
 	     if(rbtnEspectador.isSelected()){
