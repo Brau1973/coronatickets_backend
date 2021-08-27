@@ -1,4 +1,4 @@
-package logica;
+package manejadores;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import logica.Espectaculo;
 import persistencia.Conexion;
 
 public class ManejadorEspectaculo{
