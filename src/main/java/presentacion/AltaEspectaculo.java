@@ -103,7 +103,6 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 lblRegistro.setBounds(10, 290, 150, 25);
 	 miPanel.add(lblRegistro);
 
-
 	 // JComboBox
 	 comboPlataforma = new JComboBox<String>();
 	 comboPlataforma.setBounds(155, 48, 260, 25);
@@ -185,12 +184,12 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 		      JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
 		      limpiarFormulario();
 		  }catch(Exception ex){
-		      JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		      JOptionPane.showMessageDialog(null, "Los datos ingresados no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
+		      limpiarFormulario();
 		  }
 		  setVisible(false);
 	     }
 	 }
-
 	 if(e.getSource() == btnCancelar){
 	     limpiarFormulario();
 	     setVisible(false);
@@ -201,7 +200,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 if(!txtNombre.getText().isEmpty() && !txtDescripcion.getText().isEmpty() && !txtDuracion.getText().isEmpty() && !txtUrl.getText().isEmpty() && txtCosto.getText() != null && dateFechaNac.getDate() != null){
 	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 	     if(mE.buscarEspectaculo(txtNombre.getText()) != null){
-		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre del espectaculo ingresado ya existe \n¿Desea modificar los datos?", "Advertencia", JOptionPane.YES_NO_OPTION);
+		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre del espectaculo ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
 		  if(respuesta != JOptionPane.YES_NO_OPTION){
 		      limpiarFormulario();
 		      setVisible(false);
