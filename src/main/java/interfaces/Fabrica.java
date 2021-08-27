@@ -1,25 +1,30 @@
 package interfaces;
 
-import Controladores.ControladorPaquete;
-import logica.Controlador;
+import controladores.ControladorEspectaculo;
+import controladores.ControladorPaquete;
+import controladores.ControladorPlataforma;
 
-public class Fabrica {
-	private static Fabrica instancia = null;
+public class Fabrica{
+    private static Fabrica instancia = null;
 
-	private Fabrica() {
-	}
+    private Fabrica(){
+    }
 
-	public static Fabrica getInstancia() {
-		if (instancia == null)
-			instancia = new Fabrica();
-		return instancia;
-	}
+    public static Fabrica getInstancia(){
+	 if(instancia == null)
+	     instancia = new Fabrica();
+	 return instancia;
+    }
 
-	public IControlador getIControlador() {
-		return new Controlador();
-	}
+    public IControladorPlataforma getIControladorPlataforma(){
+	 return new ControladorPlataforma();
+    }
 
-	public IControladorPaquete getIControladorPaquete() {
-		return new ControladorPaquete();
-	}
+    public IControladorPaquete getIControladorPaquete(){
+	 return new ControladorPaquete();
+    }
+
+    public IControladorEspectaculo getIControladorEspectaculo(){
+	 return new ControladorEspectaculo();
+    }
 }
