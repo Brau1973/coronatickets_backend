@@ -105,8 +105,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 menuItModificarDatosUsuario.addActionListener(this);
 
 	 // Menu Item Espectaculo
-	 menuItAltaEspectaculo.setText("Alta de Espect�culo");
-	 menuItConsultaEspectaculo.setText("Consulta de Espect�culo");
+	 menuItAltaEspectaculo.setText("Alta de Espectáculo");
+	 menuItConsultaEspectaculo.setText("Consulta de Espectáculo");
 	 menuEspectaculo.add(menuItAltaEspectaculo);
 	 menuEspectaculo.addSeparator();
 	 menuEspectaculo.add(menuItConsultaEspectaculo);
@@ -123,7 +123,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 menuItConsultaPaqueteEspectaculo.setText("Consultar Paquete de Espectaculo");
 	 menuPaquete.add(menuItCreaPaqueteEspectaculo);
 	 menuPaquete.addSeparator();
-	 menuItConsultaPaqueteEspectaculo = new JMenuItem("Consulta de Paquete de Espectáculos");
+	 //menuItConsultaPaqueteEspectaculo = new JMenuItem("Consulta de Paquete de Espectáculos");
 	 
 	 menuItAgregarEspectaculoAPaquete.setText("Agregar Espectaculo a Paquete");
 	 menuPaquete.add(menuItAgregarEspectaculoAPaquete);
@@ -277,23 +277,23 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 case "Consulta de Usuario":
 	     internalFrameConsultaUsuario.setVisible(true);
 	     break;
-	 case "Alta de Espect�culo":
+	 case "Alta de Espectáculo":
 	     internalFrameAltaEspectaculo.iniciarlizarComboBox();
 	     internalFrameAltaEspectaculo.setVisible(true);
 	     break;
-	 case "Consulta de Espect�culo":
+	 case "Consulta de Espectáculo":
 	     internalFrameConsultaEspectaculo.setVisible(true);
 	     break;
 	 case "Alta de Plataforma":
 	     internalFrameAltaPlataforma.setVisible(true);
 	     break;
-	 case "Alta de Funci�n de Espect�culo":
+	 case "Alta de Función de Espectáculo":
 	     internalFrameAltaFuncion.setVisible(true);
 	     break;
-	 case "Consulta de Funci�n de Espect�culo":
+	 case "Consulta de Función de Espectáculo":
 	     internalFrameConsultaFuncion.setVisible(true);
 	     break;
-	 case "Registro a Funci�n de Espect�culo":
+	 case "Registro a Función de Espectáculo":
 	     internalFrameRegistroFuncion.setVisible(true);
 	     break;
 	 case "Crear Paquete de Espectaculo":
