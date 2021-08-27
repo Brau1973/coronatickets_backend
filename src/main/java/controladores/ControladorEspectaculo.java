@@ -33,4 +33,19 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 	 return retorno;
     }
 
+    public String[] listarArtistas(){
+	 /* ---> A la espera de AltaUsuario.
+	 ArrayList<String> artistas;
+	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	 artistas = mU.obtenerUsuario();
+	 String[] retorno = new String[artistas.size()];
+	 int i = 0;
+	 for(String a :artistas){
+	     retorno[i] = a;
+	     i++;
+	 }*/
+	 String[] retorno = {"Lucas Sugo", "Denis Elias"}; // ---> Quitar, cuando este AltaUsuario.
+	 return retorno;
+    }
+
 }

@@ -24,11 +24,11 @@ import manejadores.ManejadorEspectaculo;
 public class AltaEspectaculo extends JInternalFrame implements ActionListener{ // 79S
     private IControladorEspectaculo iconE;
     private JPanel miPanel;
-    private JTextField txtArtista, txtNombre, txtDescripcion, txtDuracion, txtUrl, txtCosto;
+    private JComboBox<String> comboPlataforma, comboArtista;
+    private JTextField txtNombre, txtDescripcion, txtDuracion, txtUrl, txtCosto;
     private JSpinner spinMin, spinMax;
     private JDateChooser dateFechaNac;
     private JButton btnAceptar, btnCancelar;
-    private JComboBox<String> comboPlataforma;
 
     public AltaEspectaculo(IControladorEspectaculo iconE){
 	 this.iconE = iconE;
@@ -103,15 +103,17 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 lblRegistro.setBounds(10, 290, 150, 25);
 	 miPanel.add(lblRegistro);
 
-	 // JTextField
+
+	 // JComboBox
 	 comboPlataforma = new JComboBox<String>();
 	 comboPlataforma.setBounds(155, 48, 260, 25);
 	 miPanel.add(comboPlataforma);
 
-	 txtArtista = new JTextField();
-	 txtArtista.setBounds(155, 78, 260, 25);
-	 miPanel.add(txtArtista);
+	 comboArtista = new JComboBox<String>();
+	 comboArtista.setBounds(155, 78, 260, 25);
+	 miPanel.add(comboArtista);
 
+	 // JTextField
 	 txtNombre = new JTextField();
 	 txtNombre.setBounds(155, 108, 260, 25);
 	 miPanel.add(txtNombre);
@@ -156,27 +158,29 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 btnCancelar.addActionListener(this);
     }
 
+    // Inicializar ComboBox
     public void iniciarlizarComboBox(){
 	 DefaultComboBoxModel<String> modelPlataformas = new DefaultComboBoxModel<String>(iconE.listarPlataformas());
 	 comboPlataforma.setModel(modelPlataformas);
+
+	 DefaultComboBoxModel<String> modelArtistas = new DefaultComboBoxModel<String>(iconE.listarArtistas());
+	 comboArtista.setModel(modelArtistas);
     }
 
     public void actionPerformed(ActionEvent e){
-	 String strartista = this.txtArtista.getText();
 	 String strplataforma = (String) this.comboPlataforma.getSelectedItem();
+	 String strartista = (String) this.comboArtista.getSelectedItem();
 	 String strnombre = this.txtNombre.getText();
 	 String strdescripcion = this.txtDescripcion.getText();
-	 int duracion = Integer.parseInt(this.txtDuracion.getText());
 	 int cantMin = (Integer) spinMin.getValue();
 	 int cantMax = (Integer) spinMax.getValue();
 	 String strurl = this.txtUrl.getText();
-	 int costo = Integer.parseInt(this.txtCosto.getText());
 	 Date dateRegistro = this.dateFechaNac.getDate();
 
 	 if(e.getSource() == btnAceptar){
 	     if(checkFormulario()){
 		  try{
-		      DtEspectaculo dte = new DtEspectaculo(strartista, strplataforma, strnombre, strdescripcion, duracion, cantMin, cantMax, strurl, costo, dateRegistro);
+		      DtEspectaculo dte = new DtEspectaculo(strartista, strplataforma, strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
 		      this.iconE.altaEspectaculo(dte);
 		      JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
 		      limpiarFormulario();
@@ -194,10 +198,10 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
     }
 
     private boolean checkFormulario(){
-	 if(!txtNombre.getText().isEmpty() && !txtArtista.getText().isEmpty() && !txtDescripcion.getText().isEmpty() && !txtDuracion.getText().isEmpty() && !txtUrl.getText().isEmpty() && dateFechaNac.getDate() != null && !txtCosto.getText().isEmpty()){
+	 if(!txtNombre.getText().isEmpty() && !txtDescripcion.getText().isEmpty() && !txtDuracion.getText().isEmpty() && !txtUrl.getText().isEmpty() && txtCosto.getText() != null && dateFechaNac.getDate() != null){
 	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 	     if(mE.buscarEspectaculo(txtNombre.getText()) != null){
-		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre ingresado ya existe \n¿Desea modificar los datos?", "Advertencia", JOptionPane.YES_NO_OPTION);
+		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre del espectaculo ingresado ya existe \n¿Desea modificar los datos?", "Advertencia", JOptionPane.YES_NO_OPTION);
 		  if(respuesta != JOptionPane.YES_NO_OPTION){
 		      limpiarFormulario();
 		      setVisible(false);
@@ -212,7 +216,6 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
     }
 
     private void limpiarFormulario(){
-	 txtArtista.setText("");
 	 txtNombre.setText("");
 	 txtDescripcion.setText("");
 	 txtDuracion.setText("");

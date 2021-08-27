@@ -7,4 +7,6 @@ public interface IControladorEspectaculo{
     public void altaEspectaculo(DtEspectaculo dte) throws EspectaculoRepetidoExcepcion;
 
     public String[] listarPlataformas();
+
+    public String[] listarArtistas();
 }
