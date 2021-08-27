@@ -2,18 +2,30 @@ package presentacion;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import interfaces.IControladorFuncion;
+import manejadores.ManejadorFuncion;
+
+import logica.Espectaculo;
+
 @SuppressWarnings("serial")
-public class ConsultaFuncion extends JInternalFrame{
+public class ConsultaFuncion extends JInternalFrame implements ActionListener{
+	
+	private IControladorFuncion icon;
     private JButton btnAceptar, btnCancelar;
     private JPanel miPanel;
     private JLabel lblTitulo, lblPlataforma, lblEspectaculos, lblFunciones, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta;
@@ -23,7 +35,8 @@ public class ConsultaFuncion extends JInternalFrame{
     private String[][] data = {{"1", "las aventuras de seba"}, {"2", "seba por el tiempo"}, {"3", "sebalandia"}, {"4", "la cocina de seba"}};
     
     // Constructor
-    public ConsultaFuncion(){
+    public ConsultaFuncion(IControladorFuncion icon){
+     this.icon = icon;
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -54,11 +67,14 @@ public class ConsultaFuncion extends JInternalFrame{
 	 comboPlataforma.addItem("Seleccione Plataforma");
 	 comboPlataforma.setBounds(220, 30, 200, 20);
 	 miPanel.add(comboPlataforma);
+	 comboPlataforma.addActionListener(this);
+	 
 	
 	 lblEspectaculos = new JLabel();
 	 lblEspectaculos.setText("Espectaculos");
 	 lblEspectaculos.setBounds(10, 60, 200, 20);
 	 miPanel.add(lblEspectaculos);
+	 
 
 	 comboEspectaculos = new JComboBox<String>();
 	 comboEspectaculos.addItem("Seleccione Espectaculo");
@@ -103,4 +119,32 @@ public class ConsultaFuncion extends JInternalFrame{
 	 miPanel.add(btnCancelar);
 	 // btnCancelar.addActionListener(this);
     }
+    
+    public void inicializarComboBoxes() {
+    	DefaultComboBoxModel<String> modelFuncionEspectaculo = new DefaultComboBoxModel<String>(icon.listarPlataformas());
+    	comboPlataforma.setModel(modelFuncionEspectaculo);
+    }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == comboPlataforma) {
+			 String plataforma = this.comboPlataforma.getSelectedItem().toString();
+			 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+			 ArrayList<String> datos = mF.obtenerEspectaculo(plataforma);
+			 if(datos.isEmpty()) {
+				 JOptionPane.showMessageDialog(this, "Esta plataforma no tiene espectaculos asociados.", "Agregar Espectaculo",
+		                    JOptionPane.WARNING_MESSAGE);
+				 comboEspectaculos.getModel().setSelectedItem("Seleccione Espectaculo");
+			 } else
+				 comboEspectaculos.getModel().setSelectedItem(mF.obtenerEspectaculo(plataforma));
+		    }
+		
+		//Cargar combo Funcion respecto al espectaculo
+		/*if(e.getSource() == comboEspectaculos) {
+			 String espectaculo = this.comboEspectaculos.getSelectedItem().toString();
+			 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+		     comboFuncion.getModel().setSelectedItem(mF.obtenerFuncion(espectaculo));
+		    }*/
+	}
+    
 }

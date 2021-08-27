@@ -2,17 +2,15 @@ package logica;
 
 import java.util.Date;
 
-import datatypes.DtHora;
-
 public class Funcion{
     private String nombre;
     private String espectaculo;
     private Date fecha;
-    private DtHora horaInicio;
+    private Date horaInicio;
     private String artistas;
     private Date registro;
 
-    public Funcion(String nombre, String espectaculo, Date fecha, DtHora horaInicio, String artistas, Date registro){
+    public Funcion(String nombre, String espectaculo, Date fecha, Date horaInicio, String artistas, Date registro){
 	 this.nombre = nombre;
 	 this.espectaculo = espectaculo;
 	 this.fecha = fecha;
@@ -33,7 +31,7 @@ public class Funcion{
 	 return fecha;
     }
 
-    public DtHora getHoraInicio(){
+    public Date getHoraInicio(){
 	 return horaInicio;
     }
 
@@ -57,7 +55,7 @@ public class Funcion{
 	 this.fecha = fecha;
     }
 
-    public void setHoraInicio(DtHora horaInicio){
+    public void setHoraInicio(Date horaInicio){
 	 this.horaInicio = horaInicio;
     }
 

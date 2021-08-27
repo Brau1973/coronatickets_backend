@@ -1,40 +1,37 @@
 package presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.Date;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.RowFilter;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 import com.toedter.calendar.JDateChooser;
 
+import interfaces.IControladorUsuario;
+import logica.Artista;
+import logica.Espectador;
+import logica.Usuario;
+
 @SuppressWarnings("serial")
 public class ModificarDatosUsuario extends JInternalFrame implements ActionListener{
-    private JButton btnConsulta, btnGuardar;
+    private IControladorUsuario iconU;
     private JPanel miPanel;
-    private JLabel lblTitulo, lblNombre, lblApellido, lblfNacimiento;
-    private JTextField txtBuscar, txtNombre, txtApellido;
+    private JTextField txtNickname, txtNombre, txtApellido, txtEmail;
     private JDateChooser dateFechaNac;
-    private JTable tabUsuario;
-    private String[] header = {"Nombre", "Apellido"};
-    private String[][] data = {{"Sebastian", "Gonzalez"}, {"Aldrin", "Rebella"}, {"Leonardo", "Mesa"}, {"Lucas", "Sugo"}, {"Luisito", "Suarez"}, {"Colorado", "DeOmar"}, {"Colorado", "DeOmar"}, {"Gruffi ", "Gummi"}};
+    private JComboBox<String> comboUsuarios;
+    private JButton btnGuardar, btnCancelar;
 
     // Constructor
-    public ModificarDatosUsuario(){
+    public ModificarDatosUsuario(IControladorUsuario iconU){
+	 this.iconU = iconU;
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -44,92 +41,127 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	 setIconifiable(false);
 	 setBorder(null);
 	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
-	 // JLabel Titulo
-	 lblTitulo = new JLabel();
-	 lblTitulo.setText("Modificar Datos de Usuario");
+
+	 // JLabel
+	 JLabel lblTitulo = new JLabel("Modificar Datos de Usuario");
 	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 19));
 	 lblTitulo.setBounds(10, 1, 270, 25);
 	 miPanel.add(lblTitulo);
 
-	 // JTextField Buscar
-	 txtBuscar = new JTextField();
-	 txtBuscar.setBounds(10, 38, 286, 25);
-	 miPanel.add(txtBuscar);
-	 // Boton Buscar
-	 btnConsulta = new JButton();
-	 btnConsulta.setText("Buscar");
-	 btnConsulta.setBounds(300, 38, 75, 24);
-	 miPanel.add(btnConsulta);
+	 JLabel lblUsuario = new JLabel("Usuario:");
+	 lblUsuario.setFont(new java.awt.Font("Verdana", 1, 12));
+	 lblUsuario.setBounds(10, 50, 150, 25);
+	 miPanel.add(lblUsuario);
 
-	 // Tabla Usuarios
-	 DefaultTableModel model = new DefaultTableModel(data, header);
-	 tabUsuario = new JTable(model);
-	 tabUsuario.setPreferredScrollableViewportSize(new Dimension(40, 290));
-	 JScrollPane jsPane = new JScrollPane(tabUsuario);
-	 jsPane.setBounds(10, 78, 365, 118);
-	 jsPane.setVisible(true);
-	 miPanel.add(jsPane, BorderLayout.SOUTH);
+	 JLabel lblNickname = new JLabel("Nickname:");
+	 lblNickname.setFont(new java.awt.Font("Verdana", 1, 12));
+	 lblNickname.setBounds(10, 80, 80, 25);
+	 miPanel.add(lblNickname);
 
-	 // Filtrar
-	 btnConsulta.addActionListener(new ActionListener(){
-	     public void actionPerformed(ActionEvent e){
-		  TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) tabUsuario.getModel()));
-		  sorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtBuscar.getText()));
-		  tabUsuario.setRowSorter(sorter);
-	     }
-	 });
-
-	 // Label
-	 lblNombre = new JLabel();
-	 lblApellido = new JLabel();
-	 lblfNacimiento = new JLabel();
-	 lblNombre.setText("Nombre:");
-	 lblApellido.setText("Apellido:");
-	 lblfNacimiento.setText("Fecha nacimiento:");
+	 JLabel lblNombre = new JLabel("Nombre:");
 	 lblNombre.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblApellido.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblfNacimiento.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblNombre.setBounds(10, 220, 80, 25);
-	 lblApellido.setBounds(10, 250, 80, 25);
-	 lblfNacimiento.setBounds(10, 280, 150, 25);
-
-	 // Agrego label al Panel
+	 lblNombre.setBounds(10, 110, 80, 25);
 	 miPanel.add(lblNombre);
+
+	 JLabel lblApellido = new JLabel("Apellido:");
+	 lblApellido.setFont(new java.awt.Font("Verdana", 1, 12));
+	 lblApellido.setBounds(10, 140, 80, 25);
 	 miPanel.add(lblApellido);
+
+	 JLabel lblEmail = new JLabel("Email:");
+	 lblEmail.setFont(new java.awt.Font("Verdana", 1, 12));
+	 lblEmail.setBounds(10, 170, 80, 25);
+	 miPanel.add(lblEmail);
+
+	 JLabel lblfNacimiento = new JLabel("Fecha nacimiento:");
+	 lblfNacimiento.setFont(new java.awt.Font("Verdana", 1, 12));
+	 lblfNacimiento.setBounds(10, 200, 150, 25);
 	 miPanel.add(lblfNacimiento);
 
-	 // JTextField
-	 txtNombre = new JTextField();
-	 txtApellido = new JTextField();
-	 dateFechaNac = new JDateChooser();
-	 txtNombre.setBounds(140, 218, 237, 25);
-	 txtApellido.setBounds(140, 248, 237, 25);
-	 dateFechaNac.setBounds(140, 278, 148, 25);
+	 // JComboBox
+	 comboUsuarios = new JComboBox<String>();
+	 comboUsuarios.setBounds(140, 48, 237, 25);
+	 miPanel.add(comboUsuarios);
+	 comboUsuarios.addActionListener(this);
 
-	 // Agrego JTextField al Panel
+	 // JTextField
+	 txtNickname = new JTextField();
+	 txtNickname.setBounds(140, 78, 237, 25);
+	 txtNickname.setEditable(false);
+	 miPanel.add(txtNickname);
+
+	 txtNombre = new JTextField();
+	 txtNombre.setBounds(140, 108, 237, 25);
 	 miPanel.add(txtNombre);
+
+	 txtApellido = new JTextField();
+	 txtApellido.setBounds(140, 138, 237, 25);
 	 miPanel.add(txtApellido);
+
+	 txtEmail = new JTextField();
+	 txtEmail.setBounds(140, 168, 237, 25);
+	 txtEmail.setEditable(false);
+	 miPanel.add(txtEmail);
+
+	 dateFechaNac = new JDateChooser();
+	 dateFechaNac.setBounds(140, 198, 237, 25);
 	 miPanel.add(dateFechaNac);
 
-	 // Click en tabUsuario
-	 tabUsuario.addMouseListener(new MouseAdapter(){
-	     public void mouseClicked(MouseEvent evt){
-		  int fila = tabUsuario.rowAtPoint(evt.getPoint());
-		  txtNombre.setText(String.valueOf(tabUsuario.getValueAt(fila, 0)));
-		  txtApellido.setText(String.valueOf(tabUsuario.getValueAt(fila, 1)));
-	     }
-	 });
 	 // Boton Guardar
-	 btnGuardar = new JButton();
-	 btnGuardar.setText("Guardar");
-	 btnGuardar.setBounds(291, 278, 85, 24);
+	 btnGuardar = new JButton("Guardar");
+	 btnGuardar.setBounds(140, 235, 116, 25);
 	 miPanel.add(btnGuardar);
 	 btnGuardar.addActionListener(this);
+
+	 // Boton Cancelar
+	 btnCancelar = new JButton("Cancelar");
+	 btnCancelar.setBounds(263, 235, 116, 25);
+	 miPanel.add(btnCancelar);
+	 btnCancelar.addActionListener(this);
     }
 
-    public void actionPerformed(ActionEvent e){
+    // Inicializar ComboBox
+    public void iniciarlizarComboBox(){
+	 DefaultComboBoxModel<String> modelUsuarios = new DefaultComboBoxModel<String>(iconU.listarUsuarios());
+	 comboUsuarios.setModel(modelUsuarios);
+    }
+
+    public void actionPerformed(ActionEvent e){ // 79S
+	 String strnick = this.txtNickname.getText();
+	 String strnombre = this.txtNombre.getText();
+	 String strapellido = this.txtApellido.getText();
+	 String stremail = this.txtEmail.getText();
+	 Date dateRegistro = this.dateFechaNac.getDate();
+
 	 if(e.getSource() == btnGuardar){
+	     Usuario usuario = this.iconU.obtenerUsuario(strnick);
+	     if(usuario instanceof Artista){
+		  Usuario nuevo = new Artista(strnick, strnombre, strapellido, stremail, dateRegistro, ((Artista) usuario).getDescripcion(), ((Artista) usuario).getBiografia(), ((Artista) usuario).getLink());
+		  Artista artista = (Artista) nuevo;
+		  this.iconU.modificarUsuario(artista);
+	     }
+	     if(usuario instanceof Espectador){
+		  Usuario nuevo = new Espectador(strnick, strnombre, strapellido, stremail, dateRegistro);
+		  Espectador espectador = (Espectador) nuevo;
+		  this.iconU.modificarUsuario(espectador);
+	     }
 	     JOptionPane.showMessageDialog(null, "Datos modificados correctamente");
+	     setVisible(false);
+	 }
+
+	 if(e.getSource() == btnCancelar){
+	     setVisible(false);
+	 }
+
+	 if(e.getSource() == comboUsuarios){
+	     String strUsuario = this.comboUsuarios.getSelectedItem().toString();
+	     Usuario u = this.iconU.obtenerUsuario(strUsuario);
+	     txtNickname.setText(u.getNickname());
+	     txtNombre.setText(u.getNombre());
+	     txtApellido.setText(u.getApellido());
+	     txtEmail.setText(u.getEmail());
+	     dateFechaNac.setDate(u.getfNacimiento());
 	 }
     }
+
 }

@@ -2,15 +2,17 @@ package logica;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class Espectaculo{
     @Id
+    @Column(name="nomEsp")
+    private String nombre;
     private String artista;
     private String plataforma;
-    private String nombre;
     private String descripcion;
     private int duracion;
     private int cantMinEsp;
@@ -22,7 +24,6 @@ public class Espectaculo{
     // @OneToMany(mappedBy = "funciones", cascade = CascadeType.ALL, orphanRemoval = true)
     // private List<Funcion> funciones = new ArrayList<>();
 
-    // Necesitamos un constructor vacio para Hibernate
     public Espectaculo(){
 	 super();
     }
