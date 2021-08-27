@@ -39,7 +39,6 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
     private String[] header = {"Nombre", "Descripcion", "etc,"};
     private String[][] data = {};
 
-<<<<<<< HEAD
 	private PaqueteEspectaculos paqueteSelected;
 	List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
 	
@@ -59,23 +58,6 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
 		setIconifiable(false);
 		setBorder(null);
 		((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
-=======
-    private PaqueteEspectaculos paqueteSelected;
-    List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
-
-    // Constructor
-    public ConsultaPaqueteEspectaculos(){
-	 miPanel = new JPanel();
-	 miPanel.setLayout(null);
-	 miPanel.setBounds(0, 0, 800, 100);
-	 add(miPanel);
-	 setBounds(30, 30, 800, 600);
-	 setResizable(false);
-	 setClosable(false);
-	 setIconifiable(false);
-	 setBorder(null);
-	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
->>>>>>> 830f3700f6b5f5ac33fddd8bf683caaa1e75eece
 
 	 // Titulo
 	 lblTitulo = new JLabel("Consultar Paquete de Espectaculos");
