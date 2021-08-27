@@ -16,10 +16,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 
     public void altaEspectaculo(DtEspectaculo dte) throws EspectaculoRepetidoExcepcion{
 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-	 Espectaculo espectaculo = mE.buscarEspectaculo(dte.getNombre());
-	 if(espectaculo != null)
-	     throw new EspectaculoRepetidoExcepcion("El Espectaculo " + dte.getNombre() + " ya esta registrado");
-	 espectaculo = new Espectaculo(dte.getArtista(), dte.getPlataforma(), dte.getNombre(), dte.getDescripcion(), dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
+	 Espectaculo espectaculo = new Espectaculo(dte.getArtista(), dte.getPlataforma(), dte.getNombre(), dte.getDescripcion(), dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
 	 mE.agregarEspectaculo(espectaculo);
     }
 

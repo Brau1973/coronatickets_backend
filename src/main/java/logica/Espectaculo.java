@@ -8,9 +8,9 @@ import javax.persistence.Id;
 @Entity
 public class Espectaculo{
     @Id
+    private String nombre;
     private String artista;
     private String plataforma;
-    private String nombre;
     private String descripcion;
     private int duracion;
     private int cantMinEsp;

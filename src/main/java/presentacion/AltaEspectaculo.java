@@ -18,6 +18,7 @@ import com.toedter.calendar.JDateChooser;
 
 import datatypes.DtEspectaculo;
 import interfaces.IControladorEspectaculo;
+import manejadores.ManejadorEspectaculo;
 
 @SuppressWarnings("serial")
 public class AltaEspectaculo extends JInternalFrame implements ActionListener{ // 79S
@@ -177,10 +178,10 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 		  try{
 		      DtEspectaculo dte = new DtEspectaculo(strartista, strplataforma, strnombre, strdescripcion, duracion, cantMin, cantMax, strurl, costo, dateRegistro);
 		      this.iconE.altaEspectaculo(dte);
-		      JOptionPane.showMessageDialog(this, "El Espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
+		      JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
 		      limpiarFormulario();
 		  }catch(Exception ex){
-		      JOptionPane.showMessageDialog(this, ex.getMessage(), "Agregar Espectaculo", JOptionPane.ERROR_MESSAGE);
+		      JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		  }
 		  setVisible(false);
 	     }
@@ -193,9 +194,18 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
     }
 
     private boolean checkFormulario(){
-	 String strName = this.txtNombre.getText();
-	 if(strName.isEmpty()){
-	     JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Agregar Espectaculo", JOptionPane.ERROR_MESSAGE);
+	 if(!txtNombre.getText().isEmpty() && !txtArtista.getText().isEmpty() && !txtDescripcion.getText().isEmpty() && !txtDuracion.getText().isEmpty() && !txtUrl.getText().isEmpty() && dateFechaNac.getDate() != null && !txtCosto.getText().isEmpty()){
+	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+	     if(mE.buscarEspectaculo(txtNombre.getText()) != null){
+		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre ingresado ya existe \n¿Desea modificar los datos?", "Advertencia", JOptionPane.YES_NO_OPTION);
+		  if(respuesta != JOptionPane.YES_NO_OPTION){
+		      limpiarFormulario();
+		      setVisible(false);
+		  }
+		  return false;
+	     }
+	 }else{
+	     JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 	     return false;
 	 }
 	 return true;

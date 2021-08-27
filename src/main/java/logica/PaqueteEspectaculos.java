@@ -10,25 +10,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public class PaqueteEspectaculos{
-	
-	@Id
+    @Id
     private String nombre;
     private String descripcion;
     @OneToMany(orphanRemoval = true)
-    @JoinTable(name="EspectaculosXPaquete",
-    			joinColumns = @JoinColumn(name="PaqNombre"),
-    			inverseJoinColumns = @JoinColumn(name="EspId"))
+    @JoinTable(name = "EspectaculosXPaquete", joinColumns = @JoinColumn(name = "PaqNombre"), inverseJoinColumns = @JoinColumn(name = "EspId"))
     private List<Espectaculo> espectaculos = new ArrayList<Espectaculo>();
     private Date fechaInicio;
     private Date fechaFin;
     private Date fechaAlta;
     private int descuento;
 
-    public PaqueteEspectaculos() {};
-    
+    public PaqueteEspectaculos(){
+    };
+
     public PaqueteEspectaculos(String nombre, String descripcion, Date fechaInicio, Date fechaFin, Date fechaAlta, int descuento){
 	 this.nombre = nombre;
 	 this.descripcion = descripcion;
@@ -90,12 +87,12 @@ public class PaqueteEspectaculos{
 	 this.espectaculos.add(esp);
     }
 
-	public Date getFechaAlta() {
-		return fechaAlta;
-	}
+    public Date getFechaAlta(){
+	 return fechaAlta;
+    }
 
-	public void setFechaAlta(Date fechaAlta) {
-		this.fechaAlta = fechaAlta;
-	}
-    
+    public void setFechaAlta(Date fechaAlta){
+	 this.fechaAlta = fechaAlta;
+    }
+
 }
