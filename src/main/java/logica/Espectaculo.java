@@ -2,12 +2,14 @@ package logica;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class Espectaculo{
     @Id
+    @Column(name="nomEsp")
     private String nombre;
     private String artista;
     private String plataforma;
