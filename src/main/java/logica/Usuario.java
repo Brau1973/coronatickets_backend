@@ -2,14 +2,25 @@ package logica;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Usuario{
+	@Id
     private String nickname;
     private String nombre;
     private String apellido;
     private String email;
     private Date fNacimiento;
 
-    public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento){
+    
+    
+    public Usuario() {
+		super();
+	}
+
+	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento){
 	 super();
 	 this.nickname = nickname;
 	 this.nombre = nombre;

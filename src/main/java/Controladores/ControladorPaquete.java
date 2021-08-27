@@ -1,5 +1,7 @@
 package Controladores;
 
+import java.util.List;
+
 import Manejadores.ManejadorPaquete;
 import interfaces.IControladorPaquete;
 import logica.PaqueteEspectaculos;
@@ -17,6 +19,12 @@ public class ControladorPaquete implements IControladorPaquete{
 	public Boolean existePaquete(String nombre) {
 		ManejadorPaquete mP = ManejadorPaquete.getInstancia();
 		return mP.existePaquete(nombre);
+	}
+
+	@Override
+	public List<PaqueteEspectaculos> obtenerPaquetes() {
+		ManejadorPaquete mP = ManejadorPaquete.getInstancia();
+		return mP.obtenerPaquetes();
 	}
 
 }

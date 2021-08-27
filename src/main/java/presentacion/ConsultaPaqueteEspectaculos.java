@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import interfaces.Fabrica;
+import interfaces.IControladorPaquete;
 import logica.Espectaculo;
 import logica.PaqueteEspectaculos;
 
@@ -39,9 +41,13 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame {
 
 	private PaqueteEspectaculos paqueteSelected;
 	List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
-
+	
+	IControladorPaquete iControladorPaquete = Fabrica.getInstancia().getIControladorPaquete();
+	
 	// Constructor
 	public ConsultaPaqueteEspectaculos() {
+		lstPaquetes = iControladorPaquete.obtenerPaquetes();
+		
 		miPanel = new JPanel();
 		miPanel.setLayout(null);
 		miPanel.setBounds(0, 0, 800, 100);
@@ -101,6 +107,9 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame {
 			DefaultTableModel tm = (DefaultTableModel) tablaEspectaculos.getModel();
 			limpiarTabla(tm);
 			paqueteSelected = lstPaquetes.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
+			
+			
+			
 			for (int i = 0; i < paqueteSelected.getEspectaculos().size(); i++) {
 				Espectaculo esp = paqueteSelected.getEspectaculos().get(i);
 				Object[] data = { esp.getNombre(), esp.getDescripcion(), esp.getPlataforma() };

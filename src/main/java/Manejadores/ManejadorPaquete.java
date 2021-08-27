@@ -39,7 +39,9 @@ public class ManejadorPaquete {
 	public List<PaqueteEspectaculos> obtenerPaquetes() {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		Query query = em.createQuery("select p from PaqueteEspectaculos p");
+		Query query = em.createQuery("select p from PaqueteEspectaculos p ");
+//				+ "LEFT JOIN EspectaculosXPaquete ep ON p.nombre = ep.PaqNombre"
+//				+ "LEFT JOIN Espectaculo e ON e.");
 		List<PaqueteEspectaculos> listPaquete = query.getResultList();
 		return listPaquete;
 	}

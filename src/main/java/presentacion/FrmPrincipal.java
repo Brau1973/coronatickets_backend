@@ -131,7 +131,6 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 menuPaquete.addSeparator();
 	
 	 menuPaquete.add(menuItConsultaPaqueteEspectaculo);
-	 menuPaquete.addSeparator();
 	 menuItCreaPaqueteEspectaculo.addActionListener(this);
 	 menuItConsultaPaqueteEspectaculo.addActionListener(this);
 	 menuItAgregarEspectaculoAPaquete.addActionListener(this);
@@ -299,7 +298,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 case "Crear Paquete de Espectaculo":
 		 internalFrameCreaPaqueteEspectaculo.setVisible(true);
 		 break;
-	 case "Consultar Paquete de Espectaculo":
+	 case "Consulta de Paquete de Espectáculos":
 	     internalFrameConsultaPaqueteEspectaculo.setVisible(true);
 	     break;
 	 case "Agregar Espectaculo a Paquete":
