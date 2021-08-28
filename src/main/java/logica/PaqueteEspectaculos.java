@@ -4,33 +4,35 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import datatypes.DtEsp;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 
-public class PaqEspectaculos{
+@Entity
+public class PaqueteEspectaculos{
+    @Id
     private String nombre;
     private String descripcion;
-    private DtEsp espectaculo;
-    private List<Espectaculo> espectaculos;
+    @OneToMany(orphanRemoval = true)
+    @JoinTable(name = "EspectaculosXPaquete", joinColumns = @JoinColumn(name = "PaqNombre"), inverseJoinColumns = @JoinColumn(name = "EspId"))
+    private List<Espectaculo> espectaculos = new ArrayList<Espectaculo>();
     private Date fechaInicio;
     private Date fechaFin;
+    private Date fechaAlta;
     private int descuento;
 
-    public PaqEspectaculos(String nombre, String descripcion, DtEsp espectaculo, Date fechaInicio, Date fechaFin, int descuento){
-	 this.nombre = nombre;
-	 this.descripcion = descripcion;
-	 this.espectaculo = espectaculo;
-	 this.fechaInicio = fechaInicio;
-	 this.fechaFin = fechaFin;
-	 this.descuento = descuento;
-    }
+    public PaqueteEspectaculos(){
+    };
 
-    public PaqEspectaculos(String nombre, String descripcion, Date fechaInicio, Date fechaFin, int descuento){
+    public PaqueteEspectaculos(String nombre, String descripcion, Date fechaInicio, Date fechaFin, Date fechaAlta, int descuento){
 	 this.nombre = nombre;
 	 this.descripcion = descripcion;
 	 this.fechaInicio = fechaInicio;
 	 this.fechaFin = fechaFin;
+	 this.fechaAlta = fechaAlta;
 	 this.descuento = descuento;
-	 this.espectaculos = new ArrayList<Espectaculo>();
     }
 
     public String getNombre(){
@@ -39,10 +41,6 @@ public class PaqEspectaculos{
 
     public String getDescripcion(){
 	 return descripcion;
-    }
-
-    public DtEsp getEspectaculo(){
-	 return espectaculo;
     }
 
     public Date getFechaInicio(){
@@ -63,10 +61,6 @@ public class PaqEspectaculos{
 
     public void setDescripcion(String descripcion){
 	 this.descripcion = descripcion;
-    }
-
-    public void setEspectaculo(DtEsp espectaculo){
-	 this.espectaculo = espectaculo;
     }
 
     public void setFechaInicio(Date fechaInicio){
@@ -92,4 +86,13 @@ public class PaqEspectaculos{
     public void addEspectaculo(Espectaculo esp){
 	 this.espectaculos.add(esp);
     }
+
+    public Date getFechaAlta(){
+	 return fechaAlta;
+    }
+
+    public void setFechaAlta(Date fechaAlta){
+	 this.fechaAlta = fechaAlta;
+    }
+
 }

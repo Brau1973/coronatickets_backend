@@ -12,11 +12,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import excepciones.PlataformaRepetidaExcepcion;
-import interfaces.IControlador;
+import interfaces.IControladorPlataforma;
 
 @SuppressWarnings("serial")
 public class AltaPlataforma extends JInternalFrame{
-    private IControlador icon;
+    private IControladorPlataforma iconP;
     private JButton btnGuardar, btnCancelar;
     private JPanel miPanel;
     private JLabel lblTitulo, lblNombre, lblDescripcion, lblUrl;
@@ -29,8 +29,8 @@ public class AltaPlataforma extends JInternalFrame{
     static final int HEIGHT_FIELD = 25;
 
     // Constructor
-    public AltaPlataforma(IControlador icon){
-	 this.icon = icon;
+    public AltaPlataforma(IControladorPlataforma iconP){
+	 this.iconP = iconP;
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -94,7 +94,7 @@ public class AltaPlataforma extends JInternalFrame{
 	 String url = this.txtUrl.getText();
 	 if(checkFormulario()){
 	     try{
-		  this.icon.altaPlataforma(nombre, descripcion, url);
+		  this.iconP.altaPlataforma(nombre, descripcion, url);
 		  JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
 	     }catch(PlataformaRepetidaExcepcion e){
 		  JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);

@@ -3,9 +3,10 @@
     <persistence-unit name="bd_coronaTickets" transaction-type="RESOURCE_LOCAL">
     <class>logica.Plataforma</class>
     <class>logica.Espectaculo</class>
+    <class>logica.PaqueteEspectaculos</class>
     <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.connection.username" value="postgres"/>
             <property name="hibernate.connection.password" value="lapass"/> 
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/bd_coronaTickets"/>

@@ -10,7 +10,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import interfaces.Fabrica;
-import interfaces.IControlador;
+import interfaces.IControladorEspectaculo;
+import interfaces.IControladorPlataforma;
+import interfaces.IControladorFuncion;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
@@ -18,7 +20,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     private JMenuBar barraMenu;
     private JMenu menuInicio, menuUsuario, menuEspectaculo, menuAyuda, menuPlataforma, menuFuncion, menuPaquete;
     private JMenuItem menuItAltaUsuario, menuItModificarDatosUsuario, menuItConsultaUsuario, menuItAltaEspectaculo, menuItConsultaEspectaculo;
-    private JMenuItem menuItConsultaPaqueteEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
+    private JMenuItem menuItConsultaPaqueteEspectaculo, menuItCreaPaqueteEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
 
     private AltaUsuario internalFrameAltaUsuario;
     private ConsultarUsuario internalFrameConsultaUsuario;
@@ -30,11 +32,14 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     private AltaFuncion internalFrameAltaFuncion;
     private ConsultaFuncion internalFrameConsultaFuncion;
     private RegistroFuncion internalFrameRegistroFuncion;
+    private CreaPaqueteEspectaculo internalFrameCreaPaqueteEspectaculo;
     private AgregarEspectaculoAPaquete internalFrameAgregarEspectaculoAPaquete;
-    private JMenuItem menuItAgregarEspectaculoAPaquete; 
+    private JMenuItem menuItAgregarEspectaculoAPaquete;
 
     private Fabrica fabrica = Fabrica.getInstancia(); // 79S
-    private IControlador icon = fabrica.getIControlador();
+    private IControladorPlataforma iconP = fabrica.getIControladorPlataforma();
+    private IControladorEspectaculo iconE = fabrica.getIControladorEspectaculo();
+    private IControladorFuncion iconF = fabrica.getIControladorFuncion();
 
     // Constructor
     public FrmPrincipal(){
@@ -84,6 +89,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 menuItAltaFuncion = new JMenuItem();
 	 menuItConsultaFuncion = new JMenuItem();
 	 menuItRegistroFuncion = new JMenuItem();
+	 menuItCreaPaqueteEspectaculo = new JMenuItem();
+	 menuItConsultaPaqueteEspectaculo = new JMenuItem();
 	 menuItAgregarEspectaculoAPaquete = new JMenuItem();
 
 	 // Menu Item Usuario
@@ -100,8 +107,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 menuItModificarDatosUsuario.addActionListener(this);
 
 	 // Menu Item Espectaculo
-	 menuItAltaEspectaculo.setText("Alta de Espectáculo");
-	 menuItConsultaEspectaculo.setText("Consulta de Espectáculo");
+	 menuItAltaEspectaculo.setText("Alta de Espectaculo");
+	 menuItConsultaEspectaculo.setText("Consulta de Espectaculo");
 	 menuEspectaculo.add(menuItAltaEspectaculo);
 	 menuEspectaculo.addSeparator();
 	 menuEspectaculo.add(menuItConsultaEspectaculo);
@@ -114,25 +121,29 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 menuItAltaPlataforma.addActionListener(this);
 
 	 // Menu Paquete
-	 menuItConsultaPaqueteEspectaculo = new JMenuItem("Consulta de Paquete de Espectáculos");
-	 
+	 menuItCreaPaqueteEspectaculo.setText("Crear Paquete de Espectaculo");
+	 menuItConsultaPaqueteEspectaculo.setText("Consultar Paquete de Espectaculo");
+	 menuPaquete.add(menuItCreaPaqueteEspectaculo);
+	 menuPaquete.addSeparator();
+	 menuItConsultaPaqueteEspectaculo = new JMenuItem("Consulta de Paquete de Espectaculos");
+
 	 menuItAgregarEspectaculoAPaquete.setText("Agregar Espectaculo a Paquete");
 	 menuPaquete.add(menuItAgregarEspectaculoAPaquete);
-	 
 	 menuPaquete.addSeparator();
-	
 	 menuPaquete.add(menuItConsultaPaqueteEspectaculo);
+	 menuPaquete.addSeparator();
+	 menuItCreaPaqueteEspectaculo.addActionListener(this);
 	 menuItConsultaPaqueteEspectaculo.addActionListener(this);
 	 menuItAgregarEspectaculoAPaquete.addActionListener(this);
 
 	 // Menu Item Funcion
-	 menuItAltaFuncion.setText("Alta de Función de Espectáculo");
+	 menuItAltaFuncion.setText("Alta de Funcion de Espectaculo");
 	 menuFuncion.add(menuItAltaFuncion);
 	 menuItAltaFuncion.addActionListener(this);
-	 menuItConsultaFuncion.setText("Consulta de Función de Espectáculo");
+	 menuItConsultaFuncion.setText("Consulta de Funcion de Espectaculo");
 	 menuFuncion.add(menuItConsultaFuncion);
 	 menuItConsultaFuncion.addActionListener(this);
-	 menuItRegistroFuncion.setText("Registro a Función de Espectáculo");
+	 menuItRegistroFuncion.setText("Registro a Funcion de Espectaculo");
 	 menuFuncion.add(menuItRegistroFuncion);
 	 menuItRegistroFuncion.addActionListener(this);
 
@@ -147,6 +158,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 inFrmConsultaFuncion();
 	 inFrmRegistroFuncion();
 	 inFrmConsultaPaqueteEspectaculos();
+	 inFrmCreaPaqueteEspectaculo();
 	 inFrmAgregarEspectaculoAPaquete();
     }
 
@@ -173,7 +185,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Alta de Espectaculo // 79S
     private void inFrmAltaEspectaculo(){
-	 internalFrameAltaEspectaculo = new AltaEspectaculo(icon);
+	 internalFrameAltaEspectaculo = new AltaEspectaculo(iconE);
 	 internalFrameAltaEspectaculo.setVisible(false);
 	 contenedor.add(internalFrameAltaEspectaculo);
     }
@@ -185,6 +197,13 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 contenedor.add(internalFrameConsultaEspectaculo);
     }
 
+    // InternalFrame Crear Paquete de espectaculo
+    private void inFrmCreaPaqueteEspectaculo(){
+	 internalFrameCreaPaqueteEspectaculo = new CreaPaqueteEspectaculo();
+	 internalFrameCreaPaqueteEspectaculo.setVisible(false);
+	 contenedor.add(internalFrameCreaPaqueteEspectaculo);
+    }
+
     // InternalFrame Consultar Paquete de espectaculo
     private void inFrmConsultaPaqueteEspectaculos(){
 	 internalFrameConsultaPaqueteEspectaculo = new ConsultaPaqueteEspectaculos();
@@ -194,9 +213,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Alta Plataforma
     private void inFrmAltaPlataforma(){
-    Fabrica fabrica = Fabrica.getInstancia();
-    IControlador icon = fabrica.getIControlador();
-	 internalFrameAltaPlataforma = new AltaPlataforma(icon);
+	 internalFrameAltaPlataforma = new AltaPlataforma(iconP);
 	 internalFrameAltaPlataforma.setVisible(false);
 	 contenedor.add(internalFrameAltaPlataforma);
     }
@@ -210,7 +227,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Consulta Funcion
     private void inFrmConsultaFuncion(){
-	 internalFrameConsultaFuncion = new ConsultaFuncion();
+	 internalFrameConsultaFuncion = new ConsultaFuncion(iconF);
 	 internalFrameConsultaFuncion.setVisible(false);
 	 contenedor.add(internalFrameConsultaFuncion);
     }
@@ -221,13 +238,15 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 internalFrameRegistroFuncion.setVisible(false);
 	 contenedor.add(internalFrameRegistroFuncion);
     }
-    
-    // InternalFrame Agregar espectaculo a Paquete 
+
+
+    // InternalFrame Agregar espectaculo a Paquete
     private void inFrmAgregarEspectaculoAPaquete(){
-    internalFrameAgregarEspectaculoAPaquete = new AgregarEspectaculoAPaquete ();
-   	internalFrameAgregarEspectaculoAPaquete.setVisible(false);
+	 internalFrameAgregarEspectaculoAPaquete = new AgregarEspectaculoAPaquete();
+	 internalFrameAgregarEspectaculoAPaquete.setVisible(false);
 	 contenedor.add(internalFrameAgregarEspectaculoAPaquete);
     }
+
 
     // Eventos
     public void actionPerformed(ActionEvent e){
@@ -241,7 +260,9 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 internalFrameConsultaFuncion.setVisible(false);
 	 internalFrameRegistroFuncion.setVisible(false);
 	 internalFrameConsultaPaqueteEspectaculo.setVisible(false);
+	 internalFrameCreaPaqueteEspectaculo.setVisible(false);
 	 internalFrameAgregarEspectaculoAPaquete.setVisible(false);
+
 
 	 switch(e.getActionCommand()){
 	 case "Alta de Usuario":
@@ -253,29 +274,34 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 case "Consulta de Usuario":
 	     internalFrameConsultaUsuario.setVisible(true);
 	     break;
-	 case "Alta de Espectáculo":
+	 case "Alta de Espectaculo":
+	     internalFrameAltaEspectaculo.iniciarlizarComboBox();
 	     internalFrameAltaEspectaculo.setVisible(true);
 	     break;
-	 case "Consulta de Espectáculo":
+	 case "Consulta de Espectaculo":
 	     internalFrameConsultaEspectaculo.setVisible(true);
 	     break;
 	 case "Alta de Plataforma":
 	     internalFrameAltaPlataforma.setVisible(true);
 	     break;
-	 case "Alta de Función de Espectáculo":
+	 case "Alta de Funcion de Espectaculo":
 	     internalFrameAltaFuncion.setVisible(true);
 	     break;
-	 case "Consulta de Función de Espectáculo":
+	 case "Consulta de Funcion de Espectaculo":
+		 internalFrameConsultaFuncion.inicializarComboBoxes();
 	     internalFrameConsultaFuncion.setVisible(true);
 	     break;
-	 case "Registro a Función de Espectáculo":
+	 case "Registro a Funcion de Espectaculo":
 	     internalFrameRegistroFuncion.setVisible(true);
 	     break;
-	 case "Consulta de Paquete de Espectáculos":
+	 case "Crear Paquete de Espectaculo":
+	     internalFrameCreaPaqueteEspectaculo.setVisible(true);
+	     break;
+	 case "Consulta de Paquete de Espectaculos":
 	     internalFrameConsultaPaqueteEspectaculo.setVisible(true);
 	     break;
 	 case "Agregar Espectaculo a Paquete":
-		 internalFrameAgregarEspectaculoAPaquete.setVisible(true);
+	     internalFrameAgregarEspectaculoAPaquete.setVisible(true);
 	     break;
 	 default:
 	     break;
