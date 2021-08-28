@@ -4,6 +4,7 @@
     <class>logica.Plataforma</class>
     <class>logica.Espectaculo</class>
     <class>logica.PaqueteEspectaculos</class>
+      <class>logica.Usuario</class>
     <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
             <property name="hibernate.hbm2ddl.auto" value="update" />

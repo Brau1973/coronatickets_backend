@@ -2,7 +2,9 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -13,18 +15,24 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import interfaces.IControladorUsuario;
+import logica.Usuario;
+import manejadores.ManejadorUsuario;
+
 @SuppressWarnings("serial")
 public class ModificarDatosUsuario extends JInternalFrame implements ActionListener{
-    private JButton btnGuardar;
+    private IControladorUsuario iconU;
+    private String[] header = {"Nombre", "Apellido"};
+    private String[][] data = {{"Sebastian", "Gonzalez"}, {"Aldrin", "Rebella"}, {"Leonardo", "Mesa"}, {"Lucas", "Sugo"}, {"Luisito", "Suarez"}, {"Colorado", "DeOmar"}, {"Colorado", "DeOmar"}, {"Gruffi ", "Gummi"}};
     private JPanel miPanel;
     private JTextField txtNickname, txtNombre, txtApellido, txtEmail;
     private JDateChooser dateFechaNac;
     private JComboBox<String> comboUsuarios;
-    private String[] header = {"Nombre", "Apellido"};
-    private String[][] data = {{"Sebastian", "Gonzalez"}, {"Aldrin", "Rebella"}, {"Leonardo", "Mesa"}, {"Lucas", "Sugo"}, {"Luisito", "Suarez"}, {"Colorado", "DeOmar"}, {"Colorado", "DeOmar"}, {"Gruffi ", "Gummi"}};
+    private JButton btnGuardar, btnCancelar;
 
     // Constructor
-    public ModificarDatosUsuario(){
+    public ModificarDatosUsuario(IControladorUsuario iconU){
+	 this.iconU = iconU;
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -35,7 +43,7 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	 setBorder(null);
 	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
 
-	 // JLabel Titulo
+	 // JLabel
 	 JLabel lblTitulo = new JLabel("Modificar Datos de Usuario");
 	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 19));
 	 lblTitulo.setBounds(10, 1, 270, 25);
@@ -43,42 +51,39 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 
 	 JLabel lblUsuario = new JLabel("Usuario:");
 	 lblUsuario.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblUsuario.setBounds(10, 48, 150, 25);
+	 lblUsuario.setBounds(10, 50, 150, 25);
 	 miPanel.add(lblUsuario);
 
-	 comboUsuarios = new JComboBox<String>();
-	 comboUsuarios.addItem("Seleccionar... ");
-	 comboUsuarios.addItem("sebastiangl7");
-	 comboUsuarios.addItem("leonut563");
-	 comboUsuarios.addItem("oldrin526u");
-	 comboUsuarios.setBounds(140, 48, 237, 25);
-	 miPanel.add(comboUsuarios);
-
-	 // Label
 	 JLabel lblNickname = new JLabel("Nickname:");
 	 lblNickname.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblNickname.setBounds(10, 78, 80, 25);
+	 lblNickname.setBounds(10, 80, 80, 25);
 	 miPanel.add(lblNickname);
 
 	 JLabel lblNombre = new JLabel("Nombre:");
 	 lblNombre.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblNombre.setBounds(10, 108, 80, 25);
+	 lblNombre.setBounds(10, 110, 80, 25);
 	 miPanel.add(lblNombre);
 
 	 JLabel lblApellido = new JLabel("Apellido:");
 	 lblApellido.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblApellido.setBounds(10, 138, 80, 25);
+	 lblApellido.setBounds(10, 140, 80, 25);
 	 miPanel.add(lblApellido);
 
 	 JLabel lblEmail = new JLabel("Email:");
 	 lblEmail.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblEmail.setBounds(10, 168, 80, 25);
+	 lblEmail.setBounds(10, 170, 80, 25);
 	 miPanel.add(lblEmail);
 
 	 JLabel lblfNacimiento = new JLabel("Fecha nacimiento:");
 	 lblfNacimiento.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblfNacimiento.setBounds(10, 198, 150, 25);
+	 lblfNacimiento.setBounds(10, 200, 150, 25);
 	 miPanel.add(lblfNacimiento);
+
+	 // JComboBox
+	 comboUsuarios = new JComboBox<String>();
+	 comboUsuarios.setBounds(140, 48, 237, 25);
+	 miPanel.add(comboUsuarios);
+	 comboUsuarios.addActionListener(this);
 
 	 // JTextField
 	 txtNickname = new JTextField();
@@ -100,19 +105,56 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	 miPanel.add(txtEmail);
 
 	 dateFechaNac = new JDateChooser();
-	 dateFechaNac.setBounds(140, 198, 148, 25);
+	 dateFechaNac.setBounds(140, 198, 237, 25);
 	 miPanel.add(dateFechaNac);
 
 	 // Boton Guardar
 	 btnGuardar = new JButton("Guardar");
-	 btnGuardar.setBounds(291, 198, 85, 25);
+	 btnGuardar.setBounds(140, 235, 116, 25);
 	 miPanel.add(btnGuardar);
 	 btnGuardar.addActionListener(this);
+
+	 // Boton Cancelar
+	 btnCancelar = new JButton("Cancelar");
+	 btnCancelar.setBounds(263, 235, 116, 25);
+	 miPanel.add(btnCancelar);
+	 btnCancelar.addActionListener(this);
+    }
+
+    // Inicializar ComboBox
+    public void iniciarlizarComboBox(){
+	 DefaultComboBoxModel<String> modelUsuarios = new DefaultComboBoxModel<String>(iconU.listarUsuarios());
+	 comboUsuarios.setModel(modelUsuarios);
     }
 
     public void actionPerformed(ActionEvent e){
+	 String strnick = this.txtNickname.getText();
+	 String strnombre = this.txtNombre.getText();
+	 String strapellido = this.txtApellido.getText();
+	 String stremail = this.txtEmail.getText();
+	 Date dateRegistro = this.dateFechaNac.getDate();
+
+	 Usuario a = new Usuario(strnick, strnombre, strapellido, stremail, dateRegistro);
 	 if(e.getSource() == btnGuardar){
+	     ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	     Usuario u = (mU.buscarUsuario(strnick));
+	     mU.ModificarUsuario(u, a);
 	     JOptionPane.showMessageDialog(null, "Datos modificados correctamente");
+	     setVisible(false);
+	 }
+	 if(e.getSource() == comboUsuarios){
+	     String strUsuario = this.comboUsuarios.getSelectedItem().toString();
+	     ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	     Usuario u = (mU.buscarUsuario(strUsuario));
+	     txtNickname.setText(u.getNickname());
+	     txtNombre.setText(u.getNombre());
+	     txtApellido.setText(u.getApellido());
+	     txtEmail.setText(u.getEmail());
+	     dateFechaNac.setDate(u.getfNacimiento());
+	     // setVisible(false);
+	 }
+	 if(e.getSource() == btnCancelar){
+	     setVisible(false);
 	 }
     }
 }

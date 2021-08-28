@@ -108,7 +108,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 miPanel.add(dateFechaNac);
 
 	 lblDescripcion = new JLabel();
-	 lblDescripcion.setText("Descripción:");
+	 lblDescripcion.setText("Descripcion:");
 	 lblDescripcion.setFont(new java.awt.Font("Verdana", 1, 12));
 	 lblDescripcion.setBounds(10, 200, 150, 25);
 	 miPanel.add(lblDescripcion);
