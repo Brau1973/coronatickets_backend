@@ -1,4 +1,4 @@
-package Controladores;
+package controladores;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 
 import logica.Funcion;
-import Manejadores.ManejadorFuncion;
+import manejadores.ManejadorFuncion;
 import interfaces.IControladorFuncion;
 import persistencia.Conexion;
 

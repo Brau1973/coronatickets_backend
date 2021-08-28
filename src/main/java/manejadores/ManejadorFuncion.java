@@ -1,4 +1,4 @@
-package Manejadores;
+package manejadores;
 
 import java.util.ArrayList;
 import java.util.List;

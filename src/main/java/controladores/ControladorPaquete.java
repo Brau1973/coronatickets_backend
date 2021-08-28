@@ -1,8 +1,8 @@
-package Controladores;
+package controladores;
 
 import interfaces.IControladorPaquete;
 import logica.PaqueteEspectaculos;
-import Manejadores.ManejadorPaquete;
+import manejadores.ManejadorPaquete;
 
 public class ControladorPaquete implements IControladorPaquete{
 

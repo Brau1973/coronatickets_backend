@@ -1,9 +1,9 @@
 package interfaces;
 
-import Controladores.ControladorEspectaculo;
-import Controladores.ControladorPaquete;
-import Controladores.ControladorPlataforma;
-import Controladores.ControladorFuncion;
+import controladores.ControladorEspectaculo;
+import controladores.ControladorPaquete;
+import controladores.ControladorPlataforma;
+import controladores.ControladorFuncion;
 
 public class Fabrica{
     private static Fabrica instancia = null;
