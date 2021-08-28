@@ -1,9 +1,9 @@
-package controladores;
+package Controladores;
 
 import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.IControladorPlataforma;
 import logica.Plataforma;
-import manejadores.ManejadorPlataforma;
+import Manejadores.ManejadorPlataforma;
 
 public class ControladorPlataforma implements IControladorPlataforma{
 

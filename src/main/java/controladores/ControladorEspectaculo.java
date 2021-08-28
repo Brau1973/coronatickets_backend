@@ -1,4 +1,4 @@
-package controladores;
+package Controladores;
 
 import java.util.ArrayList;
 
@@ -6,8 +6,8 @@ import datatypes.DtEspectaculo;
 import excepciones.EspectaculoRepetidoExcepcion;
 import interfaces.IControladorEspectaculo;
 import logica.Espectaculo;
-import manejadores.ManejadorEspectaculo;
-import manejadores.ManejadorPlataforma;
+import Manejadores.ManejadorEspectaculo;
+import Manejadores.ManejadorPlataforma;
 
 public class ControladorEspectaculo implements IControladorEspectaculo{
     public ControladorEspectaculo(){

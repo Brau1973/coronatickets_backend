@@ -1,4 +1,4 @@
-package manejadores;
+package Manejadores;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,11 +46,11 @@ public class ManejadorPlataforma{
 	 EntityManager em = conexion.getEntityManager();
 
 	 Query query = em.createQuery("select p from Plataforma p");
-	 List<Plataforma> listPlataforma = (List<Plataforma>) query.getResultList();
+	List<Plataforma> listPlataforma = (List<Plataforma>) query.getResultList();
 
 	 ArrayList<String> aRetornar = new ArrayList<>();
 	 for(Plataforma p :listPlataforma){
-	     aRetornar.add(p.getNombre());
+	     aRetornar.add(new String(p.getNombre()));
 	 }
 	 return aRetornar;
     }

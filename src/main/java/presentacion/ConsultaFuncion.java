@@ -3,6 +3,7 @@ package presentacion;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -12,8 +13,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import interfaces.IControladorFuncion;
+
 @SuppressWarnings("serial")
 public class ConsultaFuncion extends JInternalFrame{
+	
+	private IControladorFuncion icon;
     private JButton btnAceptar, btnCancelar;
     private JPanel miPanel;
     private JLabel lblTitulo, lblPlataforma, lblEspectaculos, lblFunciones, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta;
@@ -23,7 +28,8 @@ public class ConsultaFuncion extends JInternalFrame{
     private String[][] data = {{"1", "las aventuras de seba"}, {"2", "seba por el tiempo"}, {"3", "sebalandia"}, {"4", "la cocina de seba"}};
     
     // Constructor
-    public ConsultaFuncion(){
+    public ConsultaFuncion(IControladorFuncion icon){
+     this.icon = icon;
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -54,11 +60,13 @@ public class ConsultaFuncion extends JInternalFrame{
 	 comboPlataforma.addItem("Seleccione Plataforma");
 	 comboPlataforma.setBounds(220, 30, 200, 20);
 	 miPanel.add(comboPlataforma);
+	 
 	
 	 lblEspectaculos = new JLabel();
 	 lblEspectaculos.setText("Espectaculos");
 	 lblEspectaculos.setBounds(10, 60, 200, 20);
 	 miPanel.add(lblEspectaculos);
+	 
 
 	 comboEspectaculos = new JComboBox<String>();
 	 comboEspectaculos.addItem("Seleccione Espectaculo");
@@ -103,4 +111,10 @@ public class ConsultaFuncion extends JInternalFrame{
 	 miPanel.add(btnCancelar);
 	 // btnCancelar.addActionListener(this);
     }
+    
+    public void inicializarComboBoxes() {
+    	DefaultComboBoxModel<String> modelFuncionEspectaculo = new DefaultComboBoxModel<String>(icon.listarPlataformas());
+    	comboPlataforma.setModel(modelFuncionEspectaculo);
+    }
+    
 }
