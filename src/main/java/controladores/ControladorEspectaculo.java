@@ -8,6 +8,7 @@ import interfaces.IControladorEspectaculo;
 import logica.Espectaculo;
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorPlataforma;
+import manejadores.ManejadorUsuario;
 
 public class ControladorEspectaculo implements IControladorEspectaculo{
     public ControladorEspectaculo(){
@@ -21,8 +22,8 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
     }
 
     public String[] listarPlataformas(){
-	 ArrayList<String> plataforma;
 	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
+	 ArrayList<String> plataforma;
 	 plataforma = mP.obtenerPlataforma();
 	 String[] retorno = new String[plataforma.size()];
 	 int i = 0;
@@ -34,17 +35,15 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
     }
 
     public String[] listarArtistas(){
-	 /* ---> A la espera de AltaUsuario.
-	 ArrayList<String> artistas;
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	 ArrayList<String> artistas;
 	 artistas = mU.obtenerUsuario();
 	 String[] retorno = new String[artistas.size()];
 	 int i = 0;
 	 for(String a :artistas){
 	     retorno[i] = a;
 	     i++;
-	 }*/
-	 String[] retorno = {"Lucas Sugo", "Denis Elias"}; // ---> Quitar, cuando este AltaUsuario.
+	 }
 	 return retorno;
     }
 

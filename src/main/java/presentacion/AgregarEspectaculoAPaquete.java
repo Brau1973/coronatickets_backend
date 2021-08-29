@@ -36,9 +36,7 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame{
 
     // Constructor
     public AgregarEspectaculoAPaquete(){
-
 	 // cargarDatosPrueba();
-
 	 miPanel = new JPanel();
 	 miPanel.setBounds(0, 0, 800, 100);
 	 getContentPane().add(miPanel);

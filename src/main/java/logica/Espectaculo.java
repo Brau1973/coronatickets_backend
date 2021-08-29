@@ -22,7 +22,6 @@ public class Espectaculo{
     // @OneToMany(mappedBy = "funciones", cascade = CascadeType.ALL, orphanRemoval = true)
     // private List<Funcion> funciones = new ArrayList<>();
 
-    // Necesitamos un constructor vacio para Hibernate
     public Espectaculo(){
 	 super();
     }

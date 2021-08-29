@@ -2,6 +2,9 @@ package logica;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Artista extends Usuario{
     private String descripcion;
     private String biografia;
@@ -12,6 +15,9 @@ public class Artista extends Usuario{
 	 this.descripcion = descripcion;
 	 this.biografia = biografia;
 	 this.link = link;
+    }
+
+    public Artista(){
     }
 
     public String getDescripcion(){

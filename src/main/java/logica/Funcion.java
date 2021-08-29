@@ -33,7 +33,7 @@ public class Funcion{
 	 return fecha;
     }
 
-    public DtHora getHoraInicio(){
+    public Date getHoraInicio(){
 	 return horaInicio;
     }
 
