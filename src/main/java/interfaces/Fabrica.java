@@ -1,6 +1,7 @@
 package interfaces;
 
 import controladores.ControladorEspectaculo;
+import controladores.ControladorFuncion;
 import controladores.ControladorPaquete;
 import controladores.ControladorPlataforma;
 import controladores.ControladorUsuario;
@@ -32,4 +33,9 @@ public class Fabrica{
     public IControladorUsuario getIControladorUsuario(){
 	 return new ControladorUsuario();
     }
+
+    public IControladorFuncion getIControladorFuncion(){
+	 return new ControladorFuncion();
+    }
+
 }

@@ -4,8 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario{
     @Id
     private String nickname;
@@ -14,10 +17,6 @@ public class Usuario{
     private String email;
     private Date fNacimiento;
 
-    public Usuario(){
-	 super();
-    }
-
     public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento){
 	 super();
 	 this.nickname = nickname;
@@ -25,6 +24,10 @@ public class Usuario{
 	 this.apellido = apellido;
 	 this.email = email;
 	 this.fNacimiento = fNacimiento;
+    }
+
+    public Usuario(){
+	 // super();
     }
 
     public String getNickname(){

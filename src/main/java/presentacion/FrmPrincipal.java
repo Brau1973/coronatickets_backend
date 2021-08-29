@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
+import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
 
@@ -40,6 +41,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     private IControladorPlataforma iconP = fabrica.getIControladorPlataforma();
     private IControladorEspectaculo iconE = fabrica.getIControladorEspectaculo();
     private IControladorUsuario iconU = fabrica.getIControladorUsuario();
+    private IControladorFuncion iconF = fabrica.getIControladorFuncion();
 
     // Constructor
     public FrmPrincipal(){
@@ -165,7 +167,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Alta Usuario
     private void inFrmAltaUsuario(){
-	 internalFrameAltaUsuario = new AltaUsuario();
+	 internalFrameAltaUsuario = new AltaUsuario(iconU);
 	 internalFrameAltaUsuario.setVisible(false);
 	 contenedor.add(internalFrameAltaUsuario);
     }
@@ -228,7 +230,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Consulta Funcion
     private void inFrmConsultaFuncion(){
-	 internalFrameConsultaFuncion = new ConsultaFuncion();
+	 internalFrameConsultaFuncion = new ConsultaFuncion(iconF);
 	 internalFrameConsultaFuncion.setVisible(false);
 	 contenedor.add(internalFrameConsultaFuncion);
     }
@@ -290,6 +292,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameAltaFuncion.setVisible(true);
 	     break;
 	 case "Consulta de Funcion de Espectaculo":
+	     internalFrameConsultaFuncion.inicializarComboBoxes();
 	     internalFrameConsultaFuncion.setVisible(true);
 	     break;
 	 case "Registro a Funcion de Espectaculo":
