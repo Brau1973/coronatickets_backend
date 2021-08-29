@@ -2,7 +2,16 @@ package logica;
 
 import java.util.Date;
 
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario{
+	@Id
     private String nickname;
     private String nombre;
     private String apellido;
@@ -18,7 +27,11 @@ public class Usuario{
 	 this.fNacimiento = fNacimiento;
     }
 
-    public String getNickname(){
+    public Usuario() {
+		
+	}
+
+	public String getNickname(){
 	 return nickname;
     }
 
