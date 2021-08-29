@@ -37,7 +37,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     private AgregarEspectaculoAPaquete internalFrameAgregarEspectaculoAPaquete;
     private JMenuItem menuItAgregarEspectaculoAPaquete;
 
-    private Fabrica fabrica = Fabrica.getInstancia(); // 79S
+    private Fabrica fabrica = Fabrica.getInstancia();
     private IControladorPlataforma iconP = fabrica.getIControladorPlataforma();
     private IControladorEspectaculo iconE = fabrica.getIControladorEspectaculo();
     private IControladorUsuario iconU = fabrica.getIControladorUsuario();

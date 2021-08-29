@@ -14,15 +14,11 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-import excepciones.PlataformaRepetidaExcepcion;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControladorUsuario;
 import logica.Artista;
 import logica.Espectador;
 import logica.Usuario;
-
-
-
 
 @SuppressWarnings("serial")
 public class AltaUsuario extends JInternalFrame implements ActionListener{
@@ -35,8 +31,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
     private JButton btnAceptar, btnCancelar;
 
     public AltaUsuario(IControladorUsuario iconU){
-	this.iconU = iconU;
-    miPanel = new JPanel();
+	 this.iconU = iconU;
+	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 getContentPane().add(miPanel);
 	 setBounds(15, 15, 469, 434);
@@ -160,124 +156,123 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 btnCancelar.setBounds(286, 300, 127, 25);
 	 miPanel.add(btnCancelar);
 	 btnCancelar.addActionListener(this);
-   }
+    }
 
-	//	protected void actionListenerAceptar(ActionEvent e) {
-		public void actionPerformed(ActionEvent e) {
-			String strNickname=this.txtNickname.getText();
-			String strNombre=this.txtNombre.getText();
-			String strApellido=this.txtApellido.getText();
-			String strEmail=this.txtEmail.getText();
-			Date dateFechaNac=this.dateFechaNac.getDate();
-			String strDescripcion=this.txtDescripcion.getText();
-			String strBiografia=this.txtBiografia.getText();
-			String strLink=this.txtLink.getText();
-			if(e.getSource() == rbtnEspectador){
-			     if(rbtnEspectador.isSelected()){
-				  btnAceptar.setBounds(155, 210, 127, 25);
-				  btnCancelar.setBounds(286, 210, 127, 25);
-				  lblDescripcion.setVisible(false);
-				  lblBiografia.setVisible(false);
-				  lblLink.setVisible(false);
-				  txtDescripcion.setVisible(false);
-				  txtBiografia.setVisible(false);
-				  txtLink.setVisible(false);
-				  rbtnArtista.setSelected(false);
-				  
-			     }
-			 }
-			 if(e.getSource() == rbtnArtista){
-			     if(rbtnArtista.isSelected()){
-				  btnAceptar.setBounds(155, 300, 127, 25);
-				  btnCancelar.setBounds(286, 300, 127, 25);
-				  lblDescripcion.setVisible(true);
-				  lblBiografia.setVisible(true);
-				  lblLink.setVisible(true);
-				  txtDescripcion.setVisible(true);
-				  txtBiografia.setVisible(true);
-				  txtLink.setVisible(true);
-				  rbtnEspectador.setSelected(false);
-			     }
-			 }
-			 if(e.getSource() == btnAceptar) {
-				 if(rbtnEspectador.isSelected()){
-					 if(checkFormulario()){
-						 try{
-				   // 	falta mirar chequeo de fecha 
-				    		Usuario u = new Espectador(strNickname,strNombre,strApellido,strEmail,dateFechaNac);
-				    		this.iconU.altaUsuario(u);
-				    		JOptionPane.showMessageDialog(this, "el Espectador se ha creado con Exito");
-				    	
-				    	}catch(UsuarioRepetidoExcepcion x){
-					  JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
-				    	}
-						 limpiarFormulario();
-						 setVisible(false);
-					 }
-				 }	 
-				 if (rbtnArtista.isSelected()){
-				 if(checkFormulario2()){
-				     try{
-				    	 // 	falta mirar chequeo de fecha 
-				    		Usuario a = new Artista(strNickname,strNombre,strApellido,strEmail,dateFechaNac,strDescripcion,strBiografia,strLink);
-				    		this.iconU.altaUsuario(a);
-				    		JOptionPane.showMessageDialog(this, "el Artista se ha creado con Exito");
-				    	
-				    	}catch(UsuarioRepetidoExcepcion x){
-					  JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
-				     }
-				     limpiarFormulario();
-				     setVisible(false);
-				 }
-				 } 
-		 }
-			
-		}
+    // protected void actionListenerAceptar(ActionEvent e) {
+    public void actionPerformed(ActionEvent e){
+	 String strNickname = this.txtNickname.getText();
+	 String strNombre = this.txtNombre.getText();
+	 String strApellido = this.txtApellido.getText();
+	 String strEmail = this.txtEmail.getText();
+	 Date dateFechaNac = this.dateFechaNac.getDate();
+	 String strDescripcion = this.txtDescripcion.getText();
+	 String strBiografia = this.txtBiografia.getText();
+	 String strLink = this.txtLink.getText();
+	 if(e.getSource() == rbtnEspectador){
+	     if(rbtnEspectador.isSelected()){
+		  btnAceptar.setBounds(155, 210, 127, 25);
+		  btnCancelar.setBounds(286, 210, 127, 25);
+		  lblDescripcion.setVisible(false);
+		  lblBiografia.setVisible(false);
+		  lblLink.setVisible(false);
+		  txtDescripcion.setVisible(false);
+		  txtBiografia.setVisible(false);
+		  txtLink.setVisible(false);
+		  rbtnArtista.setSelected(false);
 
-    
-		private boolean checkFormulario(){
-		String strNickname=this.txtNickname.getText();
-		String strNombre=this.txtNombre.getText();
-		String strApellido=this.txtApellido.getText();
-		String strEmail=this.txtEmail.getText();
-		//Date dateFechaNac=this.dateFechaNac.getDate();
-	//	String strDescripcion=this.txtDescripcion.getText();
-	//	String strBiografia=this.txtBiografia.getText();
-	//	String strLink=this.txtLink.getText();
-			 if(strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty()){
-			     JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
-			     return false;
-			 }
-			 return true;
-		    }
-	 
-		private boolean checkFormulario2(){
-			String strNickname=this.txtNickname.getText();
-			String strNombre=this.txtNombre.getText();
-			String strApellido=this.txtApellido.getText();
-			String strEmail=this.txtEmail.getText();
-			//Date dateFechaNac=this.dateFechaNac.getDate();
-			String strDescripcion=this.txtDescripcion.getText();
+	     }
+	 }
+	 if(e.getSource() == rbtnArtista){
+	     if(rbtnArtista.isSelected()){
+		  btnAceptar.setBounds(155, 300, 127, 25);
+		  btnCancelar.setBounds(286, 300, 127, 25);
+		  lblDescripcion.setVisible(true);
+		  lblBiografia.setVisible(true);
+		  lblLink.setVisible(true);
+		  txtDescripcion.setVisible(true);
+		  txtBiografia.setVisible(true);
+		  txtLink.setVisible(true);
+		  rbtnEspectador.setSelected(false);
+	     }
+	 }
+	 if(e.getSource() == btnAceptar){
+	     if(rbtnEspectador.isSelected()){
+		  if(checkFormulario()){
+		      try{
+			   // falta mirar chequeo de fecha
+			   Usuario u = new Espectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac);
+			   this.iconU.altaUsuario(u);
+			   JOptionPane.showMessageDialog(this, "el Espectador se ha creado con Exito");
 
-				 if(strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty() || strDescripcion.isEmpty()){
-				     JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
-				     return false;
-				 }
-				 return true;
-			    }
-		
-		
-		private void limpiarFormulario(){
-			txtNickname.setText("");
-			txtNombre.setText("");
-			txtApellido.setText("");
-			txtEmail.setText("");
-			dateFechaNac.setDate(null);
-			txtDescripcion.setText("");
-			txtBiografia.setText("");
-			txtLink.setText("");
-		    }
-		
+		      }catch(UsuarioRepetidoExcepcion x){
+			   JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+		      }
+		      limpiarFormulario();
+		      setVisible(false);
+		  }
+	     }
+	     if(rbtnArtista.isSelected()){
+		  if(checkFormulario2()){
+		      try{
+			   // falta mirar chequeo de fecha
+			   Usuario a = new Artista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strDescripcion, strBiografia, strLink);
+			   this.iconU.altaUsuario(a);
+			   JOptionPane.showMessageDialog(this, "el Artista se ha creado con Exito");
+
+		      }catch(UsuarioRepetidoExcepcion x){
+			   JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+		      }
+		      limpiarFormulario();
+		      setVisible(false);
+		  }
+	     }
+	 }
+
+    }
 
 
-  }  	
+    private boolean checkFormulario(){
+	 String strNickname = this.txtNickname.getText();
+	 String strNombre = this.txtNombre.getText();
+	 String strApellido = this.txtApellido.getText();
+	 String strEmail = this.txtEmail.getText();
+	 // Date dateFechaNac=this.dateFechaNac.getDate();
+	 // String strDescripcion=this.txtDescripcion.getText();
+	 // String strBiografia=this.txtBiografia.getText();
+	 // String strLink=this.txtLink.getText();
+	 if(strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty()){
+	     JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+	     return false;
+	 }
+	 return true;
+    }
+
+    private boolean checkFormulario2(){
+	 String strNickname = this.txtNickname.getText();
+	 String strNombre = this.txtNombre.getText();
+	 String strApellido = this.txtApellido.getText();
+	 String strEmail = this.txtEmail.getText();
+	 // Date dateFechaNac=this.dateFechaNac.getDate();
+	 String strDescripcion = this.txtDescripcion.getText();
+
+	 if(strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty() || strDescripcion.isEmpty()){
+	     JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+	     return false;
+	 }
+	 return true;
+    }
+
+
+    private void limpiarFormulario(){
+	 txtNickname.setText("");
+	 txtNombre.setText("");
+	 txtApellido.setText("");
+	 txtEmail.setText("");
+	 dateFechaNac.setDate(null);
+	 txtDescripcion.setText("");
+	 txtBiografia.setText("");
+	 txtLink.setText("");
+    }
+
+
+}

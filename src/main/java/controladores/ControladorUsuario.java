@@ -2,13 +2,15 @@ package controladores;
 
 import java.util.ArrayList;
 
+import javax.persistence.EntityManager;
+
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControladorUsuario;
 import logica.Usuario;
 import manejadores.ManejadorUsuario;
+import persistencia.Conexion;
 
 public class ControladorUsuario implements IControladorUsuario{
-
     public ControladorUsuario(){
 	 super();
     }
@@ -23,7 +25,23 @@ public class ControladorUsuario implements IControladorUsuario{
 	 mU.altaUsuario(usuario);
     }
 
-    public String[] listarUsuarios(){
+    public void modificarUsuario(Usuario nuevo){ // 79S
+	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 em.getTransaction().begin();
+	 em.persist(mU.buscarUsuario(nuevo.getNickname()));
+	 em.merge(nuevo);
+	 em.getTransaction().commit();
+    }
+
+    public Usuario obtenerUsuario(String nickname){ // 79S
+	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	 Usuario usuario = mU.buscarUsuario(nickname);
+	 return usuario;
+    }
+
+    public String[] listarUsuarios(){ // 79S
 	 ArrayList<String> usuario;
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 	 usuario = mU.obtenerUsuario();
@@ -35,5 +53,4 @@ public class ControladorUsuario implements IControladorUsuario{
 	 }
 	 return retorno;
     }
-
 }

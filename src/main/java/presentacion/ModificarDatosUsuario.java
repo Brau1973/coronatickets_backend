@@ -16,8 +16,9 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import interfaces.IControladorUsuario;
+import logica.Artista;
+import logica.Espectador;
 import logica.Usuario;
-import manejadores.ManejadorUsuario;
 
 @SuppressWarnings("serial")
 public class ModificarDatosUsuario extends JInternalFrame implements ActionListener{
@@ -125,35 +126,42 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	 comboUsuarios.setModel(modelUsuarios);
     }
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e){ // 79S
 	 String strnick = this.txtNickname.getText();
 	 String strnombre = this.txtNombre.getText();
 	 String strapellido = this.txtApellido.getText();
 	 String stremail = this.txtEmail.getText();
 	 Date dateRegistro = this.dateFechaNac.getDate();
 
-	 Usuario a = new Usuario(strnick, strnombre, strapellido, stremail, dateRegistro);
 	 if(e.getSource() == btnGuardar){
-	     ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	     Usuario u = (mU.buscarUsuario(strnick));
-	     mU.ModificarUsuario(u, a);
+	     Usuario usuario = this.iconU.obtenerUsuario(strnick);
+	     if(usuario instanceof Artista){
+		  Usuario nuevo = new Artista(strnick, strnombre, strapellido, stremail, dateRegistro, ((Artista) usuario).getDescripcion(), ((Artista) usuario).getBiografia(), ((Artista) usuario).getLink());
+		  Artista artista = (Artista) nuevo;
+		  this.iconU.modificarUsuario(artista);
+	     }
+	     if(usuario instanceof Espectador){
+		  Usuario nuevo = new Espectador(strnick, strnombre, strapellido, stremail, dateRegistro);
+		  Espectador espectador = (Espectador) nuevo;
+		  this.iconU.modificarUsuario(espectador);
+	     }
 	     JOptionPane.showMessageDialog(null, "Datos modificados correctamente");
+	     setVisible(false);
+	 }
+
+	 if(e.getSource() == btnCancelar){
 	     setVisible(false);
 	 }
 
 	 if(e.getSource() == comboUsuarios){
 	     String strUsuario = this.comboUsuarios.getSelectedItem().toString();
-	     ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	     Usuario u = (mU.buscarUsuario(strUsuario));
+	     Usuario u = this.iconU.obtenerUsuario(strUsuario);
 	     txtNickname.setText(u.getNickname());
 	     txtNombre.setText(u.getNombre());
 	     txtApellido.setText(u.getApellido());
 	     txtEmail.setText(u.getEmail());
 	     dateFechaNac.setDate(u.getfNacimiento());
 	 }
-
-	 if(e.getSource() == btnCancelar){
-	     setVisible(false);
-	 }
     }
+
 }
