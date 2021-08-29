@@ -9,4 +9,5 @@ public interface IControladorEspectaculo{
     public String[] listarPlataformas();
 
     public String[] listarArtistas();
+
 }

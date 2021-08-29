@@ -42,8 +42,8 @@ public class ControladorUsuario implements IControladorUsuario{
     }
 
     public String[] listarUsuarios(){ // 79S
-	 ArrayList<String> usuario;
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	 ArrayList<String> usuario;
 	 usuario = mU.obtenerUsuario();
 	 String[] retorno = new String[usuario.size()];
 	 int i = 0;

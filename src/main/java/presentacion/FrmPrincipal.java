@@ -174,7 +174,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Consulta Usuario
     private void inFrmConsultaUsuario(){
-	 internalFrameConsultaUsuario = new ConsultarUsuario();
+	 internalFrameConsultaUsuario = new ConsultarUsuario(iconU);
 	 internalFrameConsultaUsuario.setVisible(false);
 	 contenedor.add(internalFrameConsultaUsuario);
     }
@@ -276,6 +276,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameModificarDatosUsuario.setVisible(true);
 	     break;
 	 case "Consulta de Usuario":
+	     internalFrameConsultaUsuario.iniciarlizarComboBox();
 	     internalFrameConsultaUsuario.setVisible(true);
 	     break;
 	 case "Alta de Espectaculo":

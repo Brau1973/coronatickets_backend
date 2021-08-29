@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
+import logica.Artista;
 import logica.Usuario;
 import persistencia.Conexion;
 
@@ -49,6 +50,19 @@ public class ManejadorUsuario{
 	 ArrayList<String> aRetornar = new ArrayList<>();
 	 for(Usuario u :listUsuario){
 	     aRetornar.add(u.getNickname());
+	 }
+	 return aRetornar;
+    }
+
+    @SuppressWarnings("unchecked")
+    public ArrayList<String> obtenerArtista(){
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 Query query = em.createQuery("select a from Artista a");
+	 List<Artista> listArtista = (List<Artista>) query.getResultList();
+	 ArrayList<String> aRetornar = new ArrayList<>();
+	 for(Artista a :listArtista){
+	     aRetornar.add(a.getNickname());
 	 }
 	 return aRetornar;
     }

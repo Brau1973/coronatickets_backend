@@ -3,8 +3,13 @@ package presentacion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -19,8 +24,16 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
+import interfaces.IControladorEspectaculo;
+import interfaces.IControladorUsuario;
+import logica.Usuario;
+import manejadores.ManejadorEspectaculo;
+
+
 @SuppressWarnings("serial")
-public class ConsultarUsuario extends JInternalFrame{
+public class ConsultarUsuario extends JInternalFrame implements ActionListener{
+    private IControladorUsuario iconU;
+    private IControladorEspectaculo iconE;
     private JButton btnConsulta;
     private JPanel miPanel;
     private JScrollPane panel;
@@ -29,13 +42,14 @@ public class ConsultarUsuario extends JInternalFrame{
     private JDateChooser dateFechaNac;
     private JTable tabUsuario;
     private JComboBox<String> comboUsuarios;
-    JTextArea jtextarea = new JTextArea();
+    JTextArea jtextarea;
     private String[] header = {"Artista", "Nombre", "Descripcion", "Duracion",};
     private String[][] data = {{"Sebastian", "Gonzalez", "Prueba tabla", "va duracion"}, {"Aldrin", "Rebella", "Descripcion"}, {"Leonardo", "Mesa"}, {"Lucas", "Sugo"}, {"Luisito", "Suarez"}, {"Colorado", "DeOmar"}, {"Gruffi ", "Gummi"}};
 
     // Tabla muestra todos los datos basicos.
     // Constructor
-    public ConsultarUsuario(){
+    public ConsultarUsuario(IControladorUsuario iconU){
+	 this.iconU = iconU;
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -46,33 +60,28 @@ public class ConsultarUsuario extends JInternalFrame{
 	 setBorder(null);
 	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
 
-	 // JLabel Titulo
-	 lblTitulo = new JLabel();
-	 lblTitulo.setText("Consulta de Usuario");
+	 // JLabel
+	 lblTitulo = new JLabel("Consulta de Usuario");
 	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 18));
 	 lblTitulo.setBounds(10, 1, 270, 25);
 	 miPanel.add(lblTitulo);
 
-	 lblBuscar = new JLabel();
-	 lblBuscar.setText("Nickname:");
+	 lblBuscar = new JLabel("Usuario:");
 	 lblBuscar.setFont(new java.awt.Font("Verdana", 1, 12));
 	 lblBuscar.setBounds(10, 35, 150, 25);
 	 miPanel.add(lblBuscar);
 
+	 // JComboBox
 	 comboUsuarios = new JComboBox<String>();
-	 comboUsuarios.addItem("Seleccionar... ");
-	 comboUsuarios.addItem("sebastiangl7");
-	 comboUsuarios.addItem("leonut563");
-	 comboUsuarios.addItem("oldrin526u");
-	 comboUsuarios.setBounds(120, 38, 255, 20);
+	 comboUsuarios.setBounds(120, 38, 255, 25);
 	 miPanel.add(comboUsuarios);
+	 comboUsuarios.addActionListener(this);
 
-	 JTextArea jtextarea = new JTextArea(20, 58);
+	 jtextarea = new JTextArea(20, 58);
 	 Border border = BorderFactory.createLineBorder(Color.GRAY);
 	 jtextarea.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-	 jtextarea.setBounds(10, 70, 365, 90);
+	 jtextarea.setBounds(10, 70, 365, 200);
 	 jtextarea.setFont(new java.awt.Font("Verdana", 1, 12));
-	 jtextarea.setText("Nombre: Sebastian\nApellido: Gonzalez\nEmail: sebastian@gmail.com\nFecha: 20/10/1989");
 	 jtextarea.setEditable(false);
 	 miPanel.add(jtextarea);
 
@@ -82,11 +91,11 @@ public class ConsultarUsuario extends JInternalFrame{
 	 tabUsuario.setPreferredScrollableViewportSize(new Dimension(40, 290));
 	 JScrollPane jsPane = new JScrollPane(tabUsuario);
 	 jsPane.setBounds(10, 180, 365, 118);
-	 jsPane.setVisible(true);
+	 jsPane.setVisible(false);
 	 miPanel.add(jsPane, BorderLayout.SOUTH);
 
 	 // Label
-	 /* lblNickname = new JLabel();
+	 /* lblNickname = new JLabel(); 
 	 lblNombre = new JLabel();
 	 lblApellido = new JLabel();
 	 lblEmail = new JLabel();
@@ -108,19 +117,21 @@ public class ConsultarUsuario extends JInternalFrame{
 	 lblfNacimiento.setBounds(10, 340, 150, 25);*/
 
 	 // JTextField
-	 /* txtNickname = new JTextField();
-	 txtNombre = new JTextField();
+	 // txtNickname = new JTextField();
+	 // txtNickname.setBounds(140, 218, 240, 25);
+	 // miPanel.add(txtNickname);
+	 /* txtNombre = new JTextField();
 	 txtApellido = new JTextField();
 	 txtEmail = new JTextField();
 	 dateFechaNac = new JDateChooser(); // Fecha
-	 txtNickname.setBounds(140, 218, 240, 25);
+	 
 	 txtNombre.setBounds(140, 248, 240, 25);
 	 txtApellido.setBounds(140, 278, 240, 25);
 	 txtEmail.setBounds(140, 308, 240, 25);
 	 dateFechaNac.setBounds(140, 338, 240, 25);*/
 
 	 // Agrego JTextField al Panel
-	 /*	 miPanel.add(txtNickname);
+	 /*	
 	 miPanel.add(txtNombre);
 	 miPanel.add(txtApellido);
 	 miPanel.add(txtEmail);
@@ -136,9 +147,36 @@ public class ConsultarUsuario extends JInternalFrame{
 	 });*/
 
     }
+
+    // Inicializar ComboBox
+    public void iniciarlizarComboBox(){
+	 DefaultComboBoxModel<String> modelUsuarios = new DefaultComboBoxModel<String>(iconU.listarUsuarios());
+	 comboUsuarios.setModel(modelUsuarios);
+    }
+
+    public void actionPerformed(ActionEvent e){ // 79S
+	 if(e.getSource() == comboUsuarios){
+	     String strUsuario = this.comboUsuarios.getSelectedItem().toString();
+	     Usuario u = this.iconU.obtenerUsuario(strUsuario);
+	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+
+	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+	     ArrayList<String> usuario = mE.obtenerEspectaculo();
+	     String datos = "\n\nLista de espectaculos:";
+	     for(String i :usuario){
+		  datos = datos + "\n" + i.toString();
+	     }
+	     jtextarea.setText("Nombre: " + u.getNombre() + "\nApellido: " + u.getApellido() + "\nEmail: " + u.getEmail() + "\nFecha: " + formatoFecha.format(u.getfNacimiento()) + datos);
+	 }
+    }
 }
 
 
+/*   txtNickname.setText(u.getNickname());
+      txtNombre.setText(u.getNombre());
+txtApellido.setText(u.getApellido());
+txtEmail.setText(u.getEmail());
+dateFechaNac.setDate(u.getfNacimiento());*/
 // String s = JOptionPane.showInputDialog(null, "Digite un caracter: ");
 // char ch = s.charAt(0);
 // micoordinador.proceso3(ch);

@@ -37,7 +37,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
     public String[] listarArtistas(){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 	 ArrayList<String> artistas;
-	 artistas = mU.obtenerUsuario();
+	 artistas = mU.obtenerArtista();
 	 String[] retorno = new String[artistas.size()];
 	 int i = 0;
 	 for(String a :artistas){
@@ -46,5 +46,6 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 	 }
 	 return retorno;
     }
+
 
 }
