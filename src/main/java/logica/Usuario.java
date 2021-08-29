@@ -14,7 +14,6 @@ public class Usuario{
     private String email;
     private Date fNacimiento;
 
-
     public Usuario(){
 	 super();
     }

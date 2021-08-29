@@ -22,8 +22,6 @@ import manejadores.ManejadorUsuario;
 @SuppressWarnings("serial")
 public class ModificarDatosUsuario extends JInternalFrame implements ActionListener{
     private IControladorUsuario iconU;
-    private String[] header = {"Nombre", "Apellido"};
-    private String[][] data = {{"Sebastian", "Gonzalez"}, {"Aldrin", "Rebella"}, {"Leonardo", "Mesa"}, {"Lucas", "Sugo"}, {"Luisito", "Suarez"}, {"Colorado", "DeOmar"}, {"Colorado", "DeOmar"}, {"Gruffi ", "Gummi"}};
     private JPanel miPanel;
     private JTextField txtNickname, txtNombre, txtApellido, txtEmail;
     private JDateChooser dateFechaNac;
@@ -142,6 +140,7 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	     JOptionPane.showMessageDialog(null, "Datos modificados correctamente");
 	     setVisible(false);
 	 }
+
 	 if(e.getSource() == comboUsuarios){
 	     String strUsuario = this.comboUsuarios.getSelectedItem().toString();
 	     ManejadorUsuario mU = ManejadorUsuario.getInstancia();
@@ -151,8 +150,8 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	     txtApellido.setText(u.getApellido());
 	     txtEmail.setText(u.getEmail());
 	     dateFechaNac.setDate(u.getfNacimiento());
-	     // setVisible(false);
 	 }
+
 	 if(e.getSource() == btnCancelar){
 	     setVisible(false);
 	 }
