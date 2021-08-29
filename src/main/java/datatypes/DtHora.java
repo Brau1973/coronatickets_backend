@@ -10,6 +10,11 @@ public class DtHora{
 	 this.minutos = minutos;
 	 this.segundos = segundos;
     }
+    
+    public DtHora(int horas, int minutos){
+	 this.horas = horas;
+	 this.minutos = minutos;
+    }
 
     public int getHoras(){
 	 return horas;

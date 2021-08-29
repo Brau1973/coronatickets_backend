@@ -4,17 +4,29 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
-
-import logica.Funcion;
+import datatypes.DtHora;
+import excepciones.FuncionRepetidaExcepcion;
 import manejadores.ManejadorFuncion;
 import interfaces.IControladorFuncion;
-import persistencia.Conexion;
+import logica.Funcion;
+
 
 public class ControladorFuncion implements IControladorFuncion {
 	
 	public ControladorFuncion(){
 		 super();
 	}
+	
+	@Override
+	public void altaFuncion(String nombre, String espectaculo, Date fecha, DtHora horaInicio, String artistas, Date registro) throws FuncionRepetidaExcepcion{
+		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+		Funcion funcion = mF.buscarFuncion(nombre);
+		if (funcion != null)
+            throw new FuncionRepetidaExcepcion("La funcion " + nombre + " ya esta registrada");
+		funcion = new Funcion(nombre, espectaculo, fecha, horaInicio, artistas, registro);
+		mF.agregarFuncion(funcion);
+	}
+	
 	
 	@Override
 	public String[] listarPlataformas() {
