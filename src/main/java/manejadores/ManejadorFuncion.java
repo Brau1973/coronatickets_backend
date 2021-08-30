@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import logica.Espectaculo;
 import logica.Funcion;
 import logica.Plataforma;
 import persistencia.Conexion;
@@ -67,5 +68,21 @@ public class ManejadorFuncion{
 	 }
 	 return aRetornar;
     }
+    
+    public ArrayList<String> obtenerEspectaculo(String plataforma){ 
+      	 Conexion conexion = Conexion.getInstancia();
+      	 EntityManager em = conexion.getEntityManager();
+
+      	 Query query = em.createQuery("select e from Espectaculo e where plataforma =:plataforma");
+      	 query.setParameter("plataforma", plataforma);
+      	 List<Espectaculo> listEspectaculo = (List<Espectaculo>) query.getResultList();
+
+      	 ArrayList<String> aRetornar = new ArrayList<>();
+      	 for(Espectaculo e :listEspectaculo){
+      	     aRetornar.add(e.getNombre());
+      	 }
+      	 return aRetornar;
+    }
+
 
 }

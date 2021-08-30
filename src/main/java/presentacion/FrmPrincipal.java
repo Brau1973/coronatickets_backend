@@ -223,7 +223,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Alta Funcion
     private void inFrmAltaFuncion(){
-	 internalFrameAltaFuncion = new AltaFuncion();
+	 internalFrameAltaFuncion = new AltaFuncion(iconF);
 	 internalFrameAltaFuncion.setVisible(false);
 	 contenedor.add(internalFrameAltaFuncion);
     }

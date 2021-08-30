@@ -10,5 +10,7 @@ public interface IControladorFuncion{
 	public void altaFuncion(String nombre, String espectaculo, Date fecha, DtHora horaInicio, String artistas, Date registro) throws FuncionRepetidaExcepcion;
 	
 	public String[] listarPlataformas();
+	
+	public String[] listarEspectaculos(String plataforma);
 
 }

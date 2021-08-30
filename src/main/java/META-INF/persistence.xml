@@ -4,7 +4,6 @@
     <class>logica.Plataforma</class>
     <class>logica.Espectaculo</class>
     <class>logica.PaqueteEspectaculos</class>
-	<class>logica.Funcion</class>
     <class>logica.Artista</class>
     <class>logica.Espectador</class>
     <class>logica.Usuario</class>

@@ -2,8 +2,11 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -19,12 +22,11 @@ import javax.swing.ListSelectionModel;
 import com.toedter.calendar.JDateChooser;
 
 import excepciones.FuncionRepetidaExcepcion;
-import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.IControladorFuncion;
-import manejadores.ManejadorEspectaculo;
+import manejadores.ManejadorFuncion;
 
 @SuppressWarnings("serial")
-public class AltaFuncion extends JInternalFrame{
+public class AltaFuncion extends JInternalFrame implements ActionListener{
 	
 	private IControladorFuncion iconFun;
 	
@@ -68,6 +70,7 @@ public class AltaFuncion extends JInternalFrame{
 	 comboPlataforma.addItem("Seleccione Plataforma");
 	 comboPlataforma.setBounds(220, 30, 200, 20);
 	 miPanel.add(comboPlataforma);
+	 comboPlataforma.addActionListener(this);
 
 	 lblEspectaculos = new JLabel();
 	 lblEspectaculos.setText("Espectaculos");
@@ -165,57 +168,32 @@ public class AltaFuncion extends JInternalFrame{
 	 // Boton Aceptar
 	 btnAceptar = new JButton();
 	 btnAceptar.setText("Aceptar");
-	 btnAceptar.addActionListener(new ActionListener(){
-	     public void actionPerformed(ActionEvent e){
-		  actionListenerAceptar(e);
-	     }
-
-	 });
 	 btnAceptar.setBounds(200, 400, 115, 25);
 	 miPanel.add(btnAceptar);
+	 btnAceptar.addActionListener(this);
 
 	 // Boton Cancelar
 	 btnCancelar = new JButton();
 	 btnCancelar.setText("Cancelar");
 	 btnCancelar.setBounds(322, 400, 115, 25);
 	 miPanel.add(btnCancelar);
-	 // btnCancelar.addActionListener(this);
+	 btnCancelar.addActionListener(this);
+	 
+	 iniciarlizarComboBox();
+	 comboPlataforma.setSelectedItem("Seleccione Plataforma");
+	 
     }
     
-    protected void actionListenerAceptar(ActionEvent al){
-    	if(checkFormulario()) {
-	    	String espectaculo = (String) this.comboEspectaculos.getSelectedItem();
-	    	String nombreEspectaculo = this.txtNombre.getText();
-	    	Date fechaFuncion = this.fechaFuncion.getDate();
-	//    	this.spinHora
-	//    	this.spinMin
-	//    	//Artistas invitados
-	    	Date fechaAlta = this.fechaAlta.getDate();
-	    	
-	    	try{
-	   		  this.iconFun.altaFuncion(nombreEspectaculo, espectaculo, fechaFuncion , null, null, fechaAlta); ;
-	   		  JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
-	   	     }catch(FuncionRepetidaExcepcion e){
-	   		  JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
-	   	     }
-	   	     limpiarFormulario();
-	   	     setVisible(false);
-    	}
-    }
+   // Inicializar ComboBox
     
-//	 String nombre = this.txtNombre.getText();
-//	 String descripcion = this.txtDescripcion.getText();
-//	 String url = this.txtUrl.getText();
-//	 if(checkFormulario()){
-//	     try{
-//		  this.iconP.altaPlataforma(nombre, descripcion, url);
-//		  JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
-//	     }catch(PlataformaRepetidaExcepcion e){
-//		  JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
-//	     }
-//	     limpiarFormulario();
-//	     setVisible(false);
-//	 }
+    // PLATAFORMAS
+    public void iniciarlizarComboBox(){
+	 DefaultComboBoxModel<String> modelPlataformas = new DefaultComboBoxModel<String>(iconFun.listarPlataformas());
+	 comboPlataforma.setModel(modelPlataformas);
+	 
+	// ESPECTACULOS DE LA PLATAFORMA SELECCIONADA
+	 //DefaultComboBoxModel<String> modelEspectaculos = new DefaultComboBoxModel<String>(iconFun.listarArtistas());
+	 //comboEspectaculos.setModel(modelEspectaculos);
     }
     
     private boolean checkFormulario(){
@@ -238,4 +216,53 @@ public class AltaFuncion extends JInternalFrame{
 //    	//Artistas invitados
     	this.fechaAlta.setDate(null);
     }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == comboPlataforma) {
+	    	int hora = Integer.parseInt (this.spinHora.getValue().toString());
+	    	int minutos = Integer.parseInt (this.spinHora.getValue().toString());
+	    	Time horaInicio = new Time(hora,minutos,0);
+	    	System.out.println("horaInicio: "+horaInicio.toString());
+			 String plataforma = this.comboPlataforma.getSelectedItem().toString();
+			 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+			 ArrayList<String> datos = mF.obtenerEspectaculo(plataforma);
+			 if(datos.isEmpty()) {
+				 comboPlataforma.getModel().setSelectedItem("Seleccione Plataforma");
+				 comboEspectaculos.getModel().setSelectedItem("Seleccione Espectaculo");
+				 JOptionPane.showMessageDialog(this, "Esta plataforma no tiene espectaculos asociados.", "Agregar Espectaculo",
+		         JOptionPane.WARNING_MESSAGE);
+			 } else
+				 comboEspectaculos.getModel().setSelectedItem(mF.obtenerEspectaculo(plataforma));
+		}
+		
+		// BOTON ACEPTAR
+		if(e.getSource() == btnAceptar) {
+		   	if(checkFormulario()) {
+		    	String espectaculo = (String) this.comboEspectaculos.getSelectedItem();
+		    	String nombreEspectaculo = this.txtNombre.getText();
+		    	Date fechaFuncion = this.fechaFuncion.getDate();
+		    	int hora = Integer.parseInt (this.spinHora.getValue().toString());
+		    	Time horaInicio = new Time(hora,0,0);
+		    	
+		//    	//Artistas invitados
+		    	Date fechaAlta = this.fechaAlta.getDate();
+		    	
+		    	try{
+		   		  this.iconFun.altaFuncion(nombreEspectaculo, espectaculo, fechaFuncion , null, null, fechaAlta); ;
+		   		  JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
+		   	     }catch(FuncionRepetidaExcepcion msg){
+		   		  JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+		   	     }
+		   	     limpiarFormulario();
+		   	     setVisible(false);
+	    	}
+		}
+		
+		if(e.getSource() == btnCancelar) {
+	   	     limpiarFormulario();
+	   	     setVisible(false);
+	    }
+	}
 }
