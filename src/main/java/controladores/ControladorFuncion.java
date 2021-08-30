@@ -5,12 +5,6 @@ import java.util.ArrayList;
 import interfaces.IControladorFuncion;
 import manejadores.ManejadorFuncion;
 
-public class ControladorFuncion implements IControladorFuncion{
-    public ControladorFuncion(){
-	 super();
-    }
-
-<<<<<<< HEAD
 public class ControladorFuncion implements IControladorFuncion {
 	
 	public ControladorFuncion(){
@@ -44,20 +38,5 @@ public class ControladorFuncion implements IControladorFuncion {
 		}
 		return espectaculos_ret;
 	}
-=======
-    @Override
-    public String[] listarPlataformas(){
-	 ArrayList<String> plataformas;
-	 ManejadorFuncion mP = ManejadorFuncion.getInstancia();
-	 plataformas = mP.obtenerPlataforma();
-	 String[] plataformas_ret = new String[plataformas.size()];
-	 int i = 0;
-	 for(String id :plataformas){
-	     plataformas_ret[i] = id;
-	     i++;
-	 }
-	 return plataformas_ret;
-    }
->>>>>>> dc7e2420eff0c3daa510f3581c081ef71d3dd9a0
 
 }
