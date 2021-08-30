@@ -18,6 +18,7 @@ import com.toedter.calendar.JDateChooser;
 
 import datatypes.DtEspectaculo;
 import interfaces.IControladorEspectaculo;
+import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 
 @SuppressWarnings("serial")
@@ -168,6 +169,8 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 
     public void actionPerformed(ActionEvent e){
 	 String strplataforma = (String) this.comboPlataforma.getSelectedItem();
+	 Plataforma plataforma = new Plataforma(); //AGREGAR PARAMETROS
+	 
 	 String strartista = (String) this.comboArtista.getSelectedItem();
 	 String strnombre = this.txtNombre.getText();
 	 String strdescripcion = this.txtDescripcion.getText();
@@ -179,7 +182,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 if(e.getSource() == btnAceptar){
 	     if(checkFormulario()){
 		  try{
-		      DtEspectaculo dte = new DtEspectaculo(strartista, strplataforma, strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
+		      DtEspectaculo dte = new DtEspectaculo(strartista, plataforma, strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
 		      this.iconE.altaEspectaculo(dte);
 		      JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
 		      limpiarFormulario();

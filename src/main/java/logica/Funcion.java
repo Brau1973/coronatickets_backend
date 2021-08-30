@@ -1,19 +1,34 @@
 package logica;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import datatypes.DtHora;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+//import datatypes.DtHora;
+
+@Entity
 public class Funcion{
+	@Id
     private String nombre;
-    private String espectaculo;
+	@ManyToOne
+    private Espectaculo espectaculo;
     private Date fecha;
     private Time horaInicio;
-    private String artistas;
+    @OneToMany(orphanRemoval = true)
+    @JoinTable(name = "FuncionXArtistas", joinColumns = @JoinColumn(name = "nombre"), inverseJoinColumns = @JoinColumn(name = "nickname"))
+    private List<Artista> artistas = new ArrayList<Artista>();
     private Date registro;
 
-    public Funcion(String nombre, String espectaculo, Date fecha, Time horaInicio, String artistas, Date registro){
+    public Funcion(String nombre, Espectaculo espectaculo, Date fecha, Time horaInicio, List<Artista> artistas, Date registro){
 	 this.nombre = nombre;
 	 this.espectaculo = espectaculo;
 	 this.fecha = fecha;
@@ -21,12 +36,15 @@ public class Funcion{
 	 this.artistas = artistas;
 	 this.registro = registro;
     }
+    
+    public Funcion(){
+    }
 
     public String getNombre(){
 	 return nombre;
     }
 
-    public String getEspectaculo(){
+    public Espectaculo getEspectaculo(){
 	 return espectaculo;
     }
 
@@ -38,7 +56,7 @@ public class Funcion{
 	 return horaInicio;
     }
 
-    public String getArtistas(){
+    public List<Artista> getArtistas(){
 	 return artistas;
     }
 
@@ -50,7 +68,7 @@ public class Funcion{
 	 this.nombre = nombre;
     }
 
-    public void setEspectaculo(String espectaculo){
+    public void setEspectaculo(Espectaculo espectaculo){
 	 this.espectaculo = espectaculo;
     }
 
@@ -62,7 +80,7 @@ public class Funcion{
 	 this.horaInicio = horaInicio;
     }
 
-    public void setArtistas(String artistas){
+    public void setArtistas(List<Artista> artistas){
 	 this.artistas = artistas;
     }
 

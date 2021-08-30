@@ -1,7 +1,9 @@
 package controladores;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import datatypes.DtHora;
@@ -9,6 +11,8 @@ import excepciones.FuncionRepetidaExcepcion;
 import manejadores.ManejadorFuncion;
 import manejadores.ManejadorPlataforma;
 import interfaces.IControladorFuncion;
+import logica.Artista;
+import logica.Espectaculo;
 import logica.Funcion;
 
 
@@ -19,7 +23,7 @@ public class ControladorFuncion implements IControladorFuncion {
 	}
 	
 	@Override
-	public void altaFuncion(String nombre, String espectaculo, Date fecha, DtHora horaInicio, String artistas, Date registro) throws FuncionRepetidaExcepcion{
+	public void altaFuncion(String nombre, Espectaculo espectaculo, Date fecha, Time horaInicio, List<Artista> artistas, Date registro) throws FuncionRepetidaExcepcion{
 		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 		Funcion funcion = mF.buscarFuncion(nombre);
 		if (funcion != null)
@@ -56,7 +60,5 @@ public class ControladorFuncion implements IControladorFuncion {
 		}
 		return espectaculos_ret;
 	}
-
- 
 	
 }

@@ -1,16 +1,22 @@
 package logica;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Espectaculo{
     @Id
     private String nombre;
     private String artista;
-    private String plataforma;
+    @ManyToOne
+    private Plataforma plataforma;
     private String descripcion;
     private int duracion;
     private int cantMinEsp;
@@ -19,14 +25,14 @@ public class Espectaculo{
     private int costo;
     private Date registro;
 
-    // @OneToMany(mappedBy = "funciones", cascade = CascadeType.ALL, orphanRemoval = true)
-    // private List<Funcion> funciones = new ArrayList<>();
+     @OneToMany(mappedBy = "espectaculo")
+     private List<Funcion> funciones = new ArrayList<>();
 
     public Espectaculo(){
 	 super();
     }
 
-    public Espectaculo(String artista, String plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
+    public Espectaculo(String artista, Plataforma plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
 	 super();
 	 this.artista = artista;
 	 this.plataforma = plataforma;
@@ -44,7 +50,7 @@ public class Espectaculo{
 	 return artista;
     }
 
-    public String getPlataforma(){
+    public Plataforma getPlataforma(){
 	 return plataforma;
     }
 
@@ -85,7 +91,7 @@ public class Espectaculo{
 	 this.artista = artista;
     }
 
-    public void setPlataforma(String plataforma){
+    public void setPlataforma(Plataforma plataforma){
 	 this.plataforma = plataforma;
     }
 

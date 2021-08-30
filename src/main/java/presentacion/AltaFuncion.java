@@ -19,10 +19,13 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import org.hibernate.internal.build.AllowSysOut;
+
 import com.toedter.calendar.JDateChooser;
 
 import excepciones.FuncionRepetidaExcepcion;
 import interfaces.IControladorFuncion;
+import logica.Espectaculo;
 import manejadores.ManejadorFuncion;
 
 @SuppressWarnings("serial")
@@ -37,7 +40,8 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
     private JSpinner spinHora, spinMin;
     private JDateChooser fechaFuncion, fechaAlta;
     private JComboBox<String> comboArtistas, comboEspectaculos, comboPlataforma;
-    private JList listaArtistas, listaArtistasCopia;
+    private JList listaArtistas, listaArtistasSeleccionados;
+    private JScrollPane scrollPaneListaArtistas, scrollPaneListaArtistasSeleccionados;
     private String nombresArtistas[] = {"1", "2", "3", "4", "1", "2", "3", "4", "1", "2", "3", "4"};
 
     // Constructor
@@ -95,7 +99,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 txtNombre = new JTextField();
 	 txtNombre.setBounds(220, 120, 200, 20);
 	 miPanel.add(txtNombre);
-
+	 
 	 lblFecha = new JLabel();
 	 lblFecha.setText("Fecha de la Funcion");
 	 lblFecha.setBounds(10, 150, 200, 20);
@@ -128,33 +132,32 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 lblArtistasInv.setBounds(10, 210, 150, 20);
 	 miPanel.add(lblArtistasInv);
 
-	 listaArtistas = new JList<String>(nombresArtistas);
-	 listaArtistas.setBounds(220, 210, 100, 100);
-	 listaArtistas.setVisibleRowCount(5);
-	 listaArtistas.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-	 miPanel.add(listaArtistas);
+//	 listaArtistas = new JList<String>(nombresArtistas);
+//	 listaArtistas.setBounds(220, 210, 100, 100);
+//	 listaArtistas.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-	 btnCopiar = new JButton(">>>");
-	 btnCopiar.setBounds(330, 210, 70, 25);
-	 btnCopiar.addActionListener(
+	 
+	 
+//	 btnCopiar = new JButton(">>>");
+//	 btnCopiar.setBounds(330, 210, 70, 25);
+//	 btnCopiar.addActionListener(
+//
+//		  new ActionListener(){
+//		      public void actionPerformed(ActionEvent evento){
+//		    	  listaArtistasSeleccionados.setListData(listaArtistas.getSelectedValues());
+//		      }
+//		  });
+//
+//	 miPanel.add(btnCopiar);
 
-		  new ActionListener(){
-		      public void actionPerformed(ActionEvent evento){
-			   listaArtistasCopia.setListData(listaArtistas.getSelectedValues());
-		      }
-		  });
-
-	 miPanel.add(btnCopiar);
-
-	 listaArtistasCopia = new JList();
-	 // listaArtistasCopia.setBounds(410, 210, 100, 100);
-	 listaArtistasCopia.setVisibleRowCount(5);
-	 // listaArtistasCopia.setFixedCellWidth( 100 );
-	 // listaArtistasCopia.setFixedCellHeight( 25 );
-	 listaArtistasCopia.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-	 JScrollPane algo = new JScrollPane(listaArtistasCopia);
-	 algo.setBounds(410, 210, 100, 100);
-	 miPanel.add(algo);
+//	 listaArtistasSeleccionados = new JList();
+//	 // listaArtistasSeleccionados.setBounds(410, 210, 100, 100);
+//	 listaArtistasSeleccionados.setVisibleRowCount(5);
+//	 // listaArtistasSeleccionados.setFixedCellWidth( 100 );
+//	 // listaArtistasSeleccionados.setFixedCellHeight( 25 );
+//	 listaArtistasSeleccionados.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+	 
+	// miPanel.add(scrollPaneListaArtistas);
 
 	 lblFechaAlta = new JLabel();
 	 lblFechaAlta.setText("Fecha de Alta");
@@ -179,8 +182,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 miPanel.add(btnCancelar);
 	 btnCancelar.addActionListener(this);
 	 
-	 iniciarlizarComboBox();
-	 comboPlataforma.setSelectedItem("Seleccione Plataforma");
+	 //comboPlataforma.setSelectedItem("Seleccione Plataforma");
 	 
     }
     
@@ -221,10 +223,10 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == comboPlataforma) {
-	    	int hora = Integer.parseInt (this.spinHora.getValue().toString());
-	    	int minutos = Integer.parseInt (this.spinHora.getValue().toString());
-	    	Time horaInicio = new Time(hora,minutos,0);
-	    	System.out.println("horaInicio: "+horaInicio.toString());
+//	    	int hora = Integer.parseInt (this.spinHora.getValue().toString());
+//	    	int minutos = Integer.parseInt (this.spinMin.getValue().toString());
+//	    	Time horaInicio = new Time(hora,minutos,0);
+//	    	System.out.println(horaInicio.toString());
 			 String plataforma = this.comboPlataforma.getSelectedItem().toString();
 			 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 			 ArrayList<String> datos = mF.obtenerEspectaculo(plataforma);
@@ -241,16 +243,23 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 		if(e.getSource() == btnAceptar) {
 		   	if(checkFormulario()) {
 		    	String espectaculo = (String) this.comboEspectaculos.getSelectedItem();
+		    	Espectaculo esp = new Espectaculo();
 		    	String nombreEspectaculo = this.txtNombre.getText();
 		    	Date fechaFuncion = this.fechaFuncion.getDate();
 		    	int hora = Integer.parseInt (this.spinHora.getValue().toString());
-		    	Time horaInicio = new Time(hora,0,0);
+		    	int minutos = Integer.parseInt (this.spinHora.getValue().toString());
+		    	Time horaInicio = new Time(hora,minutos,0);
+		    	System.out.println(horaInicio.toString());
+		    	
+		    	
 		    	
 		//    	//Artistas invitados
+		    	//listaArtistasSeleccionados.get
+		    	
 		    	Date fechaAlta = this.fechaAlta.getDate();
 		    	
 		    	try{
-		   		  this.iconFun.altaFuncion(nombreEspectaculo, espectaculo, fechaFuncion , null, null, fechaAlta); ;
+		   		  this.iconFun.altaFuncion(nombreEspectaculo, esp, fechaFuncion , null, null, fechaAlta); ;
 		   		  JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
 		   	     }catch(FuncionRepetidaExcepcion msg){
 		   		  JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);

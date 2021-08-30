@@ -1,8 +1,12 @@
 
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Plataforma{
@@ -11,6 +15,9 @@ public class Plataforma{
     private String descripcion;
     private String url;
 
+    @OneToMany(mappedBy = "plataforma")
+    private List<Espectaculo> espectaculo = new ArrayList<>();
+    
     public Plataforma(){
 	 super();
     }
