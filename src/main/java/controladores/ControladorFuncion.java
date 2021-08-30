@@ -15,7 +15,6 @@ import logica.Artista;
 import logica.Espectaculo;
 import logica.Funcion;
 
-
 public class ControladorFuncion implements IControladorFuncion {
 	
 	public ControladorFuncion(){
@@ -40,7 +39,7 @@ public class ControladorFuncion implements IControladorFuncion {
 		plataformas = mF.obtenerPlataforma();
 		String[] plataformas_ret = new String[plataformas.size()];
 		int i=0;
-		for(String id :plataformas) {
+		for(String id:plataformas) {
 			plataformas_ret[i] = id;
 			i++;
 		}

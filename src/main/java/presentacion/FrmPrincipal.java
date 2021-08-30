@@ -300,8 +300,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameRegistroFuncion.setVisible(true);
 	     break;
 	 case "Crear Paquete de Espectaculo":
-	     internalFrameCreaPaqueteEspectaculo.setVisible(true);
-	     break;
+		 internalFrameCreaPaqueteEspectaculo.setVisible(true);
+		 break;
 	 case "Consulta de Paquete de Espectaculos":
 	     internalFrameConsultaPaqueteEspectaculo.setVisible(true);
 	     break;

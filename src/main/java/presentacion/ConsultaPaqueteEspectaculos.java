@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import interfaces.Fabrica;
+import interfaces.IControladorPaquete;
 import logica.Espectaculo;
 import logica.PaqueteEspectaculos;
 
@@ -37,21 +39,25 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
     private String[] header = {"Nombre", "Descripcion", "etc,"};
     private String[][] data = {};
 
-    private PaqueteEspectaculos paqueteSelected;
-    List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
-
-    // Constructor
-    public ConsultaPaqueteEspectaculos(){
-	 miPanel = new JPanel();
-	 miPanel.setLayout(null);
-	 miPanel.setBounds(0, 0, 800, 100);
-	 add(miPanel);
-	 setBounds(30, 30, 800, 600);
-	 setResizable(false);
-	 setClosable(false);
-	 setIconifiable(false);
-	 setBorder(null);
-	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
+	private PaqueteEspectaculos paqueteSelected;
+	List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
+	
+	IControladorPaquete iControladorPaquete = Fabrica.getInstancia().getIControladorPaquete();
+	
+	// Constructor
+	public ConsultaPaqueteEspectaculos() {
+		lstPaquetes = iControladorPaquete.obtenerPaquetes();
+		
+		miPanel = new JPanel();
+		miPanel.setLayout(null);
+		miPanel.setBounds(0, 0, 800, 100);
+		add(miPanel);
+		setBounds(30, 30, 800, 600);
+		setResizable(false);
+		setClosable(false);
+		setIconifiable(false);
+		setBorder(null);
+		((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
 
 	 // Titulo
 	 lblTitulo = new JLabel("Consultar Paquete de Espectaculos");

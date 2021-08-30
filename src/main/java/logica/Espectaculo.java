@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -13,6 +14,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Espectaculo{
     @Id
+    @Column(name="nomEsp")
     private String nombre;
     private String artista;
     @ManyToOne

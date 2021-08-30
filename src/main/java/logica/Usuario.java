@@ -17,7 +17,7 @@ public class Usuario{
     private String email;
     private Date fNacimiento;
 
-    public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento){
+	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento){
 	 super();
 	 this.nickname = nickname;
 	 this.nombre = nombre;
