@@ -56,4 +56,14 @@ public class ControladorUsuario implements IControladorUsuario {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		return mU.listarArtistas();
 	}
+	
+	public List<String> listarArtistasStr() {
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		return mU.listarArtistasStr();
+	}
+	
+    public Artista ObtenerArtista(String nickname){
+    	ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		return mU.ObtenerArtista(nickname);
+    }
 }

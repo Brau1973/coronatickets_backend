@@ -121,8 +121,8 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
     }
     
     public void inicializarComboBoxes() {
-    	DefaultComboBoxModel<String> modelFuncionEspectaculo = new DefaultComboBoxModel<String>(icon.listarPlataformas());
-    	comboPlataforma.setModel(modelFuncionEspectaculo);
+//    	DefaultComboBoxModel<String> modelFuncionEspectaculo = new DefaultComboBoxModel<String>(icon.listarPlataformas());
+//    	comboPlataforma.setModel(modelFuncionEspectaculo);
     }
 
 	@Override
@@ -130,13 +130,14 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
 		if(e.getSource() == comboPlataforma) {
 			 String plataforma = this.comboPlataforma.getSelectedItem().toString();
 			 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-			 ArrayList<String> datos = mF.obtenerEspectaculo(plataforma);
+			 ArrayList<String> datos = null; //= mF.obtenerEspectaculo(plataforma);
 			 if(datos.isEmpty()) {
 				 JOptionPane.showMessageDialog(this, "Esta plataforma no tiene espectaculos asociados.", "Agregar Espectaculo",
 		                    JOptionPane.WARNING_MESSAGE);
 				 comboEspectaculos.getModel().setSelectedItem("Seleccione Espectaculo");
 			 } else
-				 comboEspectaculos.getModel().setSelectedItem(mF.obtenerEspectaculo(plataforma));
+				 datos = null;
+				 //comboEspectaculos.getModel().setSelectedItem(mF.obtenerEspectaculo(plataforma));
 		    }
 		
 		//Cargar combo Funcion respecto al espectaculo
