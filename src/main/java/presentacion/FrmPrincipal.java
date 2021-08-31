@@ -223,11 +223,9 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Alta Funcion
     private void inFrmAltaFuncion(){
-    	System.out.println("HOLA");
 	 internalFrameAltaFuncion = new AltaFuncion(iconF);
 	 internalFrameAltaFuncion.setVisible(false);
 	 contenedor.add(internalFrameAltaFuncion);
-	 System.out.println("HOLA");
     }
 
     // InternalFrame Consulta Funcion
@@ -250,13 +248,11 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 internalFrameAgregarEspectaculoAPaquete = new AgregarEspectaculoAPaquete();
 	 internalFrameAgregarEspectaculoAPaquete.setVisible(false);
 	 contenedor.add(internalFrameAgregarEspectaculoAPaquete);
-	 System.out.println("inFrmAgregarEspectaculoAPaquete");
     }
 
     
     // Eventos
     public void actionPerformed(ActionEvent e){
-    	System.out.println("actionPerformed");
 	 internalFrameAltaUsuario.setVisible(false);
 	 internalFrameConsultaUsuario.setVisible(false);
 	 internalFrameModificarDatosUsuario.setVisible(false);
@@ -270,8 +266,6 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	 internalFrameCreaPaqueteEspectaculo.setVisible(false);
 	 internalFrameAgregarEspectaculoAPaquete.setVisible(false);
 
-	 
-	 System.out.println("HOLA");
 	 switch(e.getActionCommand()){
 	 case "Alta de Usuario":
 	     internalFrameAltaUsuario.setVisible(true);
@@ -294,7 +288,6 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameAltaPlataforma.setVisible(true);
 	     break;
 	 case "Alta de Funcion de Espectaculo":
-		 System.out.println("HOLA");
 		 internalFrameAltaFuncion.iniciarlizarComboBox();
 		 internalFrameAltaFuncion.CargarListaArtistas();
 	     internalFrameAltaFuncion.setVisible(true);

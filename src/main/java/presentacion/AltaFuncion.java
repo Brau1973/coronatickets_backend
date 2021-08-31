@@ -55,7 +55,8 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 	private List<Artista> listArtistasInvitados;
 	private int z;
 	
-	private String arrayArtistasStr[],arrayArtistasSeleccionadosStr[];
+	private String arrayArtistasStr[];
+	String arrayArtistasSeleccionadosStr[];
 	private List<Artista> listArtistas;
 
 	// Constructor
@@ -148,7 +149,8 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 
 		// LISTA DE ARTISTAS + SCROLL PANE	
 
-		listaArtistas = new JList<String>(this.arrayArtistasStr); // RECIBE ARRAY DE STRING [];
+		//listaArtistas = new JList<String>(this.arrayArtistasStr); // RECIBE ARRAY DE STRING [];
+		listaArtistas = new JList<String>(); // RECIBE ARRAY DE STRING [];
 		listaArtistas.setBounds(220, 210, 100, 100);
 		listaArtistas.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
@@ -297,20 +299,31 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 	}
 	
 	public void CargarListaArtistas(){
+//		List<String> artistasStr = iconU.listarArtistasStr();
+//		this.arrayArtistasStr = new String[artistasStr.size()];
+//
+//		for (int i = 0; i < artistasStr.size(); i++) {
+//
+//		 System.out.println(artistasStr.get(i));
+//			this.arrayArtistasStr[i] = artistasStr.get(i);
+//
+//		}
 		this.listArtistas = iconU.listarArtistas();
 		System.out.println("TRAIGO ARTISTAS DESDE BD");
-		String arrayArtistasStr[] = new String[listArtistas.size()];
+		arrayArtistasStr = new String[listArtistas.size()];
 		
 		this.z = 0;
 		this.listArtistas.forEach((a)-> {
 			this.arrayArtistasStr[z] = a.getNickname();
-			z += 1;;
+			z = z + 1;
 		});
 		
-		for (int j = 0; j < this.listArtistas.size(); j++) {
+		for (int j = 0; j < listArtistas.size(); j++) {
 			System.out.println("CARGO DESDE LA BD");
-			System.out.println(arrayArtistasStr[j]);
+			System.out.println(this.arrayArtistasStr[j]);
 		}
+		
+		this.listaArtistas.setListData(this.arrayArtistasStr);
 	}
 				
 }
