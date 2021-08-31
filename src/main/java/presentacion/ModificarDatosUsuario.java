@@ -3,8 +3,8 @@ package presentacion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.List;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -28,6 +28,7 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
     private JDateChooser dateFechaNac;
     private JComboBox<String> comboUsuarios;
     private JButton btnGuardar, btnCancelar;
+    private List<Usuario> listUsuarios;
 
     // Constructor
     public ModificarDatosUsuario(IControladorUsuario iconU){
@@ -119,15 +120,18 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	 miPanel.add(btnCancelar);
 	 btnCancelar.addActionListener(this);
     }
-    
-    
-    
+
+
     // Inicializar ComboBox
     public void iniciarlizarComboBox(){
-//		listUsuario = iconU.listarArtistas(); 
-//		listArtistas.forEach((a) -> {
-//			comboArtista.addItem(a.getNombre());
-//		});
+	 listUsuarios = iconU.listarUsuarios();
+	 listUsuarios.forEach((a) -> {
+	     comboUsuarios.addItem(a.getNickname());
+	 });
+	 // listPlataformas = iconP.listarPlataformas(); // PONER EN CONTROLADOR PLATAFORMA
+	 // listPlataformas.forEach((p) -> {
+	 // comboPlataforma.addItem(p.getNombre());
+	 // });
     }
 
     public void actionPerformed(ActionEvent e){ // 79S
