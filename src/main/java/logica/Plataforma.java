@@ -53,4 +53,12 @@ public class Plataforma{
 	 this.url = url;
     }
 
+	public List<Espectaculo> getEspectaculo() {
+		return espectaculo;
+	}
+
+	public void setEspectaculo(List<Espectaculo> espectaculo) {
+		this.espectaculo = espectaculo;
+	}
+
 }

@@ -59,7 +59,9 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 jsPane.setBorder(new EmptyBorder(0, 90, 0, 20));
 	 jsPane.setVisible(true);
 	 // add(jsPane, BorderLayout.SOUTH);
-
+	 
+	 
+	 
 	 // Boton Buscar
 	 btnConsulta = new JButton();
 	 // btnConsulta.setText("Buscar...");

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -16,7 +17,9 @@ public class Espectaculo{
     @Id
     @Column(name="nomEsp")
     private String nombre;
-    private String artista;
+    @ManyToOne
+    @JoinColumn(name = "artista")
+    private Artista artista;
     @ManyToOne
     private Plataforma plataforma;
     private String descripcion;
@@ -34,7 +37,7 @@ public class Espectaculo{
 	 super();
     }
 
-    public Espectaculo(String artista, Plataforma plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
+    public Espectaculo(Artista artista, Plataforma plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
 	 super();
 	 this.artista = artista;
 	 this.plataforma = plataforma;
@@ -48,7 +51,7 @@ public class Espectaculo{
 	 this.registro = registro;
     }
 
-    public String getArtista(){
+    public Artista getArtista(){
 	 return artista;
     }
 
@@ -89,7 +92,7 @@ public class Espectaculo{
 	 return registro;
     }
 
-    public void setArtista(String artista){
+    public void setArtista(Artista artista){
 	 this.artista = artista;
     }
 

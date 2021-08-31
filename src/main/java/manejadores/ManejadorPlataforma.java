@@ -41,18 +41,16 @@ public class ManejadorPlataforma{
     }
 
 
-    public ArrayList<String> obtenerPlataforma(){ // 79S
+    public List<Plataforma> obtenerPlataforma(){ // 79S
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 
 	 Query query = em.createQuery("select p from Plataforma p");
-	List<Plataforma> listPlataforma = (List<Plataforma>) query.getResultList();
+	 List<Plataforma> listPlataforma = (List<Plataforma>) query.getResultList();
 
-	 ArrayList<String> aRetornar = new ArrayList<>();
-	 for(Plataforma p :listPlataforma){
-	     aRetornar.add(new String(p.getNombre()));
-	 }
-	 return aRetornar;
+	 return listPlataforma;
     }
+    
+    
 
 }

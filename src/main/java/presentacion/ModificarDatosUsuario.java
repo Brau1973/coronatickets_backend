@@ -119,11 +119,15 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	 miPanel.add(btnCancelar);
 	 btnCancelar.addActionListener(this);
     }
-
+    
+    
+    
     // Inicializar ComboBox
     public void iniciarlizarComboBox(){
-	 DefaultComboBoxModel<String> modelUsuarios = new DefaultComboBoxModel<String>(iconU.listarUsuarios());
-	 comboUsuarios.setModel(modelUsuarios);
+//		listUsuario = iconU.listarArtistas(); 
+//		listArtistas.forEach((a) -> {
+//			comboArtista.addItem(a.getNombre());
+//		});
     }
 
     public void actionPerformed(ActionEvent e){ // 79S

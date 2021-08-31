@@ -1,6 +1,9 @@
 package interfaces;
 
+import java.util.List;
+
 import excepciones.UsuarioRepetidoExcepcion;
+import logica.Artista;
 import logica.Usuario;
 
 public interface IControladorUsuario{
@@ -9,6 +12,8 @@ public interface IControladorUsuario{
     public void modificarUsuario(Usuario nuevo);
 
     public Usuario obtenerUsuario(String nickname);
+    
+    public List<Artista> listarArtistas();
 
-    public String[] listarUsuarios();
+    public List<Usuario> listarUsuarios();
 }
