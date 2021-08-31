@@ -15,5 +15,10 @@ public interface IControladorUsuario{
     
     public List<Artista> listarArtistas();
 
+    public List<String> listarArtistasStr();
+    
+    public Artista ObtenerArtista(String nickname);
+    
     public List<Usuario> listarUsuarios();
+   
 }
