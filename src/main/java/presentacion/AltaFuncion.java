@@ -6,6 +6,7 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -24,6 +25,8 @@ import excepciones.FuncionRepetidaExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
+import interfaces.IControladorUsuario;
+import logica.Artista;
 import logica.Espectaculo;
 import logica.Plataforma;
 
@@ -32,23 +35,27 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 
     private IControladorFuncion iconFun;
     private IControladorPlataforma iconP;
-
+    private IControladorUsuario iconU;
     private JButton btnAceptar, btnCancelar, btnCopiar;
     private JPanel miPanel;
     private JLabel lblPlataforma, lblEspectaculos, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta, lblDots, lblTitulo;
     private JTextField txtNombre;
     private JSpinner spinHora, spinMin;
     private JDateChooser fechaFuncion, fechaAlta;
-    private JComboBox<String> comboArtistas, comboEspectaculos, comboPlataforma;
+    private JComboBox<String> comboArtista, comboEspectaculos, comboPlataforma;
     private JList listaArtistas, listaArtistasSeleccionados;
     private JScrollPane scrollPaneListaArtistas, scrollPaneListaArtistasSeleccionados;
     private String nombresArtistas[] = {"1", "2", "3", "4", "1", "2", "3", "4", "1", "2", "3", "4"};
     private List<Plataforma> listPlataformas;
-
-
+    private DefaultListModel modelo; // Declaramos el Modelo.
+    private JScrollPane scrollPane;
+    @SuppressWarnings("rawtypes")
+    private JList listNombres; // Declaramos La Lista.
+    private List<Artista> listArtistas;
     // Constructor
-    public AltaFuncion(IControladorFuncion iconFun){
 
+    public AltaFuncion(IControladorFuncion iconFun){
+	 iconU = Fabrica.getInstancia().getIControladorUsuario();
 	 this.iconFun = iconFun;
 	 iconP = Fabrica.getInstancia().getIControladorPlataforma();
 
@@ -137,28 +144,45 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 
 	 listaArtistas = new JList<String>(nombresArtistas);
 	 listaArtistas.setBounds(220, 210, 100, 100);
+	 listaArtistas.setVisibleRowCount(5);
 	 listaArtistas.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
+	 // miPanel.add(listaArtistas);
 
 	 btnCopiar = new JButton(">>>");
-	 btnCopiar.setBounds(330, 210, 70, 25);
+	 btnCopiar.setBounds(220, 250, 70, 30);
 	 btnCopiar.addActionListener(
 
 		  new ActionListener(){
 		      public void actionPerformed(ActionEvent evento){
-			   listaArtistasSeleccionados.setListData(listaArtistas.getSelectedValues());
+			   agregarNombre();
 		      }
 		  });
 
 	 miPanel.add(btnCopiar);
 
-	 listaArtistasSeleccionados = new JList();
+	 listNombres = new JList();
+	 listNombres.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+	 modelo = new DefaultListModel();
+	 scrollPane = new JScrollPane();
+	 scrollPane.setBounds(300, 250, 120, 60);
+	 scrollPane.setViewportView(listNombres);
+	 miPanel.add(scrollPane);
+
+	 // listaArtistasSeleccionados = new JList();
+	 // listaArtistasSeleccionados = new JList();
 	 // listaArtistasSeleccionados.setBounds(410, 210, 100, 100);
-	 listaArtistasSeleccionados.setVisibleRowCount(5);
+	 // listaArtistasSeleccionados.setVisibleRowCount(5);
 	 // listaArtistasSeleccionados.setFixedCellWidth( 100 );
 	 // listaArtistasSeleccionados.setFixedCellHeight( 25 );
-	 listaArtistasSeleccionados.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+	 // listaArtistasSeleccionados.getTe
+	 // listaArtistasSeleccionados.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 	 // miPanel.add(scrollPaneListaArtistas);
+	 // JScrollPane algo = new JScrollPane(listaArtistasSeleccionados);
+	 // algo.setBounds(410, 210, 100, 100);
+	 // miPanel.add(algo);
+	 comboArtista = new JComboBox<String>();
+	 comboArtista.setBounds(220, 210, 200, 25);
+	 miPanel.add(comboArtista);
 
 	 lblFechaAlta = new JLabel();
 	 lblFechaAlta.setText("Fecha de Alta");
@@ -184,9 +208,14 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 btnCancelar.addActionListener(this);
 
 	 // comboPlataforma.setSelectedItem("Seleccione Plataforma");
-
     }
 
+    private void agregarNombre(){
+	 String nombre = this.comboArtista.getSelectedItem().toString();
+	 modelo.addElement(nombre);
+	 listNombres.setModel(modelo);
+	 txtNombre.setText("");
+    }
     // Inicializar ComboBox
 
     // PLATAFORMAS
@@ -197,6 +226,10 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	     comboPlataforma.addItem(p.getNombre());
 	 });
 
+	 listArtistas = iconU.listarArtistas();
+	 listArtistas.forEach((a) -> {
+	     comboArtista.addItem(a.getNickname());
+	 });
 	 // Cargo combo de artistas
 	 // listArtistas = iconU.listarArtistas();
 	 // listArtistas.forEach((a) -> {
@@ -263,7 +296,6 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 		  List<String> ola = (List<String>) listaArtistasSeleccionados;
 
 		  Date fechaAlta = this.fechaAlta.getDate();
-
 		  try{
 		      this.iconFun.altaFuncion(nombreEspectaculo, esp, fechaFuncion, null, null, fechaAlta);
 		      JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");

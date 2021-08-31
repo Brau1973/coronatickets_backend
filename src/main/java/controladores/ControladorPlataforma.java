@@ -4,9 +4,7 @@ import java.util.List;
 
 import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.IControladorPlataforma;
-import logica.Espectaculo;
 import logica.Plataforma;
-import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorPlataforma;
 
 public class ControladorPlataforma implements IControladorPlataforma{
@@ -23,10 +21,9 @@ public class ControladorPlataforma implements IControladorPlataforma{
 	 plataforma = new Plataforma(nombre, descripcion, url);
 	 mP.altaPlataforma(plataforma);
     }
-    
-    public List<Plataforma> listarPlataformas(){ 
+
+    public List<Plataforma> listarPlataformas(){
 	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
-	 
 	 return mP.obtenerPlataforma();
     }
 
