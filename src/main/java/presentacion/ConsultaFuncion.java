@@ -17,8 +17,7 @@ import interfaces.IControladorFuncion;
 
 @SuppressWarnings("serial")
 public class ConsultaFuncion extends JInternalFrame{
-	
-	private IControladorFuncion icon;
+    private IControladorFuncion iconF;
     private JButton btnAceptar, btnCancelar;
     private JPanel miPanel;
     private JLabel lblTitulo, lblPlataforma, lblEspectaculos, lblFunciones, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta;
@@ -26,10 +25,10 @@ public class ConsultaFuncion extends JInternalFrame{
     private JTable tabFuncion;
     private String[] header = {"Plataforma", "Espectaculo"};
     private String[][] data = {{"1", "las aventuras de seba"}, {"2", "seba por el tiempo"}, {"3", "sebalandia"}, {"4", "la cocina de seba"}};
-    
+
     // Constructor
-    public ConsultaFuncion(IControladorFuncion icon){
-     this.icon = icon;
+    public ConsultaFuncion(IControladorFuncion iconF){
+	 this.iconF = iconF;
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -45,34 +44,34 @@ public class ConsultaFuncion extends JInternalFrame{
 	 // lblTitulo.setBounds(10, 1, 280, 25);
 	 // miPanel.add(lblTitulo);
 
-	 lblTitulo = new JLabel(); 
+	 lblTitulo = new JLabel();
 	 lblTitulo.setText("Consulta de Funcion de Espectaculo");
 	 lblTitulo.setBounds(10, 0, 400, 20);
 	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 17));
 	 miPanel.add(lblTitulo);
-	 
-	 lblPlataforma = new JLabel(); 
+
+	 lblPlataforma = new JLabel();
 	 lblPlataforma.setText("Plataforma");
 	 lblPlataforma.setBounds(10, 30, 200, 20);
 	 miPanel.add(lblPlataforma);
-	 
+
 	 comboPlataforma = new JComboBox<String>();
 	 comboPlataforma.addItem("Seleccione Plataforma");
 	 comboPlataforma.setBounds(220, 30, 200, 20);
 	 miPanel.add(comboPlataforma);
-	 
-	
+
+
 	 lblEspectaculos = new JLabel();
 	 lblEspectaculos.setText("Espectaculos");
 	 lblEspectaculos.setBounds(10, 60, 200, 20);
 	 miPanel.add(lblEspectaculos);
-	 
+
 
 	 comboEspectaculos = new JComboBox<String>();
 	 comboEspectaculos.addItem("Seleccione Espectaculo");
 	 comboEspectaculos.setBounds(220, 60, 200, 20);
 	 miPanel.add(comboEspectaculos);
-	 
+
 
 	 lblFunciones = new JLabel();
 	 lblFunciones.setText("Funciones");
@@ -88,7 +87,7 @@ public class ConsultaFuncion extends JInternalFrame{
 	 lblPlataforma.setText("Datos De La Funcion");
 	 lblPlataforma.setBounds(10, 120, 250, 20);
 	 miPanel.add(lblPlataforma);
-	 
+
 	 DefaultTableModel model = new DefaultTableModel(data, header);
 	 tabFuncion = new JTable(model);
 	 tabFuncion.setPreferredScrollableViewportSize(new Dimension(40, 290));
@@ -111,10 +110,10 @@ public class ConsultaFuncion extends JInternalFrame{
 	 miPanel.add(btnCancelar);
 	 // btnCancelar.addActionListener(this);
     }
-    
-    public void inicializarComboBoxes() {
-    	DefaultComboBoxModel<String> modelFuncionEspectaculo = new DefaultComboBoxModel<String>(icon.listarPlataformas());
-    	comboPlataforma.setModel(modelFuncionEspectaculo);
+
+    public void inicializarComboBoxes(){
+	 DefaultComboBoxModel<String> modelFuncionEspectaculo = new DefaultComboBoxModel<String>(iconF.listarPlataformas());
+	 comboPlataforma.setModel(modelFuncionEspectaculo);
     }
-    
+
 }

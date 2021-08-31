@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -34,7 +33,6 @@ import manejadores.ManejadorEspectaculo;
 public class ConsultarUsuario extends JInternalFrame implements ActionListener{
     private IControladorUsuario iconU;
     private IControladorEspectaculo iconE;
-    private JButton btnConsulta;
     private JPanel miPanel;
     private JScrollPane panel;
     private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblBuscar;
@@ -159,7 +157,6 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	     String strUsuario = this.comboUsuarios.getSelectedItem().toString();
 	     Usuario u = this.iconU.obtenerUsuario(strUsuario);
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-
 	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 	     ArrayList<String> usuario = mE.obtenerEspectaculo();
 	     String datos = "\n\nLista de espectaculos:";

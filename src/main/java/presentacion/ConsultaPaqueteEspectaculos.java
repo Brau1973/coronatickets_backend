@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import interfaces.Fabrica;
+import interfaces.IControladorPaquete;
 import logica.Espectaculo;
 import logica.PaqueteEspectaculos;
 
@@ -33,15 +35,16 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
     static final int WIDTH_LABEL = 180;
     static final int WIDTH_TEXT = 200;
     static final int HEIGHT_FIELD = 25;
-
     private String[] header = {"Nombre", "Descripcion", "etc,"};
     private String[][] data = {};
 
     private PaqueteEspectaculos paqueteSelected;
     List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
+    IControladorPaquete iControladorPaquete = Fabrica.getInstancia().getIControladorPaquete();
 
     // Constructor
     public ConsultaPaqueteEspectaculos(){
+	 lstPaquetes = iControladorPaquete.obtenerPaquetes();
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 miPanel.setBounds(0, 0, 800, 100);
