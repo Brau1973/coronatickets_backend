@@ -277,7 +277,9 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 		  List<String> ola = (List<String>) listaArtistasSeleccionados;
 		  Date fechaAlta = this.fechaAlta.getDate();*/
 		  try{
-		      Funcion f = new Funcion("Funcion sabado", null, null, null, null, null);
+		      Funcion f = new Funcion();
+		      // INSERT INTO funcion VALUES ('Funcion sabado','2021-12-10', '18:30:00', '2021-08-15','Espectaculo1','artGerardo');
+		      // this.iconFun.altaFuncion("Funcion sabado", null, null, null, "Espectaculo1", "artGerardo");
 		      this.iconFun.altaFuncion(f);
 		      JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
 		  }catch(FuncionRepetidaExcepcion msg){
