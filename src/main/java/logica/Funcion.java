@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,9 +16,9 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Funcion{
-	@Id
+    @Id
     private String nombre;
-	@ManyToOne
+    @ManyToOne
     private Espectaculo espectaculo;
     private Date fecha;
     private Time horaInicio;
@@ -36,7 +35,7 @@ public class Funcion{
 	 this.artistas = artistas;
 	 this.registro = registro;
     }
-    
+
     public Funcion(){
     }
 
