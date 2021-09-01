@@ -18,22 +18,22 @@ import javax.persistence.OneToMany;
 public class Funcion{
     @Id
     private String nombre;
-    @ManyToOne
-    private Espectaculo espectaculo;
     private Date fecha;
     private Time horaInicio;
+    private Date registro;
+    @ManyToOne
+    private Espectaculo espectaculo;
     @OneToMany(orphanRemoval = true)
     @JoinTable(name = "FuncionXArtistas", joinColumns = @JoinColumn(name = "nombre"), inverseJoinColumns = @JoinColumn(name = "nickname"))
     private List<Artista> artistas = new ArrayList<Artista>();
-    private Date registro;
 
-    public Funcion(String nombre, Espectaculo espectaculo, Date fecha, Time horaInicio, List<Artista> artistas, Date registro){
+    public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, Espectaculo espectaculo, List<Artista> artistas){
 	 this.nombre = nombre;
-	 this.espectaculo = espectaculo;
 	 this.fecha = fecha;
 	 this.horaInicio = horaInicio;
-	 this.artistas = artistas;
 	 this.registro = registro;
+	 this.espectaculo = espectaculo;
+	 this.artistas = artistas;
     }
 
     public Funcion(){
@@ -55,6 +55,7 @@ public class Funcion{
 	 return horaInicio;
     }
 
+
     public List<Artista> getArtistas(){
 	 return artistas;
     }
@@ -66,6 +67,7 @@ public class Funcion{
     public void setNombre(String nombre){
 	 this.nombre = nombre;
     }
+
 
     public void setEspectaculo(Espectaculo espectaculo){
 	 this.espectaculo = espectaculo;

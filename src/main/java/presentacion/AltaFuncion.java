@@ -3,6 +3,8 @@ package presentacion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -11,7 +13,6 @@ import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -22,6 +23,7 @@ import com.toedter.calendar.JDateChooser;
 
 import excepciones.FuncionRepetidaExcepcion;
 import interfaces.Fabrica;
+import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
@@ -29,12 +31,14 @@ import logica.Artista;
 import logica.Espectaculo;
 import logica.Funcion;
 import logica.Plataforma;
+import logica.Usuario;
 
 @SuppressWarnings("serial")
 public class AltaFuncion extends JInternalFrame implements ActionListener{
     private IControladorFuncion iconFun;
     private IControladorPlataforma iconP;
     private IControladorUsuario iconU;
+    private IControladorEspectaculo iconE;
     private JButton btnAceptar, btnCancelar, btnCopiar;
     private JPanel miPanel;
     private JLabel lblPlataforma, lblEspectaculos, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta, lblDots, lblTitulo;
@@ -51,13 +55,14 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
     private List<Plataforma> listPlataformas;
     private List<Espectaculo> listEspectaculos;
     private List<Artista> listArtistas;
+    private List<Artista> listArtistasSeleccionados;
     // Constructor
 
     public AltaFuncion(IControladorFuncion iconFun){
 	 iconU = Fabrica.getInstancia().getIControladorUsuario();
 	 this.iconFun = iconFun;
 	 iconP = Fabrica.getInstancia().getIControladorPlataforma();
-
+	 iconE = Fabrica.getInstancia().getIControladorEspectaculo();
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -243,19 +248,17 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 
 	 // BOTON ACEPTAR
 	 if(e.getSource() == btnAceptar){
-
-
 	     if(checkFormulario()){
-		  String strplataforma = (String) this.comboPlataforma.getSelectedItem();
+		  /*	  String strplataforma = (String) this.comboPlataforma.getSelectedItem();
 		  String strespectaculo = (String) this.comboEspectaculos.getSelectedItem();
 		  Espectaculo espectaculo = listEspectaculos.stream().filter(ess -> (ess.getNombre() == strespectaculo)).findFirst().get();
-
+		  
 		  String strartista = (String) this.comboArtista.getSelectedItem();
 		  Artista artista = listArtistas.stream().filter(a -> (a.getNickname() == strartista)).findFirst().get();
 		  Espectaculo ey = espectaculo;
 		  Time tu = new Time(1, 2, 2);
 		  List<Artista> artist = listArtistas;
-
+		  */
 		  // this.iconFun.altaFuncion(f);
 		  // this.iconFun.altaFuncion("Funcion sabado", ey, tu, null, artist, null);
 		  // nombre, fecha, horainicio, registro, espectaculo_nomesp, artistas)
@@ -267,7 +270,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 		  String strurl = this.txtUrl.getText();
 		  Date dateRegistro = this.dateFechaNac.getDate();*/
 
-		  /*	  Espectaculo esp = new Espectaculo();
+		  /*  Espectaculo esp = new Espectaculo();
 		  String nombreEspectaculo = this.txtNombre.getText();
 		  Date fechaFuncion = this.fechaFuncion.getDate();
 		  int hora = Integer.parseInt(this.spinHora.getValue().toString());
@@ -276,23 +279,62 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 		  System.out.println(horaInicio.toString());
 		  List<String> ola = (List<String>) listaArtistasSeleccionados;
 		  Date fechaAlta = this.fechaAlta.getDate();*/
-		  try{
-		      Funcion f = new Funcion();
-		      // INSERT INTO funcion VALUES ('Funcion sabado','2021-12-10', '18:30:00', '2021-08-15','Espectaculo1','artGerardo');
-		      // this.iconFun.altaFuncion("Funcion sabado", null, null, null, "Espectaculo1", "artGerardo");
-		      this.iconFun.altaFuncion(f);
-		      JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
-		  }catch(FuncionRepetidaExcepcion msg){
-		      JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+
+		  //////////////////////////// braulio
+		  // String strplataforma = (String) this.comboPlataforma.getSelectedItem();
+
+		  // OBTENGO EL ESPECTACULO
+		  // String strespectaculo = (String) this.comboEspectaculos.getSelectedItem();
+		  // Espectaculo espectaculo = listEspectaculos.stream().filter(ess -> (ess.getNombre() == strespectaculo)).findFirst().get();
+
+		  String nombreFuncion = this.txtNombre.getText();
+		  Date FechaFuncion = this.fechaFuncion.getDate();
+
+		  // PROCESO LOS ARTISTAS SELECCIONADOS PARA QUEDARMELOS EN EL LIST DE OBJETOS ARTISTA (listArtistasSeleccionados)
+		  // System.out.println("jl.getModel().getSize() = " + this.listNombres.getModel().getSize());
+		  List<String> listArtistas = new ArrayList<String>();
+		  for(int i = 1; i < listNombres.getModel().getSize(); i++){
+		      listArtistas.add(listNombres.getModel().getElementAt(i).toString());
 		  }
-		  limpiarFormulario();
+
+		  System.out.println("arrayList = " + listArtistas.toString());
+		  for(String artista :listArtistas){
+		      Artista artistaObj = new Artista();
+		      Usuario usuarioObj = new Usuario();
+		      artistaObj = (Artista) iconU.obtenerUsuario(artista);
+		      listArtistasSeleccionados.add(artistaObj);
+		  }
+
+		  // System.out.println("arrayList = " + listArtistas.toString());
+
+		  int hora = Integer.parseInt(this.spinHora.getValue().toString());
+		  int minutos = Integer.parseInt(this.spinMin.getValue().toString());
+		  Time horaInicio = new Time(hora, minutos, 0);
+		  Date fechaRegistro = this.fechaAlta.getDate();
+		  String strartista = (String) this.comboArtista.getSelectedItem();
+		  String strespectaculo = (String) this.comboEspectaculos.getSelectedItem();
+		  /*	  Artista artista = listArtistas.stream().filter(a -> (a.getNickname() == strartista)).findFirst().get();*/
+		  // List<Artista> listArtistas = new ArrayList<Artista>();
+		  Funcion fe = new Funcion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro, iconE.obtenerEspectaculo(strespectaculo), null);
+
+		  /// listnombre =
+		  try{
+		      this.iconFun.altaFuncion(fe);
+		      // JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
+		  }catch(FuncionRepetidaExcepcion msg){
+		      // JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+		  }
+		  // limpiarFormulario();
 		  setVisible(false);
 	     }
 	 }
 
-	 if(e.getSource() == btnCancelar){
-	     limpiarFormulario();
-	     setVisible(false);
+	 if(e.getSource() == btnCancelar)
+
+	 {
+
+	     // limpiarFormulario();
+	     // setVisible(false);
 	 }
     }
 }

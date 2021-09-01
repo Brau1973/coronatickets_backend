@@ -17,7 +17,6 @@ public class ControladorFuncion implements IControladorFuncion{
 	 mF.agregarFuncion(funcion);
     }
 
-
     // @Override
     // public String[] listarPlataformas() {
     // ArrayList<String> plataformas;
