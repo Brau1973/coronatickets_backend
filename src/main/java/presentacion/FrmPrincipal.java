@@ -16,7 +16,7 @@ import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
 
 @SuppressWarnings("serial")
-public class FrmPrincipal extends JFrame implements ActionListener{
+public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     private Container contenedor;
     private JMenuBar barraMenu;
     private JMenu menuInicio, menuUsuario, menuEspectaculo, menuAyuda, menuPlataforma, menuFuncion, menuPaquete;
@@ -266,6 +266,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	 internalFrameCreaPaqueteEspectaculo.setVisible(false);
 	 internalFrameAgregarEspectaculoAPaquete.setVisible(false);
 
+
 	 switch(e.getActionCommand()){
 	 case "Alta de Usuario":
 	     internalFrameAltaUsuario.setVisible(true);
@@ -289,7 +290,6 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	     break;
 	 case "Alta de Funcion de Espectaculo":
 	     internalFrameAltaFuncion.iniciarlizarComboBox();
-	     internalFrameAltaFuncion.CargarListaArtistas();
 	     internalFrameAltaFuncion.setVisible(true);
 	     break;
 	 case "Consulta de Funcion de Espectaculo":

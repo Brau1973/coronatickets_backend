@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -18,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import interfaces.IControladorFuncion;
+import logica.Espectaculo;
 import logica.Plataforma;
 import manejadores.ManejadorFuncion;
 
@@ -127,14 +127,19 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
 	 if(e.getSource() == comboPlataforma){
-	     String plataforma = this.comboPlataforma.getSelectedItem().toString();
+	     String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
 	     ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-	     ArrayList<String> datos = null; // = mF.obtenerEspectaculo(plataforma);
-	     if(datos.isEmpty()){
+	     // ArrayList<String> datos = mF.obtenerEspectaculo(plataforma);
+	     Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();
+	     List<Espectaculo> listEspectaculos = plataforma.getEspectaculo();
+
+	     if(listEspectaculos.isEmpty()){
 		  JOptionPane.showMessageDialog(this, "Esta plataforma no tiene espectaculos asociados.", "Agregar Espectaculo", JOptionPane.WARNING_MESSAGE);
 		  comboEspectaculos.getModel().setSelectedItem("Seleccione Espectaculo");
 	     }else
-		  datos = null;
+		  listEspectaculos.forEach((esp) -> {
+		      comboEspectaculos.addItem(esp.getNombre());
+		  });
 	     // comboEspectaculos.getModel().setSelectedItem(mF.obtenerEspectaculo(plataforma));
 	 }
 

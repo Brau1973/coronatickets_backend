@@ -1,13 +1,7 @@
 package controladores;
 
-import java.sql.Time;
-import java.util.Date;
-import java.util.List;
-
 import excepciones.FuncionRepetidaExcepcion;
 import interfaces.IControladorFuncion;
-import logica.Artista;
-import logica.Espectaculo;
 import logica.Funcion;
 import manejadores.ManejadorFuncion;
 
@@ -18,12 +12,8 @@ public class ControladorFuncion implements IControladorFuncion{
     }
 
     @Override
-    public void altaFuncion(String nombre, Espectaculo espectaculo, Date fecha, Time horaInicio, List<Artista> artistas, Date registro) throws FuncionRepetidaExcepcion{
+    public void altaFuncion(Funcion funcion) throws FuncionRepetidaExcepcion{
 	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-	 Funcion funcion = mF.buscarFuncion(nombre);
-	 if(funcion != null)
-	     throw new FuncionRepetidaExcepcion("La funcion " + nombre + " ya esta registrada");
-	 funcion = new Funcion(nombre, espectaculo, fecha, horaInicio, artistas, registro);
 	 mF.agregarFuncion(funcion);
     }
 

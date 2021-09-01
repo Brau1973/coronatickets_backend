@@ -1,6 +1,5 @@
 package manejadores;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -44,13 +43,10 @@ public class ManejadorPlataforma{
     public List<Plataforma> obtenerPlataforma(){ // 79S
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
-
 	 Query query = em.createQuery("select p from Plataforma p");
 	 List<Plataforma> listPlataforma = (List<Plataforma>) query.getResultList();
-
 	 return listPlataforma;
     }
-    
-    
+
 
 }
