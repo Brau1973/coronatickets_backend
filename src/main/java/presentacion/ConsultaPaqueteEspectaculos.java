@@ -45,6 +45,7 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
     // Constructor
     public ConsultaPaqueteEspectaculos(){
 	 lstPaquetes = iControladorPaquete.obtenerPaquetes();
+
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 miPanel.setBounds(0, 0, 800, 100);

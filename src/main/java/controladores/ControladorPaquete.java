@@ -25,5 +25,4 @@ public class ControladorPaquete implements IControladorPaquete{
 	 return mP.obtenerPaquetes();
     }
 
-
 }

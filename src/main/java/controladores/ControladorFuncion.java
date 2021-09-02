@@ -6,6 +6,7 @@ import logica.Funcion;
 import manejadores.ManejadorFuncion;
 
 public class ControladorFuncion implements IControladorFuncion{
+
     public ControladorFuncion(){
 	 super();
     }

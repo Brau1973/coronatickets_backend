@@ -68,7 +68,6 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
 	 miPanel.add(comboPlataforma);
 	 comboPlataforma.addActionListener(this);
 
-
 	 lblEspectaculos = new JLabel();
 	 lblEspectaculos.setText("Espectaculos");
 	 lblEspectaculos.setBounds(10, 60, 200, 20);
@@ -145,10 +144,6 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
 	 	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 	      comboFuncion.getModel().setSelectedItem(mF.obtenerFuncion(espectaculo));
 	     }*/
-    }
-
-    public void inicializarComboBoxes(){
-
     }
 
 }

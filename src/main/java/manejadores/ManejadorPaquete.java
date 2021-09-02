@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import logica.PaqueteEspectaculos;
 import persistencia.Conexion;
 
+
 public class ManejadorPaquete{
     private static ManejadorPaquete instancia = null;
 
@@ -31,8 +32,7 @@ public class ManejadorPaquete{
     public PaqueteEspectaculos buscarPlataforma(String nombre){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
-	 PaqueteEspectaculos plataforma = em.find(PaqueteEspectaculos.class, nombre);
-	 return plataforma;
+	 return em.find(PaqueteEspectaculos.class, nombre);
     }
 
     @SuppressWarnings("unchecked")
@@ -50,5 +50,6 @@ public class ManejadorPaquete{
 	 PaqueteEspectaculos paquete = em.find(PaqueteEspectaculos.class, nombre);
 	 return paquete != null ? true : false;
     }
+
 
 }
