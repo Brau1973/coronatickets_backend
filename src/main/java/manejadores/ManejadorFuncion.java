@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import logica.Funcion;
+import logica.Plataforma;
 import persistencia.Conexion;
 
 public class ManejadorFuncion{
@@ -37,19 +38,13 @@ public class ManejadorFuncion{
 	 return funcion;
     }
 
-    public ArrayList<String> obtenerFunciones(){
-	 Conexion conexion = Conexion.getInstancia();
-	 EntityManager em = conexion.getEntityManager();
-
-	 Query query = em.createQuery("select f from Funcion f");
-	 List<Funcion> listFuncion = (List<Funcion>) query.getResultList();
-
-	 ArrayList<String> aRetornar = new ArrayList<>();
-	 for(Funcion f :listFuncion){
-	     aRetornar.add((f.getNombre()));
-	 }
-	 return aRetornar;
-    }
+    public List<Funcion> obtenerFunciones(){ // 79S
+   	 Conexion conexion = Conexion.getInstancia();
+   	 EntityManager em = conexion.getEntityManager();
+   	 Query query = em.createQuery("select f from Funcion f");
+   	 List<Funcion> listFuncion = (List<Funcion>) query.getResultList();
+   	 return listFuncion;
+       }
 
 
     // public ArrayList<Plataforma> obtenerPlataforma(){

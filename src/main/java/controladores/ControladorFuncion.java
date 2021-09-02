@@ -1,9 +1,15 @@
 package controladores;
 
+import java.util.List;
+
 import excepciones.FuncionRepetidaExcepcion;
 import interfaces.IControladorFuncion;
+import logica.Espectaculo;
 import logica.Funcion;
+import logica.Plataforma;
+import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
+import manejadores.ManejadorPlataforma;
 
 public class ControladorFuncion implements IControladorFuncion{
 
@@ -16,6 +22,16 @@ public class ControladorFuncion implements IControladorFuncion{
 	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 	 mF.agregarFuncion(funcion);
     }
+    
+    public List<Funcion> listarFunciones(){
+   	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+   	 return mF.obtenerFunciones();
+       }
+    
+    public Funcion obtenerFuncion(String nombre){
+   	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+   	 return mF.buscarFuncion(nombre);
+       }
 
     // @Override
     // public String[] listarPlataformas() {
