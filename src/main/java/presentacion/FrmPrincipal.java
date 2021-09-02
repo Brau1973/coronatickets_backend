@@ -283,6 +283,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameAltaEspectaculo.setVisible(true);
 	     break;
 	 case "Consulta de Espectaculo":
+		 internalFrameConsultaEspectaculo.iniciarlizarComboBox();
 	     internalFrameConsultaEspectaculo.setVisible(true);
 	     break;
 	 case "Alta de Plataforma":
