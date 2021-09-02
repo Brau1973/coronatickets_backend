@@ -1,18 +1,26 @@
 package logica;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Espectaculo{
     @Id
-    @Column(name="nomEsp")
+    @Column(name = "nomEsp")
     private String nombre;
-    private String artista;
-    private String plataforma;
+    @ManyToOne
+    @JoinColumn(name = "artista")
+    private Artista artista;
+    @ManyToOne
+    private Plataforma plataforma;
     private String descripcion;
     private int duracion;
     private int cantMinEsp;
@@ -20,15 +28,17 @@ public class Espectaculo{
     private String url;
     private int costo;
     private Date registro;
+    @ManyToMany(mappedBy = "espectaculos")
+    private List<PaqueteEspectaculos> paquete = new ArrayList<PaqueteEspectaculos>();
 
-    // @OneToMany(mappedBy = "funciones", cascade = CascadeType.ALL, orphanRemoval = true)
-    // private List<Funcion> funciones = new ArrayList<>();
+    /*   @OneToMany(mappedBy = "espectaculo")
+    private List<Funcion> funciones = new ArrayList<>();*/
 
     public Espectaculo(){
 	 super();
     }
 
-    public Espectaculo(String artista, String plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
+    public Espectaculo(Artista artista, Plataforma plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
 	 super();
 	 this.artista = artista;
 	 this.plataforma = plataforma;
@@ -42,11 +52,11 @@ public class Espectaculo{
 	 this.registro = registro;
     }
 
-    public String getArtista(){
+    public Artista getArtista(){
 	 return artista;
     }
 
-    public String getPlataforma(){
+    public Plataforma getPlataforma(){
 	 return plataforma;
     }
 
@@ -83,11 +93,11 @@ public class Espectaculo{
 	 return registro;
     }
 
-    public void setArtista(String artista){
+    public void setArtista(Artista artista){
 	 this.artista = artista;
     }
 
-    public void setPlataforma(String plataforma){
+    public void setPlataforma(Plataforma plataforma){
 	 this.plataforma = plataforma;
     }
 

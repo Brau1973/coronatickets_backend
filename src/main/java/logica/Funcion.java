@@ -1,29 +1,50 @@
 package logica;
 
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+//import datatypes.DtHora;
+
+@Entity
 public class Funcion{
+    @Id
     private String nombre;
-    private String espectaculo;
     private Date fecha;
-    private Date horaInicio;
-    private String artistas;
+    private Time horaInicio;
     private Date registro;
+    @ManyToOne
+    private Espectaculo espectaculo;
 
-    public Funcion(String nombre, String espectaculo, Date fecha, Date horaInicio, String artistas, Date registro){
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    // @JoinTable(name = "FuncionXArtistas", joinColumns = @JoinColumn(name = "nombre"), inverseJoinColumns = @JoinColumn(name = "nickname"))
+    private List<Artista> artistas = new ArrayList<Artista>();
+
+    public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, Espectaculo espectaculo, List<Artista> artistas){
 	 this.nombre = nombre;
-	 this.espectaculo = espectaculo;
 	 this.fecha = fecha;
 	 this.horaInicio = horaInicio;
-	 this.artistas = artistas;
 	 this.registro = registro;
+	 this.espectaculo = espectaculo;
+	 this.artistas = artistas;
+    }
+
+    public Funcion(){
     }
 
     public String getNombre(){
 	 return nombre;
     }
 
-    public String getEspectaculo(){
+    public Espectaculo getEspectaculo(){
 	 return espectaculo;
     }
 
@@ -31,11 +52,12 @@ public class Funcion{
 	 return fecha;
     }
 
-    public Date getHoraInicio(){
+    public Time getHoraInicio(){
 	 return horaInicio;
     }
 
-    public String getArtistas(){
+
+    public List<Artista> getArtistas(){
 	 return artistas;
     }
 
@@ -47,7 +69,8 @@ public class Funcion{
 	 this.nombre = nombre;
     }
 
-    public void setEspectaculo(String espectaculo){
+
+    public void setEspectaculo(Espectaculo espectaculo){
 	 this.espectaculo = espectaculo;
     }
 
@@ -55,11 +78,11 @@ public class Funcion{
 	 this.fecha = fecha;
     }
 
-    public void setHoraInicio(Date horaInicio){
+    public void setHoraInicio(Time horaInicio){
 	 this.horaInicio = horaInicio;
     }
 
-    public void setArtistas(String artistas){
+    public void setArtistas(List<Artista> artistas){
 	 this.artistas = artistas;
     }
 

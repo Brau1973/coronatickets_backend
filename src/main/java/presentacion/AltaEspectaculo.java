@@ -3,8 +3,8 @@ package presentacion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.List;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -17,21 +17,32 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import datatypes.DtEspectaculo;
+import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
+import interfaces.IControladorPlataforma;
+import interfaces.IControladorUsuario;
+import logica.Artista;
+import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 
 @SuppressWarnings("serial")
 public class AltaEspectaculo extends JInternalFrame implements ActionListener{ // 79S
     private IControladorEspectaculo iconE;
+    private IControladorUsuario iconU;
+    private IControladorPlataforma iconP;
     private JPanel miPanel;
     private JComboBox<String> comboPlataforma, comboArtista;
     private JTextField txtNombre, txtDescripcion, txtDuracion, txtUrl, txtCosto;
     private JSpinner spinMin, spinMax;
     private JDateChooser dateFechaNac;
     private JButton btnAceptar, btnCancelar;
+    private List<Plataforma> listPlataformas;
+    private List<Artista> listArtistas;
 
     public AltaEspectaculo(IControladorEspectaculo iconE){
 	 this.iconE = iconE;
+	 iconU = Fabrica.getInstancia().getIControladorUsuario();
+	 iconP = Fabrica.getInstancia().getIControladorPlataforma();
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -159,16 +170,26 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 
     // Inicializar ComboBox
     public void iniciarlizarComboBox(){
-	 DefaultComboBoxModel<String> modelPlataformas = new DefaultComboBoxModel<String>(iconE.listarPlataformas());
-	 comboPlataforma.setModel(modelPlataformas);
+	 // Cargo combo de plataformas
+	 listPlataformas = iconP.listarPlataformas(); // PONER EN CONTROLADOR PLATAFORMA
+	 listPlataformas.forEach((p) -> {
+	     comboPlataforma.addItem(p.getNombre());
+	 });
 
-	 DefaultComboBoxModel<String> modelArtistas = new DefaultComboBoxModel<String>(iconE.listarArtistas());
-	 comboArtista.setModel(modelArtistas);
+	 // Cargo combo de artistas
+	 listArtistas = iconU.listarArtistas();
+	 listArtistas.forEach((a) -> {
+	     comboArtista.addItem(a.getNickname());
+	 });
     }
 
     public void actionPerformed(ActionEvent e){
 	 String strplataforma = (String) this.comboPlataforma.getSelectedItem();
+	 Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strplataforma)).findFirst().get();
+
 	 String strartista = (String) this.comboArtista.getSelectedItem();
+	 Artista artista = listArtistas.stream().filter(a -> (a.getNickname() == strartista)).findFirst().get();
+
 	 String strnombre = this.txtNombre.getText();
 	 String strdescripcion = this.txtDescripcion.getText();
 	 int cantMin = (Integer) spinMin.getValue();
@@ -179,13 +200,13 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 if(e.getSource() == btnAceptar){
 	     if(checkFormulario()){
 		  try{
-		      DtEspectaculo dte = new DtEspectaculo(strartista, strplataforma, strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
+		      DtEspectaculo dte = new DtEspectaculo(artista, plataforma, strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
 		      this.iconE.altaEspectaculo(dte);
 		      JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
-		      limpiarFormulario();
+		      // limpiarFormulario();
 		  }catch(Exception ex){
 		      JOptionPane.showMessageDialog(null, "Los datos ingresados no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
-		      limpiarFormulario();
+		      // limpiarFormulario();
 		  }
 		  setVisible(false);
 	     }

@@ -4,9 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -18,14 +17,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import interfaces.IControladorFuncion;
-import manejadores.ManejadorFuncion;
-
 import logica.Espectaculo;
+import logica.Plataforma;
+import manejadores.ManejadorFuncion;
 
 @SuppressWarnings("serial")
 public class ConsultaFuncion extends JInternalFrame implements ActionListener{
-	
-	private IControladorFuncion icon;
+    private IControladorFuncion iconF;
     private JButton btnAceptar, btnCancelar;
     private JPanel miPanel;
     private JLabel lblTitulo, lblPlataforma, lblEspectaculos, lblFunciones, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta;
@@ -33,10 +31,11 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
     private JTable tabFuncion;
     private String[] header = {"Plataforma", "Espectaculo"};
     private String[][] data = {{"1", "las aventuras de seba"}, {"2", "seba por el tiempo"}, {"3", "sebalandia"}, {"4", "la cocina de seba"}};
-    
+    private List<Plataforma> listPlataformas;
+
     // Constructor
-    public ConsultaFuncion(IControladorFuncion icon){
-     this.icon = icon;
+    public ConsultaFuncion(IControladorFuncion iconF){
+	 this.iconF = iconF;
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -52,35 +51,34 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
 	 // lblTitulo.setBounds(10, 1, 280, 25);
 	 // miPanel.add(lblTitulo);
 
-	 lblTitulo = new JLabel(); 
+	 lblTitulo = new JLabel();
 	 lblTitulo.setText("Consulta de Funcion de Espectaculo");
 	 lblTitulo.setBounds(10, 0, 400, 20);
 	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 17));
 	 miPanel.add(lblTitulo);
-	 
-	 lblPlataforma = new JLabel(); 
+
+	 lblPlataforma = new JLabel();
 	 lblPlataforma.setText("Plataforma");
 	 lblPlataforma.setBounds(10, 30, 200, 20);
 	 miPanel.add(lblPlataforma);
-	 
+
 	 comboPlataforma = new JComboBox<String>();
 	 comboPlataforma.addItem("Seleccione Plataforma");
 	 comboPlataforma.setBounds(220, 30, 200, 20);
 	 miPanel.add(comboPlataforma);
 	 comboPlataforma.addActionListener(this);
-	 
-	
+
 	 lblEspectaculos = new JLabel();
 	 lblEspectaculos.setText("Espectaculos");
 	 lblEspectaculos.setBounds(10, 60, 200, 20);
 	 miPanel.add(lblEspectaculos);
-	 
+
 
 	 comboEspectaculos = new JComboBox<String>();
 	 comboEspectaculos.addItem("Seleccione Espectaculo");
 	 comboEspectaculos.setBounds(220, 60, 200, 20);
 	 miPanel.add(comboEspectaculos);
-	 
+
 
 	 lblFunciones = new JLabel();
 	 lblFunciones.setText("Funciones");
@@ -96,7 +94,7 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
 	 lblPlataforma.setText("Datos De La Funcion");
 	 lblPlataforma.setBounds(10, 120, 250, 20);
 	 miPanel.add(lblPlataforma);
-	 
+
 	 DefaultTableModel model = new DefaultTableModel(data, header);
 	 tabFuncion = new JTable(model);
 	 tabFuncion.setPreferredScrollableViewportSize(new Dimension(40, 290));
@@ -119,32 +117,33 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
 	 miPanel.add(btnCancelar);
 	 // btnCancelar.addActionListener(this);
     }
-    
-    public void inicializarComboBoxes() {
-    	DefaultComboBoxModel<String> modelFuncionEspectaculo = new DefaultComboBoxModel<String>(icon.listarPlataformas());
-    	comboPlataforma.setModel(modelFuncionEspectaculo);
+
+
+    @Override
+    public void actionPerformed(ActionEvent e){
+	 if(e.getSource() == comboPlataforma){
+	     String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
+	     ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+	     // ArrayList<String> datos = mF.obtenerEspectaculo(plataforma);
+	     Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();
+	     List<Espectaculo> listEspectaculos = plataforma.getEspectaculo();
+
+	     if(listEspectaculos.isEmpty()){
+		  JOptionPane.showMessageDialog(this, "Esta plataforma no tiene espectaculos asociados.", "Agregar Espectaculo", JOptionPane.WARNING_MESSAGE);
+		  comboEspectaculos.getModel().setSelectedItem("Seleccione Espectaculo");
+	     }else
+		  listEspectaculos.forEach((esp) -> {
+		      comboEspectaculos.addItem(esp.getNombre());
+		  });
+	     // comboEspectaculos.getModel().setSelectedItem(mF.obtenerEspectaculo(plataforma));
+	 }
+
+	 // Cargar combo Funcion respecto al espectaculo
+	 /*if(e.getSource() == comboEspectaculos) {
+	 	 String espectaculo = this.comboEspectaculos.getSelectedItem().toString();
+	 	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+	      comboFuncion.getModel().setSelectedItem(mF.obtenerFuncion(espectaculo));
+	     }*/
     }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == comboPlataforma) {
-			 String plataforma = this.comboPlataforma.getSelectedItem().toString();
-			 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-			 ArrayList<String> datos = mF.obtenerEspectaculo(plataforma);
-			 if(datos.isEmpty()) {
-				 JOptionPane.showMessageDialog(this, "Esta plataforma no tiene espectaculos asociados.", "Agregar Espectaculo",
-		                    JOptionPane.WARNING_MESSAGE);
-				 comboEspectaculos.getModel().setSelectedItem("Seleccione Espectaculo");
-			 } else
-				 comboEspectaculos.getModel().setSelectedItem(mF.obtenerEspectaculo(plataforma));
-		    }
-		
-		//Cargar combo Funcion respecto al espectaculo
-		/*if(e.getSource() == comboEspectaculos) {
-			 String espectaculo = this.comboEspectaculos.getSelectedItem().toString();
-			 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-		     comboFuncion.getModel().setSelectedItem(mF.obtenerFuncion(espectaculo));
-		    }*/
-	}
-    
 }

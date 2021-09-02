@@ -1,9 +1,8 @@
 package interfaces;
 
-public interface IControladorFuncion{
-	
-	public String[] listarPlataformas();
-	
-	public String[] listarEspectaculos(String plataforma);
+import excepciones.FuncionRepetidaExcepcion;
+import logica.Funcion;
 
+public interface IControladorFuncion{
+    public void altaFuncion(Funcion funcion) throws FuncionRepetidaExcepcion;
 }

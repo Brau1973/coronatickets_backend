@@ -1,11 +1,12 @@
 package controladores;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControladorUsuario;
+import logica.Artista;
 import logica.Usuario;
 import manejadores.ManejadorUsuario;
 import persistencia.Conexion;
@@ -18,14 +19,14 @@ public class ControladorUsuario implements IControladorUsuario{
     public void altaUsuario(Usuario usuario) throws UsuarioRepetidoExcepcion{
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 	 if(mU.buscarUsuario(usuario.getNickname()) != null){
-	     throw new UsuarioRepetidoExcepcion("el nickname esta en uso");
+	     throw new UsuarioRepetidoExcepcion("El nickname esta en uso");
 	 }else if(mU.buscarUsuario(usuario.getEmail()) != null){
-	     throw new UsuarioRepetidoExcepcion("el email esta en uso");
+	     throw new UsuarioRepetidoExcepcion("El email esta en uso");
 	 }
 	 mU.altaUsuario(usuario);
     }
 
-    public void modificarUsuario(Usuario nuevo){ // 79S
+    public void modificarUsuario(Usuario nuevo){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
@@ -35,22 +36,26 @@ public class ControladorUsuario implements IControladorUsuario{
 	 em.getTransaction().commit();
     }
 
-    public Usuario obtenerUsuario(String nickname){ // 79S
+    public Usuario obtenerUsuario(String nickname){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	 Usuario usuario = mU.buscarUsuario(nickname);
-	 return usuario;
+	 return mU.buscarUsuario(nickname);
     }
 
-    public String[] listarUsuarios(){ // 79S
-	 ArrayList<String> usuario;
+    public Artista obtenerArtista(String nickname){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	 usuario = mU.obtenerUsuario();
-	 String[] retorno = new String[usuario.size()];
-	 int i = 0;
-	 for(String u :usuario){
-	     retorno[i] = u;
-	     i++;
-	 }
-	 return retorno;
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 return em.find(Artista.class, nickname);
+    }
+
+
+    public List<Usuario> listarUsuarios(){
+	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	 return mU.obtenerUsuario();
+    }
+
+    public List<Artista> listarArtistas(){
+	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	 return mU.listarArtistas();
     }
 }

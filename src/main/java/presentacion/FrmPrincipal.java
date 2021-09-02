@@ -174,7 +174,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Consulta Usuario
     private void inFrmConsultaUsuario(){
-	 internalFrameConsultaUsuario = new ConsultarUsuario();
+	 internalFrameConsultaUsuario = new ConsultarUsuario(iconU);
 	 internalFrameConsultaUsuario.setVisible(false);
 	 contenedor.add(internalFrameConsultaUsuario);
     }
@@ -223,7 +223,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Alta Funcion
     private void inFrmAltaFuncion(){
-	 internalFrameAltaFuncion = new AltaFuncion();
+	 internalFrameAltaFuncion = new AltaFuncion(iconF);
 	 internalFrameAltaFuncion.setVisible(false);
 	 contenedor.add(internalFrameAltaFuncion);
     }
@@ -289,18 +289,19 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameAltaPlataforma.setVisible(true);
 	     break;
 	 case "Alta de Funcion de Espectaculo":
+	     internalFrameAltaFuncion.iniciarlizarComboBox();
 	     internalFrameAltaFuncion.setVisible(true);
 	     break;
 	 case "Consulta de Funcion de Espectaculo":
-	     internalFrameConsultaFuncion.inicializarComboBoxes();
+	     // internalFrameConsultaFuncion.inicializarComboBoxes();
 	     internalFrameConsultaFuncion.setVisible(true);
 	     break;
 	 case "Registro a Funcion de Espectaculo":
 	     internalFrameRegistroFuncion.setVisible(true);
 	     break;
 	 case "Crear Paquete de Espectaculo":
-		 internalFrameCreaPaqueteEspectaculo.setVisible(true);
-		 break;
+	     internalFrameCreaPaqueteEspectaculo.setVisible(true);
+	     break;
 	 case "Consulta de Paquete de Espectaculos":
 	     internalFrameConsultaPaqueteEspectaculo.setVisible(true);
 	     break;
