@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
 import javax.swing.table.DefaultTableModel;
 
 import interfaces.Fabrica;
@@ -113,12 +115,15 @@ public class ConsultaFuncion extends JInternalFrame {
 
 		txtDatosFuncion = new JTextArea();
 		txtDatosFuncion.setTabSize(8);
-		txtDatosFuncion.setBounds(220, 130, 275, 185);
+		txtDatosFuncion.setBounds(220, 130, 300, 100);
+		txtDatosFuncion.setFont(new java.awt.Font("Verdana", 1, 12));
 		miPanel.add(txtDatosFuncion);
 
-		scrollDatosFuncion = new JScrollPane(txtDatosFuncion);
-		scrollDatosFuncion.setBounds(220, 130, 275, 185);
-		miPanel.add(scrollDatosFuncion);
+		/*
+		 * scrollDatosFuncion = new JScrollPane(txtDatosFuncion);
+		 * scrollDatosFuncion.setBounds(220, 130, 330, 150);
+		 * miPanel.add(scrollDatosFuncion);
+		 */
 		/*
 		 * listFunciones = new JList();
 		 * listFunciones.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION
@@ -164,46 +169,60 @@ public class ConsultaFuncion extends JInternalFrame {
 
 	private void listenerComboPlataforma(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
-			// System.out.println("CLICK EN COMBO PLATAFORMA");
-			String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
-			Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst()
-					.get();
-			this.listEspectaculos = plataforma.getEspectaculo();
-			if (listEspectaculos.isEmpty()) {
-				System.out.println("LISTA DE ESPECTACULOS VACIA");
-				comboEspectaculos.removeAllItems();
-			} else {
-				comboEspectaculos.removeAllItems();
-				listEspectaculos.forEach((esp) -> {
-					comboEspectaculos.addItem(esp.getNombre());
-				});
+			if (e.getSource() == comboPlataforma) {
+				System.out.println("CLICK EN COMBO PLATAFORMA");
+				String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
+				Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma))
+						.findFirst().get();
+				this.listEspectaculos = plataforma.getEspectaculo();
+				if (listEspectaculos.isEmpty()) {
+					System.out.println("LISTA DE ESPECTACULOS VACIA");
+					comboEspectaculos.removeAllItems();
+				} else {
+					comboEspectaculos.removeAllItems();
+					listEspectaculos.forEach((esp) -> {
+						comboEspectaculos.addItem(esp.getNombre());
+					});
+				}
 			}
 		}
 	}
 
 	private void listenerComboEspectaculo(ItemEvent e) {
-		if (e.getSource() == comboEspectaculos) {
-			String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
-			Espectaculo espectaculo = listEspectaculos.stream().filter(es -> (es.getNombre() == strEspectaculo))
-					.findFirst().get();
-			List<Funcion> listFunciones = espectaculo.getFunciones();
-			if (listFunciones.isEmpty()) {
-				System.out.println("LISTA DE FUNCIONES VACIA");
-				comboFunciones.removeAllItems();
-			} else {
-				comboFunciones.removeAllItems();
-				listFunciones.forEach((f) -> {
-					comboFunciones.addItem(f.getNombre());
-				});
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			if (e.getSource() == comboEspectaculos) {
+				System.out.println("CLICK EN COMBO ESPECTACULO");
+				String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
+				Espectaculo espectaculo = listEspectaculos.stream().filter(es -> (es.getNombre() == strEspectaculo))
+						.findFirst().get();
+				List<Funcion> listFunciones = espectaculo.getFunciones();
+				if (listFunciones.isEmpty()) {
+					System.out.println("LISTA DE FUNCIONES VACIA");
+					comboFunciones.removeAllItems();
+				} else {
+					comboFunciones.removeAllItems();
+					listFunciones.forEach((f) -> {
+						comboFunciones.addItem(f.getNombre());
+					});
+				}
 			}
 		}
 
 	}
-	
+
 	private void listenerComboFunciones(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
-			// System.out.println("CLICK EN COMBO PLATAFORMA");
-			
+			if (e.getSource() == comboFunciones) {
+				System.out.println("CLICK EN COMBO FUNCION");
+				// System.out.println("CLICK EN COMBO PLATAFORMA");
+				String strFuncion = this.comboFunciones.getSelectedItem().toString();
+				Funcion f = this.iconF.obtenerFuncion(strFuncion);
+				SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+				SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm");
+				txtDatosFuncion.setText("Nombre: " + f.getNombre() + "\nFecha: " + formatoFecha.format(f.getFecha())
+						+ "\nFecha Alta: " + formatoFecha.format(f.getRegistro()) + "\nHora Inicio: "
+						+ formatoHora.format(f.getHoraInicio()) + "\nEspectaculo: " + f.getEspectaculo());
+			}
 		}
 	}
 }
