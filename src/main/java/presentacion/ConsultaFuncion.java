@@ -23,7 +23,7 @@ import manejadores.ManejadorFuncion;
 
 @SuppressWarnings("serial")
 public class ConsultaFuncion extends JInternalFrame implements ActionListener{
-    private IControladorFuncion icon;
+    private IControladorFuncion iconF;
     private JButton btnAceptar, btnCancelar;
     private JPanel miPanel;
     private JLabel lblTitulo, lblPlataforma, lblEspectaculos, lblFunciones, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta;
@@ -34,8 +34,8 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
     private List<Plataforma> listPlataformas;
 
     // Constructor
-    public ConsultaFuncion(IControladorFuncion icon){
-	 this.icon = icon;
+    public ConsultaFuncion(IControladorFuncion iconF){
+	 this.iconF = iconF;
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -67,7 +67,6 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
 	 comboPlataforma.setBounds(220, 30, 200, 20);
 	 miPanel.add(comboPlataforma);
 	 comboPlataforma.addActionListener(this);
-
 
 	 lblEspectaculos = new JLabel();
 	 lblEspectaculos.setText("Espectaculos");
@@ -117,11 +116,6 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
 	 btnCancelar.setBounds(322, 270, 115, 25);
 	 miPanel.add(btnCancelar);
 	 // btnCancelar.addActionListener(this);
-    }
-
-    public void inicializarComboBoxes(){
-	 // DefaultComboBoxModel<String> modelFuncionEspectaculo = new DefaultComboBoxModel<String>(icon.listarPlataformas());
-	 // comboPlataforma.setModel(modelFuncionEspectaculo);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package manejadores;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -37,8 +36,7 @@ public class ManejadorUsuario{
     public Usuario buscarUsuario(String nickname){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
-	 Usuario u = em.find(Usuario.class, nickname);
-	 return u;
+	 return em.find(Usuario.class, nickname);
     }
 
     @SuppressWarnings("unchecked")
@@ -50,12 +48,12 @@ public class ManejadorUsuario{
 	 return listUsuario;
     }
 
-	public List<Artista> listarArtistas() {
+    public List<Artista> listarArtistas(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 	 Query query = em.createQuery("select a from Artista a");
 	 List<Artista> listArtista = (List<Artista>) query.getResultList();
 	 return listArtista;
-	}
+    }
 
 }

@@ -128,10 +128,6 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	 listUsuarios.forEach((a) -> {
 	     comboUsuarios.addItem(a.getNickname());
 	 });
-	 // listPlataformas = iconP.listarPlataformas(); // PONER EN CONTROLADOR PLATAFORMA
-	 // listPlataformas.forEach((p) -> {
-	 // comboPlataforma.addItem(p.getNombre());
-	 // });
     }
 
     public void actionPerformed(ActionEvent e){ // 79S

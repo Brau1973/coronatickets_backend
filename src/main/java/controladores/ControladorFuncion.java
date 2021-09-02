@@ -11,40 +11,11 @@ public class ControladorFuncion implements IControladorFuncion{
 	 super();
     }
 
-    @Override
     public void altaFuncion(Funcion funcion) throws FuncionRepetidaExcepcion{
 	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 	 mF.agregarFuncion(funcion);
     }
 
-
-    // @Override
-    // public String[] listarPlataformas() {
-    // ArrayList<String> plataformas;
-    // ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-    // plataformas = mF.obtenerPlataforma();
-    // String[] plataformas_ret = new String[plataformas.size()];
-    // int i=0;
-    // for(String id:plataformas) {
-    // plataformas_ret[i] = id;
-    // i++;
-    // }
-    // return plataformas_ret;
-    // }
-
-    // @Override
-    // public Plataforma[] listarPlataformas() {
-    // ArrayList<String> plataformas;
-    // ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-    // plataformas = mF.obtenerPlataforma();
-    // String[] plataformas_ret = new String[plataformas.size()];
-    // int i=0;
-    // for(String id:plataformas) {
-    // plataformas_ret[i] = id;
-    // i++;
-    // }
-    // return plataformas_ret;
-    // }
 
     // @Override
     // public String[] listarEspectaculos(String plataforma) {

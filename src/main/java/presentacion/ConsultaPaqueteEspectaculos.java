@@ -35,29 +35,27 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
     static final int WIDTH_LABEL = 180;
     static final int WIDTH_TEXT = 200;
     static final int HEIGHT_FIELD = 25;
-
     private String[] header = {"Nombre", "Descripcion", "etc,"};
     private String[][] data = {};
 
-	private PaqueteEspectaculos paqueteSelected;
-	List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
-	
-	IControladorPaquete iControladorPaquete = Fabrica.getInstancia().getIControladorPaquete();
-	
-	// Constructor
-	public ConsultaPaqueteEspectaculos() {
-		lstPaquetes = iControladorPaquete.obtenerPaquetes();
-		
-		miPanel = new JPanel();
-		miPanel.setLayout(null);
-		miPanel.setBounds(0, 0, 800, 100);
-		add(miPanel);
-		setBounds(30, 30, 800, 600);
-		setResizable(false);
-		setClosable(false);
-		setIconifiable(false);
-		setBorder(null);
-		((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
+    private PaqueteEspectaculos paqueteSelected;
+    List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
+    IControladorPaquete iControladorPaquete = Fabrica.getInstancia().getIControladorPaquete();
+
+    // Constructor
+    public ConsultaPaqueteEspectaculos(){
+	 lstPaquetes = iControladorPaquete.obtenerPaquetes();
+
+	 miPanel = new JPanel();
+	 miPanel.setLayout(null);
+	 miPanel.setBounds(0, 0, 800, 100);
+	 add(miPanel);
+	 setBounds(30, 30, 800, 600);
+	 setResizable(false);
+	 setClosable(false);
+	 setIconifiable(false);
+	 setBorder(null);
+	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
 
 	 // Titulo
 	 lblTitulo = new JLabel("Consultar Paquete de Espectaculos");
@@ -109,7 +107,7 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
 	     paqueteSelected = lstPaquetes.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
 	     for(int i = 0; i < paqueteSelected.getEspectaculos().size(); i++){
 		  Espectaculo esp = paqueteSelected.getEspectaculos().get(i);
-		  Object[] data = {esp.getNombre(), esp.getDescripcion(), esp.getPlataforma()};
+		  Object[] data = {esp.getNombre(), esp.getDescripcion(), esp.getPlataforma().getNombre()};
 		  tm.addRow(data);
 	     }
 	 }

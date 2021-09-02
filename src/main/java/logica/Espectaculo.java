@@ -8,8 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Espectaculo{
@@ -28,9 +28,11 @@ public class Espectaculo{
     private String url;
     private int costo;
     private Date registro;
+    @ManyToMany(mappedBy = "espectaculos")
+    private List<PaqueteEspectaculos> paquete = new ArrayList<PaqueteEspectaculos>();
 
-    @OneToMany(mappedBy = "espectaculo")
-    private List<Funcion> funciones = new ArrayList<>();
+    /*   @OneToMany(mappedBy = "espectaculo")
+    private List<Funcion> funciones = new ArrayList<>();*/
 
     public Espectaculo(){
 	 super();

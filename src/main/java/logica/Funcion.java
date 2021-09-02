@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 //import datatypes.DtHora;
 
@@ -18,22 +17,23 @@ import javax.persistence.OneToMany;
 public class Funcion{
     @Id
     private String nombre;
-    @ManyToOne
-    private Espectaculo espectaculo;
     private Date fecha;
     private Time horaInicio;
-    @OneToMany(orphanRemoval = true)
-    @JoinTable(name = "FuncionXArtistas", joinColumns = @JoinColumn(name = "nombre"), inverseJoinColumns = @JoinColumn(name = "nickname"))
-    private List<Artista> artistas = new ArrayList<Artista>();
     private Date registro;
+    @ManyToOne
+    private Espectaculo espectaculo;
 
-    public Funcion(String nombre, Espectaculo espectaculo, Date fecha, Time horaInicio, List<Artista> artistas, Date registro){
+    @ManyToMany(cascade = CascadeType.ALL)
+    // @JoinTable(name = "FuncionXArtistas", joinColumns = @JoinColumn(name = "nombre"), inverseJoinColumns = @JoinColumn(name = "nickname"))
+    private List<Artista> artistas = new ArrayList<Artista>();
+
+    public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, Espectaculo espectaculo, List<Artista> artistas){
 	 this.nombre = nombre;
-	 this.espectaculo = espectaculo;
 	 this.fecha = fecha;
 	 this.horaInicio = horaInicio;
-	 this.artistas = artistas;
 	 this.registro = registro;
+	 this.espectaculo = espectaculo;
+	 this.artistas = artistas;
     }
 
     public Funcion(){

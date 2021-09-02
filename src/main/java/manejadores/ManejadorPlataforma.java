@@ -34,13 +34,10 @@ public class ManejadorPlataforma{
     public Plataforma buscarPlataforma(String nombre){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
-
-	 Plataforma plataforma = em.find(Plataforma.class, nombre);
-	 return plataforma;
+	 return em.find(Plataforma.class, nombre);
     }
 
-
-    public List<Plataforma> obtenerPlataforma(){ // 79S
+    public List<Plataforma> obtenerPlataforma(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 	 Query query = em.createQuery("select p from Plataforma p");

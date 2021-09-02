@@ -28,9 +28,7 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame{
 
     private String[] header = {"Nombre", "Descripcion", "etc,"};
     private String[][] data = {};
-
     private PaqueteEspectaculos paqueteSelected;
-
     List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
     private JTable table;
 
