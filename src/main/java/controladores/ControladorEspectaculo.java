@@ -1,14 +1,12 @@
 package controladores;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import datatypes.DtEspectaculo;
 import excepciones.EspectaculoRepetidoExcepcion;
 import interfaces.IControladorEspectaculo;
 import logica.Espectaculo;
 import manejadores.ManejadorEspectaculo;
-import manejadores.ManejadorPlataforma;
-import manejadores.ManejadorUsuario;
 
 public class ControladorEspectaculo implements IControladorEspectaculo{
     public ControladorEspectaculo(){
@@ -21,31 +19,16 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 	 mE.agregarEspectaculo(espectaculo);
     }
 
-    public String[] listarPlataformas(){
-	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
-	 ArrayList<String> plataforma;
-	 plataforma = mP.obtenerPlataforma();
-	 String[] retorno = new String[plataforma.size()];
-	 int i = 0;
-	 for(String p :plataforma){
-	     retorno[i] = p;
-	     i++;
-	 }
-	 return retorno;
+    public List<Espectaculo> listarEspectaculos(){ // ??????? se usa?
+	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+	 List<Espectaculo> espectaculos;
+	 Espectaculo espec = mE.buscarEspectaculo("espec");
+	 return null; // Vpi ñe /// ¿?¿?¿?¿?¿? /// * ***XDXDXDXD*****
     }
 
-    public String[] listarArtistas(){
-	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	 ArrayList<String> artistas;
-	 artistas = mU.obtenerArtista();
-	 String[] retorno = new String[artistas.size()];
-	 int i = 0;
-	 for(String a :artistas){
-	     retorno[i] = a;
-	     i++;
-	 }
-	 return retorno;
+    public Espectaculo obtenerEspectaculo(String nombre){
+	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+	 return mE.buscarEspectaculo(nombre);
     }
-
 
 }

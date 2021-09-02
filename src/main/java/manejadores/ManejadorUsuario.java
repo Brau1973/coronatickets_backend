@@ -1,6 +1,5 @@
 package manejadores;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -37,34 +36,24 @@ public class ManejadorUsuario{
     public Usuario buscarUsuario(String nickname){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
-	 Usuario u = em.find(Usuario.class, nickname);
-	 return u;
+	 return em.find(Usuario.class, nickname);
     }
 
     @SuppressWarnings("unchecked")
-    public ArrayList<String> obtenerUsuario(){
+    public List<Usuario> obtenerUsuario(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 	 Query query = em.createQuery("select u from Usuario u");
 	 List<Usuario> listUsuario = (List<Usuario>) query.getResultList();
-	 ArrayList<String> aRetornar = new ArrayList<>();
-	 for(Usuario u :listUsuario){
-	     aRetornar.add(u.getNickname());
-	 }
-	 return aRetornar;
+	 return listUsuario;
     }
 
-    @SuppressWarnings("unchecked")
-    public ArrayList<String> obtenerArtista(){
+    public List<Artista> listarArtistas(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 	 Query query = em.createQuery("select a from Artista a");
 	 List<Artista> listArtista = (List<Artista>) query.getResultList();
-	 ArrayList<String> aRetornar = new ArrayList<>();
-	 for(Artista a :listArtista){
-	     aRetornar.add(a.getNickname());
-	 }
-	 return aRetornar;
+	 return listArtista;
     }
 
 }

@@ -35,6 +35,7 @@ public class ManejadorPaquete{
 	 return plataforma;
     }
 
+    @SuppressWarnings("unchecked")
     public List<PaqueteEspectaculos> obtenerPaquetes(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();

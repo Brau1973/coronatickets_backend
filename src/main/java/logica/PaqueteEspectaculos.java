@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,10 +14,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class PaqueteEspectaculos{
     @Id
+    @Column(name="nomPaq")
     private String nombre;
     private String descripcion;
     @OneToMany(orphanRemoval = true)
-    @JoinTable(name = "EspectaculosXPaquete", joinColumns = @JoinColumn(name = "PaqNombre"), inverseJoinColumns = @JoinColumn(name = "EspId"))
+    @JoinTable(name = "EspectaculosXPaquete", joinColumns = @JoinColumn(name = "nomPaq"), inverseJoinColumns = @JoinColumn(name = "nomEsp"))
     private List<Espectaculo> espectaculos = new ArrayList<Espectaculo>();
     private Date fechaInicio;
     private Date fechaFin;

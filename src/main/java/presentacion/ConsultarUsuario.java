@@ -1,15 +1,13 @@
 package presentacion;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -19,7 +17,6 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -41,8 +38,7 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
     private JTable tabUsuario;
     private JComboBox<String> comboUsuarios;
     JTextArea jtextarea;
-    private String[] header = {"Artista", "Nombre", "Descripcion", "Duracion",};
-    private String[][] data = {{"Sebastian", "Gonzalez", "Prueba tabla", "va duracion"}, {"Aldrin", "Rebella", "Descripcion"}, {"Leonardo", "Mesa"}, {"Lucas", "Sugo"}, {"Luisito", "Suarez"}, {"Colorado", "DeOmar"}, {"Gruffi ", "Gummi"}};
+    private List<Usuario> listUsuarios;
 
     // Tabla muestra todos los datos basicos.
     // Constructor
@@ -84,13 +80,13 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	 miPanel.add(jtextarea);
 
 	 // Tabla Funciones de espectulos
-	 DefaultTableModel model = new DefaultTableModel(data, header);
+	 /*	 DefaultTableModel model = new DefaultTableModel(data, header);
 	 tabUsuario = new JTable(model);
 	 tabUsuario.setPreferredScrollableViewportSize(new Dimension(40, 290));
 	 JScrollPane jsPane = new JScrollPane(tabUsuario);
 	 jsPane.setBounds(10, 180, 365, 118);
 	 jsPane.setVisible(false);
-	 miPanel.add(jsPane, BorderLayout.SOUTH);
+	 miPanel.add(jsPane, BorderLayout.SOUTH);*/
 
 	 // Label
 	 /* lblNickname = new JLabel(); 
@@ -148,8 +144,11 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 
     // Inicializar ComboBox
     public void iniciarlizarComboBox(){
-	 DefaultComboBoxModel<String> modelUsuarios = new DefaultComboBoxModel<String>(iconU.listarUsuarios());
-	 comboUsuarios.setModel(modelUsuarios);
+	 // Cargo combo de artistas
+	 listUsuarios = iconU.listarUsuarios();
+	 listUsuarios.forEach((u) -> {
+	     comboUsuarios.addItem(u.getNickname());
+	 });
     }
 
     public void actionPerformed(ActionEvent e){ // 79S

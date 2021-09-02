@@ -1,8 +1,9 @@
 package interfaces;
 
+import excepciones.FuncionRepetidaExcepcion;
+import logica.Funcion;
+
 public interface IControladorFuncion{
 
-    public String[] listarPlataformas();
-
-    public String[] listarEspectaculos(String plataforma);
+    public void altaFuncion(Funcion funcion) throws FuncionRepetidaExcepcion;
 }
