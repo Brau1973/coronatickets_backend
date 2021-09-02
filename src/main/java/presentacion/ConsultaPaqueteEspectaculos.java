@@ -106,7 +106,7 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
 	     paqueteSelected = lstPaquetes.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
 	     for(int i = 0; i < paqueteSelected.getEspectaculos().size(); i++){
 		  Espectaculo esp = paqueteSelected.getEspectaculos().get(i);
-		  Object[] data = {esp.getNombre(), esp.getDescripcion(), esp.getPlataforma()};
+		  Object[] data = {esp.getNombre(), esp.getDescripcion(), esp.getPlataforma().getNombre()};
 		  tm.addRow(data);
 	     }
 	 }

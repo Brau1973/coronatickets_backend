@@ -191,8 +191,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 // listArtistasR = iconU.listarArtistas(); ///ver
 
 	 listArtistasR = new ArrayList<Artista>();
-	 listArtistasR.add(listArtistas.stream().filter(p -> (p.getNickname() == nombre)).findFirst().get());
-
+	 listArtistasR.add(iconU.obtenerArtista(nombre));
     }
 
     // Inicializar ComboBox

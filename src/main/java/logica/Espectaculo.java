@@ -1,11 +1,14 @@
 package logica;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -25,6 +28,8 @@ public class Espectaculo{
     private String url;
     private int costo;
     private Date registro;
+    @ManyToMany(mappedBy = "espectaculos")
+    private List<PaqueteEspectaculos> paquete = new ArrayList<PaqueteEspectaculos>();
 
     /*   @OneToMany(mappedBy = "espectaculo")
     private List<Funcion> funciones = new ArrayList<>();*/
