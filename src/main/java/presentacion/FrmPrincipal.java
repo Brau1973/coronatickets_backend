@@ -303,6 +303,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameCreaPaqueteEspectaculo.setVisible(true);
 	     break;
 	 case "Consulta de Paquete de Espectaculos":
+		 internalFrameConsultaPaqueteEspectaculo.iniciarlizarComboBox();
 	     internalFrameConsultaPaqueteEspectaculo.setVisible(true);
 	     break;
 	 case "Agregar Espectaculo a Paquete":

@@ -16,7 +16,7 @@ public class PaqueteEspectaculos{
     @Column(name = "nomPaq")
     private String nombre;
     private String descripcion;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Espectaculo> espectaculos = new ArrayList<Espectaculo>();
 
     // @JoinTable(name = "EspectaculosXPaquete", joinColumns = @JoinColumn(name = "nomPaq"), inverseJoinColumns = @JoinColumn(name = "nomEsp"))
