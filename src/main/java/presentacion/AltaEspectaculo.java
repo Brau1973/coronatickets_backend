@@ -170,13 +170,14 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 
     // Inicializar ComboBox
     public void iniciarlizarComboBox(){
-	 // Cargo combo de plataformas
-	 listPlataformas = iconP.listarPlataformas(); // PONER EN CONTROLADOR PLATAFORMA
+	 comboPlataforma.removeAllItems();
+	 comboArtista.removeAllItems();
+
+	 listPlataformas = iconP.listarPlataformas();
 	 listPlataformas.forEach((p) -> {
 	     comboPlataforma.addItem(p.getNombre());
 	 });
 
-	 // Cargo combo de artistas
 	 listArtistas = iconU.listarArtistas();
 	 listArtistas.forEach((a) -> {
 	     comboArtista.addItem(a.getNickname());

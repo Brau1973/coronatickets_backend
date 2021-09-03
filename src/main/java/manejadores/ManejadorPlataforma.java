@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import logica.Plataforma;
 import persistencia.Conexion;
 
+@SuppressWarnings("unused")
 public class ManejadorPlataforma{
     private static ManejadorPlataforma instancia = null;
     private static EntityManager em;
@@ -37,6 +38,7 @@ public class ManejadorPlataforma{
 	 return em.find(Plataforma.class, nombre);
     }
 
+    @SuppressWarnings("unchecked")
     public List<Plataforma> obtenerPlataforma(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
@@ -44,5 +46,6 @@ public class ManejadorPlataforma{
 	 List<Plataforma> listPlataforma = (List<Plataforma>) query.getResultList();
 	 return listPlataforma;
     }
+
 
 }

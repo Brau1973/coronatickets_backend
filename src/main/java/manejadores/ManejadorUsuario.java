@@ -48,6 +48,14 @@ public class ManejadorUsuario{
 	 return listUsuario;
     }
 
+
+    public Artista buscarArtista(String nickname){
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 return em.find(Artista.class, nickname);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<Artista> listarArtistas(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();

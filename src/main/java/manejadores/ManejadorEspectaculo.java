@@ -37,6 +37,16 @@ public class ManejadorEspectaculo{
     }
 
     @SuppressWarnings("unchecked")
+    public List<Espectaculo> listEspectaculos(){
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 Query query = em.createQuery("select e from Espectaculo e");
+	 List<Espectaculo> listEspectaculos = (List<Espectaculo>) query.getResultList();
+	 return listEspectaculos;
+    }
+
+
+    @SuppressWarnings("unchecked")
     public ArrayList<String> obtenerEspectaculo(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
@@ -48,4 +58,23 @@ public class ManejadorEspectaculo{
 	 }
 	 return aRetornar;
     }
+
+    /*  public Espectaculo buscarEspectaculoArtista(String nickArtista){
+     Conexion conexion = Conexion.getInstancia();
+     EntityManager em = conexion.getEntityManager();
+     Espectaculo espectaculo = em.find(Espectaculo.class, nickArtista);
+     return espectaculo;
+    }*/
+    /// aca
+    @SuppressWarnings("unchecked")
+    public List<Espectaculo> obtenerEspectaculoArtista(String nickname){
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 Query query = em.createQuery("select e from Espectaculo e where artista==nickname");
+	 List<Espectaculo> listEspectaculos = (List<Espectaculo>) query.getResultList();
+	 return listEspectaculos;
+
+    }
+
+
 }

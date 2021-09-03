@@ -36,6 +36,7 @@ public class ManejadorFuncion{
 	 return em.find(Funcion.class, nombre);
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList<String> obtenerFunciones(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
@@ -48,6 +49,7 @@ public class ManejadorFuncion{
 	 return aRetornar;
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList<String> obtenerEspectaculo(String plataforma){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();

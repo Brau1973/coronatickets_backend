@@ -16,7 +16,7 @@ import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
 
 @SuppressWarnings("serial")
-public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
+public class FrmPrincipal extends JFrame implements ActionListener{
     private Container contenedor;
     private JMenuBar barraMenu;
     private JMenu menuInicio, menuUsuario, menuEspectaculo, menuAyuda, menuPlataforma, menuFuncion, menuPaquete;
@@ -276,6 +276,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameModificarDatosUsuario.setVisible(true);
 	     break;
 	 case "Consulta de Usuario":
+	     // internalFrameConsultaUsuario.iniciarlizarComboBox();
 	     internalFrameConsultaUsuario.setVisible(true);
 	     break;
 	 case "Alta de Espectaculo":

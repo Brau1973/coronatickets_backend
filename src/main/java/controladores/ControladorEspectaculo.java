@@ -19,11 +19,16 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 	 mE.agregarEspectaculo(espectaculo);
     }
 
-    public List<Espectaculo> listarEspectaculos(){ // ??????? se usa?
+    /*  public List<Espectaculo> listarEspectaculos(){ // ??????? se usa?
+     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+     List<Espectaculo> espectaculos;
+     Espectaculo espec = mE.buscarEspectaculo("espec");
+     return null; // Vpi ñe /// ¿?¿?¿?¿?¿? /// * ***XDXDXDXD*****
+    }*/
+
+    public List<Espectaculo> listarEspectaculos(){
 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-	 List<Espectaculo> espectaculos;
-	 Espectaculo espec = mE.buscarEspectaculo("espec");
-	 return null; // Vpi ñe /// ¿?¿?¿?¿?¿? /// * ***XDXDXDXD*****
+	 return mE.listEspectaculos();
     }
 
     public Espectaculo obtenerEspectaculo(String nombre){
