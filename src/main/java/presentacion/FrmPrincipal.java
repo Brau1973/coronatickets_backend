@@ -47,7 +47,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     public FrmPrincipal(){
 	 inicializar();
 	 setTitle("coronaTickets.uy");
-	 setSize(800, 600);
+	 setSize(800, 700);
 	 setLocationRelativeTo(null);
 	 setResizable(false);
 	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -304,6 +304,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameCreaPaqueteEspectaculo.setVisible(true);
 	     break;
 	 case "Consulta de Paquete de Espectaculos":
+		 internalFrameConsultaPaqueteEspectaculo.iniciarlizarComboBox();
 	     internalFrameConsultaPaqueteEspectaculo.setVisible(true);
 	     break;
 	 case "Agregar Espectaculo a Paquete":
