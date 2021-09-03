@@ -47,7 +47,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     public FrmPrincipal(){
 	 inicializar();
 	 setTitle("coronaTickets.uy");
-	 setSize(800, 600);
+	 setSize(800, 700);
 	 setLocationRelativeTo(null);
 	 setResizable(false);
 	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

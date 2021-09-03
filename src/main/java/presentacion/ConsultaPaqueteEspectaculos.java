@@ -39,9 +39,9 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame {
 
 		miPanel = new JPanel();
 		miPanel.setLayout(null);
-		miPanel.setBounds(0, 0, 800, 600);
+		miPanel.setBounds(0, 0, 800, 700);
 		add(miPanel);
-		setBounds(30, 30, 800, 600);
+		setBounds(30, 30, 800, 700);
 		setResizable(false);
 		setClosable(false);
 		setIconifiable(false);
