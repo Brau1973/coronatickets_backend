@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import logica.Espectaculo;
+import logica.Plataforma;
 import persistencia.Conexion;
 
 public class ManejadorEspectaculo{
@@ -35,7 +36,7 @@ public class ManejadorEspectaculo{
 	 Espectaculo espectaculo = em.find(Espectaculo.class, nombre);
 	 return espectaculo;
     }
-
+    
     @SuppressWarnings("unchecked")
     public ArrayList<String> obtenerEspectaculo(){
 	 Conexion conexion = Conexion.getInstancia();

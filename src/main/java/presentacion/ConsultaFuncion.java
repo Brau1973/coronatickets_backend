@@ -44,15 +44,16 @@ public class ConsultaFuncion extends JInternalFrame {
 	private JTextArea txtDatosFuncion;
 	private JScrollPane scrollDatosFuncion;
 	private JComboBox<String> comboEspectaculos, comboPlataforma, comboFunciones;
+
 	// private JTable tabFuncion;
 	private JScrollPane scrollPane;
-	private JList listFunciones;
+	private JList listFuncion;
 	private String[] header = { "Plataforma", "Espectaculo" };
 	private String[][] data = { { "1", "las aventuras de seba" }, { "2", "seba por el tiempo" }, { "3", "sebalandia" },
 			{ "4", "la cocina de seba" } };
 	private List<Plataforma> listPlataformas;
 	private List<Espectaculo> listEspectaculos;
-	private List<Funcion> listFuncion;
+	private List<Funcion> listFunciones;
 
 	// Constructor
 	public ConsultaFuncion(IControladorFuncion iconF) {
@@ -153,11 +154,11 @@ public class ConsultaFuncion extends JInternalFrame {
 		comboPlataforma.removeAllItems();
 		comboEspectaculos.removeAllItems();
 		comboFunciones.removeAllItems();
+		
 		listPlataformas = iconP.listarPlataformas();
 		listPlataformas.forEach((p) -> {
 			comboPlataforma.addItem(p.getNombre());
 		});
-		// modelo.clear();
 	}
 
 	/*
@@ -178,8 +179,12 @@ public class ConsultaFuncion extends JInternalFrame {
 				if (listEspectaculos.isEmpty()) {
 					System.out.println("LISTA DE ESPECTACULOS VACIA");
 					comboEspectaculos.removeAllItems();
+					comboFunciones.removeAllItems();
+					txtDatosFuncion.setText(null);
 				} else {
 					comboEspectaculos.removeAllItems();
+					comboFunciones.removeAllItems();
+					txtDatosFuncion.setText(null);
 					listEspectaculos.forEach((esp) -> {
 						comboEspectaculos.addItem(esp.getNombre());
 					});
@@ -195,12 +200,15 @@ public class ConsultaFuncion extends JInternalFrame {
 				String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
 				Espectaculo espectaculo = listEspectaculos.stream().filter(es -> (es.getNombre() == strEspectaculo))
 						.findFirst().get();
-				List<Funcion> listFunciones = espectaculo.getFunciones();
+				this.listFunciones = espectaculo.getFunciones(); 
+				//List<Funcion> listFunciones = espectaculo.getFunciones();
 				if (listFunciones.isEmpty()) {
 					System.out.println("LISTA DE FUNCIONES VACIA");
 					comboFunciones.removeAllItems();
+					txtDatosFuncion.setText(null);
 				} else {
 					comboFunciones.removeAllItems();
+					txtDatosFuncion.setText(null);
 					listFunciones.forEach((f) -> {
 						comboFunciones.addItem(f.getNombre());
 					});
@@ -214,15 +222,21 @@ public class ConsultaFuncion extends JInternalFrame {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			if (e.getSource() == comboFunciones) {
 				System.out.println("CLICK EN COMBO FUNCION");
-				// System.out.println("CLICK EN COMBO PLATAFORMA");
 				String strFuncion = this.comboFunciones.getSelectedItem().toString();
 				Funcion f = this.iconF.obtenerFuncion(strFuncion);
 				SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 				SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm");
 				txtDatosFuncion.setText("Nombre: " + f.getNombre() + "\nFecha: " + formatoFecha.format(f.getFecha())
 						+ "\nFecha Alta: " + formatoFecha.format(f.getRegistro()) + "\nHora Inicio: "
-						+ formatoHora.format(f.getHoraInicio()) + "\nEspectaculo: " + f.getEspectaculo());
+						+ formatoHora.format(f.getHoraInicio())); // + "\nEspectaculo: " + f.getEspectaculo());
 			}
 		}
 	}
+	
+	private void limpiarFormulario(){
+		 this.comboPlataforma.setSelectedItem("Seleccione Plataforma");
+		 this.comboEspectaculos.setSelectedItem("Seleccione Espectaculo");
+		 this.comboFunciones.setSelectedItem("Seleccione Funcion");
+	    }
+	
 }

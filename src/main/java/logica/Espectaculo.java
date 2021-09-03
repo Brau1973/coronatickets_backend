@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Espectaculo{
@@ -31,8 +32,9 @@ public class Espectaculo{
     @ManyToMany(mappedBy = "espectaculos")
     private List<PaqueteEspectaculos> paquete = new ArrayList<PaqueteEspectaculos>();
 
-    /*   @OneToMany(mappedBy = "espectaculo")
-    private List<Funcion> funciones = new ArrayList<>();*/
+    @OneToMany(mappedBy = "espectaculo")
+    private List<Funcion> funciones = new ArrayList<>();
+    
 
     public Espectaculo(){
 	 super();
@@ -132,5 +134,13 @@ public class Espectaculo{
     public void setRegistro(Date registro){
 	 this.registro = registro;
     }
+    
+    public List<Funcion> getFunciones() {
+		return funciones;
+	}
+
+	public void setFuncion(List<Funcion> funcion) {
+		this.funciones = funcion;
+	}
 
 }
