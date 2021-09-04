@@ -4,6 +4,7 @@ import java.util.List;
 
 import datatypes.DtEspectaculo;
 import excepciones.EspectaculoRepetidoExcepcion;
+import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import logica.Espectaculo;
 
 public interface IControladorEspectaculo{
@@ -12,4 +13,6 @@ public interface IControladorEspectaculo{
     public List<Espectaculo> listarEspectaculos();
 
     public Espectaculo obtenerEspectaculo(String nombre);
+    
+    //public void agregarFuncion(String nombreEspectaculo,String nombreFuncion) throws FuncionYaRegistradaEnEspectaculoExcepcion;
 }

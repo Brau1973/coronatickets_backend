@@ -21,20 +21,26 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import interfaces.Fabrica;
+import interfaces.IControladorEspectaculo;
+import interfaces.IControladorPaquete;
 import interfaces.IControladorPlataforma;
 import logica.Artista;
 import logica.Espectaculo;
+import logica.Funcion;
+import logica.PaqueteEspectaculos;
 import logica.Plataforma;
+import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class ConsultaEspectaculo extends JInternalFrame{
 
 	private IControladorPlataforma iconP;
+	private IControladorEspectaculo iconE;
 
 	private JButton btnConsulta;
 	private JPanel miPanel;
-	private JLabel lblTitulo, lblPlataforma, lblEspectaculos;
-	private JComboBox<String> comboPlataforma, comboEspectaculos;
+	private JLabel lblTitulo, lblPlataforma, lblEspectaculos, lblPaquetes;
+	private JComboBox<String> comboPlataforma, comboEspectaculos, comboPaquetes,comboFunciones;
 	private List<Plataforma> listPlataformas;
 	private List<Espectaculo> listEspectaculos;
 	private JLabel lblCantidadMaxima;
@@ -48,12 +54,14 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	private JTextField textCantidadMaxima;
 	private JTextField textURL;
 	private JTextField textCosto;
+	private JLabel lblFunciones;
 
 	// Constructor
 	public ConsultaEspectaculo() {
 
 		iconP = Fabrica.getInstancia().getIControladorPlataforma();
-
+		iconE = Fabrica.getInstancia().getIControladorEspectaculo();
+		
 		miPanel = new JPanel();
 		miPanel.setLayout(null);
 		getContentPane().add(miPanel);
@@ -95,7 +103,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		miPanel.add(lblNombreEspectaculo);
 
 		textNombreEspectaculo = new JTextField();
-		textNombreEspectaculo.setEnabled(false);
+		textNombreEspectaculo.setEditable(false);
 		textNombreEspectaculo.setBounds(147, 94, 200, 20);
 		miPanel.add(textNombreEspectaculo);
 
@@ -104,7 +112,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		miPanel.add(lblArtistaOrganizador);
 
 		textArtistaOrganizador = new JTextField();
-		textArtistaOrganizador.setEnabled(false);
+		textArtistaOrganizador.setEditable(false);
 		textArtistaOrganizador.setBounds(147, 125, 200, 20);
 		miPanel.add(textArtistaOrganizador);
 
@@ -113,7 +121,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		miPanel.add(lblDescripcion);
 
 		textDescripcion = new JTextField();
-		textDescripcion.setEnabled(false);
+		textDescripcion.setEditable(false);
 		textDescripcion.setBounds(147, 153, 200, 20);
 		miPanel.add(textDescripcion);
 
@@ -122,7 +130,8 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		miPanel.add(lblDuracion);
 
 		textDuracion = new JTextField();
-		textDuracion.setEnabled(false);
+		textDuracion.setEditable(false);
+		textDuracion.setBackground(UIManager.getColor("Button.disabledForeground"));
 		textDuracion.setBounds(76, 181, 40, 20);
 		miPanel.add(textDuracion);
 
@@ -131,7 +140,8 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		miPanel.add(lblCantidadMinima);
 
 		textCantidadMaxima = new JTextField();
-		textCantidadMaxima.setEnabled(false);
+		textCantidadMaxima.setEditable(false);
+		textCantidadMaxima.setBackground(UIManager.getColor("Button.disabledForeground"));
 		textCantidadMaxima.setBounds(395, 181, 40, 20);
 		miPanel.add(textCantidadMaxima);
 
@@ -140,7 +150,8 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		miPanel.add(lblCantidadMaxima);
 
 		textCantidadMinima = new JTextField();
-		textCantidadMinima.setEnabled(false);
+		textCantidadMinima.setEditable(false);
+		textCantidadMinima.setBackground(UIManager.getColor("Button.disabledForeground"));
 		textCantidadMinima.setBounds(240, 181, 40, 20);
 		miPanel.add(textCantidadMinima);
 
@@ -149,7 +160,8 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		miPanel.add(lblURL);
 
 		textURL = new JTextField();
-		textURL.setEnabled(false);
+		textURL.setEditable(false);
+		textURL.setBackground(UIManager.getColor("Button.disabledForeground"));
 		textURL.setBounds(76, 209, 200, 20);
 		miPanel.add(textURL);
 
@@ -158,28 +170,29 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		miPanel.add(lblCosto);
 
 		textCosto = new JTextField();
-		textCosto.setEnabled(false);
+		textCosto.setEditable(false);
+		textCosto.setBackground(UIManager.getColor("Button.disabledForeground"));
 		textCosto.setBounds(332, 209, 53, 20);
 		miPanel.add(textCosto);
+		
+		comboPaquetes = new JComboBox<String>();
+		comboPaquetes.setBounds(77, 251, 199, 22);
+		miPanel.add(comboPaquetes);
+		
+		lblPaquetes = new JLabel("Paquetes");
+		lblPaquetes.setBounds(10, 255, 46, 14);
+		miPanel.add(lblPaquetes);
+		
+		lblFunciones = new JLabel("Funciones");
+		lblFunciones.setBounds(10, 291, 46, 14);
+		miPanel.add(lblFunciones);
+		
+		comboFunciones = new JComboBox();
+		comboFunciones.setBounds(76, 287, 200, 22);
+		miPanel.add(comboFunciones);
 
 		// artistaOrganizador, descripcion, duracion, cantMinEsp, cantMaxEsp, url,
 		// costo, registro
-
-//		// Boton Buscar
-//		btnConsulta = new JButton();
-//		// btnConsulta.setText("Buscar...");
-//		btnConsulta.setBounds(295, 65, 95, 25);
-//		btnConsulta.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				/*
-//				 * retorno = "Nickname:  " + data[1][0].toString() + "\n"; retorno +=
-//				 * "Nombre:  " + data[1][1].toString() + "\n"; retorno += "Apellido:  " +
-//				 * data[1][2].toString() + "\n"; JOptionPane.showMessageDialog(null, retorno,
-//				 * "Informacion", JOptionPane.PLAIN_MESSAGE);
-//				 */
-//			}
-//		});
-//		// miPanel.add(btnConsulta);
 	}
 
 	private void listenerComboPlataforma(ItemEvent e) {
@@ -224,6 +237,22 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		this.textCosto.setText(String.valueOf(espectaculo.getCosto()));
 		
 		this.textCosto.setText(String.valueOf(espectaculo.getRegistro()));
+		
+		comboPaquetes.removeAllItems();
+		List<PaqueteEspectaculos> listPaquetes = espectaculo.getPaquete();
+		listPaquetes.forEach((p) -> {
+			comboPaquetes.addItem(p.getNombre());
+		});
+		comboPaquetes.setSelectedItem("Seleccione plataforma");
+		
+		
+		comboFunciones.removeAllItems();
+		List<Funcion> listFunciones = espectaculo.getFunciones();
+		listFunciones.forEach((p) -> {
+			comboFunciones.addItem(p.getNombre());
+		});
+		comboFunciones.setSelectedItem("Seleccione plataforma");
+		
 	 	}
 	 }
 
@@ -234,15 +263,8 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		listPlataformas.forEach((p) -> {
 			comboPlataforma.addItem(p.getNombre());
 		});
+		comboPlataforma.setSelectedItem("Seleccione plataforma");
+		
 		// modelo.clear();
 	}
-
-//	@Override
-//	public void actionPerformed(ActionEvent e) {
-//		// TODO Auto-generated method stub
-//		if (e.getSource() == comboEspectaculos) {
-//
-//		}
-//
-//	}
 }

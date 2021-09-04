@@ -1,13 +1,20 @@
 package controladores;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import datatypes.DtEspectaculo;
 import excepciones.EspectaculoRepetidoExcepcion;
+import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.IControladorEspectaculo;
 import logica.Espectaculo;
+import logica.Funcion;
 import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
+import manejadores.ManejadorFuncion;
+import persistencia.Conexion;
 
 public class ControladorEspectaculo implements IControladorEspectaculo{
     public ControladorEspectaculo(){
@@ -31,5 +38,23 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 	 return mE.buscarEspectaculo(nombre);
     }
+    
+    
+//    @Override
+//	public void agregarFuncion(String nombreEspectaculo,String nombreFuncion) throws FuncionYaRegistradaEnEspectaculoExcepcion{
+//		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+//		Espectaculo espectaculo = mE.buscarEspectaculo(nombreEspectaculo);
+//		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+//		Funcion funcion = mF.buscarFuncion(nombreFuncion);
+//		if (espectaculo.funcionYaRegistrada(nombreFuncion))
+//			throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion" + nombreFuncion + " ya esta registrada en el espectaculo " + nombreEspectaculo);
+//		espectaculo.agregarFuncion(funcion);
+//
+//		Conexion conexion = Conexion.getInstancia();
+//		EntityManager em = conexion.getEntityManager();
+//		em.getTransaction().begin();
+//		em.persist(espectaculo); 
+//		em.getTransaction().commit();
+//	}
 
 }

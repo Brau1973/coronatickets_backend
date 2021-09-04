@@ -25,6 +25,7 @@ import org.hibernate.internal.build.AllowSysOut;
 import com.toedter.calendar.JDateChooser;
 
 import excepciones.FuncionRepetidaExcepcion;
+import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
@@ -246,7 +247,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 		      this.iconF.altaFuncion(fe);
 		      JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");
 		  }catch(FuncionRepetidaExcepcion msg){
-		      // JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+		       JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
 		  }
 		  // limpiarFormulario();
 		  setVisible(false);
