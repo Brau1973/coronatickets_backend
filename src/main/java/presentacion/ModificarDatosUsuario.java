@@ -124,13 +124,11 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
     // Inicializar ComboBox
     public void iniciarlizarComboBox(){
 	 comboUsuarios.removeAllItems();
-
 	 listUsuarios = iconU.listarUsuarios();
 	 listUsuarios.forEach((a) -> {
 	     comboUsuarios.addItem(a.getNickname());
 	 });
     }
-
 
     public void actionPerformed(ActionEvent e){
 	 String strnick = this.txtNickname.getText();

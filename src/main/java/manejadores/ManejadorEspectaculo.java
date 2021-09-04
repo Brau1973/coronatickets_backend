@@ -37,16 +37,6 @@ public class ManejadorEspectaculo{
     }
 
     @SuppressWarnings("unchecked")
-    public List<Espectaculo> listEspectaculos(){
-	 Conexion conexion = Conexion.getInstancia();
-	 EntityManager em = conexion.getEntityManager();
-	 Query query = em.createQuery("select e from Espectaculo e");
-	 List<Espectaculo> listEspectaculos = (List<Espectaculo>) query.getResultList();
-	 return listEspectaculos;
-    }
-
-
-    @SuppressWarnings("unchecked")
     public ArrayList<String> obtenerEspectaculo(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
@@ -59,13 +49,36 @@ public class ManejadorEspectaculo{
 	 return aRetornar;
     }
 
-    /*  public Espectaculo buscarEspectaculoArtista(String nickArtista){
-     Conexion conexion = Conexion.getInstancia();
-     EntityManager em = conexion.getEntityManager();
-     Espectaculo espectaculo = em.find(Espectaculo.class, nickArtista);
-     return espectaculo;
-    }*/
+
+    ///////////////
+    @SuppressWarnings("unchecked")
+    public ArrayList<String> obtenerEspectaculodeArtista(String nickname){ /// ok
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 Query query = em.createQuery("select e from Espectaculo e");
+	 List<Espectaculo> listEspectaculo = (List<Espectaculo>) query.getResultList();
+	 ArrayList<String> aRetornar = new ArrayList<>();
+	 for(Espectaculo e :listEspectaculo){
+	     if(e.getArtista().getNickname() == nickname){
+		  aRetornar.add(e.getNombre());
+	     }
+	 }
+	 return aRetornar;
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public List<Espectaculo> listEspectaculos(){
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 Query query = em.createQuery("select e from Espectaculo e");
+	 List<Espectaculo> listEspectaculos = (List<Espectaculo>) query.getResultList();
+	 return listEspectaculos;
+    }
+
     /// aca
+
+
     @SuppressWarnings("unchecked")
     public List<Espectaculo> obtenerEspectaculoArtista(String nickname){
 	 Conexion conexion = Conexion.getInstancia();
@@ -73,8 +86,13 @@ public class ManejadorEspectaculo{
 	 Query query = em.createQuery("select e from Espectaculo e where artista==nickname");
 	 List<Espectaculo> listEspectaculos = (List<Espectaculo>) query.getResultList();
 	 return listEspectaculos;
-
     }
 
+    /*  public Espectaculo buscarEspectaculoArtista(String nickArtista){
+     Conexion conexion = Conexion.getInstancia();
+     EntityManager em = conexion.getEntityManager();
+     Espectaculo espectaculo = em.find(Espectaculo.class, nickArtista);
+     return espectaculo;
+    }*/
 
 }

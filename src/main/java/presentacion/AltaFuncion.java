@@ -24,6 +24,7 @@ import com.toedter.calendar.JDateChooser;
 
 import excepciones.FuncionRepetidaExcepcion;
 import interfaces.Fabrica;
+import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
@@ -33,10 +34,12 @@ import logica.Funcion;
 import logica.Plataforma;
 
 
-public class AltaFuncion extends JInternalFrame implements ActionListener{
-    private IControladorFuncion iconF = Fabrica.getInstancia().getIControladorFuncion();
-    private IControladorPlataforma iconP = Fabrica.getInstancia().getIControladorPlataforma();
-    private IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
+@SuppressWarnings("serial")
+public class AltaFuncion extends JInternalFrame{
+    private IControladorFuncion iconF;
+    private IControladorPlataforma iconP;
+    private IControladorUsuario iconU;
+    private IControladorEspectaculo iconE;
     private JButton btnAceptar, btnCancelar, btnCopiar;
     private JPanel miPanel;
     private JLabel lblPlataforma, lblEspectaculos, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta, lblDots, lblTitulo;
@@ -56,18 +59,22 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 
     // Constructor
     public AltaFuncion(IControladorFuncion iconF){
+	 iconU = Fabrica.getInstancia().getIControladorUsuario();
+	 iconP = Fabrica.getInstancia().getIControladorPlataforma();
+	 iconE = Fabrica.getInstancia().getIControladorEspectaculo();
 	 this.iconF = iconF;
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
 	 setBounds(30, 30, 800, 600);
 	 setResizable(false);
-	 setClosable(true);
+	 setClosable(false);
 	 setIconifiable(false);
 	 setBorder(null);
 	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
 
-	 lblTitulo = new JLabel("Alta de Funcion de Espectaculo");
+	 lblTitulo = new JLabel();
+	 lblTitulo.setText("Alta de Funcion de Espectaculo");
 	 lblTitulo.setBounds(10, 0, 300, 20);
 	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 17));
 	 miPanel.add(lblTitulo);
@@ -78,8 +85,9 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 
 	 comboPlataforma = new JComboBox<String>();
 	 comboPlataforma.setBounds(220, 30, 200, 25);
+	 comboPlataforma.addActionListener((e) -> listenerCombo(e));
 	 miPanel.add(comboPlataforma);
-	 comboPlataforma.addActionListener(this);
+
 
 	 lblEspectaculos = new JLabel("Espectaculos");
 	 lblEspectaculos.setBounds(10, 60, 200, 20);
@@ -88,8 +96,9 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 comboEspectaculos = new JComboBox<String>();
 	 comboEspectaculos.setBounds(220, 60, 200, 25);
 	 miPanel.add(comboEspectaculos);
+	 // comboEspectaculos.addActionListener(this);
 
-	 lblPlataforma = new JLabel("Datos Funcion:");
+	 lblPlataforma = new JLabel("Datos De La Funcion");
 	 lblPlataforma.setBounds(10, 90, 250, 25);
 	 miPanel.add(lblPlataforma);
 
@@ -130,11 +139,18 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 lblArtistasInv.setBounds(10, 210, 150, 20);
 	 miPanel.add(lblArtistasInv);
 
-	 // JList
+	 btnCopiar = new JButton(">>>");
+	 btnCopiar.setBounds(220, 250, 70, 30);
+	 btnCopiar.addActionListener(new ActionListener(){
+	     public void actionPerformed(ActionEvent evento){
+		  agregarNombre();
+	     }
+	 });
+	 miPanel.add(btnCopiar);
+
 	 listNombres = new JList();
 	 listNombres.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 	 modelo = new DefaultListModel();
-
 	 scrollPane = new JScrollPane();
 	 scrollPane.setBounds(300, 250, 120, 60);
 	 scrollPane.setViewportView(listNombres);
@@ -143,7 +159,6 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 comboArtista = new JComboBox<String>();
 	 comboArtista.setBounds(220, 210, 200, 25);
 	 miPanel.add(comboArtista);
-	 comboArtista.addActionListener(this);
 
 	 lblFechaAlta = new JLabel("Fecha de Alta");
 	 lblFechaAlta.setBounds(10, 330, 200, 20);
@@ -154,30 +169,28 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 miPanel.add(fechaAlta);
 
 	 // Boton Aceptar
-	 btnAceptar = new JButton("Aceptar");
+	 btnAceptar = new JButton();
+	 btnAceptar.setText("Aceptar");
 	 btnAceptar.setBounds(200, 400, 115, 25);
 	 miPanel.add(btnAceptar);
-	 btnAceptar.addActionListener(this);
-
-	 // Boton Copiar
-	 btnCopiar = new JButton(">>>");
-	 btnCopiar.setBounds(220, 250, 70, 30);
-	 miPanel.add(btnCopiar);
-	 btnCopiar.addActionListener(this);
+	 // btnAceptar.addActionListener(this);
 
 	 // Boton Cancelar
-	 btnCancelar = new JButton("Cancelar");
+	 btnCancelar = new JButton();
+	 btnCancelar.setText("Cancelar");
 	 btnCancelar.setBounds(322, 400, 115, 25);
 	 miPanel.add(btnCancelar);
-	 btnCancelar.addActionListener(this);
+	 // btnCancelar.addActionListener(this);
     }
 
     @SuppressWarnings("unchecked")
-    public void agregarNombre(){
-	 String nombre = (String) this.comboArtista.getSelectedItem();
+    private void agregarNombre(){
+	 String nombre = this.comboArtista.getSelectedItem().toString();
 	 modelo.addElement(nombre);
 	 listNombres.setModel(modelo);
 	 comboArtista.removeItem(this.comboArtista.getSelectedItem());
+	 // listArtistasR = iconU.listarArtistas(); ///ver
+
 	 listArtistasR = new ArrayList<Artista>();
 	 listArtistasR.add(iconU.obtenerArtista(nombre));
     }
@@ -185,7 +198,6 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
     // Inicializar ComboBox
     public void iniciarlizarComboBox(){
 	 comboPlataforma.removeAllItems();
-	 comboEspectaculos.removeAllItems();
 	 comboArtista.removeAllItems();
 
 	 listPlataformas = iconP.listarPlataformas();
@@ -197,34 +209,31 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 listArtistas.forEach((a) -> {
 	     comboArtista.addItem(a.getNickname());
 	 });
-	 // comboEspectaculos.removeAllItems();
+
 	 modelo.clear();
     }
 
-    public void actionPerformed(ActionEvent e){
-	 // String strPlataforma = (String) this.comboPlataforma.getSelectedItem();
-	 String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
-	 Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();
-	 listEspectaculos = plataforma.getEspectaculo();
-
-
+    @SuppressWarnings({"deprecation", "unused"})
+    private void listenerCombo(ActionEvent e){
 	 if(e.getSource() == comboPlataforma){
+	     String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
+	     Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();
 
+	     listEspectaculos = plataforma.getEspectaculo();
 
-	     // comboArtista.removeAllItems();
-	     /*     listArtistas = iconU.listarArtistas();
-	     listArtistas.forEach((a) -> {
-	     	  comboArtista.addItem(a.getNickname());
-	     });*/
-
-	     /*     listEs = iconP.listarPlataformas(); //
-	     listEs.forEach((esp) -> {
-	     	  comboEspectaculos.addItem(esp.getNombre());
-	     });*/
+	     if(listEspectaculos.isEmpty()){
+		  comboEspectaculos.removeAllItems();
+	     }else{
+		  comboEspectaculos.removeAllItems();
+		  listEspectaculos.forEach((esp) -> {
+		      comboEspectaculos.addItem(esp.getNombre());
+		  });
+	     }
 	 }
 
+	 if(e.getSource() == btnAceptar)
 
-	 if(e.getSource() == btnAceptar){
+	 {
 	     if(checkFormulario()){
 		  String nombreFuncion = this.txtNombre.getText();
 		  Date FechaFuncion = this.fechaFuncion.getDate();
@@ -239,15 +248,11 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 		      this.iconF.altaFuncion(fe);
 		      JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");
 		  }catch(FuncionRepetidaExcepcion msg){
-		      // JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+		      JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
 		  }
 		  // limpiarFormulario();
 		  setVisible(false);
 	     }
-	 }
-
-	 if(e.getSource() == btnCopiar){
-	     agregarNombre();
 	 }
 
 	 if(e.getSource() == btnCancelar){

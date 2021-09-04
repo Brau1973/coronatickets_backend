@@ -30,9 +30,10 @@ public class Espectaculo{
     private Date registro;
     @ManyToMany(mappedBy = "espectaculos")
     private List<PaqueteEspectaculos> paquete = new ArrayList<PaqueteEspectaculos>();
+    // (mappedBy = "espectaculo")
 
-    /*   @OneToMany(mappedBy = "espectaculo")
-    private List<Funcion> funciones = new ArrayList<>();*/
+    /* @OneToMany(mappedBy = "espectaculo")
+    private List<Funcion> funciones = new ArrayList<Funcion>();*/
 
     public Espectaculo(){
 	 super();
