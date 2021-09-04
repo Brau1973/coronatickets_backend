@@ -33,7 +33,7 @@ import manejadores.ManejadorFuncion;
 import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
-public class ConsultaFuncion extends JInternalFrame {
+public class ConsultaFuncion extends JInternalFrame{
 	private IControladorFuncion iconF;
 	private IControladorPlataforma iconP;
 	private IControladorEspectaculo iconE;
@@ -54,6 +54,10 @@ public class ConsultaFuncion extends JInternalFrame {
 	private List<Plataforma> listPlataformas;
 	private List<Espectaculo> listEspectaculos;
 	private List<Funcion> listFunciones;
+	
+	private Plataforma plataforma;
+	private Espectaculo espectaculo;
+	
 
 	// Constructor
 	public ConsultaFuncion(IControladorFuncion iconF) {
@@ -84,9 +88,9 @@ public class ConsultaFuncion extends JInternalFrame {
 		comboPlataforma = new JComboBox<String>();
 		// comboPlataforma.addItem("Seleccione Plataforma");
 		comboPlataforma.setBounds(220, 30, 200, 20);
-		miPanel.add(comboPlataforma);
 		comboPlataforma.addItemListener(this::listenerComboPlataforma);
-
+		miPanel.add(comboPlataforma);
+		
 		lblEspectaculos = new JLabel();
 		lblEspectaculos.setText("Espectaculos");
 		lblEspectaculos.setBounds(10, 60, 200, 20);
@@ -95,9 +99,9 @@ public class ConsultaFuncion extends JInternalFrame {
 		comboEspectaculos = new JComboBox<String>();
 		// comboEspectaculos.addItem("Seleccione Espectaculo");
 		comboEspectaculos.setBounds(220, 60, 200, 20);
-		miPanel.add(comboEspectaculos);
 		comboEspectaculos.addItemListener(this::listenerComboEspectaculo);
-
+		miPanel.add(comboEspectaculos);
+		
 		lblFunciones = new JLabel();
 		lblFunciones.setText("Funciones");
 		lblFunciones.setBounds(10, 90, 200, 20);
@@ -106,8 +110,8 @@ public class ConsultaFuncion extends JInternalFrame {
 		comboFunciones = new JComboBox<String>();
 		// comboFunciones.addItem("Seleccione Funcion");
 		comboFunciones.setBounds(220, 90, 200, 20);
-		miPanel.add(comboFunciones);
 		comboFunciones.addItemListener(this::listenerComboFunciones);
+		miPanel.add(comboFunciones);
 
 		lblPlataforma = new JLabel();
 		lblPlataforma.setText("Datos De La Funcion");
@@ -154,11 +158,16 @@ public class ConsultaFuncion extends JInternalFrame {
 		comboPlataforma.removeAllItems();
 		comboEspectaculos.removeAllItems();
 		comboFunciones.removeAllItems();
-		
+
 		listPlataformas = iconP.listarPlataformas();
 		listPlataformas.forEach((p) -> {
 			comboPlataforma.addItem(p.getNombre());
 		});
+		
+		/*listEspectaculos = iconE.listarPlataformas();
+		listPlataformas.forEach((p) -> {
+			comboPlataforma.addItem(p.getNombre());
+		});*/
 	}
 
 	/*
@@ -168,16 +177,18 @@ public class ConsultaFuncion extends JInternalFrame {
 	 * comboPlataforma.setModel(modelFuncionEspectaculo); }
 	 */
 
-	private void listenerComboPlataforma(ItemEvent e) {
-		if (e.getStateChange() == ItemEvent.SELECTED) {
+	private void listenerComboPlataforma(ItemEvent e) {	
+	if (e.getStateChange() == ItemEvent.SELECTED) {
 			if (e.getSource() == comboPlataforma) {
 				System.out.println("CLICK EN COMBO PLATAFORMA");
 				String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
-				Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma))
+				plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma))
 						.findFirst().get();
 				this.listEspectaculos = plataforma.getEspectaculo();
 				if (listEspectaculos.isEmpty()) {
 					System.out.println("LISTA DE ESPECTACULOS VACIA");
+					JOptionPane.showMessageDialog(this, "La plataforma no tiene espectaculos asociados", "Error",
+							JOptionPane.ERROR_MESSAGE);
 					comboEspectaculos.removeAllItems();
 					comboFunciones.removeAllItems();
 					txtDatosFuncion.setText(null);
@@ -185,6 +196,7 @@ public class ConsultaFuncion extends JInternalFrame {
 					comboEspectaculos.removeAllItems();
 					comboFunciones.removeAllItems();
 					txtDatosFuncion.setText(null);
+					
 					listEspectaculos.forEach((esp) -> {
 						comboEspectaculos.addItem(esp.getNombre());
 					});
@@ -198,12 +210,14 @@ public class ConsultaFuncion extends JInternalFrame {
 			if (e.getSource() == comboEspectaculos) {
 				System.out.println("CLICK EN COMBO ESPECTACULO");
 				String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
-				Espectaculo espectaculo = listEspectaculos.stream().filter(es -> (es.getNombre() == strEspectaculo))
+				espectaculo =  listEspectaculos.stream().filter(es -> (es.getNombre() == strEspectaculo))
 						.findFirst().get();
-				this.listFunciones = espectaculo.getFunciones(); 
-				//List<Funcion> listFunciones = espectaculo.getFunciones();
+				this.listFunciones = espectaculo.getFunciones();
+				// List<Funcion> listFunciones = espectaculo.getFunciones();
 				if (listFunciones.isEmpty()) {
 					System.out.println("LISTA DE FUNCIONES VACIA");
+					JOptionPane.showMessageDialog(this, "El espectaculo no tiene funciones asociadas", "Error",
+							JOptionPane.ERROR_MESSAGE);
 					comboFunciones.removeAllItems();
 					txtDatosFuncion.setText(null);
 				} else {
@@ -228,15 +242,16 @@ public class ConsultaFuncion extends JInternalFrame {
 				SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm");
 				txtDatosFuncion.setText("Nombre: " + f.getNombre() + "\nFecha: " + formatoFecha.format(f.getFecha())
 						+ "\nFecha Alta: " + formatoFecha.format(f.getRegistro()) + "\nHora Inicio: "
-						+ formatoHora.format(f.getHoraInicio())); // + "\nEspectaculo: " + f.getEspectaculo());
+						+ formatoHora.format(f.getHoraInicio()) + "\nEspectaculo: " + f.getEspectaculo().getNombre());
 			}
 		}
 	}
-	
-	private void limpiarFormulario(){
-		 this.comboPlataforma.setSelectedItem("Seleccione Plataforma");
-		 this.comboEspectaculos.setSelectedItem("Seleccione Espectaculo");
-		 this.comboFunciones.setSelectedItem("Seleccione Funcion");
-	    }
-	
+
+
+	public void limpiarFormulario() {
+		this.comboPlataforma.removeAllItems();
+		this.comboEspectaculos.removeAllItems();
+		this.comboFunciones.removeAllItems();
+	}
+
 }

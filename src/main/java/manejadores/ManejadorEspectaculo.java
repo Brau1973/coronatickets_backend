@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import logica.Espectaculo;
+import logica.Funcion;
 import logica.Plataforma;
 import persistencia.Conexion;
 
@@ -37,7 +38,7 @@ public class ManejadorEspectaculo{
 	 return espectaculo;
     }
     
-    @SuppressWarnings("unchecked")
+    /*@SuppressWarnings("unchecked")
     public ArrayList<String> obtenerEspectaculo(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
@@ -48,5 +49,13 @@ public class ManejadorEspectaculo{
 	     aRetornar.add(e.getNombre());
 	 }
 	 return aRetornar;
-    }
+    }*/
+    
+    public List<Espectaculo> obtenerEspectaculo(){ // 79S
+      	 Conexion conexion = Conexion.getInstancia();
+      	 EntityManager em = conexion.getEntityManager();
+      	 Query query = em.createQuery("select e from Espectaculo e");
+      	 List<Espectaculo> listEspectaculo = (List<Espectaculo>) query.getResultList();
+      	 return listEspectaculo;
+          }
 }
