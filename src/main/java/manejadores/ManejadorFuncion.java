@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import logica.Espectaculo;
 import logica.Funcion;
 import logica.Plataforma;
 import persistencia.Conexion;
@@ -45,6 +46,15 @@ public class ManejadorFuncion{
    	 List<Funcion> listFuncion = (List<Funcion>) query.getResultList();
    	 return listFuncion;
        }
+    
+    public List<Funcion> obtenerFuncionesBD(String espectaculo){ //
+      	 Conexion conexion = Conexion.getInstancia();
+      	 EntityManager em = conexion.getEntityManager();
+      	 Query query = em.createQuery("select f from Funcion f where espectaculo_nomesp = :espectaculo");
+      	 query.setParameter("espectaculo", espectaculo);
+      	 List<Funcion> listFuncion = (List<Funcion>) query.getResultList();
+      	 return listFuncion;
+          }
 
 
     // public ArrayList<Plataforma> obtenerPlataforma(){

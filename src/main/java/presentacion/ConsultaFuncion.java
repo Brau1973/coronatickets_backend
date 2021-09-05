@@ -213,9 +213,10 @@ public class ConsultaFuncion extends JInternalFrame{
 			if (e.getSource() == comboEspectaculos) {
 				System.out.println("CLICK EN COMBO ESPECTACULO");
 				String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
-				espectaculo =  listEspectaculos.stream().filter(es -> (es.getNombre() == strEspectaculo))
-						.findFirst().get();
-				this.listFunciones = espectaculo.getFunciones();
+				/*espectaculo =  listEspectaculos.stream().filter(es -> (es.getNombre() == strEspectaculo))
+						.findFirst().get();*/
+				listFunciones = iconF.obtenerFuncionBD(strEspectaculo);
+				//this.listFunciones = espectaculo.getFunciones();
 				// List<Funcion> listFunciones = espectaculo.getFunciones();
 				if (listFunciones.isEmpty()) {
 					System.out.println("LISTA DE FUNCIONES VACIA");
@@ -252,9 +253,7 @@ public class ConsultaFuncion extends JInternalFrame{
 
 
 	public void limpiarFormulario() {
-		this.comboPlataforma.removeAllItems();
-		this.comboEspectaculos.removeAllItems();
-		this.comboFunciones.removeAllItems();
+		txtDatosFuncion.setText("");
 	}
-
+ 
 }
