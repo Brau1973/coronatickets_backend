@@ -29,6 +29,7 @@ import interfaces.IControladorPlataforma;
 import logica.Espectaculo;
 import logica.Funcion;
 import logica.Plataforma;
+import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
 import javax.swing.JTextArea;
 
@@ -182,9 +183,11 @@ public class ConsultaFuncion extends JInternalFrame{
 			if (e.getSource() == comboPlataforma) {
 				System.out.println("CLICK EN COMBO PLATAFORMA");
 				String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
-				plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma))
-						.findFirst().get();
-				this.listEspectaculos = plataforma.getEspectaculo();
+				/*plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma))
+						.findFirst().get();*/
+				listEspectaculos = iconE.obtenerEspectaculo2(strPlataforma);
+				/*ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+				this.listEspectaculos = mE.obtenerEspectaculoBD(strPlataforma);*/
 				if (listEspectaculos.isEmpty()) {
 					System.out.println("LISTA DE ESPECTACULOS VACIA");
 					JOptionPane.showMessageDialog(this, "La plataforma no tiene espectaculos asociados", "Error",
