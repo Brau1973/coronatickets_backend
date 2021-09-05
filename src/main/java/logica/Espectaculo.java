@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import datatypes.DtEspectaculo;
+
 @Entity
 public class Espectaculo{
     @Id
@@ -22,7 +24,6 @@ public class Espectaculo{
     @JoinColumn(name = "artista")
     private Artista artista;
     @ManyToOne
-    
     private Plataforma plataforma;
     private String descripcion;
     private int duracion;
@@ -55,12 +56,12 @@ public class Espectaculo{
 	 this.registro = registro;
     }
 
-    public Artista getArtista(){
-	 return artista;
+    public String getArtista(){
+	 return artista.getNickname();
     }
 
-    public Plataforma getPlataforma(){
-	 return plataforma;
+    public String getPlataforma(){
+	 return plataforma.getNombre();
     }
 
     public String getNombre(){
@@ -164,6 +165,10 @@ public class Espectaculo{
 		    i++;
 		}
 		return encontre;
+	}
+	
+	public DtEspectaculo getDtEspectaculo(){
+		return new DtEspectaculo(null,null,this.nombre,this.descripcion,this.duracion,this.cantMinEsp,this.cantMaxEsp,this.url,this.costo,this.registro);
 	}
 	
 	

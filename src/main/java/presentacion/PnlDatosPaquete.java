@@ -151,7 +151,7 @@ public class PnlDatosPaquete extends JInternalFrame {
 		limpiarTabla(tm);
 		for (int i = 0; i < p.getEspectaculos().size(); i++) {
 			Espectaculo esp = p.getEspectaculos().get(i);
-			Object[] data = { esp.getNombre(), esp.getArtista().getNombre(), esp.getPlataforma().getNombre(), esp.getDescripcion() };
+			Object[] data = { esp.getNombre(), esp.getArtista(), esp.getPlataforma(), esp.getDescripcion()};
 			tm.addRow(data);
 		}
     }

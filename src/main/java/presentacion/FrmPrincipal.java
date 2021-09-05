@@ -290,6 +290,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameAltaPlataforma.setVisible(true);
 	     break;
 	 case "Alta de Funcion de Espectaculo":
+		 internalFrameAltaFuncion.limpiarListaArtistas();
 	     internalFrameAltaFuncion.iniciarlizarComboBox();
 	     internalFrameAltaFuncion.setVisible(true);
 	     break;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import datatypes.DtArtista;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControladorUsuario;
 import logica.Artista;
@@ -56,5 +57,10 @@ public class ControladorUsuario implements IControladorUsuario{
     public List<Artista> listarArtistas(){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 	 return mU.listarArtistas();
+    }
+    
+    public List<DtArtista> listarArtistasDt(){
+	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	 return mU.listarArtistasDt();
     }
 }

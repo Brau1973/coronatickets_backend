@@ -27,12 +27,11 @@ public class Funcion{
     // @JoinTable(name = "FuncionXArtistas", joinColumns = @JoinColumn(name = "nombre"), inverseJoinColumns = @JoinColumn(name = "nickname"))
     private List<Artista> artistas = new ArrayList<Artista>();
 
-    public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, Espectaculo espectaculo, List<Artista> artistas){
+    public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, List<Artista> artistas){
 	 this.nombre = nombre;
 	 this.fecha = fecha;
 	 this.horaInicio = horaInicio;
 	 this.registro = registro;
-	 this.espectaculo = espectaculo;
 	 this.artistas = artistas;
     }
 
@@ -69,6 +68,7 @@ public class Funcion{
 
     public void setEspectaculo(Espectaculo espectaculo){
 	 this.espectaculo = espectaculo;
+	 espectaculo.agregarFuncion(this);
     }
 
     public void setFecha(Date fecha){

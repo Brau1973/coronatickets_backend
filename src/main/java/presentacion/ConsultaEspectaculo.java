@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import datatypes.DtEspectaculo;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorPaquete;
@@ -43,6 +44,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	private JComboBox<String> comboPlataforma, comboEspectaculos, comboPaquetes,comboFunciones;
 	private List<Plataforma> listPlataformas;
 	private List<Espectaculo> listEspectaculos;
+	private List<DtEspectaculo> listDtEspectaculos;
 	private JLabel lblCantidadMaxima;
 	private JLabel lblURL;
 	private JLabel lblCosto;
@@ -201,16 +203,34 @@ public class ConsultaEspectaculo extends JInternalFrame{
 			String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
 			Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst()
 					.get();
+//			this.listDtEspectaculos = iconP.listarEspectaculos(strPlataforma);
+//			if (listDtEspectaculos.isEmpty()) {
+//				System.out.println("LISTA ESPECTACULOS VACIA");
+//				comboEspectaculos.removeAllItems();
+//			} else {
+//				comboEspectaculos.removeAllItems();
+//				
+//				listDtEspectaculos.forEach((esp) -> {
+//					comboEspectaculos.addItem(esp.getNombre());
+//				});
+//			}
+			
+			
+			
+			
 			this.listEspectaculos = plataforma.getEspectaculo();
 			if (listEspectaculos.isEmpty()) {
 				System.out.println("LISTA ESPECTACULOS VACIA");
 				comboEspectaculos.removeAllItems();
 			} else {
 				comboEspectaculos.removeAllItems();
+				
 				listEspectaculos.forEach((esp) -> {
 					comboEspectaculos.addItem(esp.getNombre());
 				});
 			}
+			
+			
 		}
 	}
 
@@ -222,7 +242,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 
 		this.textNombreEspectaculo.setText(espectaculo.getNombre());
 		
-		this.textArtistaOrganizador.setText(espectaculo.getArtista().getNickname());
+		//this.textArtistaOrganizador.setText(espectaculo.getArtista().getNickname());
 		
 		this.textDescripcion.setText(espectaculo.getDescripcion());
 		

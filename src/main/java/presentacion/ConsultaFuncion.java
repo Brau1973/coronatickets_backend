@@ -125,8 +125,8 @@ public class ConsultaFuncion extends JInternalFrame implements ActionListener{
 	     ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 	     // ArrayList<String> datos = mF.obtenerEspectaculo(plataforma);
 	     Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();
-	     List<Espectaculo> listEspectaculos = plataforma.getEspectaculo();
-
+	     //List<Espectaculo> listEspectaculos = plataforma.getEspectaculo();
+	     List<Espectaculo> listEspectaculos = null;
 	     if(listEspectaculos.isEmpty()){
 		  JOptionPane.showMessageDialog(this, "Esta plataforma no tiene espectaculos asociados.", "Agregar Espectaculo", JOptionPane.WARNING_MESSAGE);
 		  comboEspectaculos.getModel().setSelectedItem("Seleccione Espectaculo");
