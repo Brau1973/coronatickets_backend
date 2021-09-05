@@ -23,7 +23,6 @@ public class Funcion{
     @ManyToOne
     private Espectaculo espectaculo;
 
-
     @ManyToMany(cascade = CascadeType.ALL)
     // @JoinTable(name = "FuncionXArtistas", joinColumns = @JoinColumn(name = "nombre"), inverseJoinColumns = @JoinColumn(name = "nickname"))
     private List<Artista> artistas = new ArrayList<Artista>();

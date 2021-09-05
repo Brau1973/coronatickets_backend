@@ -43,7 +43,9 @@ public class ConsultaEspectaculo extends JInternalFrame{
     private JLabel lblFunciones;
     static final String SELECCIONE = "Seleccione";
     private PaqueteEspectaculos paqueteSelected;
+    private Funcion funcionSelect;
     private PnlDatosPaquete pnlDatosPaquete;
+    private PnlDatosFuncion pnlDatosFuncion;
 
     // Constructor
     public ConsultaEspectaculo(){
@@ -73,8 +75,8 @@ public class ConsultaEspectaculo extends JInternalFrame{
 
 	 comboPlataforma = new JComboBox<String>();
 	 comboPlataforma.setBounds(147, 31, 200, 20);
-	 comboPlataforma.addItemListener(this::listenerComboPlataforma);
 	 miPanel.add(comboPlataforma);
+	 comboPlataforma.addItemListener(this::listenerComboPlataforma);
 
 	 lblEspectaculos = new JLabel("Espectaculo:");
 	 lblEspectaculos.setBounds(10, 62, 97, 20);
@@ -92,7 +94,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 comboFunciones = new JComboBox<String>();
 	 comboFunciones.setBounds(147, 91, 200, 22);
 	 miPanel.add(comboFunciones);
-	 // comboFunciones.addItemListener(this::listenerComboFuncion);
+	 comboFunciones.addItemListener(this::listenerComboFuncion);
 
 	 lblPaquetes = new JLabel("Paquetes:");
 	 lblPaquetes.setBounds(10, 126, 85, 14);
@@ -174,7 +176,6 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 lblRegistro = new JLabel("Registro:");
 	 lblRegistro.setBounds(370, 190, 55, 14);
 	 // miPanel.add(lblRegistro);
-
 	 textRegistro = new JTextField();
 	 textRegistro.setEditable(false);
 	 textRegistro.setBackground(UIManager.getColor("Button.disabledForeground"));
@@ -191,24 +192,23 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 textURL.setBounds(490, 190, 200, 20);
 	 miPanel.add(textURL);
 
-
 	 pnlDatosPaquete = new PnlDatosPaquete();
 	 pnlDatosPaquete.setBounds(0, 210, 700, 500);
 	 pnlDatosPaquete.setVisible(false);
 	 miPanel.add(pnlDatosPaquete);
-	 // comboPaquetes.addItemListener(this::listenerComboEspectaculo);
-	 // artistaOrganizador, descripcion, duracion, cantMinEsp, cantMaxEsp, url,
-	 // costo, registro
+
+	 pnlDatosFuncion = new PnlDatosFuncion();
+	 pnlDatosFuncion.setBounds(0, 210, 700, 500);
+	 pnlDatosFuncion.setVisible(false);
+	 miPanel.add(pnlDatosFuncion);
     }
 
     private void listenerComboPlataforma(ItemEvent e){
 	 if(e.getStateChange() == ItemEvent.SELECTED){
-	     System.out.println("CLICK EN COMBO PLATAFORMA");
 	     String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
 	     Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();
 	     this.listEspectaculos = plataforma.getEspectaculo();
 	     if(listEspectaculos.isEmpty()){
-		  System.out.println("LISTA ESPECTACULOS VACIA");
 		  comboEspectaculos.removeAllItems();
 	     }else{
 		  comboEspectaculos.removeAllItems();
@@ -226,7 +226,6 @@ public class ConsultaEspectaculo extends JInternalFrame{
 
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     String datosFecha = formatoFecha.format(espectaculo.getRegistro());
-
 	     this.textNombreEspectaculo.setText(espectaculo.getNombre());
 	     this.textArtistaOrganizador.setText(espectaculo.getArtista().getNickname());
 	     this.textDescripcion.setText(espectaculo.getDescripcion());
@@ -237,24 +236,45 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	     this.textCosto.setText(String.valueOf(espectaculo.getCosto()));
 	     this.textRegistro.setText(String.valueOf(datosFecha));
 
+	     // Combo Funciones
+	     comboFunciones.removeAllItems();
+	     listFunciones = espectaculo.getFunciones();
+	     listFunciones.forEach((p) -> {
+		  comboFunciones.addItem(p.getNombre());
+	     });
+	     // Combo Paquetes
 	     comboPaquetes.removeAllItems();
-	     listPaqEspe = iconPa.obtenerPaquetes();
+	     listPaqEspe = espectaculo.getPaquetes();
 	     listPaqEspe.forEach((p) -> {
 		  comboPaquetes.addItem(p.getNombre());
 	     });
-
 	 }
     }
+
+
+    private void listenerComboFuncion(ItemEvent e){ // aca
+	 if(e.getStateChange() == ItemEvent.SELECTED){
+	     if(!e.getItem().equals(SELECCIONE)){
+		  funcionSelect = listFunciones.stream().filter(f -> (f.getNombre() == e.getItem())).findFirst().get();
+		  pnlDatosFuncion.cargarPanel(funcionSelect);
+		  pnlDatosPaquete.setVisible(false);
+		  pnlDatosFuncion.setVisible(true);
+	     }else{
+		  pnlDatosFuncion.setVisible(false);
+	     }
+	 }
+    }
+
 
     private void listenerComboPaquetes(ItemEvent e){
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     if(!e.getItem().equals(SELECCIONE)){
 		  paqueteSelected = listPaqEspe.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
 		  pnlDatosPaquete.cargarPanel(paqueteSelected);
+		  pnlDatosFuncion.setVisible(false);
 		  pnlDatosPaquete.setVisible(true);
 	     }else{
 		  pnlDatosPaquete.setVisible(false);
-		  // TODO aca va el limpiar panelPaquete
 	     }
 	 }
     }
@@ -266,8 +286,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 listPlataformas.forEach((p) -> {
 	     comboPlataforma.addItem(p.getNombre());
 	 });
-	 comboPlataforma.setSelectedItem("Seleccione plataforma");
-
+	 // comboPlataforma.setSelectedItem("Seleccione plataforma");// ?
 	 // modelo.clear();
     }
 }

@@ -172,8 +172,8 @@ public class AltaFuncion extends JInternalFrame{
 	 btnAceptar = new JButton();
 	 btnAceptar.setText("Aceptar");
 	 btnAceptar.setBounds(200, 400, 115, 25);
+	 btnAceptar.addActionListener((ac) -> aceptar(ac));
 	 miPanel.add(btnAceptar);
-	 // btnAceptar.addActionListener(this);
 
 	 // Boton Cancelar
 	 btnCancelar = new JButton();
@@ -230,10 +230,10 @@ public class AltaFuncion extends JInternalFrame{
 		  });
 	     }
 	 }
+    }
 
-	 if(e.getSource() == btnAceptar)
-
-	 {
+    private void aceptar(ActionEvent ac){
+	 if(ac.getSource() == btnAceptar){
 	     if(checkFormulario()){
 		  String nombreFuncion = this.txtNombre.getText();
 		  Date FechaFuncion = this.fechaFuncion.getDate();
@@ -254,12 +254,15 @@ public class AltaFuncion extends JInternalFrame{
 		  setVisible(false);
 	     }
 	 }
-
-	 if(e.getSource() == btnCancelar){
-	     // limpiarFormulario();
-	     setVisible(false);
-	 }
     }
+    /*
+    if(e.getSource()==btnCancelar)
+    
+    {
+    	 // limpiarFormulario();
+    	 setVisible(false);
+    
+    }*/
 
 
     private boolean checkFormulario(){
