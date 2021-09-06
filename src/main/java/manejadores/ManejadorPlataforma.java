@@ -1,11 +1,14 @@
 package manejadores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
+import datatypes.DtEspectaculo;
+import logica.Artista;
 import logica.Plataforma;
 import persistencia.Conexion;
 
@@ -34,19 +37,34 @@ public class ManejadorPlataforma{
     public Plataforma buscarPlataforma(String nombre){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
-
-	 Plataforma plataforma = em.find(Plataforma.class, nombre);
-	 return plataforma;
+	 return em.find(Plataforma.class, nombre);
     }
 
-
-    public List<Plataforma> obtenerPlataforma(){ // 79S
+    public List<Plataforma> obtenerPlataforma(){ // NO SE DEBERIA USAR
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 	 Query query = em.createQuery("select p from Plataforma p");
 	 List<Plataforma> listPlataforma = (List<Plataforma>) query.getResultList();
 	 return listPlataforma;
     }
+    
+    public List<String> obtenerPlataformas(){
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 Query query = em.createQuery("select p from Plataforma p");
+	 List<Plataforma> listPlataformas = (List<Plataforma>) query.getResultList();
+	 
+	 List<String> listPlataformasDt = new ArrayList<String>();
+	 for(Plataforma p :listPlataformas){
+		 listPlataformasDt.add((p.getNombre()));
+	 }
+	 return listPlataformasDt;
+    }
+
+	public List<DtEspectaculo> obtenerEspectaculos(String nombrePlataforma) {
+		Plataforma plataforma = this.buscarPlataforma(nombrePlataforma);
+		return plataforma.getEspectaculosDt();
+	}
 
 
 }

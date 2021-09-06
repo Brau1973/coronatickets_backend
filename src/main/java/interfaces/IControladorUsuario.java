@@ -2,6 +2,7 @@ package interfaces;
 
 import java.util.List;
 
+import datatypes.DtArtista;
 import excepciones.UsuarioRepetidoExcepcion;
 import logica.Artista;
 import logica.Usuario;
@@ -16,4 +17,8 @@ public interface IControladorUsuario{
     public List<Artista> listarArtistas();
 
     public List<Usuario> listarUsuarios();
+
+    public Artista obtenerArtista(String nickname);
+    
+    public List<DtArtista> listarArtistasDt();
 }

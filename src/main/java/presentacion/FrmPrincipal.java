@@ -47,7 +47,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     public FrmPrincipal(){
 	 inicializar();
 	 setTitle("coronaTickets.uy");
-	 setSize(800, 600);
+	 setSize(800, 700);
 	 setLocationRelativeTo(null);
 	 setResizable(false);
 	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -174,7 +174,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 
     // InternalFrame Consulta Usuario
     private void inFrmConsultaUsuario(){
-	 internalFrameConsultaUsuario = new ConsultarUsuario();
+	 internalFrameConsultaUsuario = new ConsultarUsuario(iconU);
 	 internalFrameConsultaUsuario.setVisible(false);
 	 contenedor.add(internalFrameConsultaUsuario);
     }
@@ -283,17 +283,23 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameAltaEspectaculo.setVisible(true);
 	     break;
 	 case "Consulta de Espectaculo":
+		 internalFrameConsultaEspectaculo.iniciarlizarComboBox();
 	     internalFrameConsultaEspectaculo.setVisible(true);
 	     break;
 	 case "Alta de Plataforma":
 	     internalFrameAltaPlataforma.setVisible(true);
 	     break;
 	 case "Alta de Funcion de Espectaculo":
+		 internalFrameAltaFuncion.limpiarListaArtistas();
 	     internalFrameAltaFuncion.iniciarlizarComboBox();
 	     internalFrameAltaFuncion.setVisible(true);
 	     break;
 	 case "Consulta de Funcion de Espectaculo":
+<<<<<<< HEAD
 	     internalFrameConsultaFuncion.inicializarComboBox();
+=======
+	     // internalFrameConsultaFuncion.inicializarComboBoxes();
+>>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
 	     internalFrameConsultaFuncion.setVisible(true);
 	     break;
 	 case "Registro a Funcion de Espectaculo":
@@ -303,6 +309,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameCreaPaqueteEspectaculo.setVisible(true);
 	     break;
 	 case "Consulta de Paquete de Espectaculos":
+		 internalFrameConsultaPaqueteEspectaculo.iniciarlizarComboBox();
 	     internalFrameConsultaPaqueteEspectaculo.setVisible(true);
 	     break;
 	 case "Agregar Espectaculo a Paquete":

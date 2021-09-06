@@ -36,11 +36,11 @@ public class ManejadorEspectaculo{
 	 return espectaculo;
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList<String> obtenerEspectaculo(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 	 Query query = em.createQuery("select e from Espectaculo e");
-	 @SuppressWarnings("unchecked")
 	 List<Espectaculo> listEspectaculo = (List<Espectaculo>) query.getResultList();
 	 ArrayList<String> aRetornar = new ArrayList<>();
 	 for(Espectaculo e :listEspectaculo){
