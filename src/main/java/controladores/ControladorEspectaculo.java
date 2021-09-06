@@ -21,10 +21,18 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 	 mE.agregarEspectaculo(espectaculo);
     }
     
-    public List<Espectaculo> listarEspectaculos(){
+    /*public List<Espectaculo> listarEspectaculos(){
       	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
       	 return mE.obtenerEspectaculo();
-          }
+          }*/
+    
+    public List<Espectaculo> listarEspectaculos(){ 
+   	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+   	 List<Espectaculo> espectaculos;
+   	 Espectaculo espec = mE.buscarEspectaculo("espec");
+   	 return null; 
+       }
+
 
     /*public List<Espectaculo> listarEspectaculos(){ // ??????? se usa?
 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
