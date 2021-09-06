@@ -30,10 +30,6 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
     private IControladorEspectaculo iconE;
     private IControladorUsuario iconU;
     private IControladorPlataforma iconP;
-<<<<<<< HEAD
-
-=======
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
     private JPanel miPanel;
     private JComboBox<String> comboPlataforma, comboArtista;
     private JTextField txtNombre, txtDescripcion, txtDuracion, txtUrl, txtCosto;
@@ -47,10 +43,6 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 this.iconE = iconE;
 	 iconU = Fabrica.getInstancia().getIControladorUsuario();
 	 iconP = Fabrica.getInstancia().getIControladorPlataforma();
-<<<<<<< HEAD
-
-=======
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
@@ -211,17 +203,10 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 		      DtEspectaculo dte = new DtEspectaculo(artista, plataforma, strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
 		      this.iconE.altaEspectaculo(dte);
 		      JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
-<<<<<<< HEAD
-		      limpiarFormulario();
-		  }catch(Exception ex){
-		      JOptionPane.showMessageDialog(null, "Los datos ingresados no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
-		      limpiarFormulario();
-=======
 		      // limpiarFormulario();
 		  }catch(Exception ex){
 		      JOptionPane.showMessageDialog(null, "Los datos ingresados no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
 		      // limpiarFormulario();
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
 		  }
 		  setVisible(false);
 	     }

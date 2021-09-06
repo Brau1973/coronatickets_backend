@@ -22,28 +22,16 @@ public class Funcion{
     private Date registro;
     @ManyToOne
     private Espectaculo espectaculo;
-<<<<<<< HEAD
-    @OneToMany(orphanRemoval = true)
-    @JoinTable(name = "FuncionXArtistas", joinColumns = @JoinColumn(name = "nombre"), inverseJoinColumns = @JoinColumn(name = "nickname"))
-    private List<Artista> artistas = new ArrayList<Artista>();
-
-    public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, Espectaculo espectaculo, List<Artista> artistas){
-=======
 
     @ManyToMany(cascade = CascadeType.ALL)
     // @JoinTable(name = "FuncionXArtistas", joinColumns = @JoinColumn(name = "nombre"), inverseJoinColumns = @JoinColumn(name = "nickname"))
     private List<Artista> artistas = new ArrayList<Artista>();
 
     public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, List<Artista> artistas){
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
 	 this.nombre = nombre;
 	 this.fecha = fecha;
 	 this.horaInicio = horaInicio;
 	 this.registro = registro;
-<<<<<<< HEAD
-	 this.espectaculo = espectaculo;
-=======
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
 	 this.artistas = artistas;
     }
 

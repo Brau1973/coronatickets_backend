@@ -1,9 +1,6 @@
 package controladores;
 
-<<<<<<< HEAD
-=======
 import java.util.Date;
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,15 +10,11 @@ import excepciones.EspectaculoRepetidoExcepcion;
 import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.IControladorEspectaculo;
 import logica.Espectaculo;
-<<<<<<< HEAD
-import manejadores.ManejadorEspectaculo;
-=======
 import logica.Funcion;
 import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
 import persistencia.Conexion;
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
 
 public class ControladorEspectaculo implements IControladorEspectaculo{
     public ControladorEspectaculo(){
@@ -34,29 +27,17 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 //	 mE.agregarEspectaculo(espectaculo);
     }
 
-<<<<<<< HEAD
-    public List<Espectaculo> listarEspectaculos(){ // CORREGIR
-	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-	 List<Espectaculo> espectaculos;
-	 Espectaculo espec = mE.buscarEspectaculo("espec");
-
-	 return null;
-=======
     public List<Espectaculo> listarEspectaculos(){ 
 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 	 List<Espectaculo> espectaculos;
 	 Espectaculo espec = mE.buscarEspectaculo("espec");
 	 return null; 
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
     }
 
     public Espectaculo obtenerEspectaculo(String nombre){
 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 	 return mE.buscarEspectaculo(nombre);
     }
-<<<<<<< HEAD
-
-=======
     
     
 //    @Override
@@ -75,6 +56,5 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 //		em.persist(espectaculo); 
 //		em.getTransaction().commit();
 //	}
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
 
 }

@@ -1,9 +1,5 @@
 package controladores;
 
-<<<<<<< HEAD
-import java.util.List;
-
-=======
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,23 +7,19 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import datatypes.DtFuncion;
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
 import excepciones.FuncionRepetidaExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
-<<<<<<< HEAD
 import logica.Espectaculo;
-=======
 import interfaces.IControladorUsuario;
 import logica.Artista;
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
 import logica.Funcion;
 import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
-<<<<<<< HEAD
 import manejadores.ManejadorPlataforma;
+import persistencia.Conexion;
 
 public class ControladorFuncion implements IControladorFuncion{
 
@@ -35,11 +27,32 @@ public class ControladorFuncion implements IControladorFuncion{
 	 super();
     }
 
-    @Override
+    /*@Override
     public void altaFuncion(Funcion funcion) throws FuncionRepetidaExcepcion{
 	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 	 mF.agregarFuncion(funcion);
-    }
+    }*/
+    
+    public void altaFuncion(DtFuncion dtFuncion) throws FuncionRepetidaExcepcion {
+		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+		Funcion funcion = mF.buscarFuncion(dtFuncion.getNombre());
+//     if (funcion != null)
+//         throw new FuncionRepetidaExcepcion("La Funcion "+ dtFuncion.getNombre() + "ya esta registrada");
+		IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
+		List<Artista> artistas = new ArrayList<Artista>();
+		dtFuncion.getArtistas().forEach((a) -> {
+			artistas.add(iconU.obtenerArtista(a));
+
+		});
+		
+		Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(),
+				dtFuncion.getRegistro(), artistas);
+		
+		IControladorEspectaculo iconE = Fabrica.getInstancia().getIControladorEspectaculo();
+		funcionACrear.setEspectaculo(iconE.obtenerEspectaculo(dtFuncion.getEspectaculo()));
+		
+		mF.agregarFuncion(funcionACrear);
+	}
     
     public List<Funcion> listarFunciones(){
    	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
@@ -93,34 +106,4 @@ public class ControladorFuncion implements IControladorFuncion{
     // return espectaculos_ret;
     // }
     //
-=======
-import persistencia.Conexion;
-
-public class ControladorFuncion implements IControladorFuncion {
-
-	public ControladorFuncion() {
-		super();
-	}
-
-	public void altaFuncion(DtFuncion dtFuncion) throws FuncionRepetidaExcepcion {
-		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-		Funcion funcion = mF.buscarFuncion(dtFuncion.getNombre());
-//     if (funcion != null)
-//         throw new FuncionRepetidaExcepcion("La Funcion "+ dtFuncion.getNombre() + "ya esta registrada");
-		IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
-		List<Artista> artistas = new ArrayList<Artista>();
-		dtFuncion.getArtistas().forEach((a) -> {
-			artistas.add(iconU.obtenerArtista(a));
-
-		});
-		
-		Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(),
-				dtFuncion.getRegistro(), artistas);
-		
-		IControladorEspectaculo iconE = Fabrica.getInstancia().getIControladorEspectaculo();
-		funcionACrear.setEspectaculo(iconE.obtenerEspectaculo(dtFuncion.getEspectaculo()));
-		
-		mF.agregarFuncion(funcionACrear);
-	}
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
 }

@@ -145,15 +145,10 @@ public class Espectaculo{
 	 this.registro = registro;
     }
     
-<<<<<<< HEAD
-    public List<Funcion> getFunciones() {
-		return funciones;
-	}
-    
     public void setFunciones(List<Funcion> funciones) {
 		this.funciones = funciones;
 	}
-=======
+
 	public void setPaquete(List<PaqueteEspectaculos> paquete) {
 		this.paquete = paquete;
 	}
@@ -179,8 +174,5 @@ public class Espectaculo{
 	public DtEspectaculo getDtEspectaculo(){
 		return new DtEspectaculo(null,null,this.nombre,this.descripcion,this.duracion,this.cantMinEsp,this.cantMaxEsp,this.url,this.costo,this.registro);
 	}
-	
-	
->>>>>>> 6c8a5d938bb3ef6d18e666bd22ba8210faea9619
 
 }
