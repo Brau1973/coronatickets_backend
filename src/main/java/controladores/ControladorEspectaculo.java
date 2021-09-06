@@ -39,6 +39,11 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 	 return mE.buscarEspectaculo(nombre);
     }
     
+    public List<Espectaculo> obtenerEspectaculo2(String plataforma){
+   	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+   	 return mE.obtenerEspectaculoBD(plataforma);
+       }
+    
     
 //    @Override
 //	public void agregarFuncion(String nombreEspectaculo,String nombreFuncion) throws FuncionYaRegistradaEnEspectaculoExcepcion{
