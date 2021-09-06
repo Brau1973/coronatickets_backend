@@ -33,7 +33,6 @@ import logica.Espectaculo;
 import logica.Funcion;
 import logica.Plataforma;
 
-
 @SuppressWarnings("serial")
 public class AltaFuncion extends JInternalFrame{
     private IControladorFuncion iconF;
@@ -255,13 +254,10 @@ public class AltaFuncion extends JInternalFrame{
 	     }
 	 }
     }
-    /*
-    if(e.getSource()==btnCancelar)
-    
-    {
+
+    /*if(e.getSource()==btnCancelar){
     	 // limpiarFormulario();
     	 setVisible(false);
-    
     }*/
 
 
@@ -283,6 +279,7 @@ public class AltaFuncion extends JInternalFrame{
     }
 
 }
+
 // if(e.getSource() == comboPlataforma){
 // acac String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
 // Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();

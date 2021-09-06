@@ -23,7 +23,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
      ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
      List<Espectaculo> espectaculos;
      Espectaculo espec = mE.buscarEspectaculo("espec");
-     return null; // Vpi ñe /// ¿?¿?¿?¿?¿? /// * ***XDXDXDXD*****
+     return null; // Vpi Ã±e /// ?Â¿?Â¿?Â¿?Â¿?Â¿? /// * ***XDXDXDXD*****
     }*/
 
     public List<Espectaculo> listarEspectaculos(){
