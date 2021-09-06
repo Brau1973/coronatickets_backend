@@ -35,8 +35,25 @@ public class ManejadorFuncion{
 	 EntityManager em = conexion.getEntityManager();
 	 return em.find(Funcion.class, nombre);
     }
+    
+    public List<Funcion> obtenerFunciones(){ // 79S
+      	 Conexion conexion = Conexion.getInstancia();
+      	 EntityManager em = conexion.getEntityManager();
+      	 Query query = em.createQuery("select f from Funcion f");
+      	 List<Funcion> listFuncion = (List<Funcion>) query.getResultList();
+      	 return listFuncion;
+          }
+       
+       public List<Funcion> obtenerFuncionesBD(String espectaculo){ //
+         	 Conexion conexion = Conexion.getInstancia();
+         	 EntityManager em = conexion.getEntityManager();
+         	 Query query = em.createQuery("select f from Funcion f where espectaculo_nomesp = :espectaculo");
+         	 query.setParameter("espectaculo", espectaculo);
+         	 List<Funcion> listFuncion = (List<Funcion>) query.getResultList();
+         	 return listFuncion;
+             }
 
-    public ArrayList<String> obtenerFunciones(){
+    /*public ArrayList<String> obtenerFunciones(){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 	 Query query = em.createQuery("select f from Funcion f");
@@ -61,7 +78,7 @@ public class ManejadorFuncion{
 	     aRetornar.add(e.getNombre());
 	 }
 	 return aRetornar;
-    }
+    }*/
 
     // Consulta para obtener Funciones de Espectaculo
     /*public ArrayList<String> obtenerFuncion(String espectaculo){ 

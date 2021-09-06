@@ -22,6 +22,7 @@ import com.toedter.calendar.JDateChooser;
 
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorUsuario;
+import logica.Espectaculo;
 import logica.Usuario;
 import manejadores.ManejadorEspectaculo;
 
@@ -157,9 +158,9 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	     Usuario u = this.iconU.obtenerUsuario(strUsuario);
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-	     ArrayList<String> usuario = mE.obtenerEspectaculo();
+	     List<Espectaculo> usuario = mE.obtenerEspectaculo();
 	     String datos = "\n\nLista de espectaculos:";
-	     for(String i :usuario){
+	     for(Espectaculo i :usuario){
 		  datos = datos + "\n" + i.toString();
 	     }
 	     jtextarea.setText("Nombre: " + u.getNombre() + "\nApellido: " + u.getApellido() + "\nEmail: " + u.getEmail() + "\nFecha: " + formatoFecha.format(u.getfNacimiento()) + datos);

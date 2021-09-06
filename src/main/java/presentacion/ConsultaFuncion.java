@@ -173,9 +173,9 @@ public class ConsultaFuncion extends JInternalFrame {
 			if (e.getSource() == comboPlataforma) {
 				System.out.println("CLICK EN COMBO PLATAFORMA");
 				String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
-				Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma))
+				/*Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma))
 						.findFirst().get();
-				this.listEspectaculos = plataforma.getEspectaculo();
+				this.listEspectaculos = plataforma.getEspectaculo();*/
 				if (listEspectaculos.isEmpty()) {
 					System.out.println("LISTA DE ESPECTACULOS VACIA");
 					comboEspectaculos.removeAllItems();
