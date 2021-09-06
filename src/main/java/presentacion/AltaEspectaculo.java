@@ -22,6 +22,7 @@ import interfaces.IControladorEspectaculo;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
 import logica.Artista;
+import logica.Espectaculo;
 import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 

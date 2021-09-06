@@ -26,19 +26,23 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 //	 Espectaculo espectaculo = new Espectaculo(dte.getArtista(), dte.getPlataforma(), dte.getNombre(), dte.getDescripcion(), dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
 //	 mE.agregarEspectaculo(espectaculo);
     }
-
+    
+    /*public List<Espectaculo> listarEspectaculos(){
+      	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+      	 return mE.obtenerEspectaculo();
+          }*/
+    
     public List<Espectaculo> listarEspectaculos(){ 
-	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-	 List<Espectaculo> espectaculos;
-	 Espectaculo espec = mE.buscarEspectaculo("espec");
-	 return null; 
-    }
+   	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+   	 List<Espectaculo> espectaculos;
+   	 Espectaculo espec = mE.buscarEspectaculo("espec");
+   	 return null; 
+       }
 
     public Espectaculo obtenerEspectaculo(String nombre){
 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 	 return mE.buscarEspectaculo(nombre);
     }
-    
     
 //    @Override
 //	public void agregarFuncion(String nombreEspectaculo,String nombreFuncion) throws FuncionYaRegistradaEnEspectaculoExcepcion{
@@ -56,5 +60,9 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 //		em.persist(espectaculo); 
 //		em.getTransaction().commit();
 //	}
+    public List<Espectaculo> obtenerEspectaculo2(String plataforma){
+   	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+   	 return mE.obtenerEspectaculoBD(plataforma);
+       }
 
 }

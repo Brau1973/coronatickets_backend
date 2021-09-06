@@ -151,20 +151,26 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	 });
     }
 
-    public void actionPerformed(ActionEvent e){ // 79S
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+    /*public void actionPerformed(ActionEvent e){ // 79S
 	 if(e.getSource() == comboUsuarios){
 	     String strUsuario = this.comboUsuarios.getSelectedItem().toString();
 	     Usuario u = this.iconU.obtenerUsuario(strUsuario);
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-	     ArrayList<String> usuario = mE.obtenerEspectaculo();
+	    ArrayList<String> usuario = mE.obtenerEspectaculo();
 	     String datos = "\n\nLista de espectaculos:";
 	     for(String i :usuario){
 		  datos = datos + "\n" + i.toString();
 	     }
 	     jtextarea.setText("Nombre: " + u.getNombre() + "\nApellido: " + u.getApellido() + "\nEmail: " + u.getEmail() + "\nFecha: " + formatoFecha.format(u.getfNacimiento()) + datos);
 	 }
-    }
+    }*/
 }
 
 

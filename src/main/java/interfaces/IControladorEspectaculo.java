@@ -15,4 +15,6 @@ public interface IControladorEspectaculo{
     public Espectaculo obtenerEspectaculo(String nombre);
     
     //public void agregarFuncion(String nombreEspectaculo,String nombreFuncion) throws FuncionYaRegistradaEnEspectaculoExcepcion;
+    
+    public List<Espectaculo> obtenerEspectaculo2(String plataforma);
 }

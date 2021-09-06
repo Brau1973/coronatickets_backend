@@ -13,7 +13,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+
 import datatypes.DtEspectaculo;
+
+
 
 @Entity
 public class Espectaculo{
@@ -170,7 +173,5 @@ public class Espectaculo{
 	public DtEspectaculo getDtEspectaculo(){
 		return new DtEspectaculo(null,null,this.nombre,this.descripcion,this.duracion,this.cantMinEsp,this.cantMaxEsp,this.url,this.costo,this.registro);
 	}
-	
-	
 
 }
