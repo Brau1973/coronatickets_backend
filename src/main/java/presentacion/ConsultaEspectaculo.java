@@ -2,13 +2,17 @@ package presentacion;
 
 import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;
+
 import java.util.List;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
@@ -21,6 +25,18 @@ import logica.Espectaculo;
 import logica.Funcion;
 import logica.PaqueteEspectaculos;
 import logica.Plataforma;
+
+import datatypes.DtEspectaculo;
+import interfaces.Fabrica;
+import interfaces.IControladorEspectaculo;
+import interfaces.IControladorPaquete;
+import interfaces.IControladorPlataforma;
+import logica.Artista;
+import logica.Espectaculo;
+import logica.Funcion;
+import logica.PaqueteEspectaculos;
+import logica.Plataforma;
+import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class ConsultaEspectaculo extends JInternalFrame{

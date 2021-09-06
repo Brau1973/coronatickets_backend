@@ -128,12 +128,20 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	 });
     }
 
-    public void actionPerformed(ActionEvent e){
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+    /*public void actionPerformed(ActionEvent e){ // 79S
+>>>>>>> 5b93376eabd1036b2d47c9e1ba52dd49c4d3a01d
 	 if(e.getSource() == comboUsuarios){
 	     String strUsuario = (String) this.comboUsuarios.getSelectedItem();
 	     Usuario u = iconU.obtenerUsuario(strUsuario);
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+<<<<<<< HEAD
 	     ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 
 	     String datos = "";
@@ -145,6 +153,12 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 		  for(String i :espArtista){
 		      datos = datos + "\n" + i.toString();
 		  }
+=======
+	    ArrayList<String> usuario = mE.obtenerEspectaculo();
+	     String datos = "\n\nLista de espectaculos:";
+	     for(String i :usuario){
+		  datos = datos + "\n" + i.toString();
+>>>>>>> 5b93376eabd1036b2d47c9e1ba52dd49c4d3a01d
 	     }
 
 	     if(u instanceof Espectador){
@@ -157,9 +171,12 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	     }
 	     jtextarea.setText(op + "Nombre:   " + u.getNombre() + "\nApellido:   " + u.getApellido() + "\nEmail:   " + u.getEmail() + "\nFecha:   " + formatoFecha.format(u.getfNacimiento()) + datos);
 	 }
+<<<<<<< HEAD
 
     }
 
+=======
+    }*/
 }
 
 

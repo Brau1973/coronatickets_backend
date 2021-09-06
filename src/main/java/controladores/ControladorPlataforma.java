@@ -2,6 +2,7 @@ package controladores;
 
 import java.util.List;
 
+import datatypes.DtEspectaculo;
 import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.IControladorPlataforma;
 import logica.Plataforma;
@@ -26,5 +27,23 @@ public class ControladorPlataforma implements IControladorPlataforma{
 	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 	 return mP.obtenerPlataforma();
     }
+    
+    public List<String> listarPlataformasDt(){
+	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
+	 return mP.obtenerPlataformas();
+    }
+    
+    public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma){
+	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
+	 Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);
+	 return plataforma.getEspectaculosDt();
+	 //return plataforma.obtenerEspectaculos(nombrePlataforma);
+	 
+    }
+    
+    
+    
+    
+    
 
 }

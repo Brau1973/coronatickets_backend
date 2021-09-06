@@ -121,6 +121,7 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	 btnCancelar.addActionListener(this);
     }
 
+
     // Inicializar ComboBox
     public void iniciarlizarComboBox(){
 	 comboUsuarios.removeAllItems();
