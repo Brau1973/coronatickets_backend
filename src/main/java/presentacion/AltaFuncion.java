@@ -202,9 +202,10 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		comboArtista.removeItem(this.comboArtista.getSelectedItem());
 		// listArtistasR = iconU.listarArtistas(); ///ver
 
-		listArtistasR = new ArrayList<Artista>();
-		listArtistasR.add(iconU.obtenerArtista(nombre));
+//		listArtistasR = new ArrayList<Artista>();
+//		listArtistasR.add(iconU.obtenerArtista(nombre));
 
+		
 		listArtistasSeleccionados.add(nombre);
 
 	}

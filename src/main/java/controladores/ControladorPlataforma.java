@@ -36,8 +36,8 @@ public class ControladorPlataforma implements IControladorPlataforma{
     public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma){
 	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 	 Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);
+	 return plataforma.getEspectaculosDt();
 	 //return plataforma.obtenerEspectaculos(nombrePlataforma);
-	return null;
 	 
     }
     
