@@ -27,6 +27,7 @@ import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
+import interfaces.IControladorUsuario;
 import logica.Espectaculo;
 import logica.Funcion;
 import logica.Plataforma;
@@ -39,6 +40,7 @@ public class ConsultaFuncion extends JInternalFrame {
 	private IControladorFuncion iconF;
 	private IControladorPlataforma iconP;
 	private IControladorEspectaculo iconE;
+	private IControladorUsuario iconU;
 	private JButton btnAceptar, btnCancelar;
 	private JPanel miPanel;
 	private JLabel lblTitulo, lblPlataforma, lblEspectaculos, lblFunciones, lblNombre, lblFecha, lblHora,
@@ -83,7 +85,7 @@ public class ConsultaFuncion extends JInternalFrame {
 		miPanel.add(lblPlataforma);
 
 		comboPlataforma = new JComboBox<String>();
-		// comboPlataforma.addItem("Seleccione Plataforma");
+		//comboPlataforma.addItem("Seleccione Plataforma");
 		comboPlataforma.setBounds(220, 30, 200, 20);
 		miPanel.add(comboPlataforma);
 		comboPlataforma.addItemListener(this::listenerComboPlataforma);
@@ -94,7 +96,7 @@ public class ConsultaFuncion extends JInternalFrame {
 		miPanel.add(lblEspectaculos);
 
 		comboEspectaculos = new JComboBox<String>();
-		// comboEspectaculos.addItem("Seleccione Espectaculo");
+		//comboEspectaculos.addItem("Seleccione Espectaculo");
 		comboEspectaculos.setBounds(220, 60, 200, 20);
 		miPanel.add(comboEspectaculos);
 		comboEspectaculos.addItemListener(this::listenerComboEspectaculo);
@@ -105,7 +107,7 @@ public class ConsultaFuncion extends JInternalFrame {
 		miPanel.add(lblFunciones);
 
 		comboFunciones = new JComboBox<String>();
-		// comboFunciones.addItem("Seleccione Funcion");
+		//comboFunciones.addItem("Seleccione Funcion");
 		comboFunciones.setBounds(220, 90, 200, 20);
 		miPanel.add(comboFunciones);
 		comboFunciones.addItemListener(this::listenerComboFunciones);
@@ -155,6 +157,7 @@ public class ConsultaFuncion extends JInternalFrame {
 		comboPlataforma.removeAllItems();
 		comboEspectaculos.removeAllItems();
 		comboFunciones.removeAllItems();
+		
 		listPlataformas = iconP.listarPlataformas();
 		listPlataformas.forEach((p) -> {
 			comboPlataforma.addItem(p.getNombre());
@@ -190,10 +193,12 @@ public class ConsultaFuncion extends JInternalFrame {
 						comboEspectaculos.removeAllItems();
 						comboFunciones.removeAllItems();
 						txtDatosFuncion.setText(null);
+						//comboPlataforma.removeItemAt(0);
 					} else {
 						comboEspectaculos.removeAllItems();
 						comboFunciones.removeAllItems();
 						txtDatosFuncion.setText(null);
+						//comboPlataforma.removeItemAt(0);
 						
 						listEspectaculos.forEach((Dtesp) -> {
 							comboEspectaculos.addItem(Dtesp.getNombre());
@@ -244,8 +249,15 @@ public class ConsultaFuncion extends JInternalFrame {
 				txtDatosFuncion.setText("Nombre: " + f.getNombre() + "\nFecha: " + formatoFecha.format(f.getFecha())
 						+ "\nFecha Alta: " + formatoFecha.format(f.getRegistro()) + "\nHora Inicio: "
 						+ formatoHora.format(f.getHoraInicio()) + "\nEspectaculo: " + f.getEspectaculo().getNombre() 
-						/*+ "\nArtistas: " + f.getArtistas()*/);
+						+ "\nArtistas: " + f.getArtistas());
 			}
 		}
+	}
+	
+	public void limpiarFormulario() {
+		txtDatosFuncion.setText("");
+		//comboPlataforma.removeAllItems();
+		//comboEspectaculos.removeAllItems();
+		//comboFunciones.removeAllItems();
 	}
 }
