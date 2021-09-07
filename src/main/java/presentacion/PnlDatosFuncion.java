@@ -20,25 +20,17 @@ import logica.PaqueteEspectaculos;
 
 @SuppressWarnings("serial")
 public class PnlDatosFuncion extends JInternalFrame{
-    private JPanel miPanel, panelEsp, panelPaquete;
-    private JLabel lblEspectaculos, lblNombEspectaculo, lblNombPaquete, lblDescPaquete, lblDescripcion, lblCosto, lblDuracion;
-    private JTable tablaEspectaculos;
-    private JLabel txtNombEspectaculo, txtDescripcion, txtNombPaquete, txtDescripcionPaquete, txtCosto, txtDuracion;
-    private Border borderPnlEspectaculos, borderPnlPaquete;
+    private JPanel miPanel, panelFuncion;
+    private JLabel lblRegistro,lblHoraInicio,lblFecha,lblNombFuncion;
+    private JLabel txtRegistro, txtHoraInicio,txtFecha,txtNombFuncion;
+    private Border borderPnlFuncion;
     static final int X_LABEL = 15;
     static final int X_TEXT = 200;
     static final int Y_DIST = 30;
     static final int WIDTH_LABEL = 180;
     static final int WIDTH_TEXT = 200;
     static final int HEIGHT_FIELD = 25;
-    static final String SELECCIONE = "Seleccione";
 
-    private String[] header = {"Nombre", "Artista", "Plataforma", "Descripción"};
-    private String[][] data = {};
-
-    private PaqueteEspectaculos paqueteSelected;
-    List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
-    IControladorPaquete iControladorPaquete = Fabrica.getInstancia().getIControladorPaquete();
 
     // Constructor
     public PnlDatosFuncion(){
@@ -53,44 +45,45 @@ public class PnlDatosFuncion extends JInternalFrame{
 	 setBorder(null);
 	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
 
-	 panelPaquete = new JPanel();
-	 borderPnlPaquete = BorderFactory.createTitledBorder("Funcion");
-	 panelPaquete.setBorder(borderPnlPaquete);
-	 panelPaquete.setLayout(null);
-	 panelPaquete.setBounds(X_LABEL, Y_DIST, 680, 235);
-	 miPanel.add(panelPaquete);
-	 panelPaquete.setVisible(true);
-	 lblNombPaquete = new JLabel("Nombre:", SwingConstants.RIGHT);
-	 lblNombPaquete.setBounds(X_LABEL, Y_DIST, WIDTH_LABEL, HEIGHT_FIELD);
-	 panelPaquete.add(lblNombPaquete);
-	 txtNombPaquete = new JLabel();
-	 txtNombPaquete.setEnabled(false);
-	 txtNombPaquete.setBounds(X_TEXT, Y_DIST, WIDTH_TEXT, HEIGHT_FIELD);
-	 panelPaquete.add(txtNombPaquete);
+	 panelFuncion = new JPanel();
+	 borderPnlFuncion = BorderFactory.createTitledBorder("Funcion");
+	 panelFuncion.setBorder(borderPnlFuncion);
+	 panelFuncion.setLayout(null);
+	 panelFuncion.setBounds(X_LABEL, Y_DIST, 680, 235);
+	 miPanel.add(panelFuncion);
+	 panelFuncion.setVisible(true);
+	 
+	 lblNombFuncion = new JLabel("Nombre:", SwingConstants.RIGHT);
+	 lblNombFuncion.setBounds(X_LABEL, Y_DIST, WIDTH_LABEL, HEIGHT_FIELD);
+	 panelFuncion.add(lblNombFuncion);
+	 txtNombFuncion = new JLabel();
+	 txtNombFuncion.setEnabled(false);
+	 txtNombFuncion.setBounds(X_TEXT, Y_DIST, WIDTH_TEXT, HEIGHT_FIELD);
+	 panelFuncion.add(txtNombFuncion);
 
-	 lblDescPaquete = new JLabel("Fecha:", SwingConstants.RIGHT);
-	 lblDescPaquete.setBounds(X_LABEL, Y_DIST * 2, WIDTH_LABEL, HEIGHT_FIELD);
-	 panelPaquete.add(lblDescPaquete);
-	 txtDescripcion = new JLabel();
-	 txtDescripcion.setEnabled(false);
-	 txtDescripcion.setBounds(X_TEXT, Y_DIST * 2, WIDTH_TEXT, HEIGHT_FIELD);
-	 panelPaquete.add(txtDescripcion);
+	 lblFecha = new JLabel("Fecha:", SwingConstants.RIGHT);
+	 lblFecha.setBounds(X_LABEL, Y_DIST * 2, WIDTH_LABEL, HEIGHT_FIELD);
+	 panelFuncion.add(lblFecha);
+	 txtFecha = new JLabel();
+	 txtFecha.setEnabled(false);
+	 txtFecha.setBounds(X_TEXT, Y_DIST * 2, WIDTH_TEXT, HEIGHT_FIELD);
+	 panelFuncion.add(txtFecha);
 
-	 lblEspectaculos = new JLabel("Hora:", SwingConstants.RIGHT);
-	 lblEspectaculos.setBounds(X_LABEL, Y_DIST * 3, WIDTH_LABEL, HEIGHT_FIELD);
-	 panelPaquete.add(lblEspectaculos);
-	 txtDescripcionPaquete = new JLabel();
-	 txtDescripcionPaquete.setEnabled(false);
-	 txtDescripcionPaquete.setBounds(X_TEXT, Y_DIST, WIDTH_TEXT, HEIGHT_FIELD);
-	 panelPaquete.add(txtDescripcionPaquete);
+	 lblHoraInicio = new JLabel("Hora:", SwingConstants.RIGHT);
+	 lblHoraInicio.setBounds(X_LABEL, Y_DIST * 3, WIDTH_LABEL, HEIGHT_FIELD);
+	 panelFuncion.add(lblHoraInicio);
+	 txtHoraInicio = new JLabel();
+	 txtHoraInicio.setEnabled(false);
+	 txtHoraInicio.setBounds(X_TEXT, Y_DIST * 3 , WIDTH_TEXT, HEIGHT_FIELD);
+	 panelFuncion.add(txtHoraInicio);
 
-	 lblDescripcion = new JLabel("Registro:", SwingConstants.RIGHT);
-	 lblDescripcion.setBounds(X_LABEL, Y_DIST * 4, WIDTH_LABEL, HEIGHT_FIELD);
-	 panelPaquete.add(lblDescripcion);
-	 txtNombEspectaculo = new JLabel();
-	 txtNombEspectaculo.setEnabled(false);
-	 txtNombEspectaculo.setBounds(X_TEXT, Y_DIST * 5, WIDTH_TEXT, HEIGHT_FIELD);
-	 panelPaquete.add(txtNombEspectaculo);
+	 lblRegistro = new JLabel("Registro:", SwingConstants.RIGHT);
+	 lblRegistro.setBounds(X_LABEL, Y_DIST * 4, WIDTH_LABEL, HEIGHT_FIELD);
+	 panelFuncion.add(lblRegistro);
+	 txtRegistro = new JLabel();
+	 txtRegistro.setEnabled(false);
+	 txtRegistro.setBounds(X_TEXT, Y_DIST * 4, WIDTH_TEXT, HEIGHT_FIELD);
+	 panelFuncion.add(txtRegistro);
 
     }
 
@@ -99,13 +92,11 @@ public class PnlDatosFuncion extends JInternalFrame{
 	 SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	 String datosFecha = formatoFecha.format(funcion.getFecha());
 	 String datosReg = formatoFecha.format(funcion.getRegistro());
-	 /* DefaultTableModel tm = (DefaultTableModel) tablaEspectaculos.getModel();
-	 paqueteSelected = p;*/
 	 Time horaInicio = funcion.getHoraInicio();
-	 txtNombPaquete.setText(funcion.getNombre());
-	 txtDescripcion.setText(String.valueOf(datosFecha));
-	 txtDescripcionPaquete.setText(horaInicio.toString());
-	 txtNombEspectaculo.setText(String.valueOf(datosReg));
+	 txtNombFuncion.setText(funcion.getNombre());
+	 txtFecha.setText(String.valueOf(datosFecha));
+	 txtHoraInicio.setText(horaInicio.toString());
+	 txtRegistro.setText(String.valueOf(datosReg));
     }
 
 
