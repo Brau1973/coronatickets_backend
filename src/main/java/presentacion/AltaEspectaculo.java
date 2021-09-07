@@ -16,237 +16,238 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import datatypes.DtArtista;
 import datatypes.DtEspectaculo;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
-import logica.Artista;
-import logica.Espectaculo;
-import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 
 @SuppressWarnings("serial")
-public class AltaEspectaculo extends JInternalFrame implements ActionListener{ // 79S
-    private IControladorEspectaculo iconE;
-    private IControladorUsuario iconU;
-    private IControladorPlataforma iconP;
-    private JPanel miPanel;
-    private JComboBox<String> comboPlataforma, comboArtista;
-    private JTextField txtNombre, txtDescripcion, txtDuracion, txtUrl, txtCosto;
-    private JSpinner spinMin, spinMax;
-    private JDateChooser dateFechaNac;
-    private JButton btnAceptar, btnCancelar;
-    private List<Plataforma> listPlataformas;
-    private List<Artista> listArtistas;
+public class AltaEspectaculo extends JInternalFrame implements ActionListener { // 79S
+	private IControladorEspectaculo iconE;
+	private IControladorUsuario iconU;
+	private IControladorPlataforma iconP;
+	private JPanel miPanel;
+	private JComboBox<String> comboPlataforma, comboArtista;
+	private JTextField txtNombre, txtDescripcion, txtDuracion, txtUrl, txtCosto;
+	private JSpinner spinMin, spinMax;
+	private JDateChooser dateFechaNac;
+	private JButton btnAceptar, btnCancelar;
+	private List<String> listPlataformas;
+	private List<DtArtista> listArtistas;
 
-    public AltaEspectaculo(IControladorEspectaculo iconE){
-	 this.iconE = iconE;
-	 iconU = Fabrica.getInstancia().getIControladorUsuario();
-	 iconP = Fabrica.getInstancia().getIControladorPlataforma();
-	 miPanel = new JPanel();
-	 miPanel.setLayout(null);
-	 add(miPanel);
-	 setBounds(15, 15, 475, 485);
-	 setResizable(false);
-	 setClosable(true);
-	 setIconifiable(false);
-	 setBorder(null);
-	 ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
+	public AltaEspectaculo(IControladorEspectaculo iconE) {
+		this.iconE = iconE;
+		iconU = Fabrica.getInstancia().getIControladorUsuario();
+		iconP = Fabrica.getInstancia().getIControladorPlataforma();
+		miPanel = new JPanel();
+		miPanel.setLayout(null);
+		add(miPanel);
+		setBounds(15, 15, 475, 485);
+		setResizable(false);
+		setClosable(true);
+		setIconifiable(false);
+		setBorder(null);
+		((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
 
-	 // JLabel
-	 JLabel lblTitulo = new JLabel("Alta Espectaculo");
-	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 19));
-	 lblTitulo.setBounds(10, 1, 350, 25);
-	 miPanel.add(lblTitulo);
+		// JLabel
+		JLabel lblTitulo = new JLabel("Alta Espectaculo");
+		lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 19));
+		lblTitulo.setBounds(10, 1, 350, 25);
+		miPanel.add(lblTitulo);
 
-	 JLabel lblPlataforma = new JLabel("Plataforma:");
-	 lblPlataforma.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblPlataforma.setBounds(10, 50, 110, 25);
-	 miPanel.add(lblPlataforma);
+		JLabel lblPlataforma = new JLabel("Plataforma:");
+		lblPlataforma.setFont(new java.awt.Font("Verdana", 1, 12));
+		lblPlataforma.setBounds(10, 50, 110, 25);
+		miPanel.add(lblPlataforma);
 
-	 JLabel lblArtista = new JLabel("Artista:");
-	 lblArtista.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblArtista.setBounds(10, 80, 110, 25);
-	 miPanel.add(lblArtista);
+		JLabel lblArtista = new JLabel("Artista:");
+		lblArtista.setFont(new java.awt.Font("Verdana", 1, 12));
+		lblArtista.setBounds(10, 80, 110, 25);
+		miPanel.add(lblArtista);
 
-	 JLabel lblNombre = new JLabel("Nombre:");
-	 lblNombre.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblNombre.setBounds(10, 110, 110, 25);
-	 miPanel.add(lblNombre);
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setFont(new java.awt.Font("Verdana", 1, 12));
+		lblNombre.setBounds(10, 110, 110, 25);
+		miPanel.add(lblNombre);
 
-	 JLabel lblDescripcion = new JLabel("Descripcion:");
-	 lblDescripcion.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblDescripcion.setBounds(10, 140, 110, 25);
-	 miPanel.add(lblDescripcion);
+		JLabel lblDescripcion = new JLabel("Descripcion:");
+		lblDescripcion.setFont(new java.awt.Font("Verdana", 1, 12));
+		lblDescripcion.setBounds(10, 140, 110, 25);
+		miPanel.add(lblDescripcion);
 
-	 JLabel lblDuracion = new JLabel("Duracion:");
-	 lblDuracion.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblDuracion.setBounds(10, 170, 150, 25);
-	 miPanel.add(lblDuracion);
+		JLabel lblDuracion = new JLabel("Duracion:");
+		lblDuracion.setFont(new java.awt.Font("Verdana", 1, 12));
+		lblDuracion.setBounds(10, 170, 150, 25);
+		miPanel.add(lblDuracion);
 
-	 JLabel lblCantEsp = new JLabel("Espectadores:");
-	 lblCantEsp.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblCantEsp.setBounds(10, 200, 180, 25);
-	 miPanel.add(lblCantEsp);
+		JLabel lblCantEsp = new JLabel("Espectadores:");
+		lblCantEsp.setFont(new java.awt.Font("Verdana", 1, 12));
+		lblCantEsp.setBounds(10, 200, 180, 25);
+		miPanel.add(lblCantEsp);
 
-	 JLabel lblCantMinEsp = new JLabel("Minimo:");
-	 lblCantMinEsp.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblCantMinEsp.setBounds(155, 200, 110, 25);
-	 miPanel.add(lblCantMinEsp);
+		JLabel lblCantMinEsp = new JLabel("Minimo:");
+		lblCantMinEsp.setFont(new java.awt.Font("Verdana", 1, 12));
+		lblCantMinEsp.setBounds(155, 200, 110, 25);
+		miPanel.add(lblCantMinEsp);
 
-	 JLabel lblCantMaxEsp = new JLabel("Maximo:");
-	 lblCantMaxEsp.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblCantMaxEsp.setBounds(292, 200, 110, 25);
-	 miPanel.add(lblCantMaxEsp);
+		JLabel lblCantMaxEsp = new JLabel("Maximo:");
+		lblCantMaxEsp.setFont(new java.awt.Font("Verdana", 1, 12));
+		lblCantMaxEsp.setBounds(292, 200, 110, 25);
+		miPanel.add(lblCantMaxEsp);
 
-	 JLabel lblUrl = new JLabel("URL:");
-	 lblUrl.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblUrl.setBounds(10, 230, 150, 25);
-	 miPanel.add(lblUrl);
+		JLabel lblUrl = new JLabel("URL:");
+		lblUrl.setFont(new java.awt.Font("Verdana", 1, 12));
+		lblUrl.setBounds(10, 230, 150, 25);
+		miPanel.add(lblUrl);
 
-	 JLabel lblCosto = new JLabel("Costo:");
-	 lblCosto.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblCosto.setBounds(10, 260, 150, 25);
-	 miPanel.add(lblCosto);
+		JLabel lblCosto = new JLabel("Costo:");
+		lblCosto.setFont(new java.awt.Font("Verdana", 1, 12));
+		lblCosto.setBounds(10, 260, 150, 25);
+		miPanel.add(lblCosto);
 
-	 JLabel lblRegistro = new JLabel("Fecha de alta:");
-	 lblRegistro.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblRegistro.setBounds(10, 290, 150, 25);
-	 miPanel.add(lblRegistro);
+		JLabel lblRegistro = new JLabel("Fecha de alta:");
+		lblRegistro.setFont(new java.awt.Font("Verdana", 1, 12));
+		lblRegistro.setBounds(10, 290, 150, 25);
+		miPanel.add(lblRegistro);
 
-	 // JComboBox
-	 comboPlataforma = new JComboBox<String>();
-	 comboPlataforma.setBounds(155, 48, 260, 25);
-	 miPanel.add(comboPlataforma);
+		// JComboBox
+		comboPlataforma = new JComboBox<String>();
+		comboPlataforma.setBounds(155, 48, 260, 25);
+		miPanel.add(comboPlataforma);
 
-	 comboArtista = new JComboBox<String>();
-	 comboArtista.setBounds(155, 78, 260, 25);
-	 miPanel.add(comboArtista);
+		comboArtista = new JComboBox<String>();
+		comboArtista.setBounds(155, 78, 260, 25);
+		miPanel.add(comboArtista);
 
-	 // JTextField
-	 txtNombre = new JTextField();
-	 txtNombre.setBounds(155, 108, 260, 25);
-	 miPanel.add(txtNombre);
+		// JTextField
+		txtNombre = new JTextField();
+		txtNombre.setBounds(155, 108, 260, 25);
+		miPanel.add(txtNombre);
 
-	 txtDescripcion = new JTextField();
-	 txtDescripcion.setBounds(155, 138, 260, 25);
-	 miPanel.add(txtDescripcion);
+		txtDescripcion = new JTextField();
+		txtDescripcion.setBounds(155, 138, 260, 25);
+		miPanel.add(txtDescripcion);
 
-	 txtDuracion = new JTextField();
-	 txtDuracion.setBounds(155, 168, 260, 25);
-	 miPanel.add(txtDuracion);
+		txtDuracion = new JTextField();
+		txtDuracion.setBounds(155, 168, 260, 25);
+		miPanel.add(txtDuracion);
 
-	 spinMin = new JSpinner();
-	 spinMin.setBounds(209, 196, 65, 25);
-	 miPanel.add(spinMin);
+		spinMin = new JSpinner();
+		spinMin.setBounds(209, 196, 65, 25);
+		miPanel.add(spinMin);
 
-	 spinMax = new JSpinner();
-	 spinMax.setBounds(348, 196, 65, 25);
-	 miPanel.add(spinMax);
+		spinMax = new JSpinner();
+		spinMax.setBounds(348, 196, 65, 25);
+		miPanel.add(spinMax);
 
-	 txtUrl = new JTextField();
-	 txtUrl.setBounds(155, 226, 260, 25);
-	 miPanel.add(txtUrl);
+		txtUrl = new JTextField();
+		txtUrl.setBounds(155, 226, 260, 25);
+		miPanel.add(txtUrl);
 
-	 txtCosto = new JTextField();
-	 txtCosto.setBounds(155, 256, 260, 25);
-	 miPanel.add(txtCosto);
+		txtCosto = new JTextField();
+		txtCosto.setBounds(155, 256, 260, 25);
+		miPanel.add(txtCosto);
 
-	 dateFechaNac = new JDateChooser();
-	 dateFechaNac.setBounds(155, 286, 260, 25);
-	 miPanel.add(dateFechaNac);
+		dateFechaNac = new JDateChooser();
+		dateFechaNac.setBounds(155, 286, 260, 25);
+		miPanel.add(dateFechaNac);
 
-	 // JButton
-	 btnAceptar = new JButton("Aceptar");
-	 btnAceptar.setBounds(155, 325, 127, 25);
-	 miPanel.add(btnAceptar);
-	 btnAceptar.addActionListener(this);
+		// JButton
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(155, 325, 127, 25);
+		miPanel.add(btnAceptar);
+		btnAceptar.addActionListener(this);
 
-	 btnCancelar = new JButton("Cancelar");
-	 btnCancelar.setBounds(286, 325, 127, 25);
-	 miPanel.add(btnCancelar);
-	 btnCancelar.addActionListener(this);
-    }
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(286, 325, 127, 25);
+		miPanel.add(btnCancelar);
+		btnCancelar.addActionListener(this);
+	}
 
-    // Inicializar ComboBox
-    public void iniciarlizarComboBox(){
-	 comboPlataforma.removeAllItems();
-	 comboArtista.removeAllItems();
+	// Inicializar ComboBox
+	public void iniciarlizarComboBox() {
+		comboPlataforma.removeAllItems();
+		comboArtista.removeAllItems();
 
-	 listPlataformas = iconP.listarPlataformas();
-	 listPlataformas.forEach((p) -> {
-	     comboPlataforma.addItem(p.getNombre());
-	 });
+		listPlataformas = iconP.listarPlataformasDt();
+		listPlataformas.forEach((p) -> {
+			comboPlataforma.addItem(p);
+		});
 
-	 listArtistas = iconU.listarArtistas();
-	 listArtistas.forEach((a) -> {
-	     comboArtista.addItem(a.getNickname());
-	 });
-    }
+		listArtistas = iconU.listarArtistasDt();
+		listArtistas.forEach((DtArt) -> {
+			comboArtista.addItem(DtArt.getNickname());
+		});
+	}
 
-    public void actionPerformed(ActionEvent e){
-	 String strplataforma = (String) this.comboPlataforma.getSelectedItem();
-	 Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strplataforma)).findFirst().get();
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAceptar) {
+			if (checkFormulario()) {
+				String strplataforma = (String) this.comboPlataforma.getSelectedItem();
+				String strartista = (String) this.comboArtista.getSelectedItem();
+				String strnombre = this.txtNombre.getText();
+				String strdescripcion = this.txtDescripcion.getText();
+				int cantMin = (Integer) spinMin.getValue();
+				int cantMax = (Integer) spinMax.getValue();
+				String strurl = this.txtUrl.getText();
+				Date dateRegistro = this.dateFechaNac.getDate();
+				try {
+					DtEspectaculo dte = new DtEspectaculo(strartista, strplataforma, strnombre,
+							strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl,
+							Integer.parseInt(this.txtCosto.getText()), dateRegistro);
+					this.iconE.altaEspectaculo(dte);
+					JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo",
+							JOptionPane.INFORMATION_MESSAGE);
+					// limpiarFormulario();
+				} catch (Exception ex) {
+					System.out.println("Mensaje: " + ex.getMessage());
+					JOptionPane.showMessageDialog(null, "Los datos ingresados no son correctos", "Error",
+							JOptionPane.ERROR_MESSAGE);
+					// limpiarFormulario();
+				}
+				setVisible(false);
+			}
+		}
+		if (e.getSource() == btnCancelar) {
+			limpiarFormulario();
+			setVisible(false);
+		}
+	}
 
-	 String strartista = (String) this.comboArtista.getSelectedItem();
-	 Artista artista = listArtistas.stream().filter(a -> (a.getNickname() == strartista)).findFirst().get();
+	private boolean checkFormulario() {
+		if (!txtNombre.getText().isEmpty() && !txtDescripcion.getText().isEmpty() && !txtDuracion.getText().isEmpty()
+				&& !txtUrl.getText().isEmpty() && txtCosto.getText() != null && dateFechaNac.getDate() != null) {
+			ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+			if (mE.buscarEspectaculo(txtNombre.getText()) != null) {
+				int respuesta = JOptionPane.showConfirmDialog(null,
+						"El nombre del espectaculo ya existe\n¿Desea modificar los datos?\n", "Advertencia",
+						JOptionPane.YES_NO_OPTION);
+				if (respuesta != JOptionPane.YES_NO_OPTION) {
+					limpiarFormulario();
+					setVisible(false);
+				}
+				return false;
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
+	}
 
-	 String strnombre = this.txtNombre.getText();
-	 String strdescripcion = this.txtDescripcion.getText();
-	 int cantMin = (Integer) spinMin.getValue();
-	 int cantMax = (Integer) spinMax.getValue();
-	 String strurl = this.txtUrl.getText();
-	 Date dateRegistro = this.dateFechaNac.getDate();
-
-	 if(e.getSource() == btnAceptar){
-	     if(checkFormulario()){
-		  try{
-		      DtEspectaculo dte = new DtEspectaculo(artista.getNickname(), plataforma.getNombre(), strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
-		      this.iconE.altaEspectaculo(dte);
-		      JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
-		      // limpiarFormulario();
-		  }catch(Exception ex){
-			  System.out.println("Mensaje: "+ ex.getMessage());
-		      JOptionPane.showMessageDialog(null, "Los datos ingresados no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
-		      // limpiarFormulario();
-		  }
-		  setVisible(false);
-	     }
-	 }
-	 if(e.getSource() == btnCancelar){
-	     limpiarFormulario();
-	     setVisible(false);
-	 }
-    }
-
-    private boolean checkFormulario(){
-	 if(!txtNombre.getText().isEmpty() && !txtDescripcion.getText().isEmpty() && !txtDuracion.getText().isEmpty() && !txtUrl.getText().isEmpty() && txtCosto.getText() != null && dateFechaNac.getDate() != null){
-	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-	     if(mE.buscarEspectaculo(txtNombre.getText()) != null){
-		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre del espectaculo ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
-		  if(respuesta != JOptionPane.YES_NO_OPTION){
-		      limpiarFormulario();
-		      setVisible(false);
-		  }
-		  return false;
-	     }
-	 }else{
-	     JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-	     return false;
-	 }
-	 return true;
-    }
-
-    private void limpiarFormulario(){
-	 txtNombre.setText("");
-	 txtDescripcion.setText("");
-	 txtDuracion.setText("");
-	 spinMin.setValue(0);
-	 spinMax.setValue(0);
-	 txtUrl.setText("");
-	 txtCosto.setText("");
-	 dateFechaNac.setDate(null);
-    }
+	private void limpiarFormulario() {
+		txtNombre.setText("");
+		txtDescripcion.setText("");
+		txtDuracion.setText("");
+		spinMin.setValue(0);
+		spinMax.setValue(0);
+		txtUrl.setText("");
+		txtCosto.setText("");
+		dateFechaNac.setDate(null);
+	}
 
 }
