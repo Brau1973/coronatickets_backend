@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import datatypes.DtPlataforma;
 import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.IControladorPlataforma;
 
@@ -89,12 +90,13 @@ public class AltaPlataforma extends JInternalFrame{
     }
 
     protected void actionListenerGuardar(ActionEvent al){
-	 String nombre = this.txtNombre.getText();
-	 String descripcion = this.txtDescripcion.getText();
-	 String url = this.txtUrl.getText();
 	 if(checkFormulario()){
+		 String nombre = this.txtNombre.getText();
+		 String descripcion = this.txtDescripcion.getText();
+		 String url = this.txtUrl.getText();
+		 DtPlataforma dtPlataforma = new DtPlataforma(nombre,descripcion,url);
 	     try{
-		  this.iconP.altaPlataforma(nombre, descripcion, url);
+		  this.iconP.altaPlataforma(dtPlataforma);
 		  JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
 	     }catch(PlataformaRepetidaExcepcion e){
 		  JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
@@ -105,14 +107,13 @@ public class AltaPlataforma extends JInternalFrame{
     }
 
     private boolean checkFormulario(){
-	 String nombre = this.txtNombre.getText();
-	 String descripcion = this.txtDescripcion.getText();
-	 String url = this.txtUrl.getText();
-	 if(nombre.isEmpty() || descripcion.isEmpty() || url.isEmpty()){
-	     JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
-	     return false;
-	 }
-	 return true;
+		if (this.txtNombre.getText().isEmpty() || this.txtDescripcion.getText().isEmpty() || this.txtUrl.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}else {
+			return true;
+		}
     }
 
 

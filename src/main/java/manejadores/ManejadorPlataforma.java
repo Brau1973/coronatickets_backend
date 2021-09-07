@@ -43,7 +43,7 @@ public class ManejadorPlataforma{
     }
 
     @SuppressWarnings("unchecked")
-    public List<Plataforma> obtenerPlataforma(){ // NO SE DEBERIA USAR
+    public List<Plataforma> obtenerPlataforma(){ // NO SE DEBERIA USAR BORRAR UNA VEZ PASADO A DT
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 	 Query query = em.createQuery("select p from Plataforma p");

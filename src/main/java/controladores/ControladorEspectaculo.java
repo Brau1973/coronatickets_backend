@@ -19,6 +19,7 @@ import logica.Funcion;
 import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
+import manejadores.ManejadorPlataforma;
 import persistencia.Conexion;
 
 public class ControladorEspectaculo implements IControladorEspectaculo{
@@ -74,6 +75,13 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 //		em.persist(espectaculo); 
 //		em.getTransaction().commit();
 //	}
+    
+    public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma){
+	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
+	 Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);
+	 return plataforma.getEspectaculosDt();
+    }
+    
     public List<Espectaculo> obtenerEspectaculo2(String plataforma){
    	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
    	 return mE.obtenerEspectaculoBD(plataforma);
