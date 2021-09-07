@@ -16,7 +16,7 @@ import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
 
 @SuppressWarnings("serial")
-public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
+public class FrmPrincipal extends JFrame implements ActionListener{
     private Container contenedor;
     private JMenuBar barraMenu;
     private JMenu menuInicio, menuUsuario, menuEspectaculo, menuAyuda, menuPlataforma, menuFuncion, menuPaquete;
@@ -47,7 +47,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
     public FrmPrincipal(){
 	 inicializar();
 	 setTitle("coronaTickets.uy");
-	 setSize(800, 700);
+	 setSize(800, 750);
 	 setLocationRelativeTo(null);
 	 setResizable(false);
 	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -276,6 +276,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameModificarDatosUsuario.setVisible(true);
 	     break;
 	 case "Consulta de Usuario":
+	     // internalFrameConsultaUsuario.iniciarlizarComboBox();
 	     internalFrameConsultaUsuario.setVisible(true);
 	     break;
 	 case "Alta de Espectaculo":
@@ -283,7 +284,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameAltaEspectaculo.setVisible(true);
 	     break;
 	 case "Consulta de Espectaculo":
-		 internalFrameConsultaEspectaculo.iniciarlizarComboBox();
+	     internalFrameConsultaEspectaculo.iniciarlizarComboBox();
 	     internalFrameConsultaEspectaculo.setVisible(true);
 	     break;
 	 case "Alta de Plataforma":
@@ -306,7 +307,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{ // 79S
 	     internalFrameCreaPaqueteEspectaculo.setVisible(true);
 	     break;
 	 case "Consulta de Paquete de Espectaculos":
-		 internalFrameConsultaPaqueteEspectaculo.iniciarlizarComboBox();
+	     internalFrameConsultaPaqueteEspectaculo.iniciarlizarComboBox();
 	     internalFrameConsultaPaqueteEspectaculo.setVisible(true);
 	     break;
 	 case "Agregar Espectaculo a Paquete":

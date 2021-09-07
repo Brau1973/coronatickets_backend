@@ -15,33 +15,34 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import com.toedter.calendar.JDateChooser;
 
-import interfaces.IControladorEspectaculo;
+import interfaces.Fabrica;
 import interfaces.IControladorUsuario;
-import logica.Espectaculo;
-import logica.Usuario;
-import manejadores.ManejadorEspectaculo;
 
+import logica.Espectaculo;
+import logica.Artista;
+import logica.Espectador;
+import logica.Usuario;
+
+import manejadores.ManejadorEspectaculo;
+import manejadores.ManejadorFuncion;
 
 @SuppressWarnings("serial")
 public class ConsultarUsuario extends JInternalFrame implements ActionListener{
-    private IControladorUsuario iconU;
-    private IControladorEspectaculo iconE;
+
     private JPanel miPanel;
     private JScrollPane panel;
     private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblBuscar;
-    private JTextField txtBuscar, txtNickname, txtNombre, txtApellido, txtEmail;
     private JDateChooser dateFechaNac;
     private JTable tabUsuario;
     private JComboBox<String> comboUsuarios;
-    JTextArea jtextarea;
+    private JTextArea jtextarea;
     private List<Usuario> listUsuarios;
+    IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
 
-    // Tabla muestra todos los datos basicos.
     // Constructor
     public ConsultarUsuario(IControladorUsuario iconU){
 	 this.iconU = iconU;
@@ -58,7 +59,7 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	 // JLabel
 	 lblTitulo = new JLabel("Consulta de Usuario");
 	 lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 18));
-	 lblTitulo.setBounds(10, 1, 270, 25);
+	 lblTitulo.setBounds(10, 1, 380, 25);
 	 miPanel.add(lblTitulo);
 
 	 lblBuscar = new JLabel("Usuario:");
@@ -72,12 +73,12 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	 miPanel.add(comboUsuarios);
 	 comboUsuarios.addActionListener(this);
 
-	 jtextarea = new JTextArea(20, 58);
+	 jtextarea = new JTextArea(25, 150);
 	 Border border = BorderFactory.createLineBorder(Color.GRAY);
 	 jtextarea.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-	 jtextarea.setBounds(10, 70, 365, 200);
+	 jtextarea.setBounds(10, 70, 330, 300);
 	 jtextarea.setFont(new java.awt.Font("Verdana", 1, 12));
-	 jtextarea.setEditable(false);
+	 jtextarea.setAutoscrolls(maximizable);
 	 miPanel.add(jtextarea);
 
 	 // Tabla Funciones de espectulos
@@ -89,27 +90,6 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	 jsPane.setVisible(false);
 	 miPanel.add(jsPane, BorderLayout.SOUTH);*/
 
-	 // Label
-	 /* lblNickname = new JLabel(); 
-	 lblNombre = new JLabel();
-	 lblApellido = new JLabel();
-	 lblEmail = new JLabel();
-	 lblfNacimiento = new JLabel();
-	 lblNickname.setText("Nickname:");
-	 lblNombre.setText("Nombre:");
-	 lblApellido.setText("Apellido:");
-	 lblEmail.setText("Email:");
-	 lblfNacimiento.setText("Fecha nacimiento:");
-	 lblNickname.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblNombre.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblApellido.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblEmail.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblfNacimiento.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblNickname.setBounds(10, 220, 80, 25);
-	 lblNombre.setBounds(10, 250, 80, 25);
-	 lblApellido.setBounds(10, 280, 80, 25);
-	 lblEmail.setBounds(10, 310, 80, 25);
-	 lblfNacimiento.setBounds(10, 340, 150, 25);*/
 
 	 // JTextField
 	 // txtNickname = new JTextField();
@@ -140,32 +120,70 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	   txtApellido.setText(String.valueOf(tabUsuario.getValueAt(fila, 1)));
 	     }
 	 });*/
-
+	 iniciaComboBoxU();
     }
 
     // Inicializar ComboBox
-    public void iniciarlizarComboBox(){
-	 // Cargo combo de artistas
+    private void iniciaComboBoxU(){
 	 listUsuarios = iconU.listarUsuarios();
 	 listUsuarios.forEach((u) -> {
 	     comboUsuarios.addItem(u.getNickname());
 	 });
     }
 
-    public void actionPerformed(ActionEvent e){ // 79S
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+    /*public void actionPerformed(ActionEvent e){ // 79S
+>>>>>>> 5b93376eabd1036b2d47c9e1ba52dd49c4d3a01d
 	 if(e.getSource() == comboUsuarios){
-	     String strUsuario = this.comboUsuarios.getSelectedItem().toString();
-	     Usuario u = this.iconU.obtenerUsuario(strUsuario);
+	     String strUsuario = (String) this.comboUsuarios.getSelectedItem();
+	     Usuario u = iconU.obtenerUsuario(strUsuario);
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+<<<<<<< HEAD
 	     List<Espectaculo> usuario = mE.obtenerEspectaculo();
+=======
+<<<<<<< HEAD
+	     ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+
+	     String datos = "";
+	     String op = "";
+	     if(u instanceof Artista){
+		  op = "***********Artista\n\n";
+		  ArrayList<String> espArtista = mE.obtenerEspectaculodeArtista(strUsuario);
+		  datos = "\n\nLista de espectaculos:";
+		  for(String i :espArtista){
+		      datos = datos + "\n" + i.toString();
+		  }
+=======
+	    ArrayList<String> usuario = mE.obtenerEspectaculo();
+>>>>>>> fa1031cacde85a4d766ba58a399e48268702b2e6
 	     String datos = "\n\nLista de espectaculos:";
 	     for(Espectaculo i :usuario){
 		  datos = datos + "\n" + i.toString();
+>>>>>>> 5b93376eabd1036b2d47c9e1ba52dd49c4d3a01d
 	     }
-	     jtextarea.setText("Nombre: " + u.getNombre() + "\nApellido: " + u.getApellido() + "\nEmail: " + u.getEmail() + "\nFecha: " + formatoFecha.format(u.getfNacimiento()) + datos);
+
+	     if(u instanceof Espectador){
+		  op = "***********Espectador\n\n";
+		  ArrayList<String> ff = mF.obtenerFunciones();
+		  datos = "\n\nLista de funciones:";
+		  for(String f :ff){
+		      datos = datos + "\n" + f.toString();
+		  }
+	     }
+	     jtextarea.setText(op + "Nombre:   " + u.getNombre() + "\nApellido:   " + u.getApellido() + "\nEmail:   " + u.getEmail() + "\nFecha:   " + formatoFecha.format(u.getfNacimiento()) + datos);
 	 }
+<<<<<<< HEAD
+
     }
+
+=======
+    }*/
 }
 
 

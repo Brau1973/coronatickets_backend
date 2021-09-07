@@ -20,6 +20,7 @@ import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
 import manejadores.ManejadorPlataforma;
 import persistencia.Conexion;
+import manejadores.ManejadorPlataforma;
 
 public class ControladorFuncion implements IControladorFuncion{
 
@@ -35,7 +36,7 @@ public class ControladorFuncion implements IControladorFuncion{
     
     public void altaFuncion(DtFuncion dtFuncion) throws FuncionRepetidaExcepcion {
 		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-		Funcion funcion = mF.buscarFuncion(dtFuncion.getNombre());
+		//Funcion funcion = mF.buscarFuncion(dtFuncion.getNombre());
 //     if (funcion != null)
 //         throw new FuncionRepetidaExcepcion("La Funcion "+ dtFuncion.getNombre() + "ya esta registrada");
 		IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
@@ -68,7 +69,7 @@ public class ControladorFuncion implements IControladorFuncion{
      	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
      	 return mF.obtenerFuncionesBD(espectaculo);
          }
-
+ 
     // @Override
     // public String[] listarPlataformas() {
     // ArrayList<String> plataformas;

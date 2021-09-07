@@ -3,6 +3,7 @@ package controladores;
 import java.util.List;
 
 import datatypes.DtEspectaculo;
+import datatypes.DtPlataforma;
 import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.IControladorPlataforma;
 import logica.Plataforma;
@@ -14,16 +15,16 @@ public class ControladorPlataforma implements IControladorPlataforma{
 	 super();
     }
 
-    public void altaPlataforma(String nombre, String descripcion, String url) throws PlataformaRepetidaExcepcion{
+    public void altaPlataforma(DtPlataforma dtPlataforma) throws PlataformaRepetidaExcepcion{
 	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
-	 Plataforma plataforma = mP.buscarPlataforma(nombre);
+	 Plataforma plataforma = mP.buscarPlataforma(dtPlataforma.getNombre());
 	 if(plataforma != null)
-	     throw new PlataformaRepetidaExcepcion("la plataforma " + nombre + " ya esta existe");
-	 plataforma = new Plataforma(nombre, descripcion, url);
+	     throw new PlataformaRepetidaExcepcion("la plataforma " + dtPlataforma.getNombre() + " ya esta existe");
+	 plataforma = new Plataforma(dtPlataforma.getNombre(), dtPlataforma.getDescripcion(), dtPlataforma.getUrl());
 	 mP.altaPlataforma(plataforma);
     }
 
-    public List<Plataforma> listarPlataformas(){
+    public List<Plataforma> listarPlataformas(){ // NO SE DEBERIA USAR, LA CORRECTA ES listarPlataformasDt
 	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 	 return mP.obtenerPlataforma();
     }
@@ -33,14 +34,10 @@ public class ControladorPlataforma implements IControladorPlataforma{
 	 return mP.obtenerPlataformas();
     }
     
-    public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma){
+    public Plataforma buscarPlataforma(String nombrePlataforma){
 	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
-	 return mP.obtenerEspectaculos(nombrePlataforma);
+	 Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);
+	 return plataforma;
+	 
     }
-    
-    
-    
-    
-    
-
 }

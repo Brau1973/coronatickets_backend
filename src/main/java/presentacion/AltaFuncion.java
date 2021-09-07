@@ -1,6 +1,5 @@
 package presentacion;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
@@ -20,18 +19,15 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-import org.hibernate.internal.build.AllowSysOut;
-
 import com.toedter.calendar.JDateChooser;
 
 import excepciones.FuncionRepetidaExcepcion;
-import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
+//import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
-import logica.Artista;
 import datatypes.DtArtista;
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
@@ -50,24 +46,13 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 	private JSpinner spinHora, spinMin;
 	private JDateChooser fechaFuncion, fechaAlta;
 	private JComboBox<String> comboArtista, comboEspectaculos, comboPlataforma;
-	private JList listaArtistas, listaArtistasSeleccionados;
-	private String nombresArtistas[] = { "1", "2", "3", "4", "1", "2", "3", "4", "1", "2", "3", "4" };
-	private DefaultListModel modelo;
+	private JList<String> listaArtistasSeleccionados;
+	private DefaultListModel<String> modelo;
 	private JScrollPane scrollPane;
-	@SuppressWarnings("rawtypes")
-	private JList listNombres;
-
-	// private List<Plataforma> listPlataformas;
 	private List<String> listPlataformas;
-
-	// private List<Espectaculo> listEspectaculos;
 	private List<DtEspectaculo> listEspectaculos;
-
-	// private List<Artista> listArtistas;
 	private List<DtArtista> listArtistas;
-
 	private List<String> listArtistasSeleccionados;
-	private List<Artista> listArtistasR;
 
 	// Constructor
 	public AltaFuncion(IControladorFuncion iconF) {
@@ -159,12 +144,12 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		});
 		miPanel.add(btnCopiar);
 
-		listNombres = new JList();
-		listNombres.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		modelo = new DefaultListModel();
+		listaArtistasSeleccionados = new JList<String>();
+		listaArtistasSeleccionados.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		modelo = new DefaultListModel<String>();
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(300, 250, 120, 60);
-		scrollPane.setViewportView(listNombres);
+		scrollPane.setViewportView(listaArtistasSeleccionados);
 		miPanel.add(scrollPane);
 
 		comboArtista = new JComboBox<String>();
@@ -194,19 +179,13 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		btnCancelar.addActionListener(this);
 	}
 
-	@SuppressWarnings("unchecked")
 	private void agregarNombre() {
 		String nombre = this.comboArtista.getSelectedItem().toString();
 		modelo.addElement(nombre);
-		listNombres.setModel(modelo);
+		listaArtistasSeleccionados.setModel(modelo);
 		comboArtista.removeItem(this.comboArtista.getSelectedItem());
-		// listArtistasR = iconU.listarArtistas(); ///ver
-
-		listArtistasR = new ArrayList<Artista>();
-		listArtistasR.add(iconU.obtenerArtista(nombre));
-
+		
 		listArtistasSeleccionados.add(nombre);
-
 	}
 
 	// Inicializar ComboBox
@@ -233,9 +212,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		if (e.getSource() == comboPlataforma) {
 			if (this.comboPlataforma.getSelectedItem() != null) {
 				String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
-				// Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre()
-				// == strPlataforma)).findFirst().get();
-				listEspectaculos = iconP.listarEspectaculos(strPlataforma);
+				listEspectaculos = iconE.listarEspectaculos(strPlataforma);
 				if (listEspectaculos.isEmpty()) {
 					comboEspectaculos.removeAllItems();
 				} else {
@@ -256,11 +233,8 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 				Time horaInicio = new Time(hora, minutos, 0);
 				Date fechaRegistro = this.fechaAlta.getDate();
 				String strespectaculo = (String) this.comboEspectaculos.getSelectedItem();
-				// Espectaculo esp = listEspectaculos.stream().filter(p -> (p.getNombre() ==
-				// strespectaculo)).findFirst().get();
 				DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro,
 						strespectaculo, listArtistasSeleccionados);
-				// esp.agregarFuncion(fe);
 				try {
 					this.iconF.altaFuncion(dtFuncion);
 					JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");

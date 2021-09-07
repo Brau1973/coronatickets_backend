@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 import datatypes.DtEspectaculo;
 
 @Entity
@@ -32,10 +31,11 @@ public class Espectaculo{
     private String url;
     private int costo;
     private Date registro;
+
     @ManyToMany(mappedBy = "espectaculos")
     private List<PaqueteEspectaculos> paquete = new ArrayList<PaqueteEspectaculos>();
 
-    @OneToMany(mappedBy = "espectaculo",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "espectaculo", cascade = CascadeType.ALL)
     private List<Funcion> funciones = new ArrayList<>();
 
 	public Espectaculo(){
@@ -92,7 +92,6 @@ public class Espectaculo{
 	 return costo;
     }
 
-
     public Date getRegistro(){
 	 return registro;
     }
@@ -100,10 +99,15 @@ public class Espectaculo{
     public List<PaqueteEspectaculos> getPaquete() {
 		return paquete;
 	}
-    
-    public List<Funcion> getFunciones() {
-		return funciones;
-	}
+
+    public List<Funcion> getFunciones(){
+	 return funciones;
+    }
+
+    public List<PaqueteEspectaculos> getPaquetes(){
+	 return paquete;
+    }
+
 
     public void setArtista(Artista artista){
 	 this.artista = artista;
@@ -175,4 +179,7 @@ public class Espectaculo{
 		return new DtEspectaculo(null,null,this.nombre,this.descripcion,this.duracion,this.cantMinEsp,this.cantMaxEsp,this.url,this.costo,this.registro);
 	}
 
+    public void setPaquetes(List<PaqueteEspectaculos> paquete){
+	 this.paquete = paquete;
+    }
 }

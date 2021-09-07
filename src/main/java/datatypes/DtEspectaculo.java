@@ -32,7 +32,15 @@ public class DtEspectaculo{
 	 this.registro = registro;
     }
 
-    public String getNombre(){
+    public String getArtista() {
+		return artista;
+	}
+
+	public String getPlataforma() {
+		return plataforma;
+	}
+
+	public String getNombre(){
 	 return nombre;
     }
 

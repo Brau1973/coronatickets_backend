@@ -9,9 +9,11 @@ import javax.persistence.Query;
 
 import datatypes.DtEspectaculo;
 import logica.Artista;
+import logica.Funcion;
 import logica.Plataforma;
 import persistencia.Conexion;
 
+@SuppressWarnings("unused")
 public class ManejadorPlataforma{
     private static ManejadorPlataforma instancia = null;
     private static EntityManager em;
@@ -40,7 +42,8 @@ public class ManejadorPlataforma{
 	 return em.find(Plataforma.class, nombre);
     }
 
-    public List<Plataforma> obtenerPlataforma(){ // NO SE DEBERIA USAR
+    @SuppressWarnings("unchecked")
+    public List<Plataforma> obtenerPlataforma(){ // NO SE DEBERIA USAR BORRAR UNA VEZ PASADO A DT
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 	 Query query = em.createQuery("select p from Plataforma p");
@@ -65,6 +68,4 @@ public class ManejadorPlataforma{
 		Plataforma plataforma = this.buscarPlataforma(nombrePlataforma);
 		return plataforma.getEspectaculosDt();
 	}
-
-
 }

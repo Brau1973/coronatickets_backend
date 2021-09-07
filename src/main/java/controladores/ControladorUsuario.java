@@ -44,9 +44,7 @@ public class ControladorUsuario implements IControladorUsuario{
 
     public Artista obtenerArtista(String nickname){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	 Conexion conexion = Conexion.getInstancia();
-	 EntityManager em = conexion.getEntityManager();
-	 return em.find(Artista.class, nickname);
+	 return mU.buscarArtista(nickname);
     }
 
     public List<Usuario> listarUsuarios(){
