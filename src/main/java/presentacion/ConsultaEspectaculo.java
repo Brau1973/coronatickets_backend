@@ -243,7 +243,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     String datosFecha = formatoFecha.format(espectaculo.getRegistro());
 	     this.textNombreEspectaculo.setText(espectaculo.getNombre());
-	     this.textArtistaOrganizador.setText(espectaculo.getArtista().getNickname());
+	     //this.textArtistaOrganizador.setText(espectaculo.getArtista().getNickname());
 	     this.textDescripcion.setText(espectaculo.getDescripcion());
 	     this.textDuracion.setText(String.valueOf(espectaculo.getDuracion()));
 	     this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMinEsp()));

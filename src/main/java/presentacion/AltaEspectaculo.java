@@ -202,7 +202,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 if(e.getSource() == btnAceptar){
 	     if(checkFormulario()){
 		  try{
-		      DtEspectaculo dte = new DtEspectaculo(artista, plataforma, strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
+		      DtEspectaculo dte = new DtEspectaculo(artista.getNickname(), plataforma.getNombre(), strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
 		      this.iconE.altaEspectaculo(dte);
 		      JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
 		      // limpiarFormulario();

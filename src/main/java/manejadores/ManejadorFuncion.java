@@ -30,9 +30,13 @@ public class ManejadorFuncion{
 	 em.getTransaction().commit();
     }
 
-//    public Funcion buscarFuncion(String nombre){
-//	 Conexion conexion = Conexion.getInstancia();
-//	 EntityManager em = conexion.getEntityManager();
+    public Funcion buscarFuncion(String nombre){
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 return em.find(Funcion.class, nombre);
+    }
+	 
+	 
 
 //    @SuppressWarnings("unchecked")
 //    public ArrayList<String> obtenerFunciones(){

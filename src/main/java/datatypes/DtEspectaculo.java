@@ -7,8 +7,8 @@ import logica.Espectaculo;
 import logica.Plataforma;
 
 public class DtEspectaculo{
-	private DtArtista artista;
-	private DtPlataforma plataforma;
+	private String artista;
+	private String plataforma;
     private String nombre;
     private String descripcion;
     private int duracion;
@@ -18,7 +18,7 @@ public class DtEspectaculo{
     private int costo;
     private Date registro;
 
-    public DtEspectaculo(DtArtista artista,DtPlataforma plataforma,String nombre, String descripcion, int duracion, int cantMin, int cantMax, String url, int costo, Date registro){
+    public DtEspectaculo(String artista,String plataforma,String nombre, String descripcion, int duracion, int cantMin, int cantMax, String url, int costo, Date registro){
 	 super();
 	 this.artista = artista;
 	 this.plataforma = plataforma;
@@ -32,11 +32,11 @@ public class DtEspectaculo{
 	 this.registro = registro;
     }
 
-    public DtArtista getArtista() {
+    public String getArtista() {
 		return artista;
 	}
 
-	public DtPlataforma getPlataforma() {
+	public String getPlataforma() {
 		return plataforma;
 	}
 

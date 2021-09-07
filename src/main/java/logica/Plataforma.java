@@ -70,10 +70,10 @@ public class Plataforma {
 
 	public List<DtEspectaculo> getEspectaculosDt(){
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
-//		for (Espectaculo e : espectaculo) {
-//			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(),e.getPlataforma(),e.getNombre(),e.getDescripcion(),e.getDuracion(),e.getCantMinEsp(),e.getCantMaxEsp(),e.getUrl(),e.getCosto(),e.getRegistro());
-//			listEspectaculosDt.add(DtEspec);
-//		}
+		for (Espectaculo e : espectaculo) {
+			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(),e.getPlataforma(),e.getNombre(),e.getDescripcion(),e.getDuracion(),e.getCantMinEsp(),e.getCantMaxEsp(),e.getUrl(),e.getCosto(),e.getRegistro());
+			listEspectaculosDt.add(DtEspec);
+		}
 		return listEspectaculosDt;
 	}
 

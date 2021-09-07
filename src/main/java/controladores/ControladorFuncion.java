@@ -28,7 +28,7 @@ public class ControladorFuncion implements IControladorFuncion {
 
 	public void altaFuncion(DtFuncion dtFuncion) throws FuncionRepetidaExcepcion {
 		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-		Funcion funcion = mF.buscarFuncion(dtFuncion.getNombre());
+		//Funcion funcion = mF.buscarFuncion(dtFuncion.getNombre());
 //     if (funcion != null)
 //         throw new FuncionRepetidaExcepcion("La Funcion "+ dtFuncion.getNombre() + "ya esta registrada");
 		IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
