@@ -76,6 +76,15 @@ public class ManejadorEspectaculo{
 	 return listEspectaculos;
     }
 
+    public List<Espectaculo> obtenerEspectaculoBD(String plataforma){ //
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 Query query = em.createQuery("select e from Espectaculo e where plataforma_nombre = :plataforma");
+	 query.setParameter("plataforma", plataforma);
+	 List<Espectaculo> listEspectaculo = (List<Espectaculo>) query.getResultList();
+	 return listEspectaculo;
+    }
+
     /// aca
 
 

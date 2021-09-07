@@ -12,4 +12,6 @@ public interface IControladorEspectaculo{
     public List<Espectaculo> listarEspectaculos();
 
     public Espectaculo obtenerEspectaculo(String nombre);
+
+    public List<Espectaculo> obtenerEspectaculo2(String plataforma);
 }

@@ -65,6 +65,23 @@ public class ManejadorFuncion{
 	 return aRetornar;
     }
 
+    public List<Funcion> obtenerFuncion(){ // 79S
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 Query query = em.createQuery("select f from Funcion f");
+	 List<Funcion> listFuncion = (List<Funcion>) query.getResultList();
+	 return listFuncion;
+    }
+
+    public List<Funcion> obtenerFuncionesBD(String espectaculo){ //
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 Query query = em.createQuery("select f from Funcion f where espectaculo_nomesp = :espectaculo");
+	 query.setParameter("espectaculo", espectaculo);
+	 List<Funcion> listFuncion = (List<Funcion>) query.getResultList();
+	 return listFuncion;
+    }
+
     // Consulta para obtener Funciones de Espectaculo
     /*public ArrayList<String> obtenerFuncion(String espectaculo){ 
       	 Conexion conexion = Conexion.getInstancia();
