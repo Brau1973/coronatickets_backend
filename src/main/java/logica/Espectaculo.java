@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import datatypes.DtEspectaculo;
 
 @Entity
 public class Espectaculo{
@@ -37,7 +38,7 @@ public class Espectaculo{
     @OneToMany(mappedBy = "espectaculo", cascade = CascadeType.ALL)
     private List<Funcion> funciones = new ArrayList<>();
 
-    public Espectaculo(){
+	public Espectaculo(){
 	 super();
     }
 
@@ -55,12 +56,12 @@ public class Espectaculo{
 	 this.registro = registro;
     }
 
-    public Artista getArtista(){
-	 return artista;
+    public String getArtista(){
+	 return artista.getNickname();
     }
 
-    public Plataforma getPlataforma(){
-	 return plataforma;
+    public String getPlataforma(){
+	 return plataforma.getNombre();
     }
 
     public String getNombre(){
@@ -94,6 +95,10 @@ public class Espectaculo{
     public Date getRegistro(){
 	 return registro;
     }
+    
+    public List<PaqueteEspectaculos> getPaquete() {
+		return paquete;
+	}
 
     public List<Funcion> getFunciones(){
 	 return funciones;
@@ -143,6 +148,32 @@ public class Espectaculo{
     public void setRegistro(Date registro){
 	 this.registro = registro;
     }
+    
+	public void setPaquete(List<PaqueteEspectaculos> paquete) {
+		this.paquete = paquete;
+	}
+	
+	public void agregarFuncion(Funcion funcion) {
+		this.funciones.add(funcion);
+	}
+	
+	public boolean funcionYaRegistrada(String nombreFuncion) {
+		int i = 0;
+		Funcion funcion;
+		boolean encontre=false;
+		while ((i < this.funciones.size()) && (!encontre)) {
+			funcion=funciones.get(i);
+		    if (funcion.getNombre().equals(nombreFuncion)) {
+		    	encontre=true;
+		    }	
+		    i++;
+		}
+		return encontre;
+	}
+	
+	public DtEspectaculo getDtEspectaculo(){
+		return new DtEspectaculo(null,null,this.nombre,this.descripcion,this.duracion,this.cantMinEsp,this.cantMaxEsp,this.url,this.costo,this.registro);
+	}
 
     public void setFunciones(List<Funcion> funciones){
 	 this.funciones = funciones;

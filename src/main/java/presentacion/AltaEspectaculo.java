@@ -22,6 +22,7 @@ import interfaces.IControladorEspectaculo;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
 import logica.Artista;
+import logica.Espectaculo;
 import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 
@@ -201,11 +202,12 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 if(e.getSource() == btnAceptar){
 	     if(checkFormulario()){
 		  try{
-		      DtEspectaculo dte = new DtEspectaculo(artista, plataforma, strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
+		      DtEspectaculo dte = new DtEspectaculo(artista.getNickname(), plataforma.getNombre(), strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
 		      this.iconE.altaEspectaculo(dte);
 		      JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
 		      // limpiarFormulario();
 		  }catch(Exception ex){
+			  System.out.println("Mensaje: "+ ex.getMessage());
 		      JOptionPane.showMessageDialog(null, "Los datos ingresados no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
 		      // limpiarFormulario();
 		  }

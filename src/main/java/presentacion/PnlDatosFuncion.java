@@ -2,27 +2,22 @@ package presentacion;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
-import interfaces.Fabrica;
-import interfaces.IControladorPaquete;
 import logica.Funcion;
-import logica.PaqueteEspectaculos;
 
 @SuppressWarnings("serial")
 public class PnlDatosFuncion extends JInternalFrame{
     private JPanel miPanel, panelFuncion;
     private JLabel lblRegistro,lblHoraInicio,lblFecha,lblNombFuncion;
     private JLabel txtRegistro, txtHoraInicio,txtFecha,txtNombFuncion;
+
     private Border borderPnlFuncion;
     static final int X_LABEL = 15;
     static final int X_TEXT = 200;
@@ -98,6 +93,5 @@ public class PnlDatosFuncion extends JInternalFrame{
 	 txtHoraInicio.setText(horaInicio.toString());
 	 txtRegistro.setText(String.valueOf(datosReg));
     }
-
 
 }
