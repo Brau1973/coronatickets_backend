@@ -2,13 +2,17 @@ package presentacion;
 
 import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;
+
 import java.util.List;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
@@ -21,6 +25,18 @@ import logica.Espectaculo;
 import logica.Funcion;
 import logica.PaqueteEspectaculos;
 import logica.Plataforma;
+
+import datatypes.DtEspectaculo;
+import interfaces.Fabrica;
+import interfaces.IControladorEspectaculo;
+import interfaces.IControladorPaquete;
+import interfaces.IControladorPlataforma;
+import logica.Artista;
+import logica.Espectaculo;
+import logica.Funcion;
+import logica.PaqueteEspectaculos;
+import logica.Plataforma;
+import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class ConsultaEspectaculo extends JInternalFrame{
@@ -227,7 +243,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     String datosFecha = formatoFecha.format(espectaculo.getRegistro());
 	     this.textNombreEspectaculo.setText(espectaculo.getNombre());
-	     this.textArtistaOrganizador.setText(espectaculo.getArtista().getNickname());
+	     //this.textArtistaOrganizador.setText(espectaculo.getArtista().getNickname());
 	     this.textDescripcion.setText(espectaculo.getDescripcion());
 	     this.textDuracion.setText(String.valueOf(espectaculo.getDuracion()));
 	     this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMinEsp()));

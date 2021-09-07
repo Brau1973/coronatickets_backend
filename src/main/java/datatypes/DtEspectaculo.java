@@ -3,11 +3,12 @@ package datatypes;
 import java.util.Date;
 
 import logica.Artista;
+import logica.Espectaculo;
 import logica.Plataforma;
 
 public class DtEspectaculo{
-    private Artista artista;
-    private Plataforma plataforma;
+	private String artista;
+	private String plataforma;
     private String nombre;
     private String descripcion;
     private int duracion;
@@ -17,7 +18,7 @@ public class DtEspectaculo{
     private int costo;
     private Date registro;
 
-    public DtEspectaculo(Artista artista, Plataforma plataforma, String nombre, String descripcion, int duracion, int cantMin, int cantMax, String url, int costo, Date registro){
+    public DtEspectaculo(String artista,String plataforma,String nombre, String descripcion, int duracion, int cantMin, int cantMax, String url, int costo, Date registro){
 	 super();
 	 this.artista = artista;
 	 this.plataforma = plataforma;
@@ -31,15 +32,15 @@ public class DtEspectaculo{
 	 this.registro = registro;
     }
 
-    public Artista getArtista(){
-	 return artista;
-    }
+    public String getArtista() {
+		return artista;
+	}
 
-    public Plataforma getPlataforma(){
-	 return plataforma;
-    }
+	public String getPlataforma() {
+		return plataforma;
+	}
 
-    public String getNombre(){
+	public String getNombre(){
 	 return nombre;
     }
 

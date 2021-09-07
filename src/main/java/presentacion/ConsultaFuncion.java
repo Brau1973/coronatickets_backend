@@ -47,6 +47,7 @@ public class ConsultaFuncion extends JInternalFrame{
     private Plataforma plataforma;
     private Espectaculo espectaculo;
 
+
     // Constructor
     public ConsultaFuncion(IControladorFuncion iconF){
 	 this.iconF = iconF;

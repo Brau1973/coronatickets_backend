@@ -26,6 +26,7 @@ public class ManejadorEspectaculo{
 	 EntityManager em = conexion.getEntityManager();
 	 em.getTransaction().begin();
 	 em.persist(espectaculo);
+	 em.flush();
 	 em.getTransaction().commit();
     }
 
@@ -50,21 +51,21 @@ public class ManejadorEspectaculo{
     }
 
 
-    ///////////////
-    @SuppressWarnings("unchecked")
-    public ArrayList<String> obtenerEspectaculodeArtista(String nickname){ /// ok
-	 Conexion conexion = Conexion.getInstancia();
-	 EntityManager em = conexion.getEntityManager();
-	 Query query = em.createQuery("select e from Espectaculo e");
-	 List<Espectaculo> listEspectaculo = (List<Espectaculo>) query.getResultList();
-	 ArrayList<String> aRetornar = new ArrayList<>();
-	 for(Espectaculo e :listEspectaculo){
-	     if(e.getArtista().getNickname() == nickname){
-		  aRetornar.add(e.getNombre());
-	     }
-	 }
-	 return aRetornar;
-    }
+    // /////////////// CHECK USO
+    // @SuppressWarnings("unchecked")
+    // public ArrayList<String> obtenerEspectaculodeArtista(String nickname){ /// ok
+    // Conexion conexion = Conexion.getInstancia();
+    // EntityManager em = conexion.getEntityManager();
+    // Query query = em.createQuery("select e from Espectaculo e");
+    // List<Espectaculo> listEspectaculo = (List<Espectaculo>) query.getResultList();
+    // ArrayList<String> aRetornar = new ArrayList<>();
+    // for(Espectaculo e :listEspectaculo){
+    // if(e.getArtista().getNickname() == nickname){
+    // aRetornar.add(e.getNombre());
+    // }
+    // }
+    // return aRetornar;
+    // }
 
 
     @SuppressWarnings("unchecked")
@@ -76,18 +77,10 @@ public class ManejadorEspectaculo{
 	 return listEspectaculos;
     }
 
-    public List<Espectaculo> obtenerEspectaculoBD(String plataforma){ //
-	 Conexion conexion = Conexion.getInstancia();
-	 EntityManager em = conexion.getEntityManager();
-	 Query query = em.createQuery("select e from Espectaculo e where plataforma_nombre = :plataforma");
-	 query.setParameter("plataforma", plataforma);
-	 List<Espectaculo> listEspectaculo = (List<Espectaculo>) query.getResultList();
-	 return listEspectaculo;
-    }
 
     /// aca
 
-
+    // CHECK USO
     @SuppressWarnings("unchecked")
     public List<Espectaculo> obtenerEspectaculoArtista(String nickname){
 	 Conexion conexion = Conexion.getInstancia();
@@ -104,4 +97,13 @@ public class ManejadorEspectaculo{
      return espectaculo;
     }*/
 
+    // CHECK USO
+    public List<Espectaculo> obtenerEspectaculoBD(String plataforma){ //
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 Query query = em.createQuery("select e from Espectaculo e where plataforma_nombre = :plataforma");
+	 query.setParameter("plataforma", plataforma);
+	 List<Espectaculo> listEspectaculo = (List<Espectaculo>) query.getResultList();
+	 return listEspectaculo;
+    }
 }
