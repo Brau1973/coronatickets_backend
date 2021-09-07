@@ -172,7 +172,7 @@ public class ConsultaFuncion extends JInternalFrame {
 	private void listenerComboPlataforma(ItemEvent e) {	
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 				if (e.getSource() == comboPlataforma) {
-					System.out.println("CLICK EN COMBO PLATAFORMA");
+					//System.out.println("CLICK EN COMBO PLATAFORMA");
 					String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
 					
 					//probar cuando alta espectaculo este cambiado
@@ -184,7 +184,7 @@ public class ConsultaFuncion extends JInternalFrame {
 					listEspectaculos = iconE.obtenerEspectaculo2(strPlataforma);
 					
 					if (listEspectaculos.isEmpty()) {
-						System.out.println("LISTA DE ESPECTACULOS VACIA");
+						//System.out.println("LISTA DE ESPECTACULOS VACIA");
 						JOptionPane.showMessageDialog(this, "La plataforma no tiene espectaculos asociados", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						comboEspectaculos.removeAllItems();
@@ -206,7 +206,7 @@ public class ConsultaFuncion extends JInternalFrame {
 	private void listenerComboEspectaculo(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			if (e.getSource() == comboEspectaculos) {
-				System.out.println("CLICK EN COMBO ESPECTACULO");
+				//System.out.println("CLICK EN COMBO ESPECTACULO");
 				String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
 				Espectaculo espectaculo =  listEspectaculos.stream().filter(es -> (es.getNombre() == strEspectaculo))
 						.findFirst().get();
@@ -215,7 +215,7 @@ public class ConsultaFuncion extends JInternalFrame {
 				//this.listFunciones = espectaculo.getFunciones();
 				listFunciones = espectaculo.getFunciones();
 				if (listFunciones.isEmpty()) {
-					System.out.println("LISTA DE FUNCIONES VACIA");
+					//System.out.println("LISTA DE FUNCIONES VACIA");
 					JOptionPane.showMessageDialog(this, "El espectaculo no tiene funciones asociadas", "Error",
 							JOptionPane.ERROR_MESSAGE);
 					comboFunciones.removeAllItems();
@@ -235,7 +235,7 @@ public class ConsultaFuncion extends JInternalFrame {
 	private void listenerComboFunciones(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			if (e.getSource() == comboFunciones) {
-				System.out.println("CLICK EN COMBO FUNCION");
+				//System.out.println("CLICK EN COMBO FUNCION");
 				// System.out.println("CLICK EN COMBO PLATAFORMA");
 				String strFuncion = this.comboFunciones.getSelectedItem().toString();
 				Funcion f = this.iconF.obtenerFuncion(strFuncion);
@@ -243,7 +243,8 @@ public class ConsultaFuncion extends JInternalFrame {
 				SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm");
 				txtDatosFuncion.setText("Nombre: " + f.getNombre() + "\nFecha: " + formatoFecha.format(f.getFecha())
 						+ "\nFecha Alta: " + formatoFecha.format(f.getRegistro()) + "\nHora Inicio: "
-						+ formatoHora.format(f.getHoraInicio()) + "\nEspectaculo: " + f.getEspectaculo().getNombre());
+						+ formatoHora.format(f.getHoraInicio()) + "\nEspectaculo: " + f.getEspectaculo().getNombre() 
+						/*+ "\nArtistas: " + f.getArtistas()*/);
 			}
 		}
 	}
