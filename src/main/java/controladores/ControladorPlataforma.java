@@ -41,9 +41,14 @@ public class ControladorPlataforma implements IControladorPlataforma{
 	 
     }
     
+    public Plataforma buscarPlataforma(String nombrePlataforma){
+	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
+	 Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);
+	 return plataforma;
+	 //return plataforma.obtenerEspectaculos(nombrePlataforma);
+	 
+    }
     
     
     
-    
-
 }

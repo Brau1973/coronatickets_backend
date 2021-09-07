@@ -28,6 +28,7 @@ public class ManejadorEspectaculo {
 		EntityManager em = conexion.getEntityManager();
 		em.getTransaction().begin();
 		em.persist(espectaculo);
+		em.flush();
 		em.getTransaction().commit();
 	}
 

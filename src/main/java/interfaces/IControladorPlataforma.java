@@ -14,4 +14,6 @@ public interface IControladorPlataforma{
     public List<String> listarPlataformasDt();
     
     public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma);
+    
+    public Plataforma buscarPlataforma(String nombrePlataforma);
 }

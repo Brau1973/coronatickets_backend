@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import datatypes.DtEspectaculo;
 import logica.Artista;
+import logica.Funcion;
 import logica.Plataforma;
 import persistencia.Conexion;
 
