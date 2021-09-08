@@ -60,15 +60,32 @@ public class ControladorFuncion implements IControladorFuncion{
    	 return mF.obtenerFunciones();
        }
     
-    public Funcion obtenerFuncion(String nombre){
+    //converitr funcion a DtFuncion 
+    /*public Funcion obtenerFuncion(String nombre){
    	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-   	 return mF.buscarFuncion(nombre);
-       }
+   	 Funcion funcion = mF.buscarFuncion(nombre);
+   	 DtFuncion funciones = funcion.;
+   	 return funciones;
+    	return null;
+    }*/
+    
+    public Funcion obtenerFuncion(String nombre){
+      	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+      	 return mF.buscarFuncion(nombre);
+    }
+    
     
     public List<Funcion> obtenerFuncionBD(String espectaculo){
      	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
      	 return mF.obtenerFuncionesBD(espectaculo);
          }
+    
+    public List<DtFuncion> listarFuncionesDt(String nomEsp){
+    	ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+   	 Espectaculo espectaculo = mE.buscarEspectaculo(nomEsp);
+   	 return espectaculo.getFuncionesDt();
+    }
+
  
     // @Override
     // public String[] listarPlataformas() {

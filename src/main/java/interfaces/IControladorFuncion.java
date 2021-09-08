@@ -17,9 +17,13 @@ public interface IControladorFuncion{
 
     public List<Funcion> listarFunciones();
     
+    //public DtFuncion obtenerFuncion(String nombre);
+    
     public Funcion obtenerFuncion(String nombre);
     
     public List<Funcion> obtenerFuncionBD(String espectaculo);
+    
+    public List<DtFuncion> listarFuncionesDt(String espectaculo);
     
     // public String[] listarPlataformas();
 
