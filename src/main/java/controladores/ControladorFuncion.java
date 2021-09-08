@@ -49,11 +49,6 @@ public class ControladorFuncion implements IControladorFuncion {
 		}
 	}
     
-    public List<Funcion> listarFunciones(){
-   	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-   	 return mF.obtenerFunciones();
-       }
-    
     public Funcion obtenerFuncion(String nombre){
    	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
    	 return mF.buscarFuncion(nombre);

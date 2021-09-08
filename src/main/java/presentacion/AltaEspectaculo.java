@@ -172,7 +172,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener { 
 		comboPlataforma.removeAllItems();
 		comboArtista.removeAllItems();
 
-		listPlataformas = iconP.listarPlataformasDt();
+		listPlataformas = iconP.listarPlataformasStr();
 		listPlataformas.forEach((p) -> {
 			comboPlataforma.addItem(p);
 		});
