@@ -114,7 +114,7 @@ public class Espectaculo{
 
     public void setPlataforma(Plataforma plataforma){
 	 this.plataforma = plataforma;
-	 plataforma.añadirEspectaculo(this);
+	 plataforma.aniadirEspectaculo(this);
     }
 
     public void setNombre(String nombre){
