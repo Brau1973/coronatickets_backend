@@ -42,7 +42,7 @@ public class Espectaculo{
 	 super();
     }
 
-    public Espectaculo(Artista artista, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
+    public Espectaculo(Artista artista,Plataforma plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
 	 super();
 	 this.artista = artista;
 	 this.nombre = nombre;
@@ -53,6 +53,8 @@ public class Espectaculo{
 	 this.url = url;
 	 this.costo = costo;
 	 this.registro = registro;
+	 
+	 plataforma.añadirEspectaculo(this);
     }
 
     public String getArtista(){
@@ -107,14 +109,12 @@ public class Espectaculo{
 	 return paquete;
     }
 
-
     public void setArtista(Artista artista){
 	 this.artista = artista;
     }
 
     public void setPlataforma(Plataforma plataforma){
 	 this.plataforma = plataforma;
-	 plataforma.añadirEspectaculo(this);
     }
 
     public void setNombre(String nombre){
