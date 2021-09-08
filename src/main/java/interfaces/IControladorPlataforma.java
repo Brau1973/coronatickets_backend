@@ -12,7 +12,7 @@ public interface IControladorPlataforma{
 
     public List<Plataforma> listarPlataformas();
     
-    public List<String> listarPlataformasDt();
+    public List<String> listarPlataformasStr();
     
     public Plataforma buscarPlataforma(String nombrePlataforma);
 }

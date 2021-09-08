@@ -1,5 +1,6 @@
 package controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import datatypes.DtEspectaculo;
@@ -24,14 +25,23 @@ public class ControladorPlataforma implements IControladorPlataforma{
 	 mP.altaPlataforma(plataforma);
     }
 
-    public List<Plataforma> listarPlataformas(){ // NO SE DEBERIA USAR, LA CORRECTA ES listarPlataformasDt
+    public List<Plataforma> listarPlataformas(){ // NO SE DEBERIA USAR, LA CORRECTA ES listarPlataformasStr
 	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 	 return mP.obtenerPlataforma();
     }
     
-    public List<String> listarPlataformasDt(){
+    public List<String> listarPlataformasStr(){
 	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
-	 return mP.obtenerPlataformas();
+	 
+	 List<Plataforma> listPlataformas = new ArrayList<Plataforma>();
+	 listPlataformas = mP.obtenerPlataforma();
+	 
+	 List<String> listPlataformasStr = new ArrayList<String>();
+	 
+	 for(Plataforma p :listPlataformas){
+		 listPlataformasStr.add((p.getNombre()));
+	 }
+	 return listPlataformasStr;
     }
     
     public Plataforma buscarPlataforma(String nombrePlataforma){
