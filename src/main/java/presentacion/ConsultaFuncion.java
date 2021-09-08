@@ -176,10 +176,11 @@ public class ConsultaFuncion extends JInternalFrame{
 		comboFunciones.addItem(SELECCIONE_FUNC);
 		
 		
-		listPlataformas = iconP.listarPlataformasDt();
+		listPlataformas = iconP.listarPlataformasStr();
 		listPlataformas.forEach((p) -> {
 			comboPlataforma.addItem(p);
 		});
+
 
 		
 		/*listEspectaculos = iconE.listarPlataformas();

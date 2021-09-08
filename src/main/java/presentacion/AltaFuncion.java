@@ -22,6 +22,7 @@ import javax.swing.ListSelectionModel;
 import com.toedter.calendar.JDateChooser;
 
 import excepciones.FuncionRepetidaExcepcion;
+import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 //import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
@@ -193,7 +194,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		comboPlataforma.removeAllItems();
 		comboArtista.removeAllItems();
 
-		listPlataformas = iconP.listarPlataformasDt();
+		listPlataformas = iconP.listarPlataformasStr();
 		listPlataformas.forEach((p) -> {
 			comboPlataforma.addItem(p);
 		});
@@ -238,7 +239,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 				try {
 					this.iconF.altaFuncion(dtFuncion);
 					JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");
-				} catch (FuncionRepetidaExcepcion msg) {
+				} catch (FuncionYaRegistradaEnEspectaculoExcepcion msg) {
 					JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
 				}
 				limpiarFormulario();

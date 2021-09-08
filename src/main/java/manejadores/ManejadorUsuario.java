@@ -61,21 +61,6 @@ public class ManejadorUsuario{
 	 return listArtista;
     }
 
-	public List<DtArtista> listarArtistasDt() {
-	   	 Conexion conexion = Conexion.getInstancia();
-	   	 EntityManager em = conexion.getEntityManager();
-	   	 Query query = em.createQuery("select a from Artista a");
-	   	 List<Artista> listArtista = (List<Artista>) query.getResultList();
-	   	 
-	   	 List<DtArtista> listArtistasDt = new ArrayList<DtArtista>();
-	   	 for(Artista a :listArtista){
-	   		 DtArtista dtArtista = new DtArtista(a.getNickname(),a.getNombre(),a.getApellido(),a.getEmail(),a.getfNacimiento(),a.getDescripcion(),a.getBiografia(),a.getLink());
-	   		 
-	   		 listArtistasDt.add(dtArtista);
-	   	 }
-	   	 return listArtistasDt;
-	}
-
     ///// aca
     public Artista buscarArtista(String nickname){
 	 Conexion conexion = Conexion.getInstancia();

@@ -28,7 +28,6 @@ public class ManejadorEspectaculo {
 		EntityManager em = conexion.getEntityManager();
 		em.getTransaction().begin();
 		em.persist(espectaculo);
-		em.flush();
 		em.getTransaction().commit();
 	}
     
@@ -47,22 +46,6 @@ public class ManejadorEspectaculo {
 		Espectaculo espectaculo = em.find(Espectaculo.class, nombre);
 		return espectaculo;
 	}
-
-    /*@SuppressWarnings("unchecked")
-    public ArrayList<String> obtenerEspectaculo(){
-	 Conexion conexion = Conexion.getInstancia();
-	 EntityManager em = conexion.getEntityManager();
-	 Query query = em.createQuery("select e from Espectaculo e");
-	 List<Espectaculo> listEspectaculo = (List<Espectaculo>) query.getResultList();
-	 ArrayList<String> aRetornar = new ArrayList<>();
-	 for(Espectaculo e :listEspectaculo){
-	     aRetornar.add(e.getNombre());
-	 }
-	 return aRetornar;
-<<<<<<< HEAD
-    }*/
-    
-
 
 //    /////////////// CHECK USO
 //    @SuppressWarnings("unchecked")

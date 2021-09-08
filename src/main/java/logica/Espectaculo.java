@@ -44,10 +44,9 @@ public class Espectaculo{
 	 super();
     }
 
-    public Espectaculo(Artista artista, Plataforma plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
+    public Espectaculo(Artista artista, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
 	 super();
 	 this.artista = artista;
-	 this.plataforma = plataforma;
 	 this.nombre = nombre;
 	 this.descripcion = descripcion;
 	 this.duracion = duracion;
@@ -117,6 +116,7 @@ public class Espectaculo{
 
     public void setPlataforma(Plataforma plataforma){
 	 this.plataforma = plataforma;
+	 plataforma.añadirEspectaculo(this);
     }
 
     public void setNombre(String nombre){

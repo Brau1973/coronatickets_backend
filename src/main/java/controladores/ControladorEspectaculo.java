@@ -15,7 +15,6 @@ import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
 import logica.Artista;
 import logica.Espectaculo;
-import logica.Funcion;
 import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
@@ -37,44 +36,17 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 	
 	Plataforma plataforma = iconP.buscarPlataforma(dte.getPlataforma());
 	 
-	 Espectaculo espectaculo = new Espectaculo(artistaOrganizador,plataforma, dte.getNombre(), dte.getDescripcion(), dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
-	 // agregar espectaculo a coleccion de espectaculos de la plataforma
+	 Espectaculo espectaculo = new Espectaculo(artistaOrganizador, dte.getNombre(), dte.getDescripcion(), dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
+	 // Setea PLATAFORMA Y agrega ESPECTACULO a coleccion de espectaculos de la plataforma
+	 espectaculo.setPlataforma(plataforma);
+	 
 	 mE.agregarEspectaculo(espectaculo);
     }
-    
-    /*public List<Espectaculo> listarEspectaculos(){
-      	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-      	 return mE.obtenerEspectaculo();
-          }*/
-    
-    public List<Espectaculo> listarEspectaculos(){ 
-   	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-   	 List<Espectaculo> espectaculos;
-   	 Espectaculo espec = mE.buscarEspectaculo("espec");
-   	 return null; 
-       }
 
     public Espectaculo obtenerEspectaculo(String nombre){
 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 	 return mE.buscarEspectaculo(nombre);
     }
-    
-//    @Override
-//	public void agregarFuncion(String nombreEspectaculo,String nombreFuncion) throws FuncionYaRegistradaEnEspectaculoExcepcion{
-//		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-//		Espectaculo espectaculo = mE.buscarEspectaculo(nombreEspectaculo);
-//		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-//		Funcion funcion = mF.buscarFuncion(nombreFuncion);
-//		if (espectaculo.funcionYaRegistrada(nombreFuncion))
-//			throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion" + nombreFuncion + " ya esta registrada en el espectaculo " + nombreEspectaculo);
-//		espectaculo.agregarFuncion(funcion);
-//
-//		Conexion conexion = Conexion.getInstancia();
-//		EntityManager em = conexion.getEntityManager();
-//		em.getTransaction().begin();
-//		em.persist(espectaculo); 
-//		em.getTransaction().commit();
-//	}
     
     public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma){
 	 ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
