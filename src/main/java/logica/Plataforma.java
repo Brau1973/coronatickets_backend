@@ -76,6 +76,10 @@ public class Plataforma {
 		}
 		return listEspectaculosDt;
 	}
+	
+	public void añadirEspectaculo(Espectaculo espectaculo) {
+		this.espectaculo.add(espectaculo);
+	}
 
 	public void setEspectaculo(List<Espectaculo> espectaculo) {
 		this.espectaculo = espectaculo;

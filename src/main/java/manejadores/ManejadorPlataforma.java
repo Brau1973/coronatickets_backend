@@ -63,9 +63,4 @@ public class ManejadorPlataforma{
 	 }
 	 return listPlataformasDt;
     }
-
-	public List<DtEspectaculo> obtenerEspectaculos(String nombrePlataforma) {
-		Plataforma plataforma = this.buscarPlataforma(nombrePlataforma);
-		return plataforma.getEspectaculosDt();
-	}
 }
