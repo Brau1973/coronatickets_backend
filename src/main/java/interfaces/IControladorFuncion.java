@@ -22,7 +22,7 @@ public interface IControladorFuncion{
     
     public List<Funcion> obtenerFuncionBD(String espectaculo);
     
-    public List<DtFuncion> listarFuncionesDt(String espectaculo);
+    public List<DtFuncion> listarFunciones(String espectaculo);
     
     // public String[] listarPlataformas();
 
