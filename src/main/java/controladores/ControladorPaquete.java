@@ -7,6 +7,7 @@ import logica.PaqueteEspectaculos;
 import manejadores.ManejadorPaquete;
 
 public class ControladorPaquete implements IControladorPaquete{
+	
     @Override
     public void altaPaquete(PaqueteEspectaculos pEsp){
 	 ManejadorPaquete mP = ManejadorPaquete.getInstancia();

@@ -77,7 +77,7 @@ public class Plataforma {
 		return listEspectaculosDt;
 	}
 	
-	public void añadirEspectaculo(Espectaculo espectaculo) {
+	public void aniadirEspectaculo(Espectaculo espectaculo) {
 		this.espectaculo.add(espectaculo);
 	}
 

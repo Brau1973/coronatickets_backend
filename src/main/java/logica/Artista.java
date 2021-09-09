@@ -13,9 +13,6 @@ public class Artista extends Usuario{
     private String biografia;
     private String link;
 
-    @ManyToMany(mappedBy = "artistas")
-    private List<Funcion> funcion = new ArrayList<Funcion>();
-
     public Artista(String nickname, String nombre, String apellido, String email, Date fNacimiento, String descripcion, String biografia, String link){
 	 super(nickname, nombre, apellido, email, fNacimiento);
 	 this.descripcion = descripcion;

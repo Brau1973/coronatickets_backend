@@ -39,7 +39,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 		Espectaculo espectaculo = new Espectaculo(artistaOrganizador, dte.getNombre(), dte.getDescripcion(),
 				dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
 
-		plataforma.añadirEspectaculo(espectaculo);
+		plataforma.aniadirEspectaculo(espectaculo);
 		
 		mE.agregarEspectaculo(espectaculo);
 	}
