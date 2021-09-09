@@ -106,6 +106,11 @@ public class Espectaculo{
 	 this.artista = artista;
     }
 
+    public void setPlataforma(Plataforma plataforma){
+	 this.plataforma = plataforma;
+	 plataforma.aniadirEspectaculo(this);
+    }
+
     public void setNombre(String nombre){
 	 this.nombre = nombre;
     }
