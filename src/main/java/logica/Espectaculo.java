@@ -22,8 +22,6 @@ public class Espectaculo{
     @ManyToOne
     @JoinColumn(name = "artista")
     private Artista artista;
-    @ManyToOne
-    private Plataforma plataforma;
     private String descripcion;
     private int duracion;
     private int cantMinEsp;
@@ -35,7 +33,7 @@ public class Espectaculo{
     @ManyToMany(mappedBy = "espectaculos")
     private List<PaqueteEspectaculos> paquete = new ArrayList<PaqueteEspectaculos>();
 
-    @OneToMany(mappedBy = "espectaculo", cascade = CascadeType.ALL)
+    @OneToMany
     private List<Funcion> funciones = new ArrayList<>();
 
 	public Espectaculo(){
@@ -53,14 +51,11 @@ public class Espectaculo{
 	 this.url = url;
 	 this.costo = costo;
 	 this.registro = registro;
+	 
     }
 
     public String getArtista(){
 	 return artista.getNickname();
-    }
-
-    public String getPlataforma(){
-	 return plataforma.getNombre();
     }
 
     public String getNombre(){
@@ -107,14 +102,8 @@ public class Espectaculo{
 	 return paquete;
     }
 
-
     public void setArtista(Artista artista){
 	 this.artista = artista;
-    }
-
-    public void setPlataforma(Plataforma plataforma){
-	 this.plataforma = plataforma;
-	 plataforma.añadirEspectaculo(this);
     }
 
     public void setNombre(String nombre){
@@ -172,7 +161,7 @@ public class Espectaculo{
 	}
 	
 	public DtEspectaculo getDtEspectaculo(){
-		return new DtEspectaculo(null,null,this.nombre,this.descripcion,this.duracion,this.cantMinEsp,this.cantMaxEsp,this.url,this.costo,this.registro);
+		return new DtEspectaculo(this.artista.getNickname(),this.nombre,this.descripcion,this.duracion,this.cantMinEsp,this.cantMaxEsp,this.url,this.costo,this.registro);
 	}
 
     public void setFunciones(List<Funcion> funciones){

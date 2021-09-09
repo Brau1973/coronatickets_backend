@@ -245,9 +245,9 @@ public class ConsultaFuncion extends JInternalFrame{
 				Funcion f = this.iconF.obtenerFuncion(strFuncion);
 				SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 				SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm");
-				txtDatosFuncion.setText("Nombre: " + f.getNombre() + "\nFecha: " + formatoFecha.format(f.getFecha())
-						+ "\nFecha Alta: " + formatoFecha.format(f.getRegistro()) + "\nHora Inicio: "
-						+ formatoHora.format(f.getHoraInicio()) + "\nEspectaculo: " + f.getEspectaculo().getNombre());
+//				txtDatosFuncion.setText("Nombre: " + f.getNombre() + "\nFecha: " + formatoFecha.format(f.getFecha())
+//						+ "\nFecha Alta: " + formatoFecha.format(f.getRegistro()) + "\nHora Inicio: "
+//						+ formatoHora.format(f.getHoraInicio()) + "\nEspectaculo: " + f.getEspectaculo().getNombre());
 			}
 		}
 	}
