@@ -20,6 +20,7 @@ public class Funcion{
     private Date fecha;
     private Time horaInicio;
     private Date registro;
+    @ManyToOne
     private Espectaculo espectaculo;
     
     @ManyToMany(cascade = CascadeType.ALL)

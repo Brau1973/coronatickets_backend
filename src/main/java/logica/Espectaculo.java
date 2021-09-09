@@ -34,7 +34,7 @@ public class Espectaculo{
     @ManyToMany(mappedBy = "espectaculos")
     private List<PaqueteEspectaculos> paquete = new ArrayList<PaqueteEspectaculos>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "espectaculo", cascade = CascadeType.ALL)
     private List<Funcion> funciones = new ArrayList<>();
    
 

@@ -225,21 +225,22 @@ public class ConsultaFuncion extends JInternalFrame {
 			if (!e.getItem().equals(SELECCIONE_FUNC)) {
 				if (e.getSource() == comboFunciones) {
 					String strFuncion = this.comboFunciones.getSelectedItem().toString();
-					//DtFuncion f = this.iconF.obtenerFuncion(strFuncion);
-					//listFunciones = iconF.listarFunciones(strFuncion);
+					// DtFuncion f = this.iconF.obtenerFuncion(strFuncion);
+					// listFunciones = iconF.listarFunciones(strFuncion);
 					Funcion f = this.iconF.obtenerFuncion(strFuncion);
 					SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 					SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm");
 					txtDatosFuncion.setText("Nombre: " + f.getNombre() + "\nFecha: " + formatoFecha.format(f.getFecha())
 							+ "\nFecha Alta: " + formatoFecha.format(f.getRegistro()) + "\nHora Inicio: "
-							+ formatoHora.format(f.getHoraInicio()) + "\nEspectaculo: "
-							+ f.getEspectaculo() + "\nArtistas: " );
-					
+							+ formatoHora.format(f.getHoraInicio()) + "\nEspectaculo: " + f.getEspectaculo().getNombre()
+							+ "\nArtistas: ");
+
 					// + f.getArtistas());
 				}
+			}
 		}
 	}
-	}
+
 	public void limpiarFormulario() {
 		txtDatosFuncion.setText("");
 	}
