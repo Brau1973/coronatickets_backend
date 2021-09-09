@@ -84,7 +84,7 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     if(!e.getItem().equals(SELECCIONE)){
 		  paqueteSelected = lstPaquetes.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
-		  pnlDatosPaquete.cargarPanel(paqueteSelected);
+		  pnlDatosPaquete.cargarPanel(paqueteSelected,true);
 		  pnlDatosPaquete.setVisible(true);
 	     }else{
 		  pnlDatosPaquete.setVisible(false);

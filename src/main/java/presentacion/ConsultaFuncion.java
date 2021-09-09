@@ -22,6 +22,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
 import javax.swing.table.DefaultTableModel;
 
+import datatypes.DtPlataforma;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
@@ -53,7 +54,7 @@ public class ConsultaFuncion extends JInternalFrame{
 	private String[] header = { "Plataforma", "Espectaculo" };
 	private String[][] data = { { "1", "las aventuras de seba" }, { "2", "seba por el tiempo" }, { "3", "sebalandia" },
 			{ "4", "la cocina de seba" } };
-	private List<Plataforma> listPlataformas;
+	private List<DtPlataforma> listPlataformas;
 	private List<Espectaculo> listEspectaculos;
 	private List<Funcion> listFunciones;
 	
