@@ -20,11 +20,8 @@ public class Funcion{
     private Date fecha;
     private Time horaInicio;
     private Date registro;
-    @ManyToOne
-    private Espectaculo espectaculo;
-
+    
     @ManyToMany(cascade = CascadeType.ALL)
-    // @JoinTable(name = "FuncionXArtistas", joinColumns = @JoinColumn(name = "nombre"), inverseJoinColumns = @JoinColumn(name = "nickname"))
     private List<Artista> artistas = new ArrayList<Artista>();
 
     public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, List<Artista> artistas){
@@ -40,10 +37,6 @@ public class Funcion{
 
     public String getNombre(){
 	 return nombre;
-    }
-
-    public Espectaculo getEspectaculo(){
-	 return espectaculo;
     }
 
     public Date getFecha(){
@@ -64,11 +57,6 @@ public class Funcion{
 
     public void setNombre(String nombre){
 	 this.nombre = nombre;
-    }
-
-    public void setEspectaculo(Espectaculo espectaculo){
-	 this.espectaculo = espectaculo;
-	 espectaculo.agregarFuncion(this);
     }
 
     public void setFecha(Date fecha){

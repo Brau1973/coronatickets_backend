@@ -22,8 +22,6 @@ public class Espectaculo{
     @ManyToOne
     @JoinColumn(name = "artista")
     private Artista artista;
-    @ManyToOne
-    private Plataforma plataforma;
     private String descripcion;
     private int duracion;
     private int cantMinEsp;
@@ -35,14 +33,14 @@ public class Espectaculo{
     @ManyToMany(mappedBy = "espectaculos")
     private List<PaqueteEspectaculos> paquete = new ArrayList<PaqueteEspectaculos>();
 
-    @OneToMany(mappedBy = "espectaculo", cascade = CascadeType.ALL)
+    @OneToMany
     private List<Funcion> funciones = new ArrayList<>();
 
 	public Espectaculo(){
 	 super();
     }
 
-    public Espectaculo(Artista artista,Plataforma plataforma, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
+    public Espectaculo(Artista artista, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro){
 	 super();
 	 this.artista = artista;
 	 this.nombre = nombre;
@@ -54,15 +52,10 @@ public class Espectaculo{
 	 this.costo = costo;
 	 this.registro = registro;
 	 
-	 plataforma.añadirEspectaculo(this);
     }
 
     public String getArtista(){
 	 return artista.getNickname();
-    }
-
-    public String getPlataforma(){
-	 return plataforma.getNombre();
     }
 
     public String getNombre(){
@@ -111,10 +104,6 @@ public class Espectaculo{
 
     public void setArtista(Artista artista){
 	 this.artista = artista;
-    }
-
-    public void setPlataforma(Plataforma plataforma){
-	 this.plataforma = plataforma;
     }
 
     public void setNombre(String nombre){
@@ -172,7 +161,7 @@ public class Espectaculo{
 	}
 	
 	public DtEspectaculo getDtEspectaculo(){
-		return new DtEspectaculo(null,null,this.nombre,this.descripcion,this.duracion,this.cantMinEsp,this.cantMaxEsp,this.url,this.costo,this.registro);
+		return new DtEspectaculo(this.artista.getNickname(),this.nombre,this.descripcion,this.duracion,this.cantMinEsp,this.cantMaxEsp,this.url,this.costo,this.registro);
 	}
 
     public void setFunciones(List<Funcion> funciones){

@@ -26,7 +26,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 		super();
 	}
 
-	public void altaEspectaculo(DtEspectaculo dte) throws EspectaculoRepetidoExcepcion {
+	public void altaEspectaculo(DtEspectaculo dte,String nombrePlataforma) throws EspectaculoRepetidoExcepcion {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 
 		IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
@@ -34,11 +34,13 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 
 		Artista artistaOrganizador = iconU.obtenerArtista(dte.getArtista());
 
-		Plataforma plataforma = iconP.buscarPlataforma(dte.getPlataforma());
+		Plataforma plataforma = iconP.buscarPlataforma(nombrePlataforma);
 
-		Espectaculo espectaculo = new Espectaculo(artistaOrganizador, plataforma, dte.getNombre(), dte.getDescripcion(),
+		Espectaculo espectaculo = new Espectaculo(artistaOrganizador, dte.getNombre(), dte.getDescripcion(),
 				dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
 
+		plataforma.añadirEspectaculo(espectaculo);
+		
 		mE.agregarEspectaculo(espectaculo);
 	}
 

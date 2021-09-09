@@ -44,7 +44,8 @@ public class ControladorFuncion implements IControladorFuncion {
 			});
 			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(),
 					dtFuncion.getRegistro(), artistas);
-			funcionACrear.setEspectaculo(espectaculo);
+			espectaculo.agregarFuncion(funcionACrear);
+//			funcionACrear.setEspectaculo(espectaculo);
 			mF.agregarFuncion(funcionACrear);
 		}
 	}
