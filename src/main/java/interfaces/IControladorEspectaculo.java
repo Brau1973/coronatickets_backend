@@ -8,7 +8,7 @@ import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import logica.Espectaculo;
 
 public interface IControladorEspectaculo{
-    public void altaEspectaculo(DtEspectaculo dte) throws EspectaculoRepetidoExcepcion;
+    public void altaEspectaculo(DtEspectaculo dte,String nombrePlataforma) throws EspectaculoRepetidoExcepcion;
 
     public Espectaculo obtenerEspectaculo(String nombre);
 

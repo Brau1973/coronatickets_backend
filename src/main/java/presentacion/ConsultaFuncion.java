@@ -237,10 +237,9 @@ public class ConsultaFuncion extends JInternalFrame {
 					
 					// + f.getArtistas());
 				}
-			}
 		}
 	}
-
+	}
 	public void limpiarFormulario() {
 		txtDatosFuncion.setText("");
 	}

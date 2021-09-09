@@ -17,9 +17,6 @@ public class PaqueteEspectaculos{
     private String descripcion;
     @ManyToMany
     private List<Espectaculo> espectaculos = new ArrayList<Espectaculo>();
-
-    // @JoinTable(name = "EspectaculosXPaquete", joinColumns = @JoinColumn(name = "nomPaq"), inverseJoinColumns = @JoinColumn(name = "nomEsp"))
-
     private Date fechaInicio;
     private Date fechaFin;
     private Date fechaAlta;
