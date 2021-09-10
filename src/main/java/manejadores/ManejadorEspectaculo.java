@@ -43,8 +43,7 @@ public class ManejadorEspectaculo {
 	public Espectaculo buscarEspectaculo(String nombre) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		Espectaculo espectaculo = em.find(Espectaculo.class, nombre);
-		return espectaculo;
+		return em.find(Espectaculo.class, nombre);
 	}
 
 //    /////////////// CHECK USO

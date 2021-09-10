@@ -31,9 +31,9 @@ public class ControladorFuncion implements IControladorFuncion {
 		super();
 	}
 
-	public void altaFuncion(DtFuncion dtFuncion) throws FuncionYaRegistradaEnEspectaculoExcepcion {
+	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo) throws FuncionYaRegistradaEnEspectaculoExcepcion {
 		IControladorEspectaculo iconE = Fabrica.getInstancia().getIControladorEspectaculo();
-		Espectaculo espectaculo = iconE.obtenerEspectaculo(dtFuncion.getEspectaculo());
+		Espectaculo espectaculo = iconE.obtenerEspectaculo(nombreEspectaculo);
 
 		if (espectaculo.funcionYaRegistrada(dtFuncion.getNombre())) {
 			throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion" + dtFuncion.getNombre()
@@ -48,7 +48,6 @@ public class ControladorFuncion implements IControladorFuncion {
 			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(),
 					dtFuncion.getRegistro(), artistas);
 			espectaculo.agregarFuncion(funcionACrear);
-//			funcionACrear.setEspectaculo(espectaculo);
 			mF.agregarFuncion(funcionACrear);
 		}
 	}

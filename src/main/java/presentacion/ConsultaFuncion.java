@@ -56,6 +56,7 @@ public class ConsultaFuncion extends JInternalFrame {
 	private List<String> listPlataformas;
 	private List<DtEspectaculo> listEspectaculos;
 	private List<DtFuncion> listFunciones;
+	private String artistasInvitadosAFuncion;
 
 	// private List<Funcion> listFunciones;
 	// private List<Espectaculo> listEspectaculos;
@@ -125,7 +126,7 @@ public class ConsultaFuncion extends JInternalFrame {
 
 		txtDatosFuncion = new JTextArea();
 		txtDatosFuncion.setTabSize(8);
-		txtDatosFuncion.setBounds(220, 130, 300, 120);
+		txtDatosFuncion.setBounds(220, 130, 300, 180);
 		txtDatosFuncion.setFont(new java.awt.Font("Verdana", 1, 12));
 		miPanel.add(txtDatosFuncion);
 	}
@@ -150,19 +151,7 @@ public class ConsultaFuncion extends JInternalFrame {
 			if (!e.getItem().equals(SELECCIONE_PLAT)) {
 				if (e.getSource() == comboPlataforma) {
 					String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
-					/*
-					 * plataforma = listPlataformas.stream().filter(p -> (p.getNombre() ==
-					 * strPlataforma)) .findFirst().get();
-					 */
-
 					listEspectaculos = iconE.listarEspectaculos(strPlataforma);
-
-					// listEspectaculos = iconE.obtenerEspectaculo2(strPlataforma);
-
-					/*
-					 * ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-					 * this.listEspectaculos = mE.obtenerEspectaculoBD(strPlataforma);
-					 */
 					if (listEspectaculos.isEmpty()) {
 						JOptionPane.showMessageDialog(this, "La plataforma no tiene espectaculos asociados", "Error",
 								JOptionPane.ERROR_MESSAGE);
@@ -190,17 +179,7 @@ public class ConsultaFuncion extends JInternalFrame {
 			if (!e.getItem().equals(SELECCIONE_ESP)) {
 				if (e.getSource() == comboEspectaculos) {
 					String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
-					/*
-					 * espectaculo = listEspectaculos.stream().filter(es -> (es.getNombre() ==
-					 * strEspectaculo)) .findFirst().get();
-					 */
-
-					// listFunciones = iconF.listarFuncionesDt(strEspectaculo);
-
 					listFunciones = iconF.listarFunciones(strEspectaculo);
-
-					// this.listFunciones = espectaculo.getFunciones();
-					// List<Funcion> listFunciones = espectaculo.getFunciones();
 					if (listFunciones.isEmpty()) {
 						JOptionPane.showMessageDialog(this, "El espectaculo no tiene funciones asociadas", "Error",
 								JOptionPane.ERROR_MESSAGE);
@@ -225,17 +204,26 @@ public class ConsultaFuncion extends JInternalFrame {
 			if (!e.getItem().equals(SELECCIONE_FUNC)) {
 				if (e.getSource() == comboFunciones) {
 					String strFuncion = this.comboFunciones.getSelectedItem().toString();
-					// DtFuncion f = this.iconF.obtenerFuncion(strFuncion);
-					// listFunciones = iconF.listarFunciones(strFuncion);
-					Funcion f = this.iconF.obtenerFuncion(strFuncion);
+					int i = 0;
+					String nombreFuncion;
 					SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 					SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm");
-					txtDatosFuncion.setText("Nombre: " + f.getNombre() + "\nFecha: " + formatoFecha.format(f.getFecha())
-							+ "\nFecha Alta: " + formatoFecha.format(f.getRegistro()) + "\nHora Inicio: "
-							+ formatoHora.format(f.getHoraInicio()) + "\nEspectaculo: " + f.getEspectaculo().getNombre()
-							+ "\nArtistas: ");
-
-					// + f.getArtistas());
+					artistasInvitadosAFuncion = "";
+			        boolean encontre=false;
+			        while ((i < this.listFunciones.size()) && (!encontre)) {
+			            nombreFuncion = listFunciones.get(i).getNombre();
+			        	if (nombreFuncion == strFuncion) {
+			                encontre=true;
+			                DtFuncion dtFunc= listFunciones.get(i);
+			                listFunciones.get(i).getArtistas().forEach((a) -> {
+			                	artistasInvitadosAFuncion += a + "\n"; 
+			                });			         
+			                txtDatosFuncion.setText("Nombre: " + dtFunc.getNombre() + "\nFecha: " + formatoFecha.format(dtFunc.getFecha())
+							+ "\nFecha Alta: " + formatoFecha.format(dtFunc.getRegistro()) + "\nHora Inicio: "
+							+ formatoHora.format(dtFunc.getHoraInicio()) + "\n--------Artistas-------- \n" + artistasInvitadosAFuncion);
+			            }
+			            i++;
+			        }				
 				}
 			}
 		}

@@ -34,7 +34,7 @@ public class Espectaculo{
     @ManyToMany(mappedBy = "espectaculos")
     private List<PaqueteEspectaculos> paquete = new ArrayList<PaqueteEspectaculos>();
 
-    @OneToMany(mappedBy = "espectaculo", cascade = CascadeType.ALL)
+    @OneToMany //(mappedBy = "espectaculo", cascade = CascadeType.ALL)
     private List<Funcion> funciones = new ArrayList<>();
    
 
@@ -181,7 +181,7 @@ public class Espectaculo{
 			for (Artista a: f.getArtistas()) {
 				artistas.add(a.getNickname());
 			}
-			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getRegistro(), f.getHoraInicio(), f.getRegistro(), f.getEspectaculo().getNombre(), artistas);
+			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getRegistro(), f.getHoraInicio(), f.getRegistro(), artistas);
 			listFuncionesDt.add(DtFuncion);
 		}
 		return listFuncionesDt;
