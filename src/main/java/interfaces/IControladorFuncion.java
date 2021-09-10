@@ -11,7 +11,7 @@ import logica.Plataforma;
 
 public interface IControladorFuncion{
 	
-	public void altaFuncion(DtFuncion dtFuncion) throws FuncionYaRegistradaEnEspectaculoExcepcion;
+	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo) throws FuncionYaRegistradaEnEspectaculoExcepcion;
     
     public Funcion obtenerFuncion(String nombre);
     
