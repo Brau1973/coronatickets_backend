@@ -1,5 +1,8 @@
 package interfaces;
 
+import java.util.List;
+
+//import datatypes.DtHora;
 import datatypes.DtFuncion;
 
 import java.util.List;
@@ -13,9 +16,6 @@ public interface IControladorFuncion{
 	
 	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo) throws FuncionYaRegistradaEnEspectaculoExcepcion;
     
-    public Funcion obtenerFuncion(String nombre);
-    
-    public List<Funcion> obtenerFuncionBD(String espectaculo);
-   
+    public List<DtFuncion> listarFunciones(String espectaculo);
 
 }

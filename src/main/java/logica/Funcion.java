@@ -14,65 +14,65 @@ import javax.persistence.ManyToOne;
 //import datatypes.DtHora;
 
 @Entity
-public class Funcion{
-    @Id
-    private String nombre;
-    private Date fecha;
-    private Time horaInicio;
-    private Date registro;
-    
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Artista> artistas = new ArrayList<Artista>();
+public class Funcion {
+	@Id
+	private String nombre;
+	private Date fecha;
+	private Time horaInicio;
+	private Date registro;
 
-    public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, List<Artista> artistas){
-	 this.nombre = nombre;
-	 this.fecha = fecha;
-	 this.horaInicio = horaInicio;
-	 this.registro = registro;
-	 this.artistas = artistas;
-    }
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Artista> artistas = new ArrayList<Artista>();
 
-    public Funcion(){
-    }
+	public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, List<Artista> artistas) {
+		this.nombre = nombre;
+		this.fecha = fecha;
+		this.horaInicio = horaInicio;
+		this.registro = registro;
+		this.artistas = artistas;
+	}
 
-    public String getNombre(){
-	 return nombre;
-    }
+	public Funcion() {
+	}
 
-    public Date getFecha(){
-	 return fecha;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public Time getHoraInicio(){
-	 return horaInicio;
-    }
+	public Date getFecha() {
+		return fecha;
+	}
 
-    public List<Artista> getArtistas(){
-	 return artistas;
-    }
+	public Time getHoraInicio() {
+		return horaInicio;
+	}
 
-    public Date getRegistro(){
-	 return registro;
-    }
+	public List<Artista> getArtistas() {
+		return artistas;
+	}
 
-    public void setNombre(String nombre){
-	 this.nombre = nombre;
-    }
+	public Date getRegistro() {
+		return registro;
+	}
 
-    public void setFecha(Date fecha){
-	 this.fecha = fecha;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 
-    public void setHoraInicio(Time horaInicio){
-	 this.horaInicio = horaInicio;
-    }
+	public void setHoraInicio(Time horaInicio) {
+		this.horaInicio = horaInicio;
+	}
 
-    public void setArtistas(List<Artista> artistas){
-	 this.artistas = artistas;
-    }
+	public void setArtistas(List<Artista> artistas) {
+		this.artistas = artistas;
+	}
 
-    public void setRegistro(Date registro){
-	 this.registro = registro;
-    }
+	public void setRegistro(Date registro) {
+		this.registro = registro;
+	}
 
 }

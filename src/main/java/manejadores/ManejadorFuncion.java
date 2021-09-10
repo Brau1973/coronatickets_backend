@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import datatypes.DtFuncion;
 import logica.Espectaculo;
 import logica.Funcion;
 import logica.Plataforma;
@@ -30,6 +31,7 @@ public class ManejadorFuncion {
 		em.persist(funcion);
 		em.getTransaction().commit();
 	}
+
 
 	public Funcion buscarFuncion(String nombre) {
 		Conexion conexion = Conexion.getInstancia();

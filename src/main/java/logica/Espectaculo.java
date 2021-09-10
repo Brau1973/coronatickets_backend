@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import datatypes.DtEspectaculo;
+import datatypes.DtFuncion;
 
 @Entity
 public class Espectaculo{
@@ -33,8 +34,9 @@ public class Espectaculo{
     @ManyToMany(mappedBy = "espectaculos")
     private List<PaqueteEspectaculos> paquete = new ArrayList<PaqueteEspectaculos>();
 
-    @OneToMany
+    @OneToMany //(mappedBy = "espectaculo", cascade = CascadeType.ALL)
     private List<Funcion> funciones = new ArrayList<>();
+   
 
 	public Espectaculo(){
 	 super();
@@ -138,6 +140,10 @@ public class Espectaculo{
 	 this.registro = registro;
     }
     
+    public void setFunciones(List<Funcion> funciones) {
+		this.funciones = funciones;
+	}
+
 	public void setPaquete(List<PaqueteEspectaculos> paquete) {
 		this.paquete = paquete;
 	}
@@ -164,11 +170,20 @@ public class Espectaculo{
 		return new DtEspectaculo(this.artista.getNickname(),this.nombre,this.descripcion,this.duracion,this.cantMinEsp,this.cantMaxEsp,this.url,this.costo,this.registro);
 	}
 
-    public void setFunciones(List<Funcion> funciones){
-	 this.funciones = funciones;
-    }
-
     public void setPaquetes(List<PaqueteEspectaculos> paquete){
 	 this.paquete = paquete;
     }
+    
+    public List<DtFuncion> getFuncionesDt(){
+		List<DtFuncion> listFuncionesDt = new ArrayList<DtFuncion>();
+		for (Funcion f : funciones) {
+			List<String> artistas = new ArrayList<String>();
+			for (Artista a: f.getArtistas()) {
+				artistas.add(a.getNickname());
+			}
+			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getRegistro(), f.getHoraInicio(), f.getRegistro(), artistas);
+			listFuncionesDt.add(DtFuncion);
+		}
+		return listFuncionesDt;
+	}
 }

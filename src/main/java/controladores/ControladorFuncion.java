@@ -13,6 +13,7 @@ import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
+import logica.Espectaculo;
 import interfaces.IControladorUsuario;
 import logica.Artista;
 import logica.Espectaculo;
@@ -20,6 +21,7 @@ import logica.Funcion;
 import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
+import manejadores.ManejadorPlataforma;
 import persistencia.Conexion;
 import manejadores.ManejadorPlataforma;
 
@@ -33,9 +35,10 @@ public class ControladorFuncion implements IControladorFuncion {
 		IControladorEspectaculo iconE = Fabrica.getInstancia().getIControladorEspectaculo();
 		Espectaculo espectaculo = iconE.obtenerEspectaculo(nombreEspectaculo);
 		
-		if(espectaculo.funcionYaRegistrada(dtFuncion.getNombre())){
-			throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion" + dtFuncion.getNombre() + " ya esta registrada en el espectaculo " + espectaculo.getNombre());
-		}else {
+		if (espectaculo.funcionYaRegistrada(dtFuncion.getNombre())) {
+			throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion" + dtFuncion.getNombre()
+					+ " ya esta registrada en el espectaculo " + espectaculo.getNombre());
+		} else {
 			ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 			IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
 			List<Artista> artistas = new ArrayList<Artista>();
@@ -48,14 +51,11 @@ public class ControladorFuncion implements IControladorFuncion {
 			mF.agregarFuncion(funcionACrear);
 		}
 	}
-    
-    public Funcion obtenerFuncion(String nombre){
-   	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-   	 return mF.buscarFuncion(nombre);
-       }
-    
-    public List<Funcion> obtenerFuncionBD(String espectaculo){
-      	 ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-      	 return mF.obtenerFuncionesBD(espectaculo);
-      }
+
+	public List<DtFuncion> listarFunciones(String nomEsp) {
+		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+		Espectaculo espectaculo = mE.buscarEspectaculo(nomEsp);
+		return espectaculo.getFuncionesDt();
+	}
+
 }

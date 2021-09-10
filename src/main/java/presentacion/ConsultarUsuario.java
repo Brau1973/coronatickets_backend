@@ -21,9 +21,12 @@ import com.toedter.calendar.JDateChooser;
 
 import interfaces.Fabrica;
 import interfaces.IControladorUsuario;
+
+import logica.Espectaculo;
 import logica.Artista;
 import logica.Espectador;
 import logica.Usuario;
+
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
 
@@ -142,6 +145,9 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 <<<<<<< HEAD
+	     List<Espectaculo> usuario = mE.obtenerEspectaculo();
+=======
+<<<<<<< HEAD
 	     ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 
 	     String datos = "";
@@ -155,8 +161,9 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 		  }
 =======
 	    ArrayList<String> usuario = mE.obtenerEspectaculo();
+>>>>>>> fa1031cacde85a4d766ba58a399e48268702b2e6
 	     String datos = "\n\nLista de espectaculos:";
-	     for(String i :usuario){
+	     for(Espectaculo i :usuario){
 		  datos = datos + "\n" + i.toString();
 >>>>>>> 5b93376eabd1036b2d47c9e1ba52dd49c4d3a01d
 	     }
