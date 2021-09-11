@@ -36,7 +36,7 @@ public class PnlDatosPaquete extends JInternalFrame{
     static final int HEIGHT_FIELD = 25;
     static final String SELECCIONE = "Seleccione";
 
-    private String[] header = {"Nombre", "Artista", "Plataforma", "Descripción"};
+    private String[] header = {"Nombre", "Artista", "Descripcion"};
     private String[][] data = {};
 
     private PaqueteEspectaculos paqueteSelected;
@@ -148,7 +148,7 @@ public class PnlDatosPaquete extends JInternalFrame{
 	 limpiarTabla(tm);
 	 for(int i = 0; i < p.getEspectaculos().size(); i++){
 	     Espectaculo esp = p.getEspectaculos().get(i);
-	     //Object[] data = {esp.getNombre(), esp.getArtista(), esp.getPlataforma(), esp.getDescripcion()};
+	     Object[] data = {esp.getNombre(), esp.getArtista(), esp.getDescripcion()};
 	     tm.addRow(data);
 	 }
     }

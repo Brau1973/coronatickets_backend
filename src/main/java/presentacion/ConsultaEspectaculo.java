@@ -198,9 +198,8 @@ public class ConsultaEspectaculo extends JInternalFrame{
     private void listenerComboPlataforma(ItemEvent e){
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
-	     // Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();
-	     // listEspectaculos = plataforma.getEspectaculo();
-	     listEspectaculos = iconE.obtenerEspectaculo2(strPlataforma);// 79S
+	     Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();
+	     this.listEspectaculos = plataforma.getEspectaculo();
 	     if(listEspectaculos.isEmpty()){
 		  comboEspectaculos.removeAllItems();// ??
 	     }else{
@@ -220,7 +219,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     String datosFecha = formatoFecha.format(espectaculo.getRegistro());
 	     this.textNombreEspectaculo.setText(espectaculo.getNombre());
-	     this.textArtistaOrganizador.setText(espectaculo.getArtista());
+	     // this.textArtistaOrganizador.setText(espectaculo.getArtista().getNickname());
 	     this.textDescripcion.setText(espectaculo.getDescripcion());
 	     this.textDuracion.setText(String.valueOf(espectaculo.getDuracion()));
 	     this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMinEsp()));
@@ -252,22 +251,22 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		  pnlDatosPaquete.setVisible(false);
 		  pnlDatosFuncion.setVisible(true);
 	     }else{
-
 		  pnlDatosFuncion.setVisible(false);
 	     }
 	 }
     }
 
+
     private void listenerComboPaquetes(ItemEvent e){
 	 if(e.getStateChange() == ItemEvent.SELECTED){
-	     // if(!e.getItem().equals(SELECCIONE)){
-	     paqueteSelected = listPaqEspe.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
-	     pnlDatosPaquete.cargarPanel(paqueteSelected);
-	     pnlDatosFuncion.setVisible(false);
-	     pnlDatosPaquete.setVisible(true);
-	     // }else{
-	     // pnlDatosPaquete.setVisible(false);
-	     // }
+	     if(!e.getItem().equals(SELECCIONE)){
+		  paqueteSelected = listPaqEspe.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
+		  pnlDatosPaquete.cargarPanel(paqueteSelected);
+		  pnlDatosFuncion.setVisible(false);
+		  pnlDatosPaquete.setVisible(true);
+	     }else{
+		  pnlDatosPaquete.setVisible(false);
+	     }
 	 }
     }
 
@@ -278,5 +277,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 listPlataformas.forEach((p) -> {
 	     comboPlataforma.addItem(p.getNombre());
 	 });
+	 // comboPlataforma.setSelectedItem("Seleccione plataforma");// ?
+	 // modelo.clear();
     }
 }
