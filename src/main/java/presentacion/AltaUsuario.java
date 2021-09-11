@@ -14,11 +14,14 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import datatypes.DtArtista;
+import datatypes.DtEspectador;
+import datatypes.DtUsuario;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControladorUsuario;
-import logica.Artista;
-import logica.Espectador;
-import logica.Usuario;
+//import logica.Artista;
+//import logica.Espectador;
+//import logica.Usuario;
 
 @SuppressWarnings("serial")
 public class AltaUsuario extends JInternalFrame implements ActionListener{
@@ -200,8 +203,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		  if(checkFormulario()){
 		      try{
 			   // falta mirar chequeo de fecha
-			   Usuario u = new Espectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac);
-			   this.iconU.altaUsuario(u);
+			   DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac);
+			   this.iconU.altaUsuario(dte);
 			   JOptionPane.showMessageDialog(this, "el Espectador se ha creado con Exito");
 
 		      }catch(UsuarioRepetidoExcepcion x){
@@ -215,10 +218,9 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		  if(checkFormulario2()){
 		      try{
 			   // falta mirar chequeo de fecha
-			   Usuario a = new Artista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strDescripcion, strBiografia, strLink);
-			   this.iconU.altaUsuario(a);
+			   DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strDescripcion, strBiografia, strLink);
+			   this.iconU.altaUsuario(dta);
 			   JOptionPane.showMessageDialog(this, "el Artista se ha creado con Exito");
-
 		      }catch(UsuarioRepetidoExcepcion x){
 			   JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 		      }
