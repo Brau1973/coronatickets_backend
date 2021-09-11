@@ -287,7 +287,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     if(!e.getItem().equals(SELECCIONE)){
 		  paqueteSelected = listPaqEspe.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
-		  pnlDatosPaquete.cargarPanel(paqueteSelected,false);
+//		  pnlDatosPaquete.cargarPanel(paqueteSelected,false);
 		  pnlDatosFuncion.setVisible(false);
 		  pnlDatosPaquete.setVisible(true);
 	     }else{

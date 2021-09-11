@@ -19,10 +19,10 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
+import datatypes.DtEspectaculo;
+import datatypes.DtPaqueteEspectaculo;
 import interfaces.Fabrica;
 import interfaces.IControladorPaquete;
-import logica.Espectaculo;
-import logica.PaqueteEspectaculos;
 
 @SuppressWarnings("serial")
 public class PnlDatosPaquete extends JInternalFrame {
@@ -45,8 +45,8 @@ public class PnlDatosPaquete extends JInternalFrame {
 	private String[] header = { "Nombre", "Artista", "Plataforma", "Descripción" };
 	private String[][] data = {};
 
-	private PaqueteEspectaculos paqueteSelected;
-	List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
+	private DtPaqueteEspectaculo paqueteSelected;
+	List<DtPaqueteEspectaculo> lstPaquetes = new ArrayList<DtPaqueteEspectaculo>();
 	IControladorPaquete iControladorPaquete = Fabrica.getInstancia().getIControladorPaquete();
 
 	// Constructor
@@ -98,7 +98,7 @@ public class PnlDatosPaquete extends JInternalFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (eventoTablaActivo) {
 					int row = tablaEspectaculos.getSelectedRow();
-					Espectaculo esp = paqueteSelected.getEspectaculos().get(row);
+					DtEspectaculo esp = paqueteSelected.getEspectaculos().get(row);
 					cargarPanelEspectaculo(esp);
 				}
 			}
@@ -234,7 +234,7 @@ public class PnlDatosPaquete extends JInternalFrame {
 	}
 
 	// Inicializar panel
-	public void cargarPanel(PaqueteEspectaculos p, Boolean eventoTablaActivo) {
+	public void cargarPanel(DtPaqueteEspectaculo p, Boolean eventoTablaActivo) {
 		this.eventoTablaActivo = eventoTablaActivo;
 		DefaultTableModel tm = (DefaultTableModel) tablaEspectaculos.getModel();
 		paqueteSelected = p;
@@ -242,22 +242,22 @@ public class PnlDatosPaquete extends JInternalFrame {
 		txtDescripcionPaquete.setText(paqueteSelected.getDescripcion());
 		limpiarTabla(tm);
 		for (int i = 0; i < p.getEspectaculos().size(); i++) {
-			Espectaculo esp = p.getEspectaculos().get(i);
+			DtEspectaculo esp = p.getEspectaculos().get(i);
 			Object[] data = { esp.getNombre(), esp.getArtista(), "", esp.getDescripcion() };
 			tm.addRow(data);
 		}
 	}
 
-	private void cargarPanelEspectaculo(Espectaculo espectaculo) {
+	private void cargarPanelEspectaculo(DtEspectaculo espectaculo) {
 		panelEsp.setVisible(true);
 		SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 		String datosFecha = formatoFecha.format(espectaculo.getRegistro());
 		this.textNombreEspectaculo.setText(espectaculo.getNombre());
-		// this.textArtistaOrganizador.setText(espectaculo.getArtista().getNickname());
+		 this.textArtistaOrganizador.setText(espectaculo.getArtista());
 		this.textDescripcion.setText(espectaculo.getDescripcion());
 		this.textDuracion.setText(String.valueOf(espectaculo.getDuracion()));
-		this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMinEsp()));
-		this.textCantidadMaxima.setText(String.valueOf(espectaculo.getCantMaxEsp()));
+		this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMin()));
+		this.textCantidadMaxima.setText(String.valueOf(espectaculo.getCantMax()));
 		this.textURL.setText(espectaculo.getUrl());
 		this.textCosto.setText(String.valueOf(espectaculo.getCosto()));
 		this.textRegistro.setText(String.valueOf(datosFecha));

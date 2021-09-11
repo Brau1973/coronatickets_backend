@@ -10,9 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import datatypes.DtPaqueteEspectaculo;
 import interfaces.Fabrica;
 import interfaces.IControladorPaquete;
-import logica.PaqueteEspectaculos;
 
 @SuppressWarnings("serial")
 public class ConsultaPaqueteEspectaculos extends JInternalFrame{
@@ -29,8 +29,8 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
 
     private PnlDatosPaquete pnlDatosPaquete;
 
-    private PaqueteEspectaculos paqueteSelected;
-    List<PaqueteEspectaculos> lstPaquetes = new ArrayList<PaqueteEspectaculos>();
+    private DtPaqueteEspectaculo paqueteSelected;
+    List<DtPaqueteEspectaculo> lstPaquetes = new ArrayList<DtPaqueteEspectaculo>();
 
     IControladorPaquete iControladorPaquete = Fabrica.getInstancia().getIControladorPaquete();
 
