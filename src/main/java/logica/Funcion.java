@@ -14,77 +14,65 @@ import javax.persistence.ManyToOne;
 //import datatypes.DtHora;
 
 @Entity
-public class Funcion{
-    @Id
-    private String nombre;
-    private Date fecha;
-    private Time horaInicio;
-    private Date registro;
-    @ManyToOne
-    private Espectaculo espectaculo;
+public class Funcion {
+	@Id
+	private String nombre;
+	private Date fecha;
+	private Time horaInicio;
+	private Date registro;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    // @JoinTable(name = "FuncionXArtistas", joinColumns = @JoinColumn(name = "nombre"), inverseJoinColumns = @JoinColumn(name = "nickname"))
-    private List<Artista> artistas = new ArrayList<Artista>();
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Artista> artistas = new ArrayList<Artista>();
 
-    public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, List<Artista> artistas){
-	 this.nombre = nombre;
-	 this.fecha = fecha;
-	 this.horaInicio = horaInicio;
-	 this.registro = registro;
-	 this.artistas = artistas;
-    }
+	public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, List<Artista> artistas) {
+		this.nombre = nombre;
+		this.fecha = fecha;
+		this.horaInicio = horaInicio;
+		this.registro = registro;
+		this.artistas = artistas;
+	}
 
-    public Funcion(){
-    }
+	public Funcion() {
+	}
 
-    public String getNombre(){
-	 return nombre;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public Espectaculo getEspectaculo(){
-	 return espectaculo;
-    }
+	public Date getFecha() {
+		return fecha;
+	}
 
-    public Date getFecha(){
-	 return fecha;
-    }
+	public Time getHoraInicio() {
+		return horaInicio;
+	}
 
-    public Time getHoraInicio(){
-	 return horaInicio;
-    }
+	public List<Artista> getArtistas() {
+		return artistas;
+	}
 
-    public List<Artista> getArtistas(){
-	 return artistas;
-    }
+	public Date getRegistro() {
+		return registro;
+	}
 
-    public Date getRegistro(){
-	 return registro;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 
-    public void setNombre(String nombre){
-	 this.nombre = nombre;
-    }
+	public void setHoraInicio(Time horaInicio) {
+		this.horaInicio = horaInicio;
+	}
 
-    public void setEspectaculo(Espectaculo espectaculo){
-	 this.espectaculo = espectaculo;
-	 espectaculo.agregarFuncion(this);
-    }
+	public void setArtistas(List<Artista> artistas) {
+		this.artistas = artistas;
+	}
 
-    public void setFecha(Date fecha){
-	 this.fecha = fecha;
-    }
-
-    public void setHoraInicio(Time horaInicio){
-	 this.horaInicio = horaInicio;
-    }
-
-    public void setArtistas(List<Artista> artistas){
-	 this.artistas = artistas;
-    }
-
-    public void setRegistro(Date registro){
-	 this.registro = registro;
-    }
+	public void setRegistro(Date registro) {
+		this.registro = registro;
+	}
 
 }

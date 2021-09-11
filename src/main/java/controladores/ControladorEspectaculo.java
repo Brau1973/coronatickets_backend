@@ -19,24 +19,21 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 	 super();
     }
 
-    public void altaEspectaculo(DtEspectaculo dte) throws EspectaculoRepetidoExcepcion{
+    public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion{
 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+
 	 IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
 	 IControladorPlataforma iconP = Fabrica.getInstancia().getIControladorPlataforma();
 
 	 Artista artistaOrganizador = iconU.obtenerArtista(dte.getArtista());
-	 Plataforma plataforma = iconP.buscarPlataforma(dte.getPlataforma());
 
-	 Espectaculo espectaculo = new Espectaculo(artistaOrganizador, plataforma, dte.getNombre(), dte.getDescripcion(), dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
-	 // agregar espectaculo a coleccion de espectaculos de la plataforma
+	 Plataforma plataforma = iconP.buscarPlataforma(nombrePlataforma);
+
+	 Espectaculo espectaculo = new Espectaculo(artistaOrganizador, dte.getNombre(), dte.getDescripcion(), dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
+
+	 plataforma.aniadirEspectaculo(espectaculo);
+
 	 mE.agregarEspectaculo(espectaculo);
-    }
-
-    public List<Espectaculo> listarEspectaculos(){
-	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-	 List<Espectaculo> espectaculos;
-	 Espectaculo espec = mE.buscarEspectaculo("espec");
-	 return null;
     }
 
     public Espectaculo obtenerEspectaculo(String nombre){

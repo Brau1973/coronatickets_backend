@@ -7,12 +7,9 @@ import excepciones.EspectaculoRepetidoExcepcion;
 import logica.Espectaculo;
 
 public interface IControladorEspectaculo{
-    public void altaEspectaculo(DtEspectaculo dte) throws EspectaculoRepetidoExcepcion;
-
-    public List<Espectaculo> listarEspectaculos();
+    public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion;
 
     public Espectaculo obtenerEspectaculo(String nombre);
-
 
     // public void agregarFuncion(String nombreEspectaculo,String nombreFuncion) throws FuncionYaRegistradaEnEspectaculoExcepcion;
 

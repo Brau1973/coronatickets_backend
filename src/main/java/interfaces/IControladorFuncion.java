@@ -1,20 +1,12 @@
 package interfaces;
 
-
 import java.util.List;
 
 import datatypes.DtFuncion;
-import excepciones.FuncionRepetidaExcepcion;
-import logica.Funcion;
+import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 
 public interface IControladorFuncion{
+    public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo) throws FuncionYaRegistradaEnEspectaculoExcepcion;
 
-    public void altaFuncion(DtFuncion dtFuncion) throws FuncionRepetidaExcepcion;
-
-    public Funcion obtenerFuncion(String nombre);
-
-    public List<Funcion> obtenerFuncionBD(String espectaculo);
-
-    public List<Funcion> listarFunciones();
-
+    public List<DtFuncion> listarFunciones(String espectaculo);
 }

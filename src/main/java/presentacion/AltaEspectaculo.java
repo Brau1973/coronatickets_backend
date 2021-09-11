@@ -16,17 +16,16 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import datatypes.DtArtista;
 import datatypes.DtEspectaculo;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
-import logica.Artista;
-import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 
 @SuppressWarnings("serial")
-public class AltaEspectaculo extends JInternalFrame implements ActionListener{ // 79S
+public class AltaEspectaculo extends JInternalFrame implements ActionListener{
     private IControladorEspectaculo iconE;
     private IControladorUsuario iconU;
     private IControladorPlataforma iconP;
@@ -36,8 +35,8 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
     private JSpinner spinMin, spinMax;
     private JDateChooser dateFechaNac;
     private JButton btnAceptar, btnCancelar;
-    private List<Plataforma> listPlataformas;
-    private List<Artista> listArtistas;
+    private List<String> listPlataformas;
+    private List<DtArtista> listArtistas;
 
     public AltaEspectaculo(IControladorEspectaculo iconE){
 	 this.iconE = iconE;
@@ -173,36 +172,31 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 	 comboPlataforma.removeAllItems();
 	 comboArtista.removeAllItems();
 
-	 listPlataformas = iconP.listarPlataformas();
+	 listPlataformas = iconP.listarPlataformasStr();
 	 listPlataformas.forEach((p) -> {
-	     comboPlataforma.addItem(p.getNombre());
+	     comboPlataforma.addItem(p);
 	 });
 
-	 listArtistas = iconU.listarArtistas();
-	 listArtistas.forEach((a) -> {
-	     comboArtista.addItem(a.getNickname());
+	 listArtistas = iconU.listarArtistasDt();
+	 listArtistas.forEach((DtArt) -> {
+	     comboArtista.addItem(DtArt.getNickname());
 	 });
     }
 
     public void actionPerformed(ActionEvent e){
-	 String strplataforma = (String) this.comboPlataforma.getSelectedItem();
-	 Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strplataforma)).findFirst().get();
-
-	 String strartista = (String) this.comboArtista.getSelectedItem();
-	 Artista artista = listArtistas.stream().filter(a -> (a.getNickname() == strartista)).findFirst().get();
-
-	 String strnombre = this.txtNombre.getText();
-	 String strdescripcion = this.txtDescripcion.getText();
-	 int cantMin = (Integer) spinMin.getValue();
-	 int cantMax = (Integer) spinMax.getValue();
-	 String strurl = this.txtUrl.getText();
-	 Date dateRegistro = this.dateFechaNac.getDate();
-
 	 if(e.getSource() == btnAceptar){
 	     if(checkFormulario()){
+		  String strplataforma = (String) this.comboPlataforma.getSelectedItem();
+		  String strartista = (String) this.comboArtista.getSelectedItem();
+		  String strnombre = this.txtNombre.getText();
+		  String strdescripcion = this.txtDescripcion.getText();
+		  int cantMin = (Integer) spinMin.getValue();
+		  int cantMax = (Integer) spinMax.getValue();
+		  String strurl = this.txtUrl.getText();
+		  Date dateRegistro = this.dateFechaNac.getDate();
 		  try{
-		      DtEspectaculo dte = new DtEspectaculo(artista.getNickname(), plataforma.getNombre(), strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
-		      this.iconE.altaEspectaculo(dte);
+		      DtEspectaculo dte = new DtEspectaculo(strartista, strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
+		      this.iconE.altaEspectaculo(dte, strplataforma);
 		      JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
 		      // limpiarFormulario();
 		  }catch(Exception ex){

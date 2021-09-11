@@ -34,7 +34,6 @@ public class ManejadorFuncion{
 	 return em.find(Funcion.class, nombre);
     }
 
-
     public List<Funcion> obtenerFunciones(){ // 79S CHECK USO
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
@@ -51,6 +50,4 @@ public class ManejadorFuncion{
 	 List<Funcion> listFuncion = (List<Funcion>) query.getResultList();
 	 return listFuncion;
     }
-
-
 }

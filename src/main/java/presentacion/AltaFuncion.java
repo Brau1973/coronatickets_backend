@@ -25,8 +25,7 @@ import com.toedter.calendar.JDateChooser;
 import datatypes.DtArtista;
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
-import excepciones.FuncionRepetidaExcepcion;
-//import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
+import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
@@ -184,7 +183,6 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 modelo.addElement(nombre);
 	 listaArtistasSeleccionados.setModel(modelo);
 	 comboArtista.removeItem(this.comboArtista.getSelectedItem());
-
 	 listArtistasSeleccionados.add(nombre);
     }
 
@@ -193,7 +191,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 comboPlataforma.removeAllItems();
 	 comboArtista.removeAllItems();
 
-	 listPlataformas = iconP.listarPlataformasDt();
+	 listPlataformas = iconP.listarPlataformasStr();
 	 listPlataformas.forEach((p) -> {
 	     comboPlataforma.addItem(p);
 	 });
@@ -233,11 +231,11 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 		  Time horaInicio = new Time(hora, minutos, 0);
 		  Date fechaRegistro = this.fechaAlta.getDate();
 		  String strespectaculo = (String) this.comboEspectaculos.getSelectedItem();
-		  DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro, strespectaculo, listArtistasSeleccionados);
+		  DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro, listArtistasSeleccionados);
 		  try{
-		      this.iconF.altaFuncion(dtFuncion);
+		      this.iconF.altaFuncion(dtFuncion, strespectaculo);
 		      JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");
-		  }catch(FuncionRepetidaExcepcion msg){
+		  }catch(FuncionYaRegistradaEnEspectaculoExcepcion msg){
 		      JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
 		  }
 		  limpiarFormulario();
@@ -272,5 +270,4 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 listArtistasSeleccionados = new ArrayList<String>();
 	 listArtistasSeleccionados.clear();
     }
-
 }
