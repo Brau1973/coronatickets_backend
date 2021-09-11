@@ -1,9 +1,12 @@
 package datatypes;
 
+import java.util.List;
+
 public class DtPlataforma {
     private String nombre;
     private String descripcion;
     private String url;
+    private List<DtEspectaculo> espectaculo; 
     
     public DtPlataforma(String nombre,String descripcion,String url) {
     	super();
@@ -23,6 +26,16 @@ public class DtPlataforma {
 	public String getUrl() {
 		return url;
 	}
+
+	public List<DtEspectaculo> getEspectaculo() {
+		return espectaculo;
+	}
+
+	public void setEspectaculo(List<DtEspectaculo> espectaculo) {
+		this.espectaculo = espectaculo;
+	}
+	
+	
 }
 
 

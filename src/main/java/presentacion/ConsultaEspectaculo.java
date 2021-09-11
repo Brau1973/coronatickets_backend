@@ -11,13 +11,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import datatypes.DtEspectaculo;
+import datatypes.DtPlataforma;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorPlataforma;
-import logica.Espectaculo;
 import logica.Funcion;
 import logica.PaqueteEspectaculos;
-import logica.Plataforma;
+
 
 @SuppressWarnings("serial")
 public class ConsultaEspectaculo extends JInternalFrame{
@@ -26,8 +27,8 @@ public class ConsultaEspectaculo extends JInternalFrame{
     private JPanel miPanel;
     private JLabel lblTitulo, lblPlataforma, lblEspectaculos, lblPaquetes;
     private JComboBox<String> comboPlataforma, comboEspectaculos, comboPaquetes, comboFunciones;
-    private List<Plataforma> listPlataformas;
-    private List<Espectaculo> listEspectaculos;
+    private List<DtPlataforma> listPlataformas;
+    private List<DtEspectaculo> listEspectaculos;
     private List<Funcion> listFunciones;
     private List<PaqueteEspectaculos> listPaqEspe;
     private JLabel lblCantidadMaxima;
@@ -156,7 +157,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 miPanel.add(textCantidadMinima);
 
 	 lblCosto = new JLabel("Costo:");
-	 lblCosto.setBounds(545, 158, 40, 14);
+	 lblCosto.setBounds(545, 158, 105, 14);
 	 miPanel.add(lblCosto);
 
 	 textCosto = new JTextField();
@@ -198,7 +199,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
     private void listenerComboPlataforma(ItemEvent e){
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
-	     Plataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();
+	     DtPlataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();
 	     this.listEspectaculos = plataforma.getEspectaculo();
 	     if(listEspectaculos.isEmpty()){
 		  comboEspectaculos.removeAllItems();// ??
@@ -214,7 +215,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
     private void listenerComboEspectaculo(ItemEvent e){
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
-	     Espectaculo espectaculo = listEspectaculos.stream().filter(espec -> (espec.getNombre() == strEspectaculo)).findFirst().get();
+	     DtEspectaculo espectaculo = listEspectaculos.stream().filter(espec -> (espec.getNombre() == strEspectaculo)).findFirst().get();
 
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     String datosFecha = formatoFecha.format(espectaculo.getRegistro());
@@ -222,24 +223,24 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	     // this.textArtistaOrganizador.setText(espectaculo.getArtista().getNickname());
 	     this.textDescripcion.setText(espectaculo.getDescripcion());
 	     this.textDuracion.setText(String.valueOf(espectaculo.getDuracion()));
-	     this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMinEsp()));
-	     this.textCantidadMaxima.setText(String.valueOf(espectaculo.getCantMaxEsp()));
+	     this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMin()));
+	     this.textCantidadMaxima.setText(String.valueOf(espectaculo.getCantMax()));
 	     this.textURL.setText(espectaculo.getUrl());
 	     this.textCosto.setText(String.valueOf(espectaculo.getCosto()));
 	     this.textRegistro.setText(String.valueOf(datosFecha));
 
 	     // Combo Funciones
-	     comboFunciones.removeAllItems();
-	     listFunciones = espectaculo.getFunciones();
-	     listFunciones.forEach((p) -> {
-		  comboFunciones.addItem(p.getNombre());
-	     });
+	     // comboFunciones.removeAllItems();
+	     // listFunciones = espectaculo.getFunciones();
+	     // listFunciones.forEach((p) -> {
+	     // comboFunciones.addItem(p.getNombre());
+	     // });
 	     // Combo Paquetes
-	     comboPaquetes.removeAllItems();
-	     listPaqEspe = espectaculo.getPaquetes();
-	     listPaqEspe.forEach((p) -> {
-		  comboPaquetes.addItem(p.getNombre());
-	     });
+	     // comboPaquetes.removeAllItems();
+	     // listPaqEspe = espectaculo.getPaquetes();
+	     // listPaqEspe.forEach((p) -> {
+	     // comboPaquetes.addItem(p.getNombre());
+	     // });
 	 }
     }
 
@@ -261,7 +262,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     if(!e.getItem().equals(SELECCIONE)){
 		  paqueteSelected = listPaqEspe.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
-		  pnlDatosPaquete.cargarPanel(paqueteSelected);
+		  // pnlDatosPaquete.cargarPanel(paqueteSelected,false);
 		  pnlDatosFuncion.setVisible(false);
 		  pnlDatosPaquete.setVisible(true);
 	     }else{

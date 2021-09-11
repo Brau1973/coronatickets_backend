@@ -10,7 +10,7 @@ import logica.Plataforma;
 public interface IControladorPlataforma{
     public void altaPlataforma(DtPlataforma dtPlataforma) throws PlataformaRepetidaExcepcion;
 
-    public List<Plataforma> listarPlataformas();
+    public List<DtPlataforma> listarPlataformas();
     
     public List<String> listarPlataformasStr();
     

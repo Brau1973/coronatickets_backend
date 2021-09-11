@@ -2,6 +2,7 @@ package interfaces;
 
 import java.util.List;
 
+import datatypes.DtPaqueteEspectaculo;
 import logica.PaqueteEspectaculos;
 
 public interface IControladorPaquete{
@@ -9,5 +10,5 @@ public interface IControladorPaquete{
 
     public Boolean existePaquete(String nombre);
 
-    public List<PaqueteEspectaculos> obtenerPaquetes();
+    public List<DtPaqueteEspectaculo> obtenerPaquetes();
 }
