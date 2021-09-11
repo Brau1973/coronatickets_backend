@@ -22,7 +22,6 @@ import interfaces.IControladorEspectaculo;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
 import logica.Artista;
-import logica.Espectaculo;
 import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 
@@ -207,7 +206,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{ /
 		      JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
 		      // limpiarFormulario();
 		  }catch(Exception ex){
-			  System.out.println("Mensaje: "+ ex.getMessage());
+		      System.out.println("Mensaje: " + ex.getMessage());
 		      JOptionPane.showMessageDialog(null, "Los datos ingresados no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
 		      // limpiarFormulario();
 		  }

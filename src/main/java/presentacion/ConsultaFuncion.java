@@ -178,7 +178,7 @@ public class ConsultaFuncion extends JInternalFrame{
 		  this.listEspectaculos = mE.obtenerEspectaculoBD(strPlataforma);*/
 		  if(listEspectaculos.isEmpty()){
 		      System.out.println("LISTA DE ESPECTACULOS VACIA");
-		      JOptionPane.showMessageDialog(this, "La plataforma no tiene espectaculos asociados", "Error", JOptionPane.ERROR_MESSAGE);
+		      JOptionPane.showMessageDialog(this, "La plataforma no t" + "iene espectaculos asociados", "Error", JOptionPane.ERROR_MESSAGE);
 		      comboEspectaculos.removeAllItems();
 		      comboFunciones.removeAllItems();
 		      txtDatosFuncion.setText(null);
