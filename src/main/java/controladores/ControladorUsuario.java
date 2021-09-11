@@ -1,5 +1,6 @@
 package controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -78,6 +79,13 @@ public class ControladorUsuario implements IControladorUsuario{
     
     public List<DtArtista> listarArtistasDt(){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	 return mU.listarArtistasDt();
+	 List<DtArtista> listArtistasDt = new ArrayList<DtArtista>();
+	 List<Artista> listArtistas = new ArrayList<Artista>();
+	 listArtistas = mU.listarArtistas();
+   	 for(Artista a :listArtistas){
+   		 DtArtista dtArtista = new DtArtista(a.getNickname(),a.getNombre(),a.getApellido(),a.getEmail(),a.getfNacimiento(),a.getDescripcion(),a.getBiografia(),a.getLink());
+   		 listArtistasDt.add(dtArtista);
+   	 }
+   	 return listArtistasDt;
     }
 }
