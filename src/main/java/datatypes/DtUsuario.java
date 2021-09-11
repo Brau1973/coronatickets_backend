@@ -3,10 +3,10 @@ package datatypes;
 import java.util.Date;
 
 public class DtUsuario {
-	private String nickname;
+	private static String nickname;
     private String nombre;
     private String apellido;
-    private String email;
+    private static String email;
     private Date fNacimiento;
     
 	public DtUsuario(String nickname, String nombre, String apellido, String email, Date fNacimiento) {
@@ -18,7 +18,7 @@ public class DtUsuario {
 		this.fNacimiento = fNacimiento;
 	}
 	
-	public String getNickname() {
+	public static String getNickname() {
 		return nickname;
 	}
 	public String getNombre() {
@@ -27,7 +27,7 @@ public class DtUsuario {
 	public String getApellido() {
 		return apellido;
 	}
-	public String getEmail() {
+	public static String getEmail() {
 		return email;
 	}
 	public Date getfNacimiento() {

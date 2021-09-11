@@ -235,9 +235,10 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 				Date fechaRegistro = this.fechaAlta.getDate();
 				String strespectaculo = (String) this.comboEspectaculos.getSelectedItem();
 				DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro,
-						strespectaculo, listArtistasSeleccionados);
+						listArtistasSeleccionados);
 				try {
-					this.iconF.altaFuncion(dtFuncion);
+					this.iconF.altaFuncion(dtFuncion,strespectaculo);
+
 					JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");
 				} catch (FuncionYaRegistradaEnEspectaculoExcepcion msg) {
 					JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
@@ -275,5 +276,4 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		listArtistasSeleccionados = new ArrayList<String>();
 		listArtistasSeleccionados.clear();
 	}
-
 }

@@ -15,8 +15,9 @@ import logica.Funcion;
 @SuppressWarnings("serial")
 public class PnlDatosFuncion extends JInternalFrame{
     private JPanel miPanel, panelFuncion;
-    private JLabel lblRegistro, lblHoraInicio, lblFecha, lblNombFuncion;
-    private JLabel txtRegistro, txtHoraInicio, txtFecha, txtNombFuncion;
+    private JLabel lblRegistro,lblHoraInicio,lblFecha,lblNombFuncion;
+    private JLabel txtRegistro, txtHoraInicio,txtFecha,txtNombFuncion;
+
     private Border borderPnlFuncion;
     static final int X_LABEL = 15;
     static final int X_TEXT = 200;
@@ -24,6 +25,7 @@ public class PnlDatosFuncion extends JInternalFrame{
     static final int WIDTH_LABEL = 180;
     static final int WIDTH_TEXT = 200;
     static final int HEIGHT_FIELD = 25;
+
 
     // Constructor
     public PnlDatosFuncion(){
@@ -45,7 +47,7 @@ public class PnlDatosFuncion extends JInternalFrame{
 	 panelFuncion.setBounds(X_LABEL, Y_DIST, 680, 235);
 	 miPanel.add(panelFuncion);
 	 panelFuncion.setVisible(true);
-
+	 
 	 lblNombFuncion = new JLabel("Nombre:", SwingConstants.RIGHT);
 	 lblNombFuncion.setBounds(X_LABEL, Y_DIST, WIDTH_LABEL, HEIGHT_FIELD);
 	 panelFuncion.add(lblNombFuncion);
@@ -67,7 +69,7 @@ public class PnlDatosFuncion extends JInternalFrame{
 	 panelFuncion.add(lblHoraInicio);
 	 txtHoraInicio = new JLabel();
 	 txtHoraInicio.setEnabled(false);
-	 txtHoraInicio.setBounds(X_TEXT, Y_DIST * 3, WIDTH_TEXT, HEIGHT_FIELD);
+	 txtHoraInicio.setBounds(X_TEXT, Y_DIST * 3 , WIDTH_TEXT, HEIGHT_FIELD);
 	 panelFuncion.add(txtHoraInicio);
 
 	 lblRegistro = new JLabel("Registro:", SwingConstants.RIGHT);
@@ -77,6 +79,7 @@ public class PnlDatosFuncion extends JInternalFrame{
 	 txtRegistro.setEnabled(false);
 	 txtRegistro.setBounds(X_TEXT, Y_DIST * 4, WIDTH_TEXT, HEIGHT_FIELD);
 	 panelFuncion.add(txtRegistro);
+
     }
 
     // Inicializar panel

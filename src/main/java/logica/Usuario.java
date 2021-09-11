@@ -27,7 +27,6 @@ public class Usuario{
     }
 
     public Usuario(){
-	 // super();
     }
 
     public String getNickname(){

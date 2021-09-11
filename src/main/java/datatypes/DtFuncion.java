@@ -13,16 +13,14 @@ public class DtFuncion {
     private Date fecha;
     private Time horaInicio;
 	private Date registro;
-    private String espectaculo;
     private List<String> artistas = new ArrayList<String>();
 
     
-    public DtFuncion(String nombre, Date fecha, Time horaInicio, Date registro,String espectaculo,List<String> artistas){
+    public DtFuncion(String nombre, Date fecha, Time horaInicio, Date registro,List<String> artistas){
 	 this.nombre = nombre;
 	 this.fecha = fecha;
 	 this.horaInicio = horaInicio;
 	 this.registro = registro;
-	 this.espectaculo = espectaculo;
 	 this.artistas = artistas;
 	 
     }
@@ -45,10 +43,6 @@ public class DtFuncion {
 
 	public Date getRegistro() {
 		return registro;
-	}
-	
-    public String getEspectaculo() {
-		return espectaculo;
 	}
 
 	public List<String> getArtistas() {

@@ -30,12 +30,20 @@ public class ManejadorEspectaculo {
 		em.persist(espectaculo);
 		em.getTransaction().commit();
 	}
+    
+    public List<Espectaculo> obtenerEspectaculo() { // 79S
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		Query query = em.createQuery("select e from Espectaculo e");
+		List<Espectaculo> listEspectaculo = (List<Espectaculo>) query.getResultList();
+		return listEspectaculo;
 
+    }
+    
 	public Espectaculo buscarEspectaculo(String nombre) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		Espectaculo espectaculo = em.find(Espectaculo.class, nombre);
-		return espectaculo;
+		return em.find(Espectaculo.class, nombre);
 	}
 
 //    /////////////// CHECK USO
@@ -92,4 +100,5 @@ public class ManejadorEspectaculo {
 		List<Espectaculo> listEspectaculo = (List<Espectaculo>) query.getResultList();
 		return listEspectaculo;
     }
+
 }
