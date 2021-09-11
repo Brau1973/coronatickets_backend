@@ -3,29 +3,48 @@ package controladores;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.swing.JOptionPane;
 
 import datatypes.DtArtista;
+import datatypes.DtEspectador;
+import datatypes.DtUsuario;
 import excepciones.UsuarioRepetidoExcepcion;
+import interfaces.Fabrica;
 import interfaces.IControladorUsuario;
 import logica.Artista;
+import logica.Espectador;
 import logica.Usuario;
 import manejadores.ManejadorUsuario;
 import persistencia.Conexion;
 
 public class ControladorUsuario implements IControladorUsuario{
-    public ControladorUsuario(){
+ 
+
+	public ControladorUsuario(){
 	 super();
     }
 
-    public void altaUsuario(Usuario usuario) throws UsuarioRepetidoExcepcion{
+    public void altaUsuario(DtUsuario dtu ) throws UsuarioRepetidoExcepcion{
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	 if(mU.buscarUsuario(usuario.getNickname()) != null){
+	 
+	 if(mU.buscarUsuario(DtUsuario.getNickname()) != null){
 	     throw new UsuarioRepetidoExcepcion("El nickname esta en uso");
-	 }else if(mU.buscarUsuario(usuario.getEmail()) != null){
+	 }else if(mU.buscarUsuario(DtUsuario.getEmail()) != null){
 	     throw new UsuarioRepetidoExcepcion("El email esta en uso");
 	 }
-	 mU.altaUsuario(usuario);
-    }
+	     if(dtu instanceof DtArtista){
+		  Usuario usuario = new Artista (dtu.getNickname(),dtu.getNombre(),dtu.getApellido(),dtu.getEmail(),dtu.getfNacimiento(),((DtArtista) dtu).getDescripcion(),((DtArtista) dtu).getBiografia(),((DtArtista) dtu).getLink()); 
+		  mU.altaUsuario(usuario);
+	     }
+	     if(dtu instanceof DtEspectador){
+	
+		  Usuario usuario = new Espectador (dtu.getNickname(),dtu.getNombre(),dtu.getApellido(),dtu.getEmail(),dtu.getfNacimiento()); 
+		  mU.altaUsuario(usuario);
+	     }
+	   
+	 }
+
+
 
     public void modificarUsuario(Usuario nuevo){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();

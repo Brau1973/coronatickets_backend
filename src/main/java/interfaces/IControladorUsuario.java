@@ -3,12 +3,14 @@ package interfaces;
 import java.util.List;
 
 import datatypes.DtArtista;
+import datatypes.DtEspectador;
+import datatypes.DtUsuario;
 import excepciones.UsuarioRepetidoExcepcion;
 import logica.Artista;
 import logica.Usuario;
 
 public interface IControladorUsuario{
-    public void altaUsuario(Usuario u) throws UsuarioRepetidoExcepcion;
+    public void altaUsuario(DtUsuario u) throws UsuarioRepetidoExcepcion;
 
     public void modificarUsuario(Usuario nuevo);
 
