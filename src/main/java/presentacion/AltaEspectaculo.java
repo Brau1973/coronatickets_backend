@@ -195,7 +195,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener { 
 				String strurl = this.txtUrl.getText();
 				Date dateRegistro = this.dateFechaNac.getDate();
 				try {
-					DtEspectaculo dte = new DtEspectaculo(strartista, strnombre,
+					DtEspectaculo dte = new DtEspectaculo(strartista, strplataforma, strnombre,
 							strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl,
 							Integer.parseInt(this.txtCosto.getText()), dateRegistro);
 					this.iconE.altaEspectaculo(dte,strplataforma);
@@ -223,7 +223,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener { 
 			ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 			if (mE.buscarEspectaculo(txtNombre.getText()) != null) {
 				int respuesta = JOptionPane.showConfirmDialog(null,
-						"El nombre del espectaculo ya existe\n¿Desea modificar los datos?\n", "Advertencia",
+						"El nombre del espectaculo ya existe\nï¿½Desea modificar los datos?\n", "Advertencia",
 						JOptionPane.YES_NO_OPTION);
 				if (respuesta != JOptionPane.YES_NO_OPTION) {
 					limpiarFormulario();

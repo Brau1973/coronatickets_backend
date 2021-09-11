@@ -108,11 +108,6 @@ public class Espectaculo{
 	 this.artista = artista;
     }
 
-    public void setPlataforma(Plataforma plataforma){
-	 this.plataforma = plataforma;
-	 plataforma.aniadirEspectaculo(this);
-    }
-
     public void setNombre(String nombre){
 	 this.nombre = nombre;
     }
@@ -171,9 +166,9 @@ public class Espectaculo{
 		return encontre;
 	}
 	
-	public DtEspectaculo getDtEspectaculo(){
-		return new DtEspectaculo(this.artista.getNickname(),this.nombre,this.descripcion,this.duracion,this.cantMinEsp,this.cantMaxEsp,this.url,this.costo,this.registro);
-	}
+//	public DtEspectaculo getDtEspectaculo(){
+//		return new DtEspectaculo(this.artista.getNickname(),this.nombre,this.descripcion,this.duracion,this.cantMinEsp,this.cantMaxEsp,this.url,this.costo,this.registro);
+//	}
 
     public void setPaquetes(List<PaqueteEspectaculos> paquete){
 	 this.paquete = paquete;
