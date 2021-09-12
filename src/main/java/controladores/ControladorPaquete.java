@@ -5,12 +5,13 @@ import java.util.List;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtPaqueteEspectaculo;
-import datatypes.DtPlataforma;
 import interfaces.IControladorPaquete;
 import logica.Espectaculo;
 import logica.PaqueteEspectaculos;
 import logica.Plataforma;
+import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorPaquete;
+import manejadores.ManejadorPlataforma;
 
 public class ControladorPaquete implements IControladorPaquete{
 	
@@ -34,10 +35,10 @@ public class ControladorPaquete implements IControladorPaquete{
 
     public List<DtPaqueteEspectaculo> mapListEntityToDt(List<PaqueteEspectaculos> p){
 		List<DtPaqueteEspectaculo> ret = new ArrayList<DtPaqueteEspectaculo>();
-		p.forEach((plat) -> {
-			DtPaqueteEspectaculo dtP = mapEntityToDt(plat);
+		for(PaqueteEspectaculos paq : p) {
+			DtPaqueteEspectaculo dtP = mapEntityToDt(paq);
 			ret.add(dtP);
-		});
+		}
 		return ret;
 	}
 
@@ -51,4 +52,20 @@ public class ControladorPaquete implements IControladorPaquete{
 		ret.setEspectaculos(listEspectaculosDt);
     	return ret;
     }
+
+	@Override
+	public void agregarEspectaculo(String paquete,String espectaculo) {
+		ManejadorPaquete mP = ManejadorPaquete.getInstancia();
+		ManejadorPlataforma mPlat = ManejadorPlataforma.getInstancia();
+		ManejadorEspectaculo mEsp = ManejadorEspectaculo.getInstancia();
+		PaqueteEspectaculos paq = mP.buscarPaquete(paquete);
+		System.out.println("Espectaculo = " + espectaculo);
+		Espectaculo esp = mEsp.buscarEspectaculo(espectaculo);
+		System.out.println(esp.getNombre());
+		paq.addEspectaculo(esp);
+		esp.agregarPaquete(paq);
+		mP.altaPaquete(paq);
+
+		
+	}
 }
