@@ -12,33 +12,35 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import datatypes.DtEspectaculo;
+import datatypes.DtFuncion;
+import datatypes.DtPaqueteEspectaculo;
 import datatypes.DtPlataforma;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
+import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
-import logica.Funcion;
-import logica.PaqueteEspectaculos;
 
 
 @SuppressWarnings("serial")
 public class ConsultaEspectaculo extends JInternalFrame{
     private IControladorPlataforma iconP;
     private IControladorEspectaculo iconE;
+    private IControladorFuncion iconF;
     private JPanel miPanel;
     private JLabel lblTitulo, lblPlataforma, lblEspectaculos, lblPaquetes;
     private JComboBox<String> comboPlataforma, comboEspectaculos, comboPaquetes, comboFunciones;
     private List<DtPlataforma> listPlataformas;
     private List<DtEspectaculo> listEspectaculos;
-    private List<Funcion> listFunciones;
-    private List<PaqueteEspectaculos> listPaqEspe;
+    private List<DtFuncion> listFunciones;
+    private List<DtPaqueteEspectaculo> listPaqEspe;
     private JLabel lblCantidadMaxima;
     private JLabel lblURL, lblCosto, lblRegistro;
     private JTextField textNombreEspectaculo;
     private JTextField textArtistaOrganizador, textDescripcion, textDuracion, textCantidadMinima, textCantidadMaxima, textURL, textRegistro, textCosto;
     private JLabel lblFunciones;
     static final String SELECCIONE = "Seleccione";
-    private PaqueteEspectaculos paqueteSelected;
-    private Funcion funcionSelect;
+    private DtPaqueteEspectaculo paqueteSelected;
+    private DtFuncion funcionSelect;
     private PnlDatosPaquete pnlDatosPaquete;
     private PnlDatosFuncion pnlDatosFuncion;
 
@@ -46,6 +48,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
     public ConsultaEspectaculo(){
 	 iconP = Fabrica.getInstancia().getIControladorPlataforma();
 	 iconE = Fabrica.getInstancia().getIControladorEspectaculo();
+	 iconF = Fabrica.getInstancia().getIControladorFuncion();
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 getContentPane().add(miPanel);
@@ -202,7 +205,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	     DtPlataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();
 	     this.listEspectaculos = plataforma.getEspectaculo();
 	     if(listEspectaculos.isEmpty()){
-		  comboEspectaculos.removeAllItems();// ??
+		  comboEspectaculos.removeAllItems();
 	     }else{
 		  comboEspectaculos.removeAllItems();
 		  listEspectaculos.forEach((esp) -> {
@@ -216,11 +219,12 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
 	     DtEspectaculo espectaculo = listEspectaculos.stream().filter(espec -> (espec.getNombre() == strEspectaculo)).findFirst().get();
+	     listFunciones = iconF.listarFunciones(strEspectaculo);
 
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     String datosFecha = formatoFecha.format(espectaculo.getRegistro());
 	     this.textNombreEspectaculo.setText(espectaculo.getNombre());
-	     // this.textArtistaOrganizador.setText(espectaculo.getArtista().getNickname());
+	     this.textArtistaOrganizador.setText(espectaculo.getArtista());//
 	     this.textDescripcion.setText(espectaculo.getDescripcion());
 	     this.textDuracion.setText(String.valueOf(espectaculo.getDuracion()));
 	     this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMin()));
@@ -230,21 +234,21 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	     this.textRegistro.setText(String.valueOf(datosFecha));
 
 	     // Combo Funciones
-	     // comboFunciones.removeAllItems();
+	     comboFunciones.removeAllItems();
 	     // listFunciones = espectaculo.getFunciones();
-	     // listFunciones.forEach((p) -> {
-	     // comboFunciones.addItem(p.getNombre());
-	     // });
+	     listFunciones.forEach((p) -> {
+		  comboFunciones.addItem(p.getNombre());
+	     });
 	     // Combo Paquetes
 	     // comboPaquetes.removeAllItems();
-	     // listPaqEspe = espectaculo.getPaquetes();
-	     // listPaqEspe.forEach((p) -> {
-	     // comboPaquetes.addItem(p.getNombre());
-	     // });
+	     // listPaqEspe = espectaculo.getPlataforma()datosFecha;
+	     listPaqEspe.forEach((p) -> {
+		  comboPaquetes.addItem(p.getNombre());
+	     });
 	 }
     }
 
-    private void listenerComboFuncion(ItemEvent e){ // aca
+    private void listenerComboFuncion(ItemEvent e){
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     if(!e.getItem().equals(SELECCIONE)){
 		  funcionSelect = listFunciones.stream().filter(f -> (f.getNombre() == e.getItem())).findFirst().get();
@@ -262,7 +266,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     if(!e.getItem().equals(SELECCIONE)){
 		  paqueteSelected = listPaqEspe.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
-		  // pnlDatosPaquete.cargarPanel(paqueteSelected,false);
+		  pnlDatosPaquete.cargarPanel(paqueteSelected, true);
 		  pnlDatosFuncion.setVisible(false);
 		  pnlDatosPaquete.setVisible(true);
 	     }else{
