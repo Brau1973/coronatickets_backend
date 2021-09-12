@@ -11,4 +11,6 @@ public interface IControladorPaquete{
     public Boolean existePaquete(String nombre);
 
     public List<DtPaqueteEspectaculo> obtenerPaquetes();
+
+	public void agregarEspectaculo(String paquete, String espectaculo);
 }

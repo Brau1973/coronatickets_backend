@@ -18,8 +18,8 @@ public class ManejadorPaquete{
     public static ManejadorPaquete getInstancia(){
 	 if(instancia == null)
 	     instancia = new ManejadorPaquete();
-	 return instancia;
-    }
+	 return instancia;    
+	 }
 
     public void altaPaquete(PaqueteEspectaculos paquete){
 	 Conexion conexion = Conexion.getInstancia();
@@ -29,7 +29,7 @@ public class ManejadorPaquete{
 	 em.getTransaction().commit();
     }
 
-    public PaqueteEspectaculos buscarPlataforma(String nombre){
+    public PaqueteEspectaculos buscarPaquete(String nombre){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 	 return em.find(PaqueteEspectaculos.class, nombre);
