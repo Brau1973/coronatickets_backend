@@ -18,6 +18,7 @@ import datatypes.DtPlataforma;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
+import interfaces.IControladorPaquete;
 import interfaces.IControladorPlataforma;
 
 
@@ -25,6 +26,7 @@ import interfaces.IControladorPlataforma;
 public class ConsultaEspectaculo extends JInternalFrame{
     private IControladorPlataforma iconP;
     private IControladorEspectaculo iconE;
+    private IControladorPaquete iconPaquete;
     private IControladorFuncion iconF;
     private JPanel miPanel;
     private JLabel lblTitulo, lblPlataforma, lblEspectaculos, lblPaquetes;
@@ -33,6 +35,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
     private List<DtEspectaculo> listEspectaculos;
     private List<DtFuncion> listFunciones;
     private List<DtPaqueteEspectaculo> listPaqEspe;
+	private List<DtPaqueteEspectaculo> listPaquetes;
     private JLabel lblCantidadMaxima;
     private JLabel lblURL, lblCosto, lblRegistro;
     private JTextField textNombreEspectaculo;
@@ -43,10 +46,13 @@ public class ConsultaEspectaculo extends JInternalFrame{
     private DtFuncion funcionSelect;
     private PnlDatosPaquete pnlDatosPaquete;
     private PnlDatosFuncion pnlDatosFuncion;
-
+   private DtPlataforma plataformaSelected;
+   private String espectaculoSelected = "";
+	
     // Constructor
     public ConsultaEspectaculo(){
 	 iconP = Fabrica.getInstancia().getIControladorPlataforma();
+	 iconPaquete = Fabrica.getInstancia().getIControladorPaquete();
 	 iconE = Fabrica.getInstancia().getIControladorEspectaculo();
 	 iconF = Fabrica.getInstancia().getIControladorFuncion();
 	 miPanel = new JPanel();
@@ -81,7 +87,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 comboEspectaculos = new JComboBox<String>();
 	 comboEspectaculos.setBounds(147, 61, 200, 22);
 	 miPanel.add(comboEspectaculos);
-	 comboEspectaculos.addItemListener(this::listenerComboEspectaculo);
+	comboEspectaculos.addItemListener(this::listenerComboEspectaculo);
 
 	 lblFunciones = new JLabel("Funciones:");
 	 lblFunciones.setBounds(10, 94, 85, 14);
@@ -198,23 +204,58 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 pnlDatosFuncion.setVisible(false);
 	 miPanel.add(pnlDatosFuncion);
     }
+        
+	private void listenerComboPlataforma(ItemEvent e) {
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			if (!e.getItem().equals(SELECCIONE)) {
+				plataformaSelected = listPlataformas.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
+				cargarComboEspectaculo(plataformaSelected);
+			} else if (e.getItem().equals(SELECCIONE)) {
+		              comboEspectaculos.removeAllItems();
+		              espectaculoSelected = "";
+				plataformaSelected = null;
+			}
+		}
+	}
+    
+	private void cargarComboEspectaculo(DtPlataforma plataforma) {
+		comboEspectaculos.removeAllItems();
+		comboEspectaculos.addItem(SELECCIONE);
+		comboEspectaculos.setSelectedItem(SELECCIONE);
+		for (DtEspectaculo espectaculo : plataforma.getEspectaculo()) {
+				comboEspectaculos.addItem(espectaculo.getNombre());
+		}
+	}
+	
+	private void listenerComboEspectaculo(ItemEvent e) {
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			if (!e.getItem().equals(SELECCIONE)) {
+			    String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
+			     DtEspectaculo espectaculo = listEspectaculos.stream().filter(espec -> (espec.getNombre() == strEspectaculo)).findFirst().get();
+			     listFunciones = iconF.listarFunciones(strEspectaculo);
+			     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+			     String datosFecha = formatoFecha.format(espectaculo.getRegistro());
+			     this.textNombreEspectaculo.setText(espectaculo.getNombre());
+			     this.textArtistaOrganizador.setText(espectaculo.getArtista());
+			     this.textDescripcion.setText(espectaculo.getDescripcion());
+			     this.textDuracion.setText(String.valueOf(espectaculo.getDuracion()));
+			     this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMin()));
+			     this.textCantidadMaxima.setText(String.valueOf(espectaculo.getCantMax()));
+			     this.textURL.setText(espectaculo.getUrl());
+			     this.textCosto.setText(String.valueOf(espectaculo.getCosto()));
+			     this.textRegistro.setText(String.valueOf(datosFecha));
+			}
+		}
+	}
 
-    private void listenerComboPlataforma(ItemEvent e){
-	 if(e.getStateChange() == ItemEvent.SELECTED){
-	     String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
-	     DtPlataforma plataforma = listPlataformas.stream().filter(p -> (p.getNombre() == strPlataforma)).findFirst().get();
-	     this.listEspectaculos = plataforma.getEspectaculo();
-	     if(listEspectaculos.isEmpty()){
-		  comboEspectaculos.removeAllItems();
-	     }else{
-		  comboEspectaculos.removeAllItems();
-		  listEspectaculos.forEach((esp) -> {
-		      comboEspectaculos.addItem(esp.getNombre());
-		  });
-	     }
-	 }
-    }
-
+/*	private void cargarComboFunciones(Espectaculo espectaculo) {
+		comboFunciones.removeAllItems();
+		comboFunciones.addItem(SELECCIONE);
+		comboFunciones.setSelectedItem(SELECCIONE);
+		for (DtFuncion funciones : espectaculo.getFunciones()) {
+		    comboFunciones.addItem(funciones.getNombre());
+		}
+	}
     private void listenerComboEspectaculo(ItemEvent e){
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
@@ -224,7 +265,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     String datosFecha = formatoFecha.format(espectaculo.getRegistro());
 	     this.textNombreEspectaculo.setText(espectaculo.getNombre());
-	     this.textArtistaOrganizador.setText(espectaculo.getArtista());//
+	 this.textArtistaOrganizador.setText(espectaculo.getArtista());
 	     this.textDescripcion.setText(espectaculo.getDescripcion());
 	     this.textDuracion.setText(String.valueOf(espectaculo.getDuracion()));
 	     this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMin()));
@@ -232,21 +273,30 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	     this.textURL.setText(espectaculo.getUrl());
 	     this.textCosto.setText(String.valueOf(espectaculo.getCosto()));
 	     this.textRegistro.setText(String.valueOf(datosFecha));
-
-	     // Combo Funciones
+	     
+	         // Combo Funciones
+	/*  listFunciones = iconF.listarFunciones(strEspectaculo);
 	     comboFunciones.removeAllItems();
-	     // listFunciones = espectaculo.getFunciones();
+	 //   listFunciones = espectaculo.getFunciones();
 	     listFunciones.forEach((p) -> {
-		  comboFunciones.addItem(p.getNombre());
-	     });
+	     comboFunciones.addItem(p.getNombre());
+		  });
 	     // Combo Paquetes
-	     // comboPaquetes.removeAllItems();
-	     // listPaqEspe = espectaculo.getPlataforma()datosFecha;
-	     listPaqEspe.forEach((p) -> {
+	     
+	      comboPaquetes.removeAllItems();
+		listPaqEspe = espectaculo.getPlataforma()datosFecha;
+		listPaquetes = iconPaq.obtenerPaquetes();
+		listPaquetes.forEach((p) -> {
+			comboPaquetes.addItem(p.getNombre());
+		});*/
+	/*      listPaqEspe=iconP.agregarEspectaculo(paqueteSelected.getNombre(), espectaculoSelected);
+	 listPaqEspe.forEach((p) -> {
 		  comboPaquetes.addItem(p.getNombre());
-	     });
+	    });
 	 }
-    }
+    }*/
+
+
 
     private void listenerComboFuncion(ItemEvent e){
 	 if(e.getStateChange() == ItemEvent.SELECTED){
@@ -261,7 +311,8 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 }
     }
 
-
+	
+    
     private void listenerComboPaquetes(ItemEvent e){
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     if(!e.getItem().equals(SELECCIONE)){
@@ -277,11 +328,23 @@ public class ConsultaEspectaculo extends JInternalFrame{
 
     // Inicializar ComboBox
     public void iniciarlizarComboBox(){
-	 comboPlataforma.removeAllItems();
+	comboPlataforma.removeAllItems();
+	comboPaquetes.removeAllItems();
+	
+	comboPlataforma.addItem(SELECCIONE);
+	comboPlataforma.setSelectedItem(SELECCIONE);
 	 listPlataformas = iconP.listarPlataformas();
 	 listPlataformas.forEach((p) -> {
 	     comboPlataforma.addItem(p.getNombre());
 	 });
+	 
+	/* comboPaquetes.addItem(SELECCIONE);
+	comboPaquetes.setSelectedItem(SELECCIONE);
+	listPaquetes = iconPaquete.obtenerPaquetes();
+	listPaquetes.forEach((p) -> {
+		comboPaquetes.addItem(p.getNombre());
+	});*/
+	
 	 // comboPlataforma.setSelectedItem("Seleccione plataforma");// ?
 	 // modelo.clear();
     }

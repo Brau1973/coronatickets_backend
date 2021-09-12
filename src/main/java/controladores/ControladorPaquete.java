@@ -8,7 +8,6 @@ import datatypes.DtPaqueteEspectaculo;
 import interfaces.IControladorPaquete;
 import logica.Espectaculo;
 import logica.PaqueteEspectaculos;
-import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorPaquete;
 import manejadores.ManejadorPlataforma;
@@ -65,7 +64,5 @@ public class ControladorPaquete implements IControladorPaquete{
 		paq.addEspectaculo(esp);
 		esp.agregarPaquete(paq);
 		mP.altaPaquete(paq);
-
-		
 	}
 }

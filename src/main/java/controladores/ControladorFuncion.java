@@ -47,4 +47,13 @@ public class ControladorFuncion implements IControladorFuncion{
 	 return espectaculo.getFuncionesDt();
     }
 
+    
+    
+    //
+    
+    public List<Funcion> listarFunciones2(String nomEsp){
+	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+	 Espectaculo espectaculo = mE.buscarEspectaculo(nomEsp);
+	 return espectaculo.getFunciones();
+    }
 }
