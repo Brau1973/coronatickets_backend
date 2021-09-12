@@ -10,13 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
-import logica.Funcion;
+import datatypes.DtFuncion;
 
 @SuppressWarnings("serial")
 public class PnlDatosFuncion extends JInternalFrame{
     private JPanel miPanel, panelFuncion;
-    private JLabel lblRegistro,lblHoraInicio,lblFecha,lblNombFuncion;
-    private JLabel txtRegistro, txtHoraInicio,txtFecha,txtNombFuncion;
+    private JLabel lblRegistro, lblHoraInicio, lblFecha, lblNombFuncion;
+    private JLabel txtRegistro, txtHoraInicio, txtFecha, txtNombFuncion;
 
     private Border borderPnlFuncion;
     static final int X_LABEL = 15;
@@ -47,7 +47,7 @@ public class PnlDatosFuncion extends JInternalFrame{
 	 panelFuncion.setBounds(X_LABEL, Y_DIST, 680, 235);
 	 miPanel.add(panelFuncion);
 	 panelFuncion.setVisible(true);
-	 
+
 	 lblNombFuncion = new JLabel("Nombre:", SwingConstants.RIGHT);
 	 lblNombFuncion.setBounds(X_LABEL, Y_DIST, WIDTH_LABEL, HEIGHT_FIELD);
 	 panelFuncion.add(lblNombFuncion);
@@ -69,7 +69,7 @@ public class PnlDatosFuncion extends JInternalFrame{
 	 panelFuncion.add(lblHoraInicio);
 	 txtHoraInicio = new JLabel();
 	 txtHoraInicio.setEnabled(false);
-	 txtHoraInicio.setBounds(X_TEXT, Y_DIST * 3 , WIDTH_TEXT, HEIGHT_FIELD);
+	 txtHoraInicio.setBounds(X_TEXT, Y_DIST * 3, WIDTH_TEXT, HEIGHT_FIELD);
 	 panelFuncion.add(txtHoraInicio);
 
 	 lblRegistro = new JLabel("Registro:", SwingConstants.RIGHT);
@@ -83,7 +83,7 @@ public class PnlDatosFuncion extends JInternalFrame{
     }
 
     // Inicializar panel
-    public void cargarPanel(Funcion funcion){
+    public void cargarPanel(DtFuncion funcion){
 	 SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	 String datosFecha = formatoFecha.format(funcion.getFecha());
 	 String datosReg = formatoFecha.format(funcion.getRegistro());
@@ -94,4 +94,26 @@ public class PnlDatosFuncion extends JInternalFrame{
 	 txtRegistro.setText(String.valueOf(datosReg));
     }
 
+    // Inicializar panel
+    // public void cargarPanel(DtPaqueteEspectaculo p, Boolean eventoTablaActivo){
+
+    // SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+    // String datosFecha = formatoFecha.format(p.getFecha());
+    // String datosReg = formatoFecha.format(p.getRegistro());
+    // Time horaInicio = p.getHoraInicio();
+    // txtNombFuncion.setText(p.getNombre());
+    // txtFecha.setText(String.valueOf(datosFecha));
+    // txtHoraInicio.setText(horaInicio.toString());
+    // txtRegistro.setText(String.valueOf(datosReg));
+
+    /* paqueteSelected = p;
+    txtNombPaquete.setText(paqueteSelected.getNombre());
+    txtDescripcionPaquete.setText(paqueteSelected.getDescripcion());
+    */
+    /* for(int i = 0; i < p.getEspectaculos().size(); i++){
+        DtEspectaculo esp = p.getEspectaculos().get(i);
+        Object[] data = {esp.getNombre(), esp.getArtista(), "", esp.getDescripcion()};
+        tm.addRow(data);
+    }*/
+    // }
 }

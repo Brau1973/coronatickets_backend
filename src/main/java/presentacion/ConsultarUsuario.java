@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -21,12 +20,8 @@ import com.toedter.calendar.JDateChooser;
 
 import interfaces.Fabrica;
 import interfaces.IControladorUsuario;
-
 import logica.Espectaculo;
-import logica.Artista;
-import logica.Espectador;
 import logica.Usuario;
-
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
 
@@ -35,7 +30,7 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 
     private JPanel miPanel;
     private JScrollPane panel;
-    private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblBuscar;
+    private JLabel lblTitulo, lblBuscar;
     private JDateChooser dateFechaNac;
     private JTable tabUsuario;
     private JComboBox<String> comboUsuarios;
@@ -89,29 +84,6 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	 jsPane.setBounds(10, 180, 365, 118);
 	 jsPane.setVisible(false);
 	 miPanel.add(jsPane, BorderLayout.SOUTH);*/
-
-
-	 // JTextField
-	 // txtNickname = new JTextField();
-	 // txtNickname.setBounds(140, 218, 240, 25);
-	 // miPanel.add(txtNickname);
-	 /* txtNombre = new JTextField();
-	 txtApellido = new JTextField();
-	 txtEmail = new JTextField();
-	 dateFechaNac = new JDateChooser(); // Fecha
-	 
-	 txtNombre.setBounds(140, 248, 240, 25);
-	 txtApellido.setBounds(140, 278, 240, 25);
-	 txtEmail.setBounds(140, 308, 240, 25);
-	 dateFechaNac.setBounds(140, 338, 240, 25);*/
-
-	 // Agrego JTextField al Panel
-	 /*	
-	 miPanel.add(txtNombre);
-	 miPanel.add(txtApellido);
-	 miPanel.add(txtEmail);
-	 miPanel.add(dateFechaNac);*/
-
 	 // Click en tabUsuario
 	 /* tabUsuario.addMouseListener(new MouseAdapter(){
 	     public void mouseClicked(MouseEvent evt){
@@ -131,71 +103,44 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	 });
     }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-    /*public void actionPerformed(ActionEvent e){ // 79S
->>>>>>> 5b93376eabd1036b2d47c9e1ba52dd49c4d3a01d
+    public void actionPerformed(ActionEvent e){
 	 if(e.getSource() == comboUsuarios){
 	     String strUsuario = (String) this.comboUsuarios.getSelectedItem();
 	     Usuario u = iconU.obtenerUsuario(strUsuario);
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-<<<<<<< HEAD
 	     List<Espectaculo> usuario = mE.obtenerEspectaculo();
-=======
-<<<<<<< HEAD
 	     ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 
 	     String datos = "";
 	     String op = "";
-	     if(u instanceof Artista){
-		  op = "***********Artista\n\n";
-		  ArrayList<String> espArtista = mE.obtenerEspectaculodeArtista(strUsuario);
-		  datos = "\n\nLista de espectaculos:";
-		  for(String i :espArtista){
-		      datos = datos + "\n" + i.toString();
-		  }
-=======
-	    ArrayList<String> usuario = mE.obtenerEspectaculo();
->>>>>>> fa1031cacde85a4d766ba58a399e48268702b2e6
-	     String datos = "\n\nLista de espectaculos:";
-	     for(Espectaculo i :usuario){
-		  datos = datos + "\n" + i.toString();
->>>>>>> 5b93376eabd1036b2d47c9e1ba52dd49c4d3a01d
-	     }
+	     /*   if(u instanceof Artista){
+	       op = "***********Artista\n\n";
+	       ArrayList<String> espArtista = mE.obtenerEspectaculodeArtista(strUsuario);
+	       datos = "\n\nLista de espectaculos:";
+	       for(String i :espArtista){
+	           datos = datos + "\n" + i.toString();
+	       }
+	     
+	       ArrayList<String> usuario = mE.obtenerEspectaculo();
+	       String datos = "\n\nLista de espectaculos:";
+	       for(Espectaculo i :usuario){
+	           datos = datos + "\n" + i.toString();
+	       }
+	     
+	       if(u instanceof Espectador){
+	           op = "***********Espectador\n\n";
+	           ArrayList<String> ff = mE.obtenerEspectaculo();// mF.obtenerFunciones();
+	           datos = "\n\nLista de funciones:";
+	           for(String f :ff){
+	     	   datos = datos + "\n" + f.toString();
+	           }
+	       }*/
+	     // jtextarea.setText(op + "Nombre: " + u.getNombre() + "\nApellido: " + u.getApellido() + "\nEmail: " + u.getEmail() + "\nFecha: " + formatoFecha.format(u.getfNacimiento()) + datos);
+	     // }
 
-	     if(u instanceof Espectador){
-		  op = "***********Espectador\n\n";
-		  ArrayList<String> ff = mF.obtenerFunciones();
-		  datos = "\n\nLista de funciones:";
-		  for(String f :ff){
-		      datos = datos + "\n" + f.toString();
-		  }
-	     }
-	     jtextarea.setText(op + "Nombre:   " + u.getNombre() + "\nApellido:   " + u.getApellido() + "\nEmail:   " + u.getEmail() + "\nFecha:   " + formatoFecha.format(u.getfNacimiento()) + datos);
 	 }
-<<<<<<< HEAD
 
     }
-
-=======
-    }*/
 }
 
-
-/*   txtNickname.setText(u.getNickname());
-      txtNombre.setText(u.getNombre());
-txtApellido.setText(u.getApellido());
-txtEmail.setText(u.getEmail());
-dateFechaNac.setDate(u.getfNacimiento());*/
-// String s = JOptionPane.showInputDialog(null, "Digite un caracter: ");
-// char ch = s.charAt(0);
-// micoordinador.proceso3(ch);
-/*		  retorno = "\nNickname:  " + data[1][0].toString() + "\n";
-		  retorno += "Nombre:  " + data[1][1].toString() + "\n";
-		  retorno += "Apellido:  " + data[1][2].toString() + "\n\n";
- * */
