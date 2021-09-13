@@ -1,14 +1,12 @@
 package datatypes;
 
+import java.util.ArrayList;
 import java.util.Date;
-
-import logica.Artista;
-import logica.Espectaculo;
-import logica.Plataforma;
+import java.util.List;
 
 public class DtEspectaculo{
-	private String artista;
-	private String plataforma;
+    private String artista;
+    private String plataforma;
     private String nombre;
     private String descripcion;
     private int duracion;
@@ -17,7 +15,9 @@ public class DtEspectaculo{
     private String url;
     private int costo;
     private Date registro;
-
+   
+  private List<DtPaqueteEspectaculo> paquete = new ArrayList<DtPaqueteEspectaculo>();
+	
     public DtEspectaculo(String artista,String plataforma,String nombre, String descripcion, int duracion, int cantMin, int cantMax, String url, int costo, Date registro){
 	 super();
 	 this.artista = artista;
@@ -71,4 +71,13 @@ public class DtEspectaculo{
     public Date getRegistro(){
 	 return registro;
     }
+    
+    public List<DtPaqueteEspectaculo> getPaquete(){
+    return paquete;
+ }
+
+public void setPaquete(List<DtPaqueteEspectaculo> paquete){
+    this.paquete = paquete;
+}
+
 }

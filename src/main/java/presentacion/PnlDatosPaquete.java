@@ -41,7 +41,7 @@ public class PnlDatosPaquete extends JInternalFrame{
     static final String SELECCIONE = "Seleccione";
 
     private Boolean eventoTablaActivo = true;
-    private String[] header = {"Nombre", "Artista", "Plataforma", "Descripción"};
+    private String[] header = {"Nombre", "Artista", "Descripción","Costo"};
     private String[][] data = {};
 
     private DtPaqueteEspectaculo paqueteSelected;
@@ -242,7 +242,7 @@ public class PnlDatosPaquete extends JInternalFrame{
 	 limpiarTabla(tm);
 	 for(int i = 0; i < p.getEspectaculos().size(); i++){
 	     DtEspectaculo esp = p.getEspectaculos().get(i);
-	     Object[] data = {esp.getNombre(), esp.getArtista(), "", esp.getDescripcion()};
+	     Object[] data = {esp.getNombre(), esp.getArtista(), esp.getDescripcion(),"$ "+esp.getCosto()};
 	     tm.addRow(data);
 	 }
     }

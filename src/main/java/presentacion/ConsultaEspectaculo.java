@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -20,7 +21,7 @@ import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPaquete;
 import interfaces.IControladorPlataforma;
-
+import logica.Espectaculo;
 
 @SuppressWarnings("serial")
 public class ConsultaEspectaculo extends JInternalFrame{
@@ -33,6 +34,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
     private JComboBox<String> comboPlataforma, comboEspectaculos, comboPaquetes, comboFunciones;
     private List<DtPlataforma> listPlataformas;
     private List<DtEspectaculo> listEspectaculos;
+    private List<Espectaculo> listEspectaculos2;
     private List<DtFuncion> listFunciones;
     private List<DtPaqueteEspectaculo> listPaqEspe;
 	private List<DtPaqueteEspectaculo> listPaquetes;
@@ -226,36 +228,89 @@ public class ConsultaEspectaculo extends JInternalFrame{
 				comboEspectaculos.addItem(espectaculo.getNombre());
 		}
 	}
+	    
+	private void listenerComboEspectaculo(ItemEvent e){
+		 if(e.getStateChange() == ItemEvent.SELECTED){
+		     if(!e.getItem().equals(SELECCIONE)){
+			  String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
+			   DtEspectaculo espectaculo=plataformaSelected.getEspectaculo().stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
+			      listPaqEspe = espectaculo.getPaquete();		  
+				   SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+				     String datosFecha = formatoFecha.format(espectaculo.getRegistro());
+				     this.textNombreEspectaculo.setText(espectaculo.getNombre());
+				 this.textArtistaOrganizador.setText(espectaculo.getArtista());
+				     this.textDescripcion.setText(espectaculo.getDescripcion());
+				     this.textDuracion.setText(String.valueOf(espectaculo.getDuracion()));
+				     this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMin()));
+				     this.textCantidadMaxima.setText(String.valueOf(espectaculo.getCantMax()));
+				     this.textURL.setText(espectaculo.getUrl());
+				     this.textCosto.setText(String.valueOf(espectaculo.getCosto()));
+				     this.textRegistro.setText(String.valueOf(datosFecha));
+			      listFunciones = iconF.listarFunciones(strEspectaculo);
+			      if(listFunciones.isEmpty()){
+				   JOptionPane.showMessageDialog(this, "El espectaculo no tiene funciones asociadas", "Error", JOptionPane.ERROR_MESSAGE);
+				   comboFunciones.removeAllItems();
+			      }else{
+				   comboFunciones.removeAllItems();
+				   comboFunciones.addItem(SELECCIONE);
+				   listFunciones.forEach((f) -> {
+					comboFunciones.addItem(f.getNombre());
+				   });
+			      }
+			     
+			      if(espectaculo.getPaquete().isEmpty()){
+				   JOptionPane.showMessageDialog(this, "El espectaculo no tiene paquetes asociados", "Error", JOptionPane.ERROR_MESSAGE);
+				   comboPaquetes.removeAllItems();
+			      }else{
+				   comboPaquetes.removeAllItems();
+				   comboPaquetes.addItem(SELECCIONE);
+				   espectaculo.getPaquete().forEach((f) -> {
+					comboPaquetes.addItem(f.getNombre());
+				   });
+			      }   
+			  }
+		 }
+	    }
+	    
+	private void listenerComboFuncion(ItemEvent e){
+	    if(e.getStateChange() == ItemEvent.SELECTED){
+		 if(!e.getItem().equals(SELECCIONE)){
+	     funcionSelect = listFunciones.stream().filter(f -> (f.getNombre() == e.getItem())).findFirst().get();
+		     pnlDatosFuncion.cargarPanel(funcionSelect);
+		     pnlDatosPaquete.setVisible(false);
+		     pnlDatosFuncion.setVisible(true);
+		 }else{
+		     pnlDatosFuncion.setVisible(false);
+		 }
+	    }
+	}
+	 	
+	private void listenerComboPaquetes(ItemEvent e){
+	    if(e.getStateChange() == ItemEvent.SELECTED){
+		 if(!e.getItem().equals(SELECCIONE)){
+		   paqueteSelected = listPaqEspe.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
+		     pnlDatosPaquete.cargarPanel(paqueteSelected, false);
+		     pnlDatosFuncion.setVisible(false);
+		     pnlDatosPaquete.setVisible(true);
+		 }else{
+		     pnlDatosPaquete.setVisible(false);
+		 }
+	    }
+	}
 	
-	private void listenerComboEspectaculo(ItemEvent e) {
-		if (e.getStateChange() == ItemEvent.SELECTED) {
-			if (!e.getItem().equals(SELECCIONE)) {
-			    String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
-			     DtEspectaculo espectaculo = listEspectaculos.stream().filter(espec -> (espec.getNombre() == strEspectaculo)).findFirst().get();
-			     listFunciones = iconF.listarFunciones(strEspectaculo);
-			     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-			     String datosFecha = formatoFecha.format(espectaculo.getRegistro());
-			     this.textNombreEspectaculo.setText(espectaculo.getNombre());
-			     this.textArtistaOrganizador.setText(espectaculo.getArtista());
-			     this.textDescripcion.setText(espectaculo.getDescripcion());
-			     this.textDuracion.setText(String.valueOf(espectaculo.getDuracion()));
-			     this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMin()));
-			     this.textCantidadMaxima.setText(String.valueOf(espectaculo.getCantMax()));
-			     this.textURL.setText(espectaculo.getUrl());
-			     this.textCosto.setText(String.valueOf(espectaculo.getCosto()));
-			     this.textRegistro.setText(String.valueOf(datosFecha));
-			}
-		}
-	}
-
-/*	private void cargarComboFunciones(Espectaculo espectaculo) {
-		comboFunciones.removeAllItems();
-		comboFunciones.addItem(SELECCIONE);
-		comboFunciones.setSelectedItem(SELECCIONE);
-		for (DtFuncion funciones : espectaculo.getFunciones()) {
-		    comboFunciones.addItem(funciones.getNombre());
-		}
-	}
+	// Inicializar ComboBox
+	public void iniciarlizarComboBox(){
+	    comboPlataforma.removeAllItems();
+	   // comboPaquetes.removeAllItems();
+	    comboPlataforma.addItem(SELECCIONE);
+	    comboPlataforma.setSelectedItem(SELECCIONE);
+	    listPlataformas = iconP.listarPlataformas();
+	    listPlataformas.forEach((p) -> {
+		 comboPlataforma.addItem(p.getNombre());
+	    });
+	    }
+	
+/*
     private void listenerComboEspectaculo(ItemEvent e){
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
@@ -295,48 +350,6 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	    });
 	 }
     }*/
-
-
-
-    private void listenerComboFuncion(ItemEvent e){
-	 if(e.getStateChange() == ItemEvent.SELECTED){
-	     if(!e.getItem().equals(SELECCIONE)){
-		  funcionSelect = listFunciones.stream().filter(f -> (f.getNombre() == e.getItem())).findFirst().get();
-		  pnlDatosFuncion.cargarPanel(funcionSelect);
-		  pnlDatosPaquete.setVisible(false);
-		  pnlDatosFuncion.setVisible(true);
-	     }else{
-		  pnlDatosFuncion.setVisible(false);
-	     }
-	 }
-    }
-
-	
-    
-    private void listenerComboPaquetes(ItemEvent e){
-	 if(e.getStateChange() == ItemEvent.SELECTED){
-	     if(!e.getItem().equals(SELECCIONE)){
-		  paqueteSelected = listPaqEspe.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
-		  pnlDatosPaquete.cargarPanel(paqueteSelected, true);
-		  pnlDatosFuncion.setVisible(false);
-		  pnlDatosPaquete.setVisible(true);
-	     }else{
-		  pnlDatosPaquete.setVisible(false);
-	     }
-	 }
-    }
-
-    // Inicializar ComboBox
-    public void iniciarlizarComboBox(){
-	comboPlataforma.removeAllItems();
-	comboPaquetes.removeAllItems();
-	
-	comboPlataforma.addItem(SELECCIONE);
-	comboPlataforma.setSelectedItem(SELECCIONE);
-	 listPlataformas = iconP.listarPlataformas();
-	 listPlataformas.forEach((p) -> {
-	     comboPlataforma.addItem(p.getNombre());
-	 });
 	 
 	/* comboPaquetes.addItem(SELECCIONE);
 	comboPaquetes.setSelectedItem(SELECCIONE);
@@ -347,5 +360,5 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	
 	 // comboPlataforma.setSelectedItem("Seleccione plataforma");// ?
 	 // modelo.clear();
-    }
+
 }

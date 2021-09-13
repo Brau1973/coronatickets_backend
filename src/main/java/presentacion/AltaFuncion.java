@@ -22,7 +22,6 @@ import javax.swing.ListSelectionModel;
 
 import com.toedter.calendar.JDateChooser;
 
-import datatypes.DtArtista;
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
 import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
@@ -31,6 +30,7 @@ import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
+import manejadores.ManejadorFuncion;
 
 @SuppressWarnings("serial")
 public class AltaFuncion extends JInternalFrame implements ActionListener{
@@ -50,7 +50,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
     private JScrollPane scrollPane;
     private List<String> listPlataformas;
     private List<DtEspectaculo> listEspectaculos;
-    private List<DtArtista> listArtistas;
+    private List<String> listArtistas;
     private List<String> listArtistasSeleccionados;
 
     // Constructor
@@ -196,9 +196,9 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	     comboPlataforma.addItem(p);
 	 });
 
-	 listArtistas = iconU.listarArtistasDt();
-	 listArtistas.forEach((DtArt) -> {
-	     comboArtista.addItem(DtArt.getNickname());
+	 listArtistas = iconU.listarNicknameArtistas();
+	 listArtistas.forEach((art) -> {
+	     comboArtista.addItem(art);
 	 });
 
 	 modelo.clear();
@@ -223,7 +223,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 }
 
 	 if(e.getSource() == btnAceptar){
-	     if(checkFormulario()){
+	     if(checkFormulario()&&modificarDatos()){
 		  String nombreFuncion = this.txtNombre.getText();
 		  Date FechaFuncion = this.fechaFuncion.getDate();
 		  int hora = Integer.parseInt(this.spinHora.getValue().toString());
@@ -257,7 +257,20 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	 }
 	 return true;
     }
-
+    
+    private boolean modificarDatos(){
+	     ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+	     if(mF.buscarFuncion(txtNombre.getText()) != null){
+		  int respuesta = JOptionPane.showConfirmDialog(null, "El noimbre de la funcion ya existe\n�Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
+		  if(respuesta != JOptionPane.YES_NO_OPTION){
+		      limpiarFormulario();
+		      setVisible(false);
+		  }
+		  return false;
+	 }
+	 return true;
+}
+    
     private void limpiarFormulario(){
 	 this.txtNombre.setText("");
 	 this.fechaFuncion.setDate(null);

@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import datatypes.DtPlataforma;
 import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.IControladorPlataforma;
+import manejadores.ManejadorPlataforma;
 
 @SuppressWarnings("serial")
 public class AltaPlataforma extends JInternalFrame{
@@ -78,19 +79,24 @@ public class AltaPlataforma extends JInternalFrame{
 	     public void actionPerformed(ActionEvent e){
 		  actionListenerGuardar(e);
 	     }
-
 	 });
 	 btnGuardar.setBounds(200, Y_DIST * 6, 115, 25);
 	 miPanel.add(btnGuardar);
 
 	 // Boton cancelar
 	 btnCancelar = new JButton("Cancelar");
+	 btnCancelar.addActionListener(new ActionListener(){
+	     public void actionPerformed(ActionEvent c){
+		  actionListenerCancelar(c);
+	     }
+	 });
 	 btnCancelar.setBounds(325, Y_DIST * 6, 115, 25);
 	 miPanel.add(btnCancelar);
+	 
     }
 
     protected void actionListenerGuardar(ActionEvent al){
-	 if(checkFormulario()){
+	 if(checkFormulario()&&modificarDatos()){
 		 String nombre = this.txtNombre.getText();
 		 String descripcion = this.txtDescripcion.getText();
 		 String url = this.txtUrl.getText();
@@ -106,6 +112,11 @@ public class AltaPlataforma extends JInternalFrame{
 	 }
     }
 
+    protected void actionListenerCancelar(ActionEvent ca){
+	     limpiarFormulario();
+	     setVisible(false);
+    }
+    
     private boolean checkFormulario(){
 		if (this.txtNombre.getText().isEmpty() || this.txtDescripcion.getText().isEmpty() || this.txtUrl.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error",
@@ -116,6 +127,18 @@ public class AltaPlataforma extends JInternalFrame{
 		}
     }
 
+    private boolean modificarDatos(){
+	     ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
+	     if(mP.buscarPlataforma(txtNombre.getText()) != null){
+		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre de la plataforma ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
+		  if(respuesta != JOptionPane.YES_NO_OPTION){
+		      limpiarFormulario();
+		      setVisible(false);
+		  }
+		  return false;
+	 }
+	 return true;
+}
 
     private void limpiarFormulario(){
 	 txtNombre.setText("");

@@ -19,9 +19,7 @@ import datatypes.DtEspectador;
 import datatypes.DtUsuario;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControladorUsuario;
-//import logica.Artista;
-//import logica.Espectador;
-//import logica.Usuario;
+import manejadores.ManejadorUsuario;
 
 @SuppressWarnings("serial")
 public class AltaUsuario extends JInternalFrame implements ActionListener{
@@ -198,9 +196,10 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		  rbtnEspectador.setSelected(false);
 	     }
 	 }
+	 
 	 if(e.getSource() == btnAceptar){
 	     if(rbtnEspectador.isSelected()){
-		  if(checkFormulario()){
+		  if(checkFormulario()&&modificarDatos()){
 		      try{
 			   // falta mirar chequeo de fecha
 			   DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac);
@@ -215,7 +214,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		  }
 	     }
 	     if(rbtnArtista.isSelected()){
-		  if(checkFormulario2()){
+		  if(checkFormulario2()&&modificarDatos()){
 		      try{
 			   // falta mirar chequeo de fecha
 			   DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strDescripcion, strBiografia, strLink);
@@ -228,6 +227,11 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		      setVisible(false);
 		  }
 	     }
+	 }
+	 
+	 if(e.getSource() == btnCancelar){
+	      limpiarFormulario();
+	      setVisible(false);
 	 }
 
     }
@@ -248,7 +252,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 }
 	 return true;
     }
-
+    
     private boolean checkFormulario2(){
 	 String strNickname = this.txtNickname.getText();
 	 String strNombre = this.txtNombre.getText();
@@ -264,6 +268,20 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 return true;
     }
 
+    
+    private boolean modificarDatos(){
+	     ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	     if(mU.buscarUsuario(txtNickname.getText()) != null){
+		  int respuesta = JOptionPane.showConfirmDialog(null, "El nickname del Usuario ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
+		  if(respuesta != JOptionPane.YES_NO_OPTION){
+		      limpiarFormulario();
+		      setVisible(false);
+		  }
+		  return false;
+	 }
+	 return true;
+    }
+    
 
     private void limpiarFormulario(){
 	 txtNickname.setText("");
