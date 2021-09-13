@@ -51,7 +51,6 @@ public class ControladorPlataforma implements IControladorPlataforma {
 		ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 		Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);
 		return plataforma;
-
 	}
 
 	public List<DtPlataforma> mapListEntityToDt(List<Plataforma> p){
@@ -68,6 +67,7 @@ public class ControladorPlataforma implements IControladorPlataforma {
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 		for (Espectaculo e : p.getEspectaculo()) {
 			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(),p.getNombre(),e.getNombre(),e.getDescripcion(),e.getDuracion(),e.getCantMinEsp(),e.getCantMaxEsp(),e.getUrl(),e.getCosto(),e.getRegistro());
+			DtEspec.setPaquete(e.getPaqueteEspectaculoDt());
 			listEspectaculosDt.add(DtEspec);
 		}
 		ret.setEspectaculo(listEspectaculosDt);

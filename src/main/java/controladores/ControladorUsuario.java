@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.swing.JOptionPane;
 
 import datatypes.DtArtista;
 import datatypes.DtEspectador;
 import datatypes.DtUsuario;
 import excepciones.UsuarioRepetidoExcepcion;
-import interfaces.Fabrica;
 import interfaces.IControladorUsuario;
 import logica.Artista;
 import logica.Espectador;
@@ -77,15 +75,14 @@ public class ControladorUsuario implements IControladorUsuario{
 	 return mU.listarArtistas();
     }
     
-    public List<DtArtista> listarArtistasDt(){
+    public List<String> listarNicknameArtistas(){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	 List<DtArtista> listArtistasDt = new ArrayList<DtArtista>();
+	 List<String> listStringArtistas = new ArrayList<String>();
 	 List<Artista> listArtistas = new ArrayList<Artista>();
 	 listArtistas = mU.listarArtistas();
    	 for(Artista a :listArtistas){
-   		 DtArtista dtArtista = new DtArtista(a.getNickname(),a.getNombre(),a.getApellido(),a.getEmail(),a.getfNacimiento(),a.getDescripcion(),a.getBiografia(),a.getLink());
-   		 listArtistasDt.add(dtArtista);
+   	  listStringArtistas.add(a.getNickname());
    	 }
-   	 return listArtistasDt;
+   	 return listStringArtistas;
     }
 }

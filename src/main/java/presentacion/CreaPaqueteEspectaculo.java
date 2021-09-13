@@ -128,7 +128,11 @@ public class CreaPaqueteEspectaculo extends JInternalFrame{
     private Boolean validateForm(){
 	 if(!txtNombre.getText().isEmpty() && !txtDescripcion.getText().isEmpty() && dateFechaInicio.getDate() != null && dateFechaFin.getDate() != null && dateFechaAlta.getDate() != null && !txtDescuento.getText().isEmpty()){
 	     if(iControladorPaquete.existePaquete(txtNombre.getText())){
-		  JOptionPane.showMessageDialog(null, "Ya existe un paquete con ese nombre", "Error", JOptionPane.ERROR_MESSAGE);
+		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre del paquete ya existe\n�Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
+		  if(respuesta != JOptionPane.YES_NO_OPTION){
+		      limpiarPantalla();
+		      setVisible(false);
+		  }
 		  return false;
 	     }
 	 }else{
@@ -137,7 +141,8 @@ public class CreaPaqueteEspectaculo extends JInternalFrame{
 	 }
 	 return true;
     }
-
+    
+   
     private void guardar(ActionEvent a){
 	 if(validateForm()){
 	     Integer.parseInt(this.txtDescuento.getText());
@@ -150,5 +155,6 @@ public class CreaPaqueteEspectaculo extends JInternalFrame{
 
     private void cancelar(ActionEvent a){
 	 limpiarPantalla();
+	 setVisible(false);
     }
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,8 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
+import datatypes.DtPaqueteEspectaculo;
 
 @Entity
 public class Espectaculo {
@@ -189,5 +190,20 @@ public class Espectaculo {
 			listFuncionesDt.add(DtFuncion);
 		}
 		return listFuncionesDt;
+	}
+	
+	public List<DtPaqueteEspectaculo> getPaqueteEspectaculoDt() {
+		List<DtPaqueteEspectaculo> listPaquetesDt = new ArrayList<DtPaqueteEspectaculo>();
+		for (PaqueteEspectaculos p : paquete) {
+			List<DtEspectaculo> espectaculos = new ArrayList<DtEspectaculo>();
+			for (Espectaculo e : p.getEspectaculos()) {
+			    DtEspectaculo dtEspec = new DtEspectaculo(e.getArtista(),p.getNombre(),e.getNombre(),e.getDescripcion(),e.getDuracion(),e.getCantMinEsp(),e.getCantMaxEsp(),e.getUrl(),e.getCosto(),e.getRegistro());
+			    espectaculos.add(dtEspec);
+			}
+			DtPaqueteEspectaculo dtPaqueteEspectaculo = new DtPaqueteEspectaculo(p.getNombre(), p.getDescripcion(), p.getFechaInicio(), p.getFechaFin(),p.getFechaAlta(),p.getDescuento());
+			dtPaqueteEspectaculo.setEspectaculos(espectaculos);
+			listPaquetesDt.add(dtPaqueteEspectaculo);
+		}
+		return listPaquetesDt;
 	}
 }

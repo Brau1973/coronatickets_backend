@@ -4,8 +4,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,10 +13,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtPaqueteEspectaculo;
@@ -26,7 +22,6 @@ import datatypes.DtPlataforma;
 import interfaces.Fabrica;
 import interfaces.IControladorPaquete;
 import interfaces.IControladorPlataforma;
-import logica.PaqueteEspectaculos;
 
 @SuppressWarnings("serial")
 public class AgregarEspectaculoAPaquete extends JInternalFrame {
@@ -110,6 +105,12 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame {
 
 		// Boton cancelar
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			    actionListenerCancelar(e);
+			}
+
+		});		
 		btnCancelar.setBounds(325, Y_DIST * 6, 115, 25);
 		miPanel.add(btnCancelar);
 	}
@@ -189,12 +190,15 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame {
 	private void actionListenerGuardar(ActionEvent al) {
 		if (paqueteSelected != null && plataformaSelected != null && !espectaculoSelected.isEmpty()) {
 			iconPaquete.agregarEspectaculo(paqueteSelected.getNombre(), espectaculoSelected);
+			  JOptionPane.showMessageDialog(this, "Se agrego el espectaculo al paquete con Exito");
+			  iniciarlizarComboBox();
 		} else {
 			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
-//	private void actionListenerCancelar(ActionEvent al){
-//		
-//	}
+	private void actionListenerCancelar(ActionEvent al){
+	      setVisible(false);
+	}
+	
 }

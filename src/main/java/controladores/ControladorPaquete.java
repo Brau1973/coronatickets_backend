@@ -65,4 +65,6 @@ public class ControladorPaquete implements IControladorPaquete{
 		esp.agregarPaquete(paq);
 		mP.altaPaquete(paq);
 	}
+	
+		
 }

@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-import datatypes.DtArtista;
 import datatypes.DtEspectaculo;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
@@ -36,7 +35,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
     private JDateChooser dateFechaNac;
     private JButton btnAceptar, btnCancelar;
     private List<String> listPlataformas;
-    private List<DtArtista> listArtistas;
+    private List<String> listArtistas;
 
     public AltaEspectaculo(IControladorEspectaculo iconE){
 	 this.iconE = iconE;
@@ -168,6 +167,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
     }
 
     // Inicializar ComboBox
+    @SuppressWarnings("static-access")
     public void iniciarlizarComboBox(){
 	 comboPlataforma.removeAllItems();
 	 comboArtista.removeAllItems();
@@ -177,9 +177,9 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
 	     comboPlataforma.addItem(p);
 	 });
 
-	 listArtistas = iconU.listarArtistasDt();
-	 listArtistas.forEach((DtArt) -> {
-	     comboArtista.addItem(DtArt.getNickname());
+	 listArtistas = iconU.listarNicknameArtistas();
+	 listArtistas.forEach((art) -> {
+	     comboArtista.addItem(art);
 	 });
     }
 
@@ -198,11 +198,11 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
 		      DtEspectaculo dte = new DtEspectaculo(strartista, strplataforma, strnombre, strdescripcion, Integer.parseInt(this.txtDuracion.getText()), cantMin, cantMax, strurl, Integer.parseInt(this.txtCosto.getText()), dateRegistro);
 		      this.iconE.altaEspectaculo(dte, strplataforma);
 		      JOptionPane.showMessageDialog(null, "El espectaculo se ha creado con exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
-		      // limpiarFormulario();
+		      limpiarFormulario();
 		  }catch(Exception ex){
 		      System.out.println("Mensaje: " + ex.getMessage());
 		      JOptionPane.showMessageDialog(null, "Los datos ingresados no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
-		      // limpiarFormulario();
+		      limpiarFormulario();
 		  }
 		  setVisible(false);
 	     }
@@ -217,7 +217,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
 	 if(!txtNombre.getText().isEmpty() && !txtDescripcion.getText().isEmpty() && !txtDuracion.getText().isEmpty() && !txtUrl.getText().isEmpty() && txtCosto.getText() != null && dateFechaNac.getDate() != null){
 	     ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 	     if(mE.buscarEspectaculo(txtNombre.getText()) != null){
-		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre del espectaculo ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
+		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre del espectaculo ya existe\nï¿½Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
 		  if(respuesta != JOptionPane.YES_NO_OPTION){
 		      limpiarFormulario();
 		      setVisible(false);
