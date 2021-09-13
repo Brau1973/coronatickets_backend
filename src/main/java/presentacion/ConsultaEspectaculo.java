@@ -20,6 +20,8 @@ import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPaquete;
 import interfaces.IControladorPlataforma;
+import logica.Espectaculo;
+import logica.Funcion;
 
 
 @SuppressWarnings("serial")
@@ -32,7 +34,9 @@ public class ConsultaEspectaculo extends JInternalFrame{
     private JLabel lblTitulo, lblPlataforma, lblEspectaculos, lblPaquetes;
     private JComboBox<String> comboPlataforma, comboEspectaculos, comboPaquetes, comboFunciones;
     private List<DtPlataforma> listPlataformas;
+    private List<Espectaculo> listEspectaculos2;
     private List<DtEspectaculo> listEspectaculos;
+    private List<Funcion> listFunciones2;
     private List<DtFuncion> listFunciones;
     private List<DtPaqueteEspectaculo> listPaqEspe;
 	private List<DtPaqueteEspectaculo> listPaquetes;
@@ -87,7 +91,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 	 comboEspectaculos = new JComboBox<String>();
 	 comboEspectaculos.setBounds(147, 61, 200, 22);
 	 miPanel.add(comboEspectaculos);
-	comboEspectaculos.addItemListener(this::listenerComboEspectaculo);
+comboEspectaculos.addItemListener(this::listenerComboEspectaculo);
 
 	 lblFunciones = new JLabel("Funciones:");
 	 lblFunciones.setBounds(10, 94, 85, 14);
@@ -226,7 +230,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 				comboEspectaculos.addItem(espectaculo.getNombre());
 		}
 	}
-	
+	/*
 	private void listenerComboEspectaculo(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			if (!e.getItem().equals(SELECCIONE)) {
@@ -247,7 +251,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 			}
 		}
 	}
-
+*/
 /*	private void cargarComboFunciones(Espectaculo espectaculo) {
 		comboFunciones.removeAllItems();
 		comboFunciones.addItem(SELECCIONE);
@@ -255,46 +259,46 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		for (DtFuncion funciones : espectaculo.getFunciones()) {
 		    comboFunciones.addItem(funciones.getNombre());
 		}
-	}
+	}*/
+//	
     private void listenerComboEspectaculo(ItemEvent e){
 	 if(e.getStateChange() == ItemEvent.SELECTED){
 	     String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
 	     DtEspectaculo espectaculo = listEspectaculos.stream().filter(espec -> (espec.getNombre() == strEspectaculo)).findFirst().get();
 	     listFunciones = iconF.listarFunciones(strEspectaculo);
-
 	     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	     String datosFecha = formatoFecha.format(espectaculo.getRegistro());
 	     this.textNombreEspectaculo.setText(espectaculo.getNombre());
   		 this.textArtistaOrganizador.setText(espectaculo.getArtista());
      	 this.textDescripcion.setText(espectaculo.getDescripcion());
 	     this.textDuracion.setText(String.valueOf(espectaculo.getDuracion()));
-	     this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMin()));
-	     this.textCantidadMaxima.setText(String.valueOf(espectaculo.getCantMax()));
+	   this.textCantidadMinima.setText(String.valueOf(espectaculo.getCantMin()));
+	    this.textCantidadMaxima.setText(String.valueOf(espectaculo.getCantMax()));
 	     this.textURL.setText(espectaculo.getUrl());
 	     this.textCosto.setText(String.valueOf(espectaculo.getCosto()));
 	     this.textRegistro.setText(String.valueOf(datosFecha));
 	     
 	         // Combo Funciones
-	/*  listFunciones = iconF.listarFunciones(strEspectaculo);
+	     listFunciones = iconF.listarFunciones(strEspectaculo);
 	     comboFunciones.removeAllItems();
-	 //   listFunciones = espectaculo.getFunciones();
+	 	listFunciones = espectaculo.getArtista();
 	     listFunciones.forEach((p) -> {
 	     comboFunciones.addItem(p.getNombre());
 		  });
 	     // Combo Paquetes
 	     
-	      comboPaquetes.removeAllItems();
-		listPaqEspe = espectaculo.getPlataforma()datosFecha;
-		listPaquetes = iconPaq.obtenerPaquetes();
-		listPaquetes.forEach((p) -> {
-			comboPaquetes.addItem(p.getNombre());
-		});*/
-	/*      listPaqEspe=iconP.agregarEspectaculo(paqueteSelected.getNombre(), espectaculoSelected);
-	 listPaqEspe.forEach((p) -> {
-		  comboPaquetes.addItem(p.getNombre());
-	    });
-	 }
-    }*/
+//	      comboPaquetes.removeAllItems();
+//		listPaqEspe = espectaculo.getPlataforma()datosFecha;
+//		listPaquetes = iconPaq.obtenerPaquetes();
+//		listPaquetes.forEach((p) -> {
+//			comboPaquetes.addItem(p.getNombre());
+//		});
+//	      listPaqEspe=iconP.agregarEspectaculo(paqueteSelected.getNombre(), espectaculoSelected);
+//	 listPaqEspe.forEach((p) -> {
+//		  comboPaquetes.addItem(p.getNombre());
+//	    });
+	                       }
+                             }
 
 
 
