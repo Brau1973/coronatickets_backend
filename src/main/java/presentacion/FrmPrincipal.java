@@ -301,6 +301,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	     internalFrameConsultaFuncion.setVisible(true);
 	     break;
 	 case "Registro a Funcion de Espectaculo":
+		 internalFrameRegistroFuncion.iniciarlizarComboBox();
 	     internalFrameRegistroFuncion.setVisible(true);
 	     break;
 	 case "Crear Paquete de Espectaculo":

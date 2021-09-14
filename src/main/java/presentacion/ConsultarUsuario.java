@@ -92,16 +92,16 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	   txtApellido.setText(String.valueOf(tabUsuario.getValueAt(fila, 1)));
 	     }
 	 });*/
-	 iniciaComboBoxU();
+	 //iniciaComboBoxU();
     }
 
-    // Inicializar ComboBox
+    /*// Inicializar ComboBox
     private void iniciaComboBoxU(){
 	 listUsuarios = iconU.listarUsuarios();
 	 listUsuarios.forEach((u) -> {
 	     comboUsuarios.addItem(u.getNickname());
 	 });
-    }
+    }*/
 
     public void actionPerformed(ActionEvent e){
 	 if(e.getSource() == comboUsuarios){

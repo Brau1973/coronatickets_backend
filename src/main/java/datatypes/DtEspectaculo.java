@@ -16,7 +16,8 @@ public class DtEspectaculo{
     private int costo;
     private Date registro;
    
-  private List<DtPaqueteEspectaculo> paquete = new ArrayList<DtPaqueteEspectaculo>();
+  private List<DtPaqueteEspectaculo> paquetes = new ArrayList<DtPaqueteEspectaculo>();
+  private List<DtFuncion> funciones = new ArrayList<DtFuncion>();
 	
     public DtEspectaculo(String artista,String plataforma,String nombre, String descripcion, int duracion, int cantMin, int cantMax, String url, int costo, Date registro){
 	 super();
@@ -72,12 +73,21 @@ public class DtEspectaculo{
 	 return registro;
     }
     
-    public List<DtPaqueteEspectaculo> getPaquete(){
-    return paquete;
+    public List<DtPaqueteEspectaculo> getPaquetes(){
+    return paquetes;
  }
+    
+    public List<DtFuncion> getFunciones(){
+        return funciones;
+     }  
 
-public void setPaquete(List<DtPaqueteEspectaculo> paquete){
-    this.paquete = paquete;
+public void setPaquetes(List<DtPaqueteEspectaculo> paquete){
+    this.paquetes = paquete;
 }
+
+public void setFunciones(List<DtFuncion> funcion){
+    this.funciones = funcion;
+}
+
 
 }

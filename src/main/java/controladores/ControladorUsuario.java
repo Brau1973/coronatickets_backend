@@ -64,16 +64,6 @@ public class ControladorUsuario implements IControladorUsuario{
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 	 return mU.buscarArtista(nickname);
     }
-
-    public List<Usuario> listarUsuarios(){
-	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	 return mU.obtenerUsuario();
-    }
-
-    public List<Artista> listarArtistas(){
-	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	 return mU.listarArtistas();
-    }
     
     public List<String> listarNicknameArtistas(){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
@@ -85,4 +75,16 @@ public class ControladorUsuario implements IControladorUsuario{
    	 }
    	 return listStringArtistas;
     }
+    
+    public List<String> listarNicknameEspectadores(){
+   	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+   	 List<String> listStringEspectadores = new ArrayList<String>();
+   	 List<Espectador> listEspectadores = new ArrayList<Espectador>();
+   	 listEspectadores = mU.listarEspectadores();
+      	 for(Espectador e :listEspectadores){
+      	  listStringEspectadores.add(e.getNickname());
+      	 }
+      	 return listStringEspectadores;
+       }
+    
 }

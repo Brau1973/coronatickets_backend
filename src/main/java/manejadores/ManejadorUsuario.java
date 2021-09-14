@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import datatypes.DtArtista;
 import logica.Artista;
+import logica.Espectador;
 import logica.Plataforma;
 import logica.Usuario;
 import persistencia.Conexion;
@@ -59,6 +60,15 @@ public class ManejadorUsuario{
 	 Query query = em.createQuery("select a from Artista a");
 	 List<Artista> listArtista = (List<Artista>) query.getResultList();
 	 return listArtista;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<Espectador> listarEspectadores(){
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 Query query = em.createQuery("select e from Espectador e");
+	 List<Espectador> listEspectador = (List<Espectador>) query.getResultList();
+	 return listEspectador;
     }
 
     ///// aca

@@ -67,7 +67,8 @@ public class ControladorPlataforma implements IControladorPlataforma {
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 		for (Espectaculo e : p.getEspectaculo()) {
 			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(),p.getNombre(),e.getNombre(),e.getDescripcion(),e.getDuracion(),e.getCantMinEsp(),e.getCantMaxEsp(),e.getUrl(),e.getCosto(),e.getRegistro());
-			DtEspec.setPaquete(e.getPaqueteEspectaculoDt());
+			DtEspec.setPaquetes(e.getPaqueteEspectaculoDt());
+			DtEspec.setFunciones(e.getFuncionesDt());
 			listEspectaculosDt.add(DtEspec);
 		}
 		ret.setEspectaculo(listEspectaculosDt);

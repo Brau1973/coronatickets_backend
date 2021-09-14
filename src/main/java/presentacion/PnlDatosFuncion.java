@@ -31,9 +31,9 @@ public class PnlDatosFuncion extends JInternalFrame{
     public PnlDatosFuncion(){
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
-	 miPanel.setBounds(0, 0, 800, 700);
+	 miPanel.setBounds(0, 0, 800, 215);
 	 add(miPanel);
-	 setBounds(3, 3, 700, 700);
+	 setBounds(3, 3, 700, 215);
 	 setResizable(false);
 	 setClosable(false);
 	 setIconifiable(false);
@@ -44,7 +44,7 @@ public class PnlDatosFuncion extends JInternalFrame{
 	 borderPnlFuncion = BorderFactory.createTitledBorder("Funcion");
 	 panelFuncion.setBorder(borderPnlFuncion);
 	 panelFuncion.setLayout(null);
-	 panelFuncion.setBounds(X_LABEL, Y_DIST, 680, 235);
+	 panelFuncion.setBounds(X_LABEL, Y_DIST, 680, 180);
 	 miPanel.add(panelFuncion);
 	 panelFuncion.setVisible(true);
 
