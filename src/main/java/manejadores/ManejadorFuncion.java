@@ -1,11 +1,14 @@
 package manejadores;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import logica.Funcion;
+//import logica.Registro;
 import persistencia.Conexion;
 
 public class ManejadorFuncion{
@@ -50,4 +53,17 @@ public class ManejadorFuncion{
 	 List<Funcion> listFuncion = (List<Funcion>) query.getResultList();
 	 return listFuncion;
     }
+    
+//    public int getCantidadEspectadoresRegistrados(String nombreFuncion){ //
+//	 Conexion conexion = Conexion.getInstancia();
+//	 EntityManager em = conexion.getEntityManager();
+//	 Query query = em.createQuery("select count(funcion) from Registro r where registro_funcion = :nombreFuncion");
+//	 query.setParameter("funcion", nombreFuncion);
+//	 
+//	 int cantEspectadoresRegistradosAFuncion = Integer.parseInt(query.getResultList().toString());
+//	 System.out.println("cantEspectadoresRegistradosAFuncion: "+cantEspectadoresRegistradosAFuncion);
+//	 return cantEspectadoresRegistradosAFuncion;
+//	 
+//    }
+    
 }

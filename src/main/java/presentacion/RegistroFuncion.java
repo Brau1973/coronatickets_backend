@@ -17,6 +17,7 @@ import datatypes.DtEspectador;
 import datatypes.DtFuncion;
 import datatypes.DtPlataforma;
 import interfaces.Fabrica;
+import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
 import logica.Plataforma;
@@ -25,6 +26,7 @@ import logica.Plataforma;
 public class RegistroFuncion extends JInternalFrame {
 	private IControladorPlataforma iconP;
 	private IControladorUsuario iconU;
+	private IControladorFuncion iconF;
 	private JButton btnAceptar, btnCancelar;
 	private JPanel miPanel;
 	private JLabel lblPlataforma, lblEspectaculos, lblFunciones, lblNombre, lblFecha, lblHora, lblArtistasInv,
@@ -44,6 +46,7 @@ public class RegistroFuncion extends JInternalFrame {
 	public RegistroFuncion() {
 		iconP = Fabrica.getInstancia().getIControladorPlataforma();
 		iconU = Fabrica.getInstancia().getIControladorUsuario();
+		iconF = Fabrica.getInstancia().getIControladorFuncion();
 		miPanel = new JPanel();
 		miPanel.setLayout(null);
 		add(miPanel);
@@ -190,21 +193,23 @@ public class RegistroFuncion extends JInternalFrame {
 		for (DtFuncion funcion : espectaculo.getFunciones()) {
 			Date fecha = new Date();
 			System.out.println(fecha);
-			if(funcion.getFecha().after(fecha) || funcion.getFecha().equals(fecha)){
+			if(funcion.getFecha().after(fecha) || funcion.getFecha().equals(fecha)){ //CARGA SOLAMENTE LAS FUNCIONES VIGENTES
 				comboFunciones.addItem(funcion.getNombre());
 			}
 		}
 	}
 	
 	private void listenerComboFunciones(ItemEvent e) {
-		if (e.getStateChange() == ItemEvent.SELECTED) {
-			if (!e.getItem().equals(SELECCIONE)) {
-				pnlDatosFuncion.setVisible(true);
-				funcionSelected = espectaculoSelected.getFunciones().stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
-				pnlDatosFuncion.cargarPanel(funcionSelected);
-			} else if (e.getItem().equals(SELECCIONE)) {
-		              pnlDatosFuncion.setVisible(false);
-			}
-		}
+//		if (e.getStateChange() == ItemEvent.SELECTED) {
+//			if (!e.getItem().equals(SELECCIONE)) {
+//				pnlDatosFuncion.setVisible(true);
+//				funcionSelected = espectaculoSelected.getFunciones().stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
+//				pnlDatosFuncion.cargarPanel(funcionSelected);
+//				//iconF.getCantidadEspectadoresRegistrados(funcionSelected.getNombre());
+//			} else if (e.getItem().equals(SELECCIONE)) {
+//		              pnlDatosFuncion.setVisible(false);
+//			}
+//			
+//		}
 	}
 }
