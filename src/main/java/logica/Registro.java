@@ -3,26 +3,21 @@ package logica;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import persistencia.RegistroID;
 
 @Entity
-@IdClass(RegistroID.class)
 public class Registro{
-	@Id
-	@ManyToOne
-	private Espectador espectador;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id;
+	
 	@ManyToOne
 	private Funcion funcion;
 	
-	@Temporal(TemporalType.DATE)
     private Date fechaRegistro;
 	
     private float costo;
@@ -33,20 +28,11 @@ public class Registro{
     
 	public Registro(Espectador espectador, Funcion funcion, Date fechaRegistro, float costo) {
 		super();
-		this.espectador = espectador;
 		this.funcion = funcion;
 		this.fechaRegistro = fechaRegistro;
 		this.costo = costo;
 	}
 	
-	public Espectador getEspectador() {
-		return espectador;
-	}
-
-	public void setEspectador(Espectador espectador) {
-		this.espectador = espectador;
-	}
-
 	public Funcion getFuncion() {
 		return funcion;
 	}

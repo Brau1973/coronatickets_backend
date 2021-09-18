@@ -200,16 +200,16 @@ public class RegistroFuncion extends JInternalFrame {
 	}
 	
 	private void listenerComboFunciones(ItemEvent e) {
-//		if (e.getStateChange() == ItemEvent.SELECTED) {
-//			if (!e.getItem().equals(SELECCIONE)) {
-//				pnlDatosFuncion.setVisible(true);
-//				funcionSelected = espectaculoSelected.getFunciones().stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
-//				pnlDatosFuncion.cargarPanel(funcionSelected);
-//				//iconF.getCantidadEspectadoresRegistrados(funcionSelected.getNombre());
-//			} else if (e.getItem().equals(SELECCIONE)) {
-//		              pnlDatosFuncion.setVisible(false);
-//			}
-//			
-//		}
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			if (!e.getItem().equals(SELECCIONE)) {
+				pnlDatosFuncion.setVisible(true);
+				funcionSelected = espectaculoSelected.getFunciones().stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
+				pnlDatosFuncion.cargarPanel(funcionSelected);
+				//iconF.getCantidadEspectadoresRegistrados(funcionSelected.getNombre());
+			} else if (e.getItem().equals(SELECCIONE)) {
+		              pnlDatosFuncion.setVisible(false);
+			}
+			
+		}
 	}
 }
