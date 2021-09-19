@@ -11,8 +11,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Espectador extends Usuario{
 	
-	@OneToMany (mappedBy="espectador",cascade=CascadeType.ALL)
-	private List<Registro> registros = new ArrayList<>();
+//	@OneToMany (mappedBy="espectador",cascade=CascadeType.ALL)
+//	private List<Registro> registros = new ArrayList<>();
 	
     public Espectador(){
 	 super();
@@ -22,11 +22,11 @@ public class Espectador extends Usuario{
 	 super(nickname, nombre, apellido, email, fNacimiento);
     }
 
-	public List<Registro> getRegistros() {
-		return registros;
-	}
-
-	public void setRegistros(List<Registro> registros) {
-		this.registros = registros;
-	}
+//	public List<Registro> getRegistros() {
+//		return registros;
+//	}
+//
+//	public void setRegistros(List<Registro> registros) {
+//		this.registros = registros;
+//	}
 }

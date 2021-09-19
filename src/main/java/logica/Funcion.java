@@ -24,8 +24,8 @@ public class Funcion {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Artista> artistas = new ArrayList<Artista>();
 
-	@OneToMany (mappedBy="funcion",cascade=CascadeType.ALL)
-	private List<Registro> registros = new ArrayList<>();
+//	@OneToMany (mappedBy="funcion",cascade=CascadeType.ALL)
+//	private List<Registro> registros = new ArrayList<>();
 	
 	public Funcion() {
 		super();
@@ -79,12 +79,12 @@ public class Funcion {
 		this.registro = registro;
 	}
 	
-	public List<Registro> getRegistros() {
-		return registros;
-	}
-
-	public void setRegistros(List<Registro> registros) {
-		this.registros = registros;
-	}
+//	public List<Registro> getRegistros() {
+//		return registros;
+//	}
+//
+//	public void setRegistros(List<Registro> registros) {
+//		this.registros = registros;
+//	}
 
 }
