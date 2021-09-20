@@ -24,8 +24,8 @@ public class Funcion {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Artista> artistas = new ArrayList<Artista>();
 
-//	@OneToMany (mappedBy="funcion",cascade=CascadeType.ALL)
-//	private List<Registro> registros = new ArrayList<>();
+	@OneToMany(mappedBy="funcion",cascade=CascadeType.ALL,orphanRemoval=true)
+	private List<Registro> registros = new ArrayList<>();
 	
 	public Funcion() {
 		super();

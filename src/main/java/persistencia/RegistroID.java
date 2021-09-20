@@ -9,8 +9,14 @@ public class RegistroID implements Serializable{
 
     private String espectador;
     private String funcion;
+    
+    public RegistroID(String espectador, String funcion) {
+		super();
+		this.espectador = espectador;
+		this.funcion = funcion;
+	}
 
-    // Tiene que tener constructor por defecto
+	// Tiene que tener constructor por defecto
     public RegistroID(){
 	 super();
     }
