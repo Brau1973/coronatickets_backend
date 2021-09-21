@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Espectador extends Usuario{
 	
-	@OneToMany(mappedBy="espectador",cascade=CascadeType.ALL,orphanRemoval=true)
+	@OneToMany
 	private List<Registro> registros = new ArrayList<>();
 	
     public Espectador(){
