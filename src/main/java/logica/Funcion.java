@@ -79,6 +79,10 @@ public class Funcion {
 		this.registro = registro;
 	}
 	
+	public void agregarRegistro(Registro registro) {
+		this.registros.add(registro);
+	}
+	
 //	public List<Registro> getRegistros() {
 //		return registros;
 //	}

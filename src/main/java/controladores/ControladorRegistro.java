@@ -22,6 +22,8 @@ public class ControladorRegistro  implements IControladorRegistro{
 		
 		Registro registro = new Registro(funcion,dtRegistro.getFechaRegistro(),dtRegistro.getCosto());
 		
+		funcion.agregarRegistro(registro);
+		
     	ManejadorUsuario mU = ManejadorUsuario.getInstancia();
     	Espectador espectador = mU.buscarEspectador(nicknameEspectador);
     	espectador.agregarRegistro(registro);

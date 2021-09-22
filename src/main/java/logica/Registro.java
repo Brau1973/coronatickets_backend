@@ -2,6 +2,7 @@ package logica;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +18,7 @@ public class Registro{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(
 			insertable=false,
 			updatable=false
