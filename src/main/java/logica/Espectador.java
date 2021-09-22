@@ -29,4 +29,9 @@ public class Espectador extends Usuario{
 	public void setRegistros(List<Registro> registros) {
 		this.registros = registros;
 	}
+	
+	public void agregarRegistro(Registro registro) {
+		this.registros.add(registro);
+	}
+	
 }

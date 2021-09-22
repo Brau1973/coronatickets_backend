@@ -32,7 +32,7 @@ public class Registro{
 		super();
 	}
     
-	public Registro(Espectador espectador, Funcion funcion, Date fechaRegistro, float costo) {
+	public Registro(Funcion funcion, Date fechaRegistro, float costo) {
 		super();
 		this.funcion = funcion;
 		this.fechaRegistro = fechaRegistro;

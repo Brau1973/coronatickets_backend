@@ -43,6 +43,13 @@ public class ManejadorUsuario{
 	 EntityManager em = conexion.getEntityManager();
 	 return em.find(Usuario.class, nickname);
     }
+    
+    public Espectador buscarEspectador(String nickname){
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 return em.find(Espectador.class, nickname);
+    }
+
 
     @SuppressWarnings("unchecked")
     public List<Usuario> obtenerUsuario(){

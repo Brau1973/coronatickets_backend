@@ -5,6 +5,7 @@ import java.util.List;
 import datatypes.DtUsuario;
 import excepciones.UsuarioRepetidoExcepcion;
 import logica.Artista;
+import logica.Espectador;
 import logica.Usuario;
 
 public interface IControladorUsuario{
