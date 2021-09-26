@@ -19,10 +19,10 @@ public class Registro{
 	Integer id;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(
-			insertable=false,
-			updatable=false
-	)
+//	@JoinColumn(
+//			insertable=false,
+//			updatable=false
+//	)
 	private Funcion funcion;
 	
     private Date fechaRegistro;
