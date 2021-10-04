@@ -313,6 +313,8 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	     break;
 	 case "Agregar Espectaculo a Paquete":
 		 System.out.println("menu agregar");
+//		 iconU.seguirUsuario("Alexis Sanchez", "CR7");
+//		 iconU.seguirUsuario("CR7", "Alexis Sanchez");
 		 internalFrameAgregarEspectaculoAPaquete.iniciarlizarComboBox();
 	     internalFrameAgregarEspectaculoAPaquete.setVisible(true);
 	     break;
