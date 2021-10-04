@@ -42,8 +42,28 @@ public class ControladorUsuario implements IControladorUsuario{
 	     }
 	   
 	 }
-
-
+    
+    public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir){
+    	ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+    	Usuario usuario = mU.buscarArtista(nicknameUsuario);
+    	Usuario usuarioASeguir = mU.buscarArtista(nicknameUsuarioASeguir);
+    	
+    	usuario.seguirUsuario(usuarioASeguir);
+    	usuarioASeguir.agregarSeguidor(usuario);
+    	
+    	mU.ActualizarRegistro(usuario);
+    }
+    
+    public void dejarDeSeguirUsuario(String nicknameUsuario, String nicknameUsuarioADejarDeSeguir){
+    	ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+    	Usuario usuario = mU.buscarArtista(nicknameUsuario);
+    	Usuario usuarioADejarDeSeguir = mU.buscarArtista(nicknameUsuarioADejarDeSeguir);
+    	
+    	usuario.dejarSeguirUsuario(usuarioADejarDeSeguir);
+    	usuarioADejarDeSeguir.quitarSeguidor(usuario);
+    	
+    	mU.ActualizarRegistro(usuario);
+    }
 
     public void modificarUsuario(Usuario nuevo){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();

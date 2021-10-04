@@ -29,6 +29,15 @@ public class ManejadorUsuario{
 	     instancia = new ManejadorUsuario();
 	 return instancia;
     }
+    
+    public void ActualizarRegistro(Usuario u){
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 em.getTransaction().begin();
+	 em.persist(u);
+	 em.merge(u);
+	 em.getTransaction().commit();
+    }
 
     public void altaUsuario(Usuario u){
 	 Conexion conexion = Conexion.getInstancia();
