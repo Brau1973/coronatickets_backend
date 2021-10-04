@@ -20,4 +20,8 @@ public interface IControladorUsuario{
     public List<String> listarNicknameArtistas();
     
     public List<String> listarNicknameEspectadores();
+    
+    public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir);
+    
+    public void dejarDeSeguirUsuario(String nicknameUsuario, String nicknameUsuarioADejarDeSeguir);
 }

@@ -2,7 +2,9 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -30,6 +32,9 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
     private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtDescripcion, txtBiografia, txtLink;
     private JDateChooser dateFechaNac;
     private JButton btnAceptar, btnCancelar;
+    
+	private List<String> seguidos = new ArrayList<String>(); //Vacias porque recien se esta creando el usuario;
+	private List<String> seguidores = new ArrayList<String>();
 
     public AltaUsuario(IControladorUsuario iconU){
 	 this.iconU = iconU;
@@ -202,7 +207,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		  if(checkFormulario()&&modificarDatos()){
 		      try{
 			   // falta mirar chequeo de fecha
-			   DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac);
+			   DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos ,seguidores);
 			   this.iconU.altaUsuario(dte);
 			   JOptionPane.showMessageDialog(this, "el Espectador se ha creado con Exito");
 
@@ -217,7 +222,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		  if(checkFormulario2()&&modificarDatos()){
 		      try{
 			   // falta mirar chequeo de fecha
-			   DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strDescripcion, strBiografia, strLink);
+			   DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos ,seguidores, strDescripcion, strBiografia, strLink);
 			   this.iconU.altaUsuario(dta);
 			   JOptionPane.showMessageDialog(this, "el Artista se ha creado con Exito");
 		      }catch(UsuarioRepetidoExcepcion x){
