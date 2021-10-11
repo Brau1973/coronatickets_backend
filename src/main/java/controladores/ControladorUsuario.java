@@ -25,19 +25,19 @@ public class ControladorUsuario implements IControladorUsuario{
 
     public void altaUsuario(DtUsuario dtu ) throws UsuarioRepetidoExcepcion{
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	 
+	
 	 if(mU.buscarUsuario(DtUsuario.getNickname()) != null){
 	     throw new UsuarioRepetidoExcepcion("El nickname esta en uso");
 	 }else if(mU.buscarUsuario(DtUsuario.getEmail()) != null){
 	     throw new UsuarioRepetidoExcepcion("El email esta en uso");
 	 }
 	     if(dtu instanceof DtArtista){
-		  Usuario usuario = new Artista (dtu.getNickname(),dtu.getNombre(),dtu.getApellido(),dtu.getEmail(),dtu.getfNacimiento(),((DtArtista) dtu).getDescripcion(),((DtArtista) dtu).getBiografia(),((DtArtista) dtu).getLink()); 
+		  Usuario usuario = new Artista (dtu.getNickname(),dtu.getNombre(),dtu.getApellido(),dtu.getEmail(),dtu.getfNacimiento(),dtu.getContrasenia(),((DtArtista) dtu).getDescripcion(),((DtArtista) dtu).getBiografia(),((DtArtista) dtu).getLink()); 
 		  mU.altaUsuario(usuario);
 	     }
 	     if(dtu instanceof DtEspectador){
 	
-		  Usuario usuario = new Espectador (dtu.getNickname(),dtu.getNombre(),dtu.getApellido(),dtu.getEmail(),dtu.getfNacimiento()); 
+		  Usuario usuario = new Espectador (dtu.getNickname(),dtu.getNombre(),dtu.getApellido(),dtu.getEmail(),dtu.getfNacimiento(), dtu.getContrasenia()); 
 		  mU.altaUsuario(usuario);
 	     }
 	   

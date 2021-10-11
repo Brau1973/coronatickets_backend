@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+
 public class Usuario {
 	@Id
 	private String nickname;
@@ -20,6 +21,7 @@ public class Usuario {
 	private String apellido;
 	private String email;
 	private Date fNacimiento;
+	private String contrasenia;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Usuario> seguidos = new ArrayList<Usuario>();
@@ -27,13 +29,15 @@ public class Usuario {
 	@ManyToMany(mappedBy = "seguidos")
 	private List<Usuario> seguidores = new ArrayList<Usuario>();
 
-	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento) {
+	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia) {
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.fNacimiento = fNacimiento;
+		this.contrasenia = contrasenia;
+	
 	}
 
 	public Usuario() {
@@ -58,7 +62,9 @@ public class Usuario {
 	public Date getfNacimiento() {
 		return fNacimiento;
 	}
-
+	public String getContrasenia() {
+		return contrasenia;
+	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
@@ -118,4 +124,10 @@ public class Usuario {
 	public void quitarSeguidor(Usuario u) {
 		this.seguidores.remove(u);
 	}
+		 
+	public void setContrasenia(String contrasenia){
+		   this.contrasenia = contrasenia;
+				   }
+	
+
 }
