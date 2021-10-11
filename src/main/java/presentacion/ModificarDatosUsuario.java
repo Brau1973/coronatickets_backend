@@ -24,7 +24,7 @@ import logica.Usuario;
 public class ModificarDatosUsuario extends JInternalFrame implements ActionListener{
     private IControladorUsuario iconU;
     private JPanel miPanel;
-    private JTextField txtNickname, txtNombre, txtApellido, txtEmail;
+    private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtContrasenia;
     private JDateChooser dateFechaNac;
     private JComboBox<String> comboUsuarios;
     private JButton btnGuardar, btnCancelar;
@@ -73,10 +73,15 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	 lblEmail.setFont(new java.awt.Font("Verdana", 1, 12));
 	 lblEmail.setBounds(10, 170, 80, 25);
 	 miPanel.add(lblEmail);
+	 
+	 JLabel lblContrasenia = new JLabel("Contraseña:");
+	 lblContrasenia.setFont(new java.awt.Font("Verdana", 1, 12));
+	 lblContrasenia.setBounds(10, 200, 80, 25);
+	 miPanel.add(lblContrasenia);
 
 	 JLabel lblfNacimiento = new JLabel("Fecha nacimiento:");
 	 lblfNacimiento.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblfNacimiento.setBounds(10, 200, 150, 25);
+	 lblfNacimiento.setBounds(10, 230, 150, 25);
 	 miPanel.add(lblfNacimiento);
 
 	 // JComboBox
@@ -108,15 +113,20 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	 dateFechaNac.setBounds(140, 198, 237, 25);
 	 miPanel.add(dateFechaNac);
 
+	 txtContrasenia = new JTextField();
+	 txtContrasenia .setBounds(140, 228, 237, 25);
+	 txtContrasenia .setEditable(false);
+	 miPanel.add(txtContrasenia );
+	 
 	 // Boton Guardar
 	 btnGuardar = new JButton("Guardar");
-	 btnGuardar.setBounds(140, 235, 116, 25);
+	 btnGuardar.setBounds(140, 264, 116, 25);
 	 miPanel.add(btnGuardar);
 	 btnGuardar.addActionListener(this);
 
 	 // Boton Cancelar
 	 btnCancelar = new JButton("Cancelar");
-	 btnCancelar.setBounds(263, 235, 116, 25);
+	 btnCancelar.setBounds(263, 264, 116, 25);
 	 miPanel.add(btnCancelar);
 	 btnCancelar.addActionListener(this);
     }
@@ -137,16 +147,17 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	 String strapellido = this.txtApellido.getText();
 	 String stremail = this.txtEmail.getText();
 	 Date dateRegistro = this.dateFechaNac.getDate();
+	 String strcontrasenia = this.txtContrasenia.getText();
 
 	 if(e.getSource() == btnGuardar){
 	     Usuario usuario = this.iconU.obtenerUsuario(strnick);
 	     if(usuario instanceof Artista){
-		  Usuario nuevo = new Artista(strnick, strnombre, strapellido, stremail, dateRegistro, ((Artista) usuario).getDescripcion(), ((Artista) usuario).getBiografia(), ((Artista) usuario).getLink());
+		  Usuario nuevo = new Artista(strnick, strnombre, strapellido, stremail, dateRegistro,strcontrasenia, ((Artista) usuario).getDescripcion(), ((Artista) usuario).getBiografia(), ((Artista) usuario).getLink());
 		  Artista artista = (Artista) nuevo;
 		  this.iconU.modificarUsuario(artista);
 	     }
 	     if(usuario instanceof Espectador){
-		  Usuario nuevo = new Espectador(strnick, strnombre, strapellido, stremail, dateRegistro);
+		  Usuario nuevo = new Espectador(strnick, strnombre, strapellido, stremail, dateRegistro, strcontrasenia);
 		  Espectador espectador = (Espectador) nuevo;
 		  this.iconU.modificarUsuario(espectador);
 	     }
@@ -166,6 +177,7 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	     txtApellido.setText(u.getApellido());
 	     txtEmail.setText(u.getEmail());
 	     dateFechaNac.setDate(u.getfNacimiento());
+	     txtContrasenia.setText(u.getContrasenia());
 	 }
     }
 

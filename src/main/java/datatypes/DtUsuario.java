@@ -8,14 +8,16 @@ public class DtUsuario {
     private String apellido;
     private static String email;
     private Date fNacimiento;
+    private String contrasenia;
     
-	public DtUsuario(String nickname, String nombre, String apellido, String email, Date fNacimiento) {
+	public DtUsuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia) {
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.fNacimiento = fNacimiento;
+		this.contrasenia = contrasenia;
 	}
 	
 	public static String getNickname() {
@@ -32,5 +34,8 @@ public class DtUsuario {
 	}
 	public Date getfNacimiento() {
 		return fNacimiento;
+	}
+	public String getContrasenia() {
+		return contrasenia;
 	}
 }

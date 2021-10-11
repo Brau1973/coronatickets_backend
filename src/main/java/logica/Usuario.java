@@ -16,14 +16,16 @@ public class Usuario{
     private String apellido;
     private String email;
     private Date fNacimiento;
+    private String contrasenia;
 
-	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento){
+	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia){
 	 super();
 	 this.nickname = nickname;
 	 this.nombre = nombre;
 	 this.apellido = apellido;
 	 this.email = email;
 	 this.fNacimiento = fNacimiento;
+	 this.contrasenia = contrasenia;
     }
 
     public Usuario(){
@@ -48,6 +50,10 @@ public class Usuario{
     public Date getfNacimiento(){
 	 return fNacimiento;
     }
+    
+    public String getContrasenia(){
+   	 return contrasenia;
+       }
 
     public void setNickname(String nickname){
 	 this.nickname = nickname;
@@ -68,4 +74,9 @@ public class Usuario{
     public void setfNacimiento(Date fNacimiento){
 	 this.fNacimiento = fNacimiento;
     }
+    
+    public void setContrasenia(String contrasenia){
+      	 this.contrasenia = contrasenia;
+          }
+
 }
