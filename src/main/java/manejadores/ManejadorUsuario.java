@@ -68,6 +68,15 @@ public class ManejadorUsuario{
 	 List<Usuario> listUsuario = (List<Usuario>) query.getResultList();
 	 return listUsuario;
     }
+    
+    @SuppressWarnings("unchecked")
+    public List<Usuario> listarUsuarios(){
+	 Conexion conexion = Conexion.getInstancia();
+	 EntityManager em = conexion.getEntityManager();
+	 Query query = em.createQuery("select u from Usuario u");
+	 List<Usuario> listUsuarios = (List<Usuario>) query.getResultList();
+	 return listUsuarios;
+    }
 
     @SuppressWarnings("unchecked")
     public List<Artista> listarArtistas(){
