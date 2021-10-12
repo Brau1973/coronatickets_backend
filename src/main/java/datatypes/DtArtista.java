@@ -12,9 +12,9 @@ public class DtArtista extends DtUsuario {
 		return descripcion;
 	}
 
-	public DtArtista(String nickname, String nombre, String apellido, String email, Date fNacimiento,
+	public DtArtista(String nickname, String nombre, String apellido, String email, Date fNacimiento,String contrasenia,
 			List<String> seguidos, List<String> seguidores, String descripcion, String biografia, String link) {
-		super(nickname, nombre, apellido, email, fNacimiento, seguidos, seguidores);
+		super(nickname, nombre, apellido, email, fNacimiento, seguidos, seguidores, contrasenia);
 		this.descripcion = descripcion;
 		this.biografia = biografia;
 		this.link = link;

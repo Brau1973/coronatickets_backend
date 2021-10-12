@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Espectador extends Usuario{
+
 	
 	@OneToMany
 	private List<Registro> registros = new ArrayList<>();
@@ -17,9 +18,9 @@ public class Espectador extends Usuario{
     public Espectador(){
 	 super();
     }
-	
-    public Espectador(String nickname, String nombre, String apellido, String email, Date fNacimiento){
-	 super(nickname, nombre, apellido, email, fNacimiento);
+    
+    public Espectador(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia){
+	 super(nickname, nombre, apellido, email, fNacimiento, contrasenia);
     }
 
 	public List<Registro> getRegistros() {
