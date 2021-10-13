@@ -1,6 +1,8 @@
 package datatypes;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DtUsuario {
 	private static String nickname;
@@ -8,16 +10,24 @@ public class DtUsuario {
     private String apellido;
     private static String email;
     private Date fNacimiento;
+    private List<String> seguidos = new ArrayList<String>();
+	private List<String> seguidores = new ArrayList<String>();
+    private String contrasenia;
     
-	public DtUsuario(String nickname, String nombre, String apellido, String email, Date fNacimiento) {
+	public DtUsuario(String nickname, String nombre, String apellido, String email, Date fNacimiento,
+			List<String> seguidos, List<String> seguidores,String contrasenia) {
+
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.fNacimiento = fNacimiento;
+		this.seguidos = seguidos;
+		this.seguidores = seguidores;
+		this.contrasenia = contrasenia;
+
 	}
-	
 	public static String getNickname() {
 		return nickname;
 	}
@@ -32,5 +42,16 @@ public class DtUsuario {
 	}
 	public Date getfNacimiento() {
 		return fNacimiento;
+	}
+
+	public List<String> getSeguidos() {
+		return seguidos;
+	}
+	public List<String> getSeguidores() {
+		return seguidores;
+	}
+	public String getContrasenia() {
+		return contrasenia;
+
 	}
 }

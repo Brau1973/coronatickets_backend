@@ -2,7 +2,9 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -26,10 +28,13 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
     private IControladorUsuario iconU;
     private JPanel miPanel;
     private JRadioButton rbtnEspectador, rbtnArtista;
-    private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblDescripcion, lblBiografia, lblLink;
-    private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtDescripcion, txtBiografia, txtLink;
+    private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblContrasenia, lblDescripcion, lblBiografia, lblLink;
+    private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtContrasenia, txtDescripcion, txtBiografia, txtLink;
     private JDateChooser dateFechaNac;
     private JButton btnAceptar, btnCancelar;
+    
+	private List<String> seguidos = new ArrayList<String>(); //Vacias porque recien se esta creando el usuario;
+	private List<String> seguidores = new ArrayList<String>();
 
     public AltaUsuario(IControladorUsuario iconU){
 	 this.iconU = iconU;
@@ -113,48 +118,58 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 dateFechaNac.setBounds(155, 168, 260, 25);
 	 miPanel.add(dateFechaNac);
 
+	 lblContrasenia = new JLabel();
+	 lblContrasenia.setText("Contraseña:");
+	 lblContrasenia.setFont(new java.awt.Font("Verdana", 1, 12));
+	 lblContrasenia.setBounds(10, 200, 80, 25);
+	 miPanel.add(lblContrasenia);
+	 
+	 txtContrasenia = new JTextField();
+	 txtContrasenia .setBounds(155, 198, 260, 25);
+	 miPanel.add(txtContrasenia );
+	 
 	 lblDescripcion = new JLabel();
 	 lblDescripcion.setText("Descripcion:");
 	 lblDescripcion.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblDescripcion.setBounds(10, 200, 150, 25);
+	 lblDescripcion.setBounds(10, 230, 150, 25);
 	 miPanel.add(lblDescripcion);
 
 	 txtDescripcion = new JTextField();
-	 txtDescripcion.setBounds(155, 198, 260, 25);
+	 txtDescripcion.setBounds(155, 228, 260, 25);
 	 miPanel.add(txtDescripcion);
 
 	 lblBiografia = new JLabel();
 	 lblBiografia.setText("Biografia:");
 	 lblBiografia.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblBiografia.setBounds(10, 230, 150, 25);
+	 lblBiografia.setBounds(10, 260, 150, 25);
 	 miPanel.add(lblBiografia);
 
 	 txtBiografia = new JTextField();
-	 txtBiografia.setBounds(155, 228, 260, 25);
+	 txtBiografia.setBounds(155, 258, 260, 25);
 	 miPanel.add(txtBiografia);
 
 	 lblLink = new JLabel();
 	 lblLink.setText("Link:");
 	 lblLink.setFont(new java.awt.Font("Verdana", 1, 12));
-	 lblLink.setBounds(10, 260, 150, 25);
+	 lblLink.setBounds(10, 290, 150, 25);
 	 miPanel.add(lblLink);
 
 	 txtLink = new JTextField();
-	 txtLink.setBounds(155, 258, 260, 25);
+	 txtLink.setBounds(155, 288, 260, 25);
 	 miPanel.add(txtLink);
 
 
 	 // Boton Aceptar
 	 btnAceptar = new JButton();
 	 btnAceptar.setText("Aceptar");
-	 btnAceptar.setBounds(155, 300, 127, 25);
+	 btnAceptar.setBounds(155, 330, 127, 25);
 	 miPanel.add(btnAceptar);
 	 btnAceptar.addActionListener(this);
 
 	 // Boton Cancelar
 	 btnCancelar = new JButton();
 	 btnCancelar.setText("Cancelar");
-	 btnCancelar.setBounds(286, 300, 127, 25);
+	 btnCancelar.setBounds(286, 330, 127, 25);
 	 miPanel.add(btnCancelar);
 	 btnCancelar.addActionListener(this);
     }
@@ -166,13 +181,14 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 String strApellido = this.txtApellido.getText();
 	 String strEmail = this.txtEmail.getText();
 	 Date dateFechaNac = this.dateFechaNac.getDate();
+	 String strContrasenia = this.txtContrasenia.getText();
 	 String strDescripcion = this.txtDescripcion.getText();
 	 String strBiografia = this.txtBiografia.getText();
 	 String strLink = this.txtLink.getText();
 	 if(e.getSource() == rbtnEspectador){
 	     if(rbtnEspectador.isSelected()){
-		  btnAceptar.setBounds(155, 210, 127, 25);
-		  btnCancelar.setBounds(286, 210, 127, 25);
+		  btnAceptar.setBounds(155, 330, 127, 25);
+		  btnCancelar.setBounds(286, 330, 127, 25);
 		  lblDescripcion.setVisible(false);
 		  lblBiografia.setVisible(false);
 		  lblLink.setVisible(false);
@@ -185,8 +201,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 }
 	 if(e.getSource() == rbtnArtista){
 	     if(rbtnArtista.isSelected()){
-		  btnAceptar.setBounds(155, 300, 127, 25);
-		  btnCancelar.setBounds(286, 300, 127, 25);
+		  btnAceptar.setBounds(155, 410, 127, 25);
+		  btnCancelar.setBounds(286, 410, 127, 25);
 		  lblDescripcion.setVisible(true);
 		  lblBiografia.setVisible(true);
 		  lblLink.setVisible(true);
@@ -202,7 +218,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		  if(checkFormulario()&&modificarDatos()){
 		      try{
 			   // falta mirar chequeo de fecha
-			   DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac);
+			   DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strContrasenia,seguidos ,seguidores);
+
 			   this.iconU.altaUsuario(dte);
 			   JOptionPane.showMessageDialog(this, "el Espectador se ha creado con Exito");
 
@@ -217,7 +234,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		  if(checkFormulario2()&&modificarDatos()){
 		      try{
 			   // falta mirar chequeo de fecha
-			   DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strDescripcion, strBiografia, strLink);
+			   DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strContrasenia, seguidos ,seguidores, strDescripcion, strBiografia, strLink);
+
 			   this.iconU.altaUsuario(dta);
 			   JOptionPane.showMessageDialog(this, "el Artista se ha creado con Exito");
 		      }catch(UsuarioRepetidoExcepcion x){
@@ -242,11 +260,12 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 String strNombre = this.txtNombre.getText();
 	 String strApellido = this.txtApellido.getText();
 	 String strEmail = this.txtEmail.getText();
+	 String strContrasenia = this.txtContrasenia.getText();
 	 // Date dateFechaNac=this.dateFechaNac.getDate();
 	 // String strDescripcion=this.txtDescripcion.getText();
 	 // String strBiografia=this.txtBiografia.getText();
 	 // String strLink=this.txtLink.getText();
-	 if(strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty()){
+	 if(strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty()|| strContrasenia.isEmpty()){
 	     JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 	     return false;
 	 }
@@ -258,10 +277,11 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 String strNombre = this.txtNombre.getText();
 	 String strApellido = this.txtApellido.getText();
 	 String strEmail = this.txtEmail.getText();
+	 String strContrasenia = this.txtContrasenia.getText();
 	 // Date dateFechaNac=this.dateFechaNac.getDate();
 	 String strDescripcion = this.txtDescripcion.getText();
 
-	 if(strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty() || strDescripcion.isEmpty()){
+	 if(strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty() || strContrasenia.isEmpty()|| strDescripcion.isEmpty()){
 	     JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 	     return false;
 	 }
@@ -289,6 +309,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	 txtApellido.setText("");
 	 txtEmail.setText("");
 	 dateFechaNac.setDate(null);
+	 txtContrasenia.setText("");
 	 txtDescripcion.setText("");
 	 txtBiografia.setText("");
 	 txtLink.setText("");
