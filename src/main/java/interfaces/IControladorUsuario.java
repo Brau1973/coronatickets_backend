@@ -28,4 +28,6 @@ public interface IControladorUsuario{
     public void dejarDeSeguirUsuario(String nicknameUsuario, String nicknameUsuarioADejarDeSeguir);
     
     public List<String> listarNicknameUsuariosNoSeguidos(String nickname);
+    
+    public List<String> listarNicknameUsuariosSeguidos(String nickname);
 }

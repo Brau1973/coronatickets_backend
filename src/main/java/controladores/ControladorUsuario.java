@@ -143,4 +143,18 @@ public class ControladorUsuario implements IControladorUsuario{
    	 return listStringUsuariosNoSeguidos;
     }
     
+    public List<String> listarNicknameUsuariosSeguidos(String nickname){
+    	ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+    	Usuario usuario = mU.buscarUsuario(nickname);
+    	List<String> listStringUsuariosSeguidos = new ArrayList<String>(); // a retornar
+    	
+    	List<Usuario> listUsuariosSeguidos = new ArrayList<Usuario>();
+    	listUsuariosSeguidos = usuario.getSeguidos(); // Usuario ya seguidos por el usuario recibido por param
+    	
+    	for(Usuario u :listUsuariosSeguidos){
+    		listStringUsuariosSeguidos.add(u.getNickname());
+       	}
+       	 return listStringUsuariosSeguidos;
+    }
+    
 }
