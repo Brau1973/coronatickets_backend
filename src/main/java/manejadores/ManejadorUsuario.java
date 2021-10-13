@@ -59,7 +59,6 @@ public class ManejadorUsuario{
 	 return em.find(Espectador.class, nickname);
     }
 
-
     @SuppressWarnings("unchecked")
     public List<Usuario> obtenerUsuario(){
 	 Conexion conexion = Conexion.getInstancia();
