@@ -85,6 +85,17 @@ public class ControladorUsuario implements IControladorUsuario{
 	 return mU.buscarArtista(nickname);
     }
     
+    public List<String> listarNicknameUsuarios(){
+	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	 List<String> listStringUsuarios = new ArrayList<String>();
+	 List<Usuario> listUsuarios = new ArrayList<Usuario>();
+	 listUsuarios = mU.listarUsuarios();
+   	 for(Usuario u :listUsuarios){
+   	  listStringUsuarios.add(u.getNickname());
+   	 }
+   	 return listStringUsuarios;
+    }
+    
     public List<String> listarNicknameArtistas(){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 	 List<String> listStringArtistas = new ArrayList<String>();

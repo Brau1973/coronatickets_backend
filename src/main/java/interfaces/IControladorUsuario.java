@@ -5,6 +5,7 @@ import java.util.List;
 import datatypes.DtUsuario;
 import excepciones.UsuarioRepetidoExcepcion;
 import logica.Artista;
+import logica.Espectador;
 import logica.Usuario;
 
 public interface IControladorUsuario{
@@ -15,6 +16,8 @@ public interface IControladorUsuario{
     public Usuario obtenerUsuario(String nickname);
 
     public Artista obtenerArtista(String nickname);
+    
+    public List<String> listarNicknameUsuarios();
     
     public List<String> listarNicknameArtistas();
     

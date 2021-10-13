@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -11,17 +12,28 @@ import javax.persistence.OneToMany;
 public class Espectador extends Usuario{
 
 	
-	@OneToMany // (mappedBy = "espectaculo", cascade = CascadeType.ALL)
+	@OneToMany
 	private List<Registro> registros = new ArrayList<>();
 	
+
     public Espectador(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia){
 	 super(nickname, nombre, apellido, email, fNacimiento, contrasenia);
     }
-
+    
     public Espectador(){
 	 super();
     }
-    
-    
 
+	public List<Registro> getRegistros() {
+		return registros;
+	}
+
+	public void setRegistros(List<Registro> registros) {
+		this.registros = registros;
+	}
+	
+	public void agregarRegistro(Registro registro) {
+		this.registros.add(registro);
+	}
+	
 }
