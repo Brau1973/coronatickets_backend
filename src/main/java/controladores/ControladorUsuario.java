@@ -26,9 +26,9 @@ public class ControladorUsuario implements IControladorUsuario{
     public void altaUsuario(DtUsuario dtu ) throws UsuarioRepetidoExcepcion{
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 	
-	 if(mU.buscarUsuario(DtUsuario.getNickname()) != null){
+	 if(mU.buscarUsuario(dtu.getNickname()) != null){
 	     throw new UsuarioRepetidoExcepcion("El nickname esta en uso");
-	 }else if(mU.buscarUsuario(DtUsuario.getEmail()) != null){
+	 }else if(mU.buscarUsuario(dtu.getEmail()) != null){
 	     throw new UsuarioRepetidoExcepcion("El email esta en uso");
 	 }
 	     if(dtu instanceof DtArtista){

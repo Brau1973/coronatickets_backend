@@ -5,10 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 public class DtUsuario {
-	private static String nickname;
+	private String nickname;
     private String nombre;
     private String apellido;
-    private static String email;
+    private String email;
     private Date fNacimiento;
     private List<String> seguidos = new ArrayList<String>();
 	private List<String> seguidores = new ArrayList<String>();
@@ -28,7 +28,7 @@ public class DtUsuario {
 		this.contrasenia = contrasenia;
 
 	}
-	public static String getNickname() {
+	public String getNickname() {
 		return nickname;
 	}
 	public String getNombre() {
@@ -37,13 +37,12 @@ public class DtUsuario {
 	public String getApellido() {
 		return apellido;
 	}
-	public static String getEmail() {
+	public String getEmail() {
 		return email;
 	}
 	public Date getfNacimiento() {
 		return fNacimiento;
 	}
-
 	public List<String> getSeguidos() {
 		return seguidos;
 	}
@@ -52,6 +51,5 @@ public class DtUsuario {
 	}
 	public String getContrasenia() {
 		return contrasenia;
-
 	}
 }
