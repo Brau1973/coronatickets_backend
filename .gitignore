@@ -3,5 +3,6 @@
 *.classpath
 /.settings/
 .gitignore
-.proyect
+.project
 
+/coronaTikets/
