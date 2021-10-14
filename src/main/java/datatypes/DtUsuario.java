@@ -1,10 +1,13 @@
 package datatypes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class DtUsuario {
+public class DtUsuario implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private String nickname;
     private String nombre;
     private String apellido;

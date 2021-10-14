@@ -157,4 +157,13 @@ public class ControladorUsuario implements IControladorUsuario{
        	 return listStringUsuariosSeguidos;
     }
     
+    public DtUsuario getLoginUsuario(String nickname) {
+    	ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+    	Usuario entity = mU.buscarUsuario(nickname);
+    	DtUsuario dt = null;
+    	if(entity != null) {
+    		dt = new DtUsuario(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), null, null, null, entity.getContrasenia());
+    	}
+   	 	return dt;
+    }
 }

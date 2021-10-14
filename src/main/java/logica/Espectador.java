@@ -19,6 +19,7 @@ public class Espectador extends Usuario{
 	 super();
     }
     
+	
     public Espectador(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia){
 	 super(nickname, nombre, apellido, email, fNacimiento, contrasenia);
     }
