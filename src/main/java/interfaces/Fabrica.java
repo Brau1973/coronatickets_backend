@@ -4,6 +4,7 @@ import controladores.ControladorEspectaculo;
 import controladores.ControladorFuncion;
 import controladores.ControladorPaquete;
 import controladores.ControladorPlataforma;
+import controladores.ControladorRegistro;
 import controladores.ControladorUsuario;
 
 public class Fabrica{
@@ -20,6 +21,10 @@ public class Fabrica{
 
     public IControladorPlataforma getIControladorPlataforma(){
 	 return new ControladorPlataforma();
+    }
+    
+    public IControladorRegistro getIControladorRegistro(){
+	 return new ControladorRegistro();
     }
 
     public IControladorPaquete getIControladorPaquete(){

@@ -9,7 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 //import datatypes.DtHora;
 
@@ -24,15 +24,19 @@ public class Funcion {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Artista> artistas = new ArrayList<Artista>();
 
+	@OneToMany(mappedBy="funcion",cascade=CascadeType.ALL,orphanRemoval=true)
+	private List<Registro> registros = new ArrayList<>();
+	
+	public Funcion() {
+		super();
+	}
+	
 	public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, List<Artista> artistas) {
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.horaInicio = horaInicio;
 		this.registro = registro;
 		this.artistas = artistas;
-	}
-
-	public Funcion() {
 	}
 
 	public String getNombre() {
@@ -74,5 +78,17 @@ public class Funcion {
 	public void setRegistro(Date registro) {
 		this.registro = registro;
 	}
+	
+	public void agregarRegistro(Registro registro) {
+		this.registros.add(registro);
+	}
+	
+//	public List<Registro> getRegistros() {
+//		return registros;
+//	}
+//
+//	public void setRegistros(List<Registro> registros) {
+//		this.registros = registros;
+//	}
 
 }

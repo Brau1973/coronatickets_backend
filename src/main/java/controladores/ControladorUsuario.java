@@ -26,9 +26,9 @@ public class ControladorUsuario implements IControladorUsuario{
     public void altaUsuario(DtUsuario dtu ) throws UsuarioRepetidoExcepcion{
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 	
-	 if(mU.buscarUsuario(DtUsuario.getNickname()) != null){
+	 if(mU.buscarUsuario(dtu.getNickname()) != null){
 	     throw new UsuarioRepetidoExcepcion("El nickname esta en uso");
-	 }else if(mU.buscarUsuario(DtUsuario.getEmail()) != null){
+	 }else if(mU.buscarUsuario(dtu.getEmail()) != null){
 	     throw new UsuarioRepetidoExcepcion("El email esta en uso");
 	 }
 	     if(dtu instanceof DtArtista){
@@ -85,6 +85,17 @@ public class ControladorUsuario implements IControladorUsuario{
 	 return mU.buscarArtista(nickname);
     }
     
+    public List<String> listarNicknameUsuarios(){
+	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	 List<String> listStringUsuarios = new ArrayList<String>();
+	 List<Usuario> listUsuarios = new ArrayList<Usuario>();
+	 listUsuarios = mU.listarUsuarios();
+   	 for(Usuario u :listUsuarios){
+   	  listStringUsuarios.add(u.getNickname());
+   	 }
+   	 return listStringUsuarios;
+    }
+    
     public List<String> listarNicknameArtistas(){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 	 List<String> listStringArtistas = new ArrayList<String>();
@@ -105,6 +116,45 @@ public class ControladorUsuario implements IControladorUsuario{
       	  listStringEspectadores.add(e.getNickname());
       	 }
       	 return listStringEspectadores;
-       }
+    }
+    
+    public List<String> listarNicknameUsuariosNoSeguidos(String nickname){
+	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+	 List<String> listStringUsuariosNoSeguidos = new ArrayList<String>(); // a retornar
+	 
+	 Usuario usuario = mU.buscarUsuario(nickname);
+	 List<Usuario> listUsuariosSeguidos = new ArrayList<Usuario>();
+	 List<Usuario> listAllUsuarios = new ArrayList<Usuario>();
+	 List<Usuario> listUsuariosNoSeguidos = new ArrayList<Usuario>();
+	 
+	 listAllUsuarios = mU.listarUsuarios(); // TODOS LOS USU DEL SISTEMA
+	 listUsuariosSeguidos = usuario.getSeguidos(); // Usuario ya seguidos por el usuario recibido por param
+	 
+	 
+   	 for(Usuario u :listUsuariosSeguidos){
+   		listAllUsuarios.remove(u);
+     }
+   	 
+   	listUsuariosNoSeguidos = listAllUsuarios;
+   	 
+   	 for(Usuario u :listUsuariosNoSeguidos){
+   		listStringUsuariosNoSeguidos.add(u.getNickname());
+   	 }
+   	 return listStringUsuariosNoSeguidos;
+    }
+    
+    public List<String> listarNicknameUsuariosSeguidos(String nickname){
+    	ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+    	Usuario usuario = mU.buscarUsuario(nickname);
+    	List<String> listStringUsuariosSeguidos = new ArrayList<String>(); // a retornar
+    	
+    	List<Usuario> listUsuariosSeguidos = new ArrayList<Usuario>();
+    	listUsuariosSeguidos = usuario.getSeguidos(); // Usuario ya seguidos por el usuario recibido por param
+    	
+    	for(Usuario u :listUsuariosSeguidos){
+    		listStringUsuariosSeguidos.add(u.getNickname());
+       	}
+       	 return listStringUsuariosSeguidos;
+    }
     
 }

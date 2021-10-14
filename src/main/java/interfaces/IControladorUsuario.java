@@ -5,6 +5,7 @@ import java.util.List;
 import datatypes.DtUsuario;
 import excepciones.UsuarioRepetidoExcepcion;
 import logica.Artista;
+import logica.Espectador;
 import logica.Usuario;
 
 public interface IControladorUsuario{
@@ -16,6 +17,8 @@ public interface IControladorUsuario{
 
     public Artista obtenerArtista(String nickname);
     
+    public List<String> listarNicknameUsuarios();
+    
     public List<String> listarNicknameArtistas();
     
     public List<String> listarNicknameEspectadores();
@@ -23,4 +26,8 @@ public interface IControladorUsuario{
     public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir);
     
     public void dejarDeSeguirUsuario(String nicknameUsuario, String nicknameUsuarioADejarDeSeguir);
+    
+    public List<String> listarNicknameUsuariosNoSeguidos(String nickname);
+    
+    public List<String> listarNicknameUsuariosSeguidos(String nickname);
 }
