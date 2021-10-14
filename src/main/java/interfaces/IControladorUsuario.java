@@ -23,4 +23,6 @@ public interface IControladorUsuario{
     public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir);
     
     public void dejarDeSeguirUsuario(String nicknameUsuario, String nicknameUsuarioADejarDeSeguir);
+    
+    public DtUsuario getLoginUsuario(String nickname);
 }
