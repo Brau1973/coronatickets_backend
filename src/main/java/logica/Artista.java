@@ -1,11 +1,8 @@
 package logica;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Artista extends Usuario{
@@ -13,8 +10,8 @@ public class Artista extends Usuario{
     private String biografia;
     private String link;
 
-    public Artista(String nickname, String nombre, String apellido, String email, Date fNacimiento, String descripcion, String biografia, String link){
-	 super(nickname, nombre, apellido, email, fNacimiento);
+    public Artista(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia, String descripcion, String biografia, String link){
+	 super(nickname, nombre, apellido, email, fNacimiento, contrasenia);
 	 this.descripcion = descripcion;
 	 this.biografia = biografia;
 	 this.link = link;
@@ -47,3 +44,4 @@ public class Artista extends Usuario{
 	 this.link = link;
     }
 }
+

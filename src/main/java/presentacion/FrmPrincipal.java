@@ -276,7 +276,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	     internalFrameModificarDatosUsuario.setVisible(true);
 	     break;
 	 case "Consulta de Usuario":
-	     // internalFrameConsultaUsuario.iniciarlizarComboBox();
+	      internalFrameConsultaUsuario.iniciaComboBoxU();
 	     internalFrameConsultaUsuario.setVisible(true);
 	     break;
 	 case "Alta de Espectaculo":
@@ -301,6 +301,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	     internalFrameConsultaFuncion.setVisible(true);
 	     break;
 	 case "Registro a Funcion de Espectaculo":
+		 internalFrameRegistroFuncion.iniciarlizarComboBox();
 	     internalFrameRegistroFuncion.setVisible(true);
 	     break;
 	 case "Crear Paquete de Espectaculo":

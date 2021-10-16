@@ -2,18 +2,63 @@ package logica;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Registro{
-    private Date fecha;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	/*@JoinColumn(
+			insertable=false,
+			updatable=false
+	)*/
+	private Funcion funcion;
+	
+    private Date fechaRegistro;
+	
+    private float costo;
+	
+	public Registro() {
+		super();
+	}
+    
+	public Registro(Funcion funcion, Date fechaRegistro, float costo) {
+		super();
+		this.funcion = funcion;
+		this.fechaRegistro = fechaRegistro;
+		this.costo = costo;
+	}
+	
+	public Funcion getFuncion() {
+		return funcion;
+	}
 
-    public Registro(Date fecha){
-	 this.fecha = fecha;
-    }
+	public void setFuncion(Funcion funcion) {
+		this.funcion = funcion;
+	}
 
-    public Date getfecha(){
-	 return fecha;
-    }
+	public Date getFechaRegistro() {
+		return fechaRegistro;
+	}
 
-    public void setfecha(Date fecha){
-	 this.fecha = fecha;
-    }
+	public void setFechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+
+	public float getCosto() {
+		return costo;
+	}
+
+	public void setCosto(float costo) {
+		this.costo = costo;
+	}
 }

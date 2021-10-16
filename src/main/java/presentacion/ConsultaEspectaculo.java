@@ -234,7 +234,7 @@ public class ConsultaEspectaculo extends JInternalFrame{
 		     if(!e.getItem().equals(SELECCIONE)){
 			  String strEspectaculo = this.comboEspectaculos.getSelectedItem().toString();
 			   DtEspectaculo espectaculo=plataformaSelected.getEspectaculo().stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
-			      listPaqEspe = espectaculo.getPaquete();		  
+			      listPaqEspe = espectaculo.getPaquetes();		  
 				   SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 				     String datosFecha = formatoFecha.format(espectaculo.getRegistro());
 				     this.textNombreEspectaculo.setText(espectaculo.getNombre());
@@ -258,13 +258,13 @@ public class ConsultaEspectaculo extends JInternalFrame{
 				   });
 			      }
 			     
-			      if(espectaculo.getPaquete().isEmpty()){
+			      if(espectaculo.getPaquetes().isEmpty()){
 				   JOptionPane.showMessageDialog(this, "El espectaculo no tiene paquetes asociados", "Error", JOptionPane.ERROR_MESSAGE);
 				   comboPaquetes.removeAllItems();
 			      }else{
 				   comboPaquetes.removeAllItems();
 				   comboPaquetes.addItem(SELECCIONE);
-				   espectaculo.getPaquete().forEach((f) -> {
+				   espectaculo.getPaquetes().forEach((f) -> {
 					comboPaquetes.addItem(f.getNombre());
 				   });
 			      }   

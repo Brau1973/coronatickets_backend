@@ -185,7 +185,7 @@ public class Espectaculo {
 			for (Artista a : f.getArtistas()) {
 				artistas.add(a.getNickname());
 			}
-			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getRegistro(), f.getHoraInicio(), f.getRegistro(),
+			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getFecha(), f.getHoraInicio(), f.getRegistro(),
 					artistas);
 			listFuncionesDt.add(DtFuncion);
 		}

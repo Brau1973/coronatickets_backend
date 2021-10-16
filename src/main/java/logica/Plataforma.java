@@ -17,7 +17,7 @@ public class Plataforma {
 	private String descripcion;
 	private String url;
 
-	@OneToMany //(mappedBy = "plataforma")
+	@OneToMany
 	private List<Espectaculo> espectaculo = new ArrayList<>();
 
 	public Plataforma() {
