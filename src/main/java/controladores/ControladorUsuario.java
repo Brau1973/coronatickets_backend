@@ -135,6 +135,8 @@ public class ControladorUsuario implements IControladorUsuario{
    		listAllUsuarios.remove(u);
      }
    	 
+   	listAllUsuarios.remove(usuario); //Quito al usuario mismo de la lista
+   	 
    	listUsuariosNoSeguidos = listAllUsuarios;
    	 
    	 for(Usuario u :listUsuariosNoSeguidos){
