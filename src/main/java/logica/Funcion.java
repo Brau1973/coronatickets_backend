@@ -13,8 +13,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-//import datatypes.DtHora;
-
 @Entity
 public class Funcion{
 	@Id
@@ -45,6 +43,7 @@ public class Funcion{
 		this.artistas = artistas;
 		this.imagen = imagen;
 	}
+
 
 	public String getNombre(){
 		return nombre;
@@ -89,6 +88,15 @@ public class Funcion{
 	public void setRegistro(Date registro){
 		this.registro = registro;
 	}
+	
+	
+//	public List<Registro> getRegistros() {
+//		return registros;
+//	}
+//
+//	public void setRegistros(List<Registro> registros) {
+//		this.registros = registros;
+//	}
 
 	public void agregarRegistro(Registro registro){
 		this.registros.add(registro);

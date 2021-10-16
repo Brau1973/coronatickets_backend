@@ -254,7 +254,6 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 
 	}
 
-
 	private boolean checkFormulario(){
 		String strNickname = this.txtNickname.getText();
 		String strNombre = this.txtNombre.getText();
@@ -288,7 +287,6 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		return true;
 	}
 
-
 	private boolean modificarDatos(){
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		if(mU.buscarUsuario(txtNickname.getText()) != null){
@@ -302,7 +300,6 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		return true;
 	}
 
-
 	private void limpiarFormulario(){
 		txtNickname.setText("");
 		txtNombre.setText("");
@@ -314,6 +311,5 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		txtBiografia.setText("");
 		txtLink.setText("");
 	}
-
 
 }

@@ -19,9 +19,6 @@ import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
 import manejadores.ManejadorUsuario;
 
-
-
-
 public class ControladorFuncion implements IControladorFuncion{
 
 	public ControladorFuncion(){
@@ -72,10 +69,8 @@ public class ControladorFuncion implements IControladorFuncion{
 		}
 		return funcionesARetornar;
 	}
-
+}
 	// public int getCantidadEspectadoresRegistrados(String nombreFuncion){
 	// ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 	// return mF.getCantidadEspectadoresRegistrados(nombreFuncion);
 	// }
-
-}

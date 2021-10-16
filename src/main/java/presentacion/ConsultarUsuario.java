@@ -127,14 +127,21 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	     for(String i :espArtista){
 		 datos = datos + "\n" + i.toString();
 	     }
-	     /*
+    }
+    /*// Inicializar ComboBox
+    private void iniciaComboBoxU(){
+	 listUsuarios = iconU.listarUsuarios();
+	 listUsuarios.forEach((u) -> {
+	     comboUsuarios.addItem(u.getNickname());
+	 });
+    }
 	       ArrayList<String> usuario = mE.obtenerEspectaculo();
 	       String datos = "\n\nLista de espectaculos:";
 	       for(Espectaculo i :usuario){
 	           datos = datos + "\n" + i.toString();
 	       }
 	     */
-	    	  }
+	    
 	     if(u instanceof Espectador){
 	  	     op = "--------Espectador--------\n\n";
 	           List<Espectaculo> ff = mE.obtenerEspectaculo();// mF.obtenerFunciones();
@@ -144,7 +151,6 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	           }
 	       }
 	     jtextarea.setText(op + "Nombre: " + u.getNombre() + "\nApellido: " + u.getApellido() + "\nEmail: " + u.getEmail() + "\nFecha: " + formatoFecha.format(u.getfNacimiento()) + datos);
-
       }
    }
 }

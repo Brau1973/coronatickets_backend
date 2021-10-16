@@ -31,4 +31,5 @@ public interface IControladorUsuario{
 	public List<String> listarNicknameUsuariosSeguidos(String nickname);
 
 	public DtUsuario getLoginUsuario(String nickname);
+
 }
