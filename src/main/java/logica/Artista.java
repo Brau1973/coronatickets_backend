@@ -1,11 +1,8 @@
 package logica;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Artista extends Usuario{
@@ -47,3 +44,4 @@ public class Artista extends Usuario{
 	 this.link = link;
     }
 }
+

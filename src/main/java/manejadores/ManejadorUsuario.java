@@ -1,17 +1,13 @@
 package manejadores;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-import datatypes.DtArtista;
 import logica.Artista;
 import logica.Espectador;
-import logica.Plataforma;
 import logica.Usuario;
 import persistencia.Conexion;
 

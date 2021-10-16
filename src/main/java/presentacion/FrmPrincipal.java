@@ -276,7 +276,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	     internalFrameModificarDatosUsuario.setVisible(true);
 	     break;
 	 case "Consulta de Usuario":
-	     // internalFrameConsultaUsuario.iniciarlizarComboBox();
+	      internalFrameConsultaUsuario.iniciaComboBoxU();
 	     internalFrameConsultaUsuario.setVisible(true);
 	     break;
 	 case "Alta de Espectaculo":
