@@ -127,6 +127,9 @@ public class ControladorUsuario implements IControladorUsuario{
    	 List<Usuario> listUsuariosSeguidos = new ArrayList<Usuario>();
    	 List<Usuario> listAllUsuarios = new ArrayList<Usuario>();
    	 List<Usuario> listUsuariosNoSeguidos = new ArrayList<Usuario>();
+
+   	listAllUsuarios.remove(usuario); //Quito al usuario mismo de la lista
+   	listUsuariosNoSeguidos = listAllUsuarios;
    	 
    	 listAllUsuarios = mU.listarUsuarios(); // TODOS LOS USU DEL SISTEMA
    	 listUsuariosSeguidos = usuario.getSeguidos(); // Usuario ya seguidos por el usuario recibido por param
