@@ -218,7 +218,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 				if(checkFormulario() && modificarDatos()){
 					try{
 						// falta mirar chequeo de fecha
-						DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strContrasenia, seguidos, seguidores);
+						DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac,  seguidos, seguidores,strContrasenia);
 
 						this.iconU.altaUsuario(dte);
 						JOptionPane.showMessageDialog(this, "el Espectador se ha creado con Exito");
@@ -234,7 +234,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 				if(checkFormulario2() && modificarDatos()){
 					try{
 						// falta mirar chequeo de fecha
-						DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strContrasenia, seguidos, seguidores, strDescripcion, strBiografia, strLink);
+						DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia,strDescripcion, strBiografia, strLink);
 
 						this.iconU.altaUsuario(dta);
 						JOptionPane.showMessageDialog(this, "el Artista se ha creado con Exito");

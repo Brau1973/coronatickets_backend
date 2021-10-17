@@ -106,7 +106,6 @@ public class ConsultaFuncion extends JInternalFrame{
 		txtDatosFuncion.setTabSize(8);
 		txtDatosFuncion.setBounds(220, 150, 300, 180);
 		txtDatosFuncion.setFont(new java.awt.Font("Verdana", 1, 12));
-
 		txtDatosFuncion.setOpaque(false);
 		miPanel.add(txtDatosFuncion);
 

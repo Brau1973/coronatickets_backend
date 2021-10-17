@@ -6,19 +6,18 @@ import java.util.Date;
 import java.util.List;
 
 public class DtUsuario implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 	private String nickname;
-    private String nombre;
-    private String apellido;
-    private String email;
-    private Date fNacimiento;
-    private List<String> seguidos = new ArrayList<String>();
+	private String nombre;
+	private String apellido;
+	private String email;
+	private Date fNacimiento;
+	private List<String> seguidos = new ArrayList<String>();
 	private List<String> seguidores = new ArrayList<String>();
-    private String contrasenia;
-    
-	public DtUsuario(String nickname, String nombre, String apellido, String email, Date fNacimiento,
-			List<String> seguidos, List<String> seguidores,String contrasenia) {
+	private String contrasenia;
+
+	public DtUsuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, List<String> seguidos, List<String> seguidores, String contrasenia){
 
 		super();
 		this.nickname = nickname;
@@ -31,28 +30,36 @@ public class DtUsuario implements Serializable{
 		this.contrasenia = contrasenia;
 
 	}
-	public String getNickname() {
+
+	public String getNickname(){
 		return nickname;
 	}
-	public String getNombre() {
+
+	public String getNombre(){
 		return nombre;
 	}
-	public String getApellido() {
+
+	public String getApellido(){
 		return apellido;
 	}
-	public String getEmail() {
+
+	public String getEmail(){
 		return email;
 	}
-	public Date getfNacimiento() {
+
+	public Date getfNacimiento(){
 		return fNacimiento;
 	}
-	public List<String> getSeguidos() {
+
+	public List<String> getSeguidos(){
 		return seguidos;
 	}
-	public List<String> getSeguidores() {
+
+	public List<String> getSeguidores(){
 		return seguidores;
 	}
-	public String getContrasenia() {
+
+	public String getContrasenia(){
 		return contrasenia;
 	}
 }
