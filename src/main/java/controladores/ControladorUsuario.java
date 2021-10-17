@@ -32,12 +32,12 @@ public class ControladorUsuario implements IControladorUsuario{
 	     throw new UsuarioRepetidoExcepcion("El email esta en uso");
 	 }
 	     if(dtu instanceof DtArtista){
-		  Usuario usuario = new Artista (dtu.getNickname(),dtu.getNombre(),dtu.getApellido(),dtu.getEmail(),dtu.getfNacimiento(),dtu.getContrasenia(),((DtArtista) dtu).getDescripcion(),((DtArtista) dtu).getBiografia(),((DtArtista) dtu).getLink()); 
+		  Usuario usuario = new Artista (dtu.getNickname(),dtu.getNombre(),dtu.getApellido(),dtu.getEmail(),dtu.getfNacimiento(),dtu.getContrasenia(),dtu.getImagen(),((DtArtista) dtu).getDescripcion(),((DtArtista) dtu).getBiografia(),((DtArtista) dtu).getLink()); 
 		  mU.altaUsuario(usuario);
 	     }
 	     if(dtu instanceof DtEspectador){
 	
-		  Usuario usuario = new Espectador (dtu.getNickname(),dtu.getNombre(),dtu.getApellido(),dtu.getEmail(),dtu.getfNacimiento(), dtu.getContrasenia()); 
+		  Usuario usuario = new Espectador (dtu.getNickname(),dtu.getNombre(),dtu.getApellido(),dtu.getEmail(),dtu.getfNacimiento(), dtu.getContrasenia(),dtu.getImagen()); 
 		  mU.altaUsuario(usuario);
 	     }
 	   
@@ -45,8 +45,8 @@ public class ControladorUsuario implements IControladorUsuario{
     
     public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir){
     	ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-    	Usuario usuario = mU.buscarArtista(nicknameUsuario);
-    	Usuario usuarioASeguir = mU.buscarArtista(nicknameUsuarioASeguir);
+    	Usuario usuario = mU.buscarUsuario(nicknameUsuario);
+    	Usuario usuarioASeguir = mU.buscarUsuario(nicknameUsuarioASeguir);
     	
     	usuario.seguirUsuario(usuarioASeguir);
     	usuarioASeguir.agregarSeguidor(usuario);
@@ -56,14 +56,15 @@ public class ControladorUsuario implements IControladorUsuario{
     
     public void dejarDeSeguirUsuario(String nicknameUsuario, String nicknameUsuarioADejarDeSeguir){
     	ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-    	Usuario usuario = mU.buscarArtista(nicknameUsuario);
-    	Usuario usuarioADejarDeSeguir = mU.buscarArtista(nicknameUsuarioADejarDeSeguir);
+    	Usuario usuario = mU.buscarUsuario(nicknameUsuario);
+    	Usuario usuarioADejarDeSeguir = mU.buscarUsuario(nicknameUsuarioADejarDeSeguir);
     	
     	usuario.dejarSeguirUsuario(usuarioADejarDeSeguir);
     	usuarioADejarDeSeguir.quitarSeguidor(usuario);
     	
     	mU.ActualizarRegistro(usuario);
     }
+
 
     public void modificarUsuario(Usuario nuevo){
 	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
@@ -119,29 +120,32 @@ public class ControladorUsuario implements IControladorUsuario{
     }
     
     public List<String> listarNicknameUsuariosNoSeguidos(String nickname){
-	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-	 List<String> listStringUsuariosNoSeguidos = new ArrayList<String>(); // a retornar
-	 
-	 Usuario usuario = mU.buscarUsuario(nickname);
-	 List<Usuario> listUsuariosSeguidos = new ArrayList<Usuario>();
-	 List<Usuario> listAllUsuarios = new ArrayList<Usuario>();
-	 List<Usuario> listUsuariosNoSeguidos = new ArrayList<Usuario>();
-	 
-	 listAllUsuarios = mU.listarUsuarios(); // TODOS LOS USU DEL SISTEMA
-	 listUsuariosSeguidos = usuario.getSeguidos(); // Usuario ya seguidos por el usuario recibido por param
-	 
-	 
-   	 for(Usuario u :listUsuariosSeguidos){
-   		listAllUsuarios.remove(u);
-     }
+   	 ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+   	 List<String> listStringUsuariosNoSeguidos = new ArrayList<String>(); // a retornar
    	 
-   	listUsuariosNoSeguidos = listAllUsuarios;
+   	 Usuario usuario = mU.buscarUsuario(nickname);
+   	 List<Usuario> listUsuariosSeguidos = new ArrayList<Usuario>();
+   	 List<Usuario> listAllUsuarios = new ArrayList<Usuario>();
+   	 List<Usuario> listUsuariosNoSeguidos = new ArrayList<Usuario>();
    	 
-   	 for(Usuario u :listUsuariosNoSeguidos){
-   		listStringUsuariosNoSeguidos.add(u.getNickname());
-   	 }
-   	 return listStringUsuariosNoSeguidos;
-    }
+   	 listAllUsuarios = mU.listarUsuarios(); // TODOS LOS USU DEL SISTEMA
+   	 listUsuariosSeguidos = usuario.getSeguidos(); // Usuario ya seguidos por el usuario recibido por param
+   	 
+   	 
+      	 for(Usuario u :listUsuariosSeguidos){
+      		listAllUsuarios.remove(u);
+        }
+      	 
+      	listAllUsuarios.remove(usuario); //Quito al usuario mismo de la lista
+      	 
+      	listUsuariosNoSeguidos = listAllUsuarios;
+      	 
+      	 for(Usuario u :listUsuariosNoSeguidos){
+      		listStringUsuariosNoSeguidos.add(u.getNickname());
+      	 }
+      	 return listStringUsuariosNoSeguidos;
+       }
+
     
     public List<String> listarNicknameUsuariosSeguidos(String nickname){
     	ManejadorUsuario mU = ManejadorUsuario.getInstancia();
@@ -162,7 +166,7 @@ public class ControladorUsuario implements IControladorUsuario{
     	Usuario entity = mU.buscarUsuario(nickname);
     	DtUsuario dt = null;
     	if(entity != null) {
-    		dt = new DtUsuario(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), null, null, null, entity.getContrasenia());
+    		dt = new DtUsuario(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), null, null, null, entity.getContrasenia(),entity.getImagen());
     	}
    	 	return dt;
     }

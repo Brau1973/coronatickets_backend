@@ -162,12 +162,12 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 		if(e.getSource() == btnGuardar){
 			Usuario usuario = this.iconU.obtenerUsuario(strnick);
 			if(usuario instanceof Artista){
-				Usuario nuevo = new Artista(strnick, strnombre, strapellido, stremail, dateRegistro, strcontrasenia, ((Artista) usuario).getDescripcion(), ((Artista) usuario).getBiografia(), ((Artista) usuario).getLink());
+				Usuario nuevo = new Artista(strnick, strnombre, strapellido, stremail, dateRegistro, strcontrasenia, null,((Artista) usuario).getDescripcion(), ((Artista) usuario).getBiografia(), ((Artista) usuario).getLink());
 				Artista artista = (Artista) nuevo;
 				this.iconU.modificarUsuario(artista);
 			}
 			if(usuario instanceof Espectador){
-				Usuario nuevo = new Espectador(strnick, strnombre, strapellido, stremail, dateRegistro, strcontrasenia);
+				Usuario nuevo = new Espectador(strnick, strnombre, strapellido, stremail, dateRegistro, strcontrasenia,null);
 				Espectador espectador = (Espectador) nuevo;
 				this.iconU.modificarUsuario(espectador);
 			}

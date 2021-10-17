@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Lob;
+
 public class DtUsuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -16,8 +19,11 @@ public class DtUsuario implements Serializable{
 	private List<String> seguidos = new ArrayList<String>();
 	private List<String> seguidores = new ArrayList<String>();
 	private String contrasenia;
-
-	public DtUsuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, List<String> seguidos, List<String> seguidores, String contrasenia){
+	@Lob
+	@Column(name = "imagen")
+	private byte[] imagen;
+	
+	public DtUsuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, List<String> seguidos, List<String> seguidores, String contrasenia, byte[] imagen){
 
 		super();
 		this.nickname = nickname;
@@ -28,7 +34,7 @@ public class DtUsuario implements Serializable{
 		this.seguidos = seguidos;
 		this.seguidores = seguidores;
 		this.contrasenia = contrasenia;
-
+		this.imagen = imagen;
 	}
 
 	public String getNickname(){
@@ -62,4 +68,9 @@ public class DtUsuario implements Serializable{
 	public String getContrasenia(){
 		return contrasenia;
 	}
+	
+	public byte[] getImagen(){
+		return imagen;
+	}
+
 }

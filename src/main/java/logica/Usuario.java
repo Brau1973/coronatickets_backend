@@ -5,10 +5,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 
 @Entity
@@ -29,7 +31,11 @@ public class Usuario{
 	@ManyToMany(mappedBy = "seguidos")
 	private List<Usuario> seguidores = new ArrayList<Usuario>();
 
-	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia){
+	@Lob
+	@Column(name = "imagen")
+	private byte[] imagen;
+	
+	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia, byte[] imagen){
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
@@ -37,6 +43,7 @@ public class Usuario{
 		this.email = email;
 		this.fNacimiento = fNacimiento;
 		this.contrasenia = contrasenia;
+		this.imagen = imagen;
 	}
 
 	public Usuario(){
@@ -65,7 +72,11 @@ public class Usuario{
 	public String getContrasenia(){
 		return contrasenia;
 	}
-
+	
+	public byte[] getImagen(){
+		return imagen;
+	}
+	
 	public void setNickname(String nickname){
 		this.nickname = nickname;
 	}
@@ -102,6 +113,10 @@ public class Usuario{
 		this.seguidores = seguidores;
 	}
 
+	public void setImagen(byte[] imagen){
+		this.imagen = imagen;
+	}
+	
 	// Modificar los seguidos
 	public void seguirUsuario(Usuario u){
 		if(!this.seguidos.contains(u)){

@@ -1,18 +1,26 @@
 package presentacion;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -28,10 +36,10 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	private IControladorUsuario iconU;
 	private JPanel miPanel;
 	private JRadioButton rbtnEspectador, rbtnArtista;
-	private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblContrasenia, lblDescripcion, lblBiografia, lblLink;
-	private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtContrasenia, txtDescripcion, txtBiografia, txtLink;
+	private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblContrasenia, lblDescripcion, lblBiografia, lblLink,jLabelImag,jLabelImage;
+	private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtContrasenia, txtDescripcion, txtBiografia, txtLink,txturl;
 	private JDateChooser dateFechaNac;
-	private JButton btnAceptar, btnCancelar;
+	private JButton btnAceptar, btnCancelar, btnAbrir;
 
 	private List<String> seguidos = new ArrayList<String>(); // Vacias porque recien se esta creando el usuario;
 	private List<String> seguidores = new ArrayList<String>();
@@ -158,7 +166,26 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		txtLink.setBounds(155, 288, 260, 25);
 		miPanel.add(txtLink);
 
+		jLabelImag = new JLabel("Seleccionar imagen"); // label imagen
+		jLabelImag.setBounds(10, 370, 200, 20);
+		miPanel.add(jLabelImag);
 
+		jLabelImage = new JLabel(); // label imagen
+		jLabelImage.setBounds(230, 370, 140, 140);
+		miPanel.add(jLabelImage);
+
+		txturl = new JTextField(); // url
+		txturl.setBounds(202, 500, 200, 20);
+		miPanel.add(txturl);
+		txturl.setVisible(false);
+
+		btnAbrir = new JButton();
+		btnAbrir.setText("...");
+		btnAbrir.setBounds(130, 370, 40, 20);
+
+		miPanel.add(btnAbrir);
+		btnAbrir.addActionListener(this);
+		
 		// Boton Aceptar
 		btnAceptar = new JButton();
 		btnAceptar.setText("Aceptar");
@@ -199,6 +226,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 
 			}
 		}
+		
 		if(e.getSource() == rbtnArtista){
 			if(rbtnArtista.isSelected()){
 				btnAceptar.setBounds(155, 410, 127, 25);
@@ -212,13 +240,39 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 				rbtnEspectador.setSelected(false);
 			}
 		}
+		
+		if(e.getSource() == btnAbrir){ 
+			JFileChooser browseImageFile = new JFileChooser();
+			FileNameExtensionFilter fnef = new FileNameExtensionFilter("IMAGES", "png", "jpg", "jpeg");
+			browseImageFile.addChoosableFileFilter(fnef);
+			int showOpenDialogue = browseImageFile.showOpenDialog(null);
 
+			if(showOpenDialogue == JFileChooser.APPROVE_OPTION){
+				File selectedImageFile = browseImageFile.getSelectedFile();
+				String selectedImagePath = selectedImageFile.getAbsolutePath();
+		
+				// JOptionPane.showMessageDialog(null, selectedImagePath);
+				ImageIcon ii = new ImageIcon(selectedImagePath);
+				Image image = ii.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
+				jLabelImage.setIcon(new ImageIcon(image));
+
+				this.txturl.setText(selectedImagePath);
+			}
+		}
+		
 		if(e.getSource() == btnAceptar){
+			String url = this.txturl.getText();
+			byte[] selectedImage = null;
+			try{
+				selectedImage = Files.readAllBytes(Paths.get(url));
+			}catch(IOException e1){
+				e1.printStackTrace();
+			}
 			if(rbtnEspectador.isSelected()){
 				if(checkFormulario() && modificarDatos()){
 					try{
 						// falta mirar chequeo de fecha
-						DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac,  seguidos, seguidores,strContrasenia);
+						DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strContrasenia,selectedImage, seguidos, seguidores);
 
 						this.iconU.altaUsuario(dte);
 						JOptionPane.showMessageDialog(this, "el Espectador se ha creado con Exito");
@@ -234,7 +288,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 				if(checkFormulario2() && modificarDatos()){
 					try{
 						// falta mirar chequeo de fecha
-						DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia,strDescripcion, strBiografia, strLink);
+						DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strContrasenia,selectedImage,seguidos, seguidores, strDescripcion, strBiografia, strLink);
 
 						this.iconU.altaUsuario(dta);
 						JOptionPane.showMessageDialog(this, "el Artista se ha creado con Exito");

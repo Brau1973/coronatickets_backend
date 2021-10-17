@@ -8,8 +8,8 @@ public class DtArtista extends DtUsuario{
 	private String biografia;
 	private String link;
 
-	public DtArtista(String nickname, String nombre, String apellido, String email, Date fNacimiento, List<String> seguidos, List<String> seguidores, String contrasenia, String descripcion, String biografia, String link){
-		super(nickname, nombre, apellido, email, fNacimiento, seguidos, seguidores, contrasenia);
+	public DtArtista(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia,byte[] imagen, List<String> seguidos, List<String> seguidores, String descripcion, String biografia, String link){
+		super(nickname, nombre, apellido, email, fNacimiento, seguidos, seguidores, contrasenia,imagen);
 		this.descripcion = descripcion;
 		this.biografia = biografia;
 		this.link = link;
