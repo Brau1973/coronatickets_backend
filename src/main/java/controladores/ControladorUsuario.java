@@ -45,8 +45,8 @@ public class ControladorUsuario implements IControladorUsuario{
     
     public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir){
     	ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-    	Usuario usuario = mU.buscarArtista(nicknameUsuario);
-    	Usuario usuarioASeguir = mU.buscarArtista(nicknameUsuarioASeguir);
+    	Usuario usuario = mU.buscarUsuario(nicknameUsuario);
+    	Usuario usuarioASeguir = mU.buscarUsuario(nicknameUsuarioASeguir);
     	
     	usuario.seguirUsuario(usuarioASeguir);
     	usuarioASeguir.agregarSeguidor(usuario);
@@ -56,8 +56,8 @@ public class ControladorUsuario implements IControladorUsuario{
     
     public void dejarDeSeguirUsuario(String nicknameUsuario, String nicknameUsuarioADejarDeSeguir){
     	ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-    	Usuario usuario = mU.buscarArtista(nicknameUsuario);
-    	Usuario usuarioADejarDeSeguir = mU.buscarArtista(nicknameUsuarioADejarDeSeguir);
+    	Usuario usuario = mU.buscarUsuario(nicknameUsuario);
+    	Usuario usuarioADejarDeSeguir = mU.buscarUsuario(nicknameUsuarioADejarDeSeguir);
     	
     	usuario.dejarSeguirUsuario(usuarioADejarDeSeguir);
     	usuarioADejarDeSeguir.quitarSeguidor(usuario);
