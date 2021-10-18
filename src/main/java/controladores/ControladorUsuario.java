@@ -40,21 +40,16 @@ public class ControladorUsuario implements IControladorUsuario{
 			mU.altaUsuario(usuario);
 		}
 	}
-	
+
 	public boolean emailRepetido(String email){
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-		List<Usuario> listUsuarios = new ArrayList<Usuario>();
-		boolean iguales=false;
-		listUsuarios = mU.listarUsuarios();
-		for(Usuario u :listUsuarios){
-			if(u.getEmail().equals(email)) {
-				iguales=true;
-				return iguales;
-			}
+		Usuario entity = mU.buscarUsuarioMail(email);
+		if(entity!=null){
+			return true;
 		}
-		return iguales;
+		return false;
 	}
-	
+
 	public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir){
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		Usuario usuario = mU.buscarUsuario(nicknameUsuario);
@@ -171,6 +166,7 @@ public class ControladorUsuario implements IControladorUsuario{
 		return listStringUsuariosSeguidos;
 	}
 
+	@Override
 	public DtUsuario getLoginUsuario(String nickname){
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		Usuario entity = mU.buscarUsuario(nickname);
@@ -180,4 +176,15 @@ public class ControladorUsuario implements IControladorUsuario{
 		}
 		return dt;
 	}
+
+	public DtUsuario getLoginUsuarioMail(String mail){
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		Usuario entity = mU.buscarUsuarioMail(mail);
+		DtUsuario dt = null;
+		if(entity != null){
+			dt = new DtUsuario(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), null, null, null, entity.getContrasenia(), entity.getImagen());
+		}
+		return dt;
+	}
+
 }

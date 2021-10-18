@@ -49,6 +49,14 @@ public class ManejadorUsuario{
 	 return em.find(Usuario.class, nickname);
     }
     
+    public Usuario buscarUsuarioMail(String mail){
+   	 Conexion conexion = Conexion.getInstancia();
+   	 EntityManager em = conexion.getEntityManager();
+   	 Query query = em.createQuery("select u from Usuario u where email = '" + mail + "'");
+	 Usuario user = (Usuario) query.getSingleResult();
+   	 return user;
+     }
+    
     public Espectador buscarEspectador(String nickname){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
