@@ -159,6 +159,7 @@ public class ControladorUsuario implements IControladorUsuario{
 		return listStringUsuariosSeguidos;
 	}
 
+	@Override
 	public DtUsuario getLoginUsuario(String nickname){
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		Usuario entity = mU.buscarUsuario(nickname);
@@ -168,4 +169,15 @@ public class ControladorUsuario implements IControladorUsuario{
 		}
 		return dt;
 	}
+
+	public DtUsuario getLoginUsuarioMail(String mail){
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		Usuario entity = mU.buscarUsuarioMail(mail);
+		DtUsuario dt = null;
+		if(entity != null){
+			dt = new DtUsuario(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), null, null, null, entity.getContrasenia(), entity.getImagen());
+		}
+		return dt;
+	}
+	
 }
