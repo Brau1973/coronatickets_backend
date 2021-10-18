@@ -28,7 +28,7 @@ public class ControladorUsuario implements IControladorUsuario{
 
 		if(mU.buscarUsuario(dtu.getNickname()) != null){
 			throw new UsuarioRepetidoExcepcion("El nickname esta en uso");
-		}else if(mU.buscarUsuario(dtu.getEmail()) != null){
+		}else if(emailRepetido(dtu.getEmail())){
 			throw new UsuarioRepetidoExcepcion("El email esta en uso");
 		}
 		if(dtu instanceof DtArtista){
@@ -36,13 +36,25 @@ public class ControladorUsuario implements IControladorUsuario{
 			mU.altaUsuario(usuario);
 		}
 		if(dtu instanceof DtEspectador){
-
 			Usuario usuario = new Espectador(dtu.getNickname(), dtu.getNombre(), dtu.getApellido(), dtu.getEmail(), dtu.getfNacimiento(), dtu.getContrasenia(), dtu.getImagen());
 			mU.altaUsuario(usuario);
 		}
-
 	}
-
+	
+	public boolean emailRepetido(String email){
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		List<Usuario> listUsuarios = new ArrayList<Usuario>();
+		boolean iguales=false;
+		listUsuarios = mU.listarUsuarios();
+		for(Usuario u :listUsuarios){
+			if(u.getEmail().equals(email)) {
+				iguales=true;
+				return iguales;
+			}
+		}
+		return iguales;
+	}
+	
 	public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir){
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		Usuario usuario = mU.buscarUsuario(nicknameUsuario);
