@@ -5,16 +5,18 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 
-public class Usuario {
+public class Usuario{
 	@Id
 	private String nickname;
 	private String nombre;
@@ -29,7 +31,11 @@ public class Usuario {
 	@ManyToMany(mappedBy = "seguidos")
 	private List<Usuario> seguidores = new ArrayList<Usuario>();
 
-	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia) {
+	@Lob
+	@Column(name = "imagen")
+	private byte[] imagen;
+	
+	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia, byte[] imagen){
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
@@ -37,97 +43,107 @@ public class Usuario {
 		this.email = email;
 		this.fNacimiento = fNacimiento;
 		this.contrasenia = contrasenia;
-	
+		this.imagen = imagen;
 	}
 
-	public Usuario() {
+	public Usuario(){
 	}
 
-	public String getNickname() {
+	public String getNickname(){
 		return nickname;
 	}
 
-	public String getNombre() {
+	public String getNombre(){
 		return nombre;
 	}
 
-	public String getApellido() {
+	public String getApellido(){
 		return apellido;
 	}
 
-	public String getEmail() {
+	public String getEmail(){
 		return email;
 	}
 
-	public Date getfNacimiento() {
+	public Date getfNacimiento(){
 		return fNacimiento;
 	}
-	public String getContrasenia() {
+
+	public String getContrasenia(){
 		return contrasenia;
 	}
-	public void setNickname(String nickname) {
+	
+	public byte[] getImagen(){
+		return imagen;
+	}
+	
+	public void setNickname(String nickname){
 		this.nickname = nickname;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre){
 		this.nombre = nombre;
 	}
 
-	public void setApellido(String apellido) {
+	public void setApellido(String apellido){
 		this.apellido = apellido;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email){
 		this.email = email;
 	}
 
-	public void setfNacimiento(Date fNacimiento) {
+	public void setfNacimiento(Date fNacimiento){
 		this.fNacimiento = fNacimiento;
 	}
-	
-	public List<Usuario> getSeguidos() {
+
+	public List<Usuario> getSeguidos(){
 		return seguidos;
 	}
 
-	public void setSeguidos(List<Usuario> seguidos) {
+	public void setSeguidos(List<Usuario> seguidos){
 		this.seguidos = seguidos;
 	}
 
-	public List<Usuario> getSeguidores() {
+	public List<Usuario> getSeguidores(){
 		return seguidores;
 	}
 
-	public void setSeguidores(List<Usuario> seguidores) {
+	public void setSeguidores(List<Usuario> seguidores){
 		this.seguidores = seguidores;
 	}
 
+	public void setImagen(byte[] imagen){
+		this.imagen = imagen;
+	}
+	
 	// Modificar los seguidos
-	public void seguirUsuario(Usuario u) {
-		if (!this.seguidos.contains(u)) {
+	public void seguirUsuario(Usuario u){
+		if(!this.seguidos.contains(u)){
 			this.seguidos.add(u);
 			u.agregarSeguidor(this);
 		}
 	}
 
-	public void dejarSeguirUsuario(Usuario u) {
+	public void dejarSeguirUsuario(Usuario u){
 		this.seguidos.remove(u);
 		u.quitarSeguidor(this);
 	}
 
 	// Modificar los seguidores
-	public void agregarSeguidor(Usuario u) {
-		if (!this.seguidores.contains(u)) {
+	public void agregarSeguidor(Usuario u){
+		if(!this.seguidores.contains(u)){
 			this.seguidores.add(u);
 		}
 	}
 
-	public void quitarSeguidor(Usuario u) {
+	public void quitarSeguidor(Usuario u){
 		this.seguidores.remove(u);
 	}
-		 
+
 	public void setContrasenia(String contrasenia){
-		   this.contrasenia = contrasenia;
-				   }
-	
+		this.contrasenia = contrasenia;
+	}
+
 
 }

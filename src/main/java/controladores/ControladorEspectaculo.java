@@ -51,5 +51,10 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 	 return mE.obtenerEspectaculoBD(plataforma);
     }
+    
+    public List<String> obtenerEspectaculosArtista(String nickname){ // veer
+ 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+ 	 return mE.obtenerEspectaculodeArtista(nickname);
+     }
 
 }

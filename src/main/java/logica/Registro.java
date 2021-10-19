@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -19,7 +17,6 @@ public class Registro{
 	Integer id;
 	
     private float costo;
-    
     private Date fechaRegistro;
 	
 	@ManyToOne(cascade=CascadeType.ALL)

@@ -4,13 +4,12 @@ import java.util.List;
 
 import datatypes.DtFuncion;
 import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
-import logica.Funcion;
 
 public interface IControladorFuncion{
-    public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo) throws FuncionYaRegistradaEnEspectaculoExcepcion;
+    public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion;
 
-    public List<DtFuncion> listarFunciones(String espectaculo);
-    
+    public List<DtFuncion> listarFunciones(String nomEsp);
+
     public List<String> getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador);
     
    // public int getCantidadEspectadoresRegistrados(String nombreFuncion);

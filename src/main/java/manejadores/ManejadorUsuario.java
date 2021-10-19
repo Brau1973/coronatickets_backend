@@ -1,17 +1,13 @@
 package manejadores;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-import datatypes.DtArtista;
 import logica.Artista;
 import logica.Espectador;
-import logica.Plataforma;
 import logica.Usuario;
 import persistencia.Conexion;
 
@@ -53,12 +49,19 @@ public class ManejadorUsuario{
 	 return em.find(Usuario.class, nickname);
     }
     
+    public Usuario buscarUsuarioMail(String mail){
+   	 Conexion conexion = Conexion.getInstancia();
+   	 EntityManager em = conexion.getEntityManager();
+   	 Query query = em.createQuery("select u from Usuario u where email = '" + mail + "'");
+	 Usuario user = (Usuario) query.getSingleResult();
+   	 return user;
+     }
+    
     public Espectador buscarEspectador(String nickname){
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 	 return em.find(Espectador.class, nickname);
     }
-
 
     @SuppressWarnings("unchecked")
     public List<Usuario> obtenerUsuario(){
