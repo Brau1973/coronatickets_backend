@@ -165,7 +165,11 @@ public class ControladorUsuario implements IControladorUsuario{
 		Usuario entity = mU.buscarUsuario(nickname);
 		DtUsuario dt = null;
 		if(entity != null){
-			dt = new DtUsuario(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), null, null, null, entity.getContrasenia(), entity.getImagen());
+			if(entity instanceof Artista) {
+				dt = new DtArtista(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), entity.getContrasenia(), entity.getImagen(), null, null, ((Artista) entity).getDescripcion(),((Artista) entity).getBiografia(), ((Artista) entity).getLink());
+			}else {
+				dt= new DtEspectador(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), entity.getContrasenia(), entity.getImagen(), null, null);
+			}
 		}
 		return dt;
 	}
@@ -175,7 +179,11 @@ public class ControladorUsuario implements IControladorUsuario{
 		Usuario entity = mU.buscarUsuarioMail(mail);
 		DtUsuario dt = null;
 		if(entity != null){
-			dt = new DtUsuario(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), null, null, null, entity.getContrasenia(), entity.getImagen());
+			if(entity instanceof Artista) {
+				dt = new DtArtista(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), entity.getContrasenia(), entity.getImagen(), null, null, ((Artista) entity).getDescripcion(),((Artista) entity).getBiografia(), ((Artista) entity).getLink());
+			}else {
+				dt= new DtEspectador(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), entity.getContrasenia(), entity.getImagen(), null, null);
+			}
 		}
 		return dt;
 	}
