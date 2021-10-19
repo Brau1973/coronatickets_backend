@@ -32,6 +32,7 @@ public interface IControladorUsuario{
 
 	public DtUsuario getLoginUsuario(String nickname);
 	
-	public DtUsuario getLoginUsuarioMail(String mail);
+	public boolean emailRepetido(String email);
 
+	public DtUsuario getLoginUsuarioMail(String mail);
 }
