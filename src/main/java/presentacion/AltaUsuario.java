@@ -36,8 +36,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	private IControladorUsuario iconU;
 	private JPanel miPanel;
 	private JRadioButton rbtnEspectador, rbtnArtista;
-	private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblContrasenia, lblDescripcion, lblBiografia, lblLink,jLabelImag,jLabelImage;
-	private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtContrasenia, txtDescripcion, txtBiografia, txtLink,txturl;
+	private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblContrasenia, lblContrasenia2, lblDescripcion, lblBiografia, lblLink,jLabelImag,jLabelImage;
+	private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtContrasenia, txtContrasenia2, txtDescripcion, txtBiografia, txtLink,txturl;
 	private JDateChooser dateFechaNac;
 	private JButton btnAceptar, btnCancelar, btnAbrir;
 
@@ -129,59 +129,69 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		lblContrasenia = new JLabel();
 		lblContrasenia.setText("Contraseña:");
 		lblContrasenia.setFont(new java.awt.Font("Verdana", 1, 12));
-		lblContrasenia.setBounds(10, 200, 80, 25);
+		lblContrasenia.setBounds(10, 200, 150, 25);
 		miPanel.add(lblContrasenia);
 
 		txtContrasenia = new JTextField();
 		txtContrasenia.setBounds(155, 198, 260, 25);
 		miPanel.add(txtContrasenia);
+		
+		lblContrasenia2 = new JLabel();
+		lblContrasenia2.setText("Contraseña:");
+		lblContrasenia2.setFont(new java.awt.Font("Verdana", 1, 12));
+		lblContrasenia2.setBounds(10, 230, 150, 25);
+		miPanel.add(lblContrasenia2);
+
+		txtContrasenia2 = new JTextField();
+		txtContrasenia2.setBounds(155, 228, 260, 25);
+		miPanel.add(txtContrasenia2);
 
 		lblDescripcion = new JLabel();
 		lblDescripcion.setText("Descripcion:");
 		lblDescripcion.setFont(new java.awt.Font("Verdana", 1, 12));
-		lblDescripcion.setBounds(10, 230, 150, 25);
+		lblDescripcion.setBounds(10, 260, 150, 25);
 		miPanel.add(lblDescripcion);
 
 		txtDescripcion = new JTextField();
-		txtDescripcion.setBounds(155, 228, 260, 25);
+		txtDescripcion.setBounds(155, 258, 260, 25);
 		miPanel.add(txtDescripcion);
 
 		lblBiografia = new JLabel();
 		lblBiografia.setText("Biografia:");
 		lblBiografia.setFont(new java.awt.Font("Verdana", 1, 12));
-		lblBiografia.setBounds(10, 260, 150, 25);
+		lblBiografia.setBounds(10, 290, 150, 25);
 		miPanel.add(lblBiografia);
 
 		txtBiografia = new JTextField();
-		txtBiografia.setBounds(155, 258, 260, 25);
+		txtBiografia.setBounds(155, 288, 260, 25);
 		miPanel.add(txtBiografia);
 
 		lblLink = new JLabel();
 		lblLink.setText("Link:");
 		lblLink.setFont(new java.awt.Font("Verdana", 1, 12));
-		lblLink.setBounds(10, 290, 150, 25);
+		lblLink.setBounds(10, 320, 150, 25);
 		miPanel.add(lblLink);
 
 		txtLink = new JTextField();
-		txtLink.setBounds(155, 288, 260, 25);
+		txtLink.setBounds(155, 318, 260, 25);
 		miPanel.add(txtLink);
 
 		jLabelImag = new JLabel("Seleccionar imagen"); // label imagen
-		jLabelImag.setBounds(10, 370, 200, 20);
+		jLabelImag.setBounds(10, 400, 200, 20);
 		miPanel.add(jLabelImag);
 
 		jLabelImage = new JLabel(); // label imagen
-		jLabelImage.setBounds(230, 370, 140, 140);
+		jLabelImage.setBounds(230, 400, 140, 140);
 		miPanel.add(jLabelImage);
 
 		txturl = new JTextField(); // url
-		txturl.setBounds(202, 500, 200, 20);
+		txturl.setBounds(202, 530, 200, 20);
 		miPanel.add(txturl);
 		txturl.setVisible(false);
 
 		btnAbrir = new JButton();
 		btnAbrir.setText("...");
-		btnAbrir.setBounds(130, 370, 40, 20);
+		btnAbrir.setBounds(180, 400, 40, 20);
 
 		miPanel.add(btnAbrir);
 		btnAbrir.addActionListener(this);
@@ -189,14 +199,14 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		// Boton Aceptar
 		btnAceptar = new JButton();
 		btnAceptar.setText("Aceptar");
-		btnAceptar.setBounds(155, 330, 127, 25);
+		btnAceptar.setBounds(155, 350, 127, 25);
 		miPanel.add(btnAceptar);
 		btnAceptar.addActionListener(this);
 
 		// Boton Cancelar
 		btnCancelar = new JButton();
 		btnCancelar.setText("Cancelar");
-		btnCancelar.setBounds(286, 330, 127, 25);
+		btnCancelar.setBounds(286, 350, 127, 25);
 		miPanel.add(btnCancelar);
 		btnCancelar.addActionListener(this);
 	}
@@ -214,8 +224,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		String strLink = this.txtLink.getText();
 		if(e.getSource() == rbtnEspectador){
 			if(rbtnEspectador.isSelected()){
-				btnAceptar.setBounds(155, 330, 127, 25);
-				btnCancelar.setBounds(286, 330, 127, 25);
+				btnAceptar.setBounds(155, 258, 127, 25);
+				btnCancelar.setBounds(286, 258, 127, 25);
 				lblDescripcion.setVisible(false);
 				lblBiografia.setVisible(false);
 				lblLink.setVisible(false);
@@ -229,8 +239,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		
 		if(e.getSource() == rbtnArtista){
 			if(rbtnArtista.isSelected()){
-				btnAceptar.setBounds(155, 410, 127, 25);
-				btnCancelar.setBounds(286, 410, 127, 25);
+				btnAceptar.setBounds(155, 350, 127, 25);
+				btnCancelar.setBounds(286, 350, 127, 25);
 				lblDescripcion.setVisible(true);
 				lblBiografia.setVisible(true);
 				lblLink.setVisible(true);
@@ -263,10 +273,12 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		if(e.getSource() == btnAceptar){
 			String url = this.txturl.getText();
 			byte[] selectedImage = null;
-			try{
-				selectedImage = Files.readAllBytes(Paths.get(url));
-			}catch(IOException e1){
-				e1.printStackTrace();
+			if(url != null && !url.isEmpty()) {
+				try{
+					selectedImage = Files.readAllBytes(Paths.get(url));
+				}catch(IOException e1){
+					e1.printStackTrace();
+				}
 			}
 			if(rbtnEspectador.isSelected()){
 				if(checkFormulario() && modificarDatos()){
@@ -314,12 +326,14 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		String strApellido = this.txtApellido.getText();
 		String strEmail = this.txtEmail.getText();
 		String strContrasenia = this.txtContrasenia.getText();
-		// Date dateFechaNac=this.dateFechaNac.getDate();
-		// String strDescripcion=this.txtDescripcion.getText();
-		// String strBiografia=this.txtBiografia.getText();
-		// String strLink=this.txtLink.getText();
-		if(strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty() || strContrasenia.isEmpty()){
+		String strContrasenia2 = this.txtContrasenia2.getText();
+		if(strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty() || strContrasenia.isEmpty()
+				|| strContrasenia2.isEmpty()){
 			JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(!strContrasenia.equals(strContrasenia2)) {
+			JOptionPane.showMessageDialog(this, "Las Contraseñas deben ser iguales", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;

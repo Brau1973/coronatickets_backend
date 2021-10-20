@@ -21,19 +21,23 @@ public class ControladorEspectaculo implements IControladorEspectaculo{
 
     public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion{
 	 ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-
-	 IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
-	 IControladorPlataforma iconP = Fabrica.getInstancia().getIControladorPlataforma();
-
-	 Artista artistaOrganizador = iconU.obtenerArtista(dte.getArtista());
-
-	 Plataforma plataforma = iconP.buscarPlataforma(nombrePlataforma);
-
-	 Espectaculo espectaculo = new Espectaculo(artistaOrganizador, dte.getNombre(), dte.getDescripcion(), dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
-
-	 plataforma.aniadirEspectaculo(espectaculo);
-
-	 mE.agregarEspectaculo(espectaculo);
+	 if(mE.buscarEspectaculo(dte.getNombre()) == null) {
+		 
+		 IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
+		 IControladorPlataforma iconP = Fabrica.getInstancia().getIControladorPlataforma();
+		 
+		 Artista artistaOrganizador = iconU.obtenerArtista(dte.getArtista());
+		 
+		 Plataforma plataforma = iconP.buscarPlataforma(nombrePlataforma);
+		 
+		 Espectaculo espectaculo = new Espectaculo(artistaOrganizador, dte.getNombre(), dte.getDescripcion(), dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
+		 
+		 plataforma.aniadirEspectaculo(espectaculo);
+		 
+		 mE.agregarEspectaculo(espectaculo);
+	 }else { 
+		 throw new EspectaculoRepetidoExcepcion("El espectaculo con el nombre " + dte.getNombre() + " ya existe.");
+	 }
     }
 
     public Espectaculo obtenerEspectaculo(String nombre){

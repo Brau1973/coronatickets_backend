@@ -30,7 +30,7 @@ public class ControladorFuncion implements IControladorFuncion{
 		Espectaculo espectaculo = iconE.obtenerEspectaculo(nombreEspectaculo);
 
 		if(espectaculo.funcionYaRegistrada(dtFuncion.getNombre())){
-			throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion" + dtFuncion.getNombre() + " ya esta registrada en el espectaculo " + espectaculo.getNombre());
+			throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion " + dtFuncion.getNombre() + " ya esta registrada en el espectaculo " + espectaculo.getNombre());
 		}else{
 			ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 			IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
