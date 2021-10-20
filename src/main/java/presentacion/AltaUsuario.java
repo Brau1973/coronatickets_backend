@@ -127,7 +127,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		miPanel.add(dateFechaNac);
 
 		lblContrasenia = new JLabel();
-		lblContrasenia.setText("Contraseña:");
+		lblContrasenia.setText("Contrasenia:");
 		lblContrasenia.setFont(new java.awt.Font("Verdana", 1, 12));
 		lblContrasenia.setBounds(10, 200, 150, 25);
 		miPanel.add(lblContrasenia);
@@ -137,7 +137,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		miPanel.add(txtContrasenia);
 		
 		lblContrasenia2 = new JLabel();
-		lblContrasenia2.setText("Contraseña:");
+		lblContrasenia2.setText("Contrasenia:");
 		lblContrasenia2.setFont(new java.awt.Font("Verdana", 1, 12));
 		lblContrasenia2.setBounds(10, 230, 150, 25);
 		miPanel.add(lblContrasenia2);
@@ -333,7 +333,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 			return false;
 		}
 		if(!strContrasenia.equals(strContrasenia2)) {
-			JOptionPane.showMessageDialog(this, "Las Contraseñas deben ser iguales", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Las Contrasenias deben ser iguales", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;
