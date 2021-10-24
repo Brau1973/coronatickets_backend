@@ -18,5 +18,7 @@ public interface IControladorEspectaculo{
     public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma);
     
     public List<String> obtenerEspectaculosArtista(String nickname);
-
+    
+	public List<DtEspectaculo> listEntityToDtEsp(List<Espectaculo> dte);
+	public List<DtEspectaculo> obtenerAllDtEspectaculos(String nickname);
 }
