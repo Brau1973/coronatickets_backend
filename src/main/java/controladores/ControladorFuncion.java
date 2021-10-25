@@ -69,8 +69,13 @@ public class ControladorFuncion implements IControladorFuncion{
 		}
 		return funcionesARetornar;
 	}
+
+	public Funcion obtenerFuncion(String nombre){ // Ok Seba 23-10-2021
+		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+		return mF.buscarFuncion(nombre);
+	}
 }
-	// public int getCantidadEspectadoresRegistrados(String nombreFuncion){
-	// ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-	// return mF.getCantidadEspectadoresRegistrados(nombreFuncion);
-	// }
+// public int getCantidadEspectadoresRegistrados(String nombreFuncion){
+// ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+// return mF.getCantidadEspectadoresRegistrados(nombreFuncion);
+// }
