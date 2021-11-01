@@ -1,0 +1,68 @@
+package publicadores;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import javax.jws.soap.SOAPBinding.ParameterStyle;
+import javax.jws.soap.SOAPBinding.Style;
+import javax.xml.ws.Endpoint;
+
+import configuraciones.WebServiceConfiguracion;
+import datatypes.DtClase;
+import datatypes.DtEntrenamiento;
+import datatypes.DtEspectaculo;
+import datatypes.DtRegistro;
+import datatypes.DtSocio;
+import datatypes.DtSpinning;
+import datatypes.DtUsuario;
+import excepciones.EspectaculoRepetidoExcepcion;
+import excepciones.UsuarioRepetidoExcepcion;
+import interfaces.Fabrica;
+import interfaces.IControlador;
+import interfaces.IControladorEspectaculo;
+import interfaces.IControladorRegistro;
+import interfaces.IControladorUsuario;
+import logica.Artista;
+import logica.Espectaculo;
+import logica.Usuario;
+
+@WebService
+@SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
+public class ControladorRegistroPublish {
+	private Fabrica fabrica;
+	private IControladorRegistro icon;
+	private WebServiceConfiguracion configuracion;
+	private Endpoint endpoint;
+
+	public ControladorRegistroPublish() {
+		fabrica = Fabrica.getInstancia();
+		icon = fabrica.getIControladorRegistro();
+		try {
+			configuracion = new WebServiceConfiguracion();
+		} catch (Exception ex) {
+			
+		}
+	}
+
+//	@WebMethod(exclude = true)
+//	public void publicar() {
+//		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador", this);
+//		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador");
+//	}
+//	
+//	@WebMethod(exclude = true)
+//	public Endpoint getEndpoint() {
+//        return endpoint;
+//	}
+	
+	//LOS MÉTODOS QUE VAMOS A PUBLICAR
+	@WebMethod
+	public void altaRegistro(DtRegistro dtRegistro, String nicknameEspectador) {
+		icon.altaRegistro(dtRegistro, nicknameEspectador);
+	}
+
+}
