@@ -1,7 +1,5 @@
 package publicadores;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.jws.WebMethod;
@@ -12,14 +10,9 @@ import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
-import datatypes.DtClase;
-import datatypes.DtEntrenamiento;
-import datatypes.DtSocio;
-import datatypes.DtSpinning;
 import datatypes.DtUsuario;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.Fabrica;
-import interfaces.IControlador;
 import interfaces.IControladorUsuario;
 import logica.Artista;
 import logica.Usuario;
@@ -42,16 +35,16 @@ public class ControladorUsuarioPublish {
 		}
 	}
 
-//	@WebMethod(exclude = true)
-//	public void publicar() {
-//		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador", this);
-//		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador");
-//	}
-//	
-//	@WebMethod(exclude = true)
-//	public Endpoint getEndpoint() {
-//        return endpoint;
-//	}
+	@WebMethod(exclude = true)
+	public void publicar() {
+		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorUsuario", this);
+		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorUsuario");
+	}
+	
+	@WebMethod(exclude = true)
+	public Endpoint getEndpoint() {
+        return endpoint;
+	}
 	
 	//LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
@@ -61,7 +54,7 @@ public class ControladorUsuarioPublish {
 	
 	@WebMethod
 	public boolean emailRepetido(String email){
-		icon.emailRepetido(email);
+		return icon.emailRepetido(email);
 	}
 	
 	@WebMethod
@@ -76,17 +69,17 @@ public class ControladorUsuarioPublish {
 	
 	@WebMethod
 	public Usuario obtenerUsuario(String nickname){
-		icon.obtenerUsuario(nickname);
+		return icon.obtenerUsuario(nickname);
 	}
 	
 	@WebMethod
 	public Artista obtenerArtista(String nickname){
-		icon.obtenerArtista(nickname);
+		return icon.obtenerArtista(nickname);
 	}
 	
 	@WebMethod
 	public List<String> listarNicknameUsuarios(){
-		return icon.listarNicknameUsuarios()
+		return icon.listarNicknameUsuarios();
 	}
 	
 	@WebMethod
@@ -118,7 +111,4 @@ public class ControladorUsuarioPublish {
 	public DtUsuario getLoginUsuarioMail(String mail){
 		return icon.getLoginUsuarioMail(mail);
 	}
-	
-	
-
 }

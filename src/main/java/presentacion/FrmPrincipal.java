@@ -14,6 +14,12 @@ import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
+import publicadores.ControladorEspectaculoPublish;
+import publicadores.ControladorFuncionPublish;
+import publicadores.ControladorPaquetePublish;
+import publicadores.ControladorPlataformaPublish;
+import publicadores.ControladorRegistroPublish;
+import publicadores.ControladorUsuarioPublish;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame implements ActionListener{
@@ -42,9 +48,28 @@ public class FrmPrincipal extends JFrame implements ActionListener{
     private IControladorEspectaculo iconE = fabrica.getIControladorEspectaculo();
     private IControladorUsuario iconU = fabrica.getIControladorUsuario();
     private IControladorFuncion iconF = fabrica.getIControladorFuncion();
-
+    
     // Constructor
     public FrmPrincipal(){
+	 
+	 ControladorEspectaculoPublish cEspectaculoPublish = new ControladorEspectaculoPublish();
+	 cEspectaculoPublish.publicar();
+	 
+	 ControladorFuncionPublish cFuncionPublish = new ControladorFuncionPublish();
+	 cFuncionPublish.publicar();
+	 
+	 ControladorPaquetePublish cPaquetePublish = new ControladorPaquetePublish();
+	 cPaquetePublish.publicar();
+	 
+	 ControladorUsuarioPublish cUsuarioPublish = new ControladorUsuarioPublish();
+	 cUsuarioPublish.publicar();
+	 
+	 ControladorPlataformaPublish cPlataformaPublish = new ControladorPlataformaPublish();
+	 cPlataformaPublish.publicar();
+	 
+	 ControladorRegistroPublish cRegistroPublish = new ControladorRegistroPublish();
+	 cRegistroPublish.publicar();	
+	 
 	 inicializar();
 	 setTitle("coronaTickets.uy");
 	 setSize(800, 750);

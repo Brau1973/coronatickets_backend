@@ -1,7 +1,5 @@
 package publicadores;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.jws.WebMethod;
@@ -12,24 +10,10 @@ import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
-import datatypes.DtClase;
-import datatypes.DtEntrenamiento;
-import datatypes.DtEspectaculo;
 import datatypes.DtPaqueteEspectaculo;
-import datatypes.DtSocio;
-import datatypes.DtSpinning;
-import datatypes.DtUsuario;
-import excepciones.EspectaculoRepetidoExcepcion;
-import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.Fabrica;
-import interfaces.IControlador;
-import interfaces.IControladorEspectaculo;
 import interfaces.IControladorPaquete;
-import interfaces.IControladorUsuario;
-import logica.Artista;
-import logica.Espectaculo;
 import logica.PaqueteEspectaculos;
-import logica.Usuario;
 
 @WebService
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
@@ -49,16 +33,16 @@ public class ControladorPaquetePublish {
 		}
 	}
 
-//	@WebMethod(exclude = true)
-//	public void publicar() {
-//		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador", this);
-//		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador");
-//	}
-//	
-//	@WebMethod(exclude = true)
-//	public Endpoint getEndpoint() {
-//        return endpoint;
-//	}
+	@WebMethod(exclude = true)
+	public void publicar() {
+		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorPaquete", this);
+		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorPaquete");
+	}
+	
+	@WebMethod(exclude = true)
+	public Endpoint getEndpoint() {
+        return endpoint;
+	}
 	
 	//LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
@@ -68,12 +52,12 @@ public class ControladorPaquetePublish {
 	
 	@WebMethod
 	public Boolean existePaquete(String nombre){
-		icon.existePaquete(nombre);
+		return icon.existePaquete(nombre);
 	}
 	
 	@WebMethod
 	public List<DtPaqueteEspectaculo> obtenerPaquetes(){
-		icon.obtenerPaquetes();
+		return icon.obtenerPaquetes();
 	}
 	
 	@WebMethod
