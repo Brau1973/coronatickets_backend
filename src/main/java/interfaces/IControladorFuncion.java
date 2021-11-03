@@ -7,7 +7,7 @@ import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import logica.Funcion;
 
 public interface IControladorFuncion{
-    public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion;
+    public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen);
 
     public List<DtFuncion> listarFunciones(String nomEsp);
 
