@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 public class Principal {
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -17,5 +18,10 @@ public class Principal {
 	}
 }
 
-
-/* public static void main(String[] args){ FrmPrincipal frmInicio = new FrmPrincipal(); frmInicio.setVisible(true); // Fabrica.getInstancia().getIControladorEspectaculo().listarEspectaculos(); } */
+//public class Principal{
+//    public static void main(String[] args){
+//	 FrmPrincipal frmInicio = new FrmPrincipal();
+//	 frmInicio.setVisible(true);
+// Fabrica.getInstancia().getIControladorEspectaculo().listarEspectaculos();
+//    }
+//}

@@ -30,7 +30,6 @@ public class ControladorEspectaculoPublish {
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-
 		}
 	}
 

@@ -26,7 +26,6 @@ public class ControladorRegistroPublish {
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-
 		}
 	}
 
@@ -41,7 +40,7 @@ public class ControladorRegistroPublish {
 		return endpoint;
 	}
 
-	// LOS MÉTODOS QUE VAMOS A PUBLICAR
+	//LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
 	public void altaRegistro(DtRegistro dtRegistro, String nicknameEspectador) {
 		icon.altaRegistro(dtRegistro, nicknameEspectador);

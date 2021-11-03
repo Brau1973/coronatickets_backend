@@ -10,10 +10,8 @@ import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
-import datatypes.DtFuncion;
 import interfaces.Fabrica;
 import interfaces.IControladorFuncion;
-import logica.Funcion;
 
 @WebService
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
@@ -29,7 +27,6 @@ public class ControladorFuncionPublish {
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-
 		}
 	}
 

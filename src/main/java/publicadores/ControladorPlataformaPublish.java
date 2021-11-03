@@ -80,14 +80,21 @@ public class ControladorPlataformaPublish {
 	}
 
 	// NO son necesarias?
-	/*
-	 * @WebMethod public DtPlataforma[] mapListEntityToDt(Plataforma[] p) {
-	 * List<DtPlataforma> listPlataformas = icon.mapListEntityToDt(p); int i = 0;
-	 * DtPlataforma[] ret = new DtPlataforma[listPlataformas.size()]; for
-	 * (DtPlataforma dtp : listPlataformas) { ret[i] = dtp; i++; } return ret; }
-	 * 
-	 * @WebMethod public DtPlataforma mapEntityToDt(Plataforma p) { return
-	 * icon.mapEntityToDt(p); }
-	 */
+
+	//	  @WebMethod 
+	//	  public DtPlataforma[] mapListEntityToDt(Plataforma[] p) {
+	//	 // List<DtPlataforma> listPlataformas = icon.mapListEntityToDt(p); 
+	//		  int i = 0;
+	//	  DtPlataforma[] ret = new DtPlataforma[listPlataformas.size()];
+	//	  for(DtPlataforma dtp : listPlataformas) { 
+	//		  ret[i] = dtp; i++;
+	//		  } 
+	//	  return ret; 
+	//	  }
+	//	  
+	//	  @WebMethod 
+	//	  public DtPlataforma mapEntityToDt(Plataforma p) { 
+	//		  return icon.mapEntityToDt(p); 
+	//		  }
 
 }
