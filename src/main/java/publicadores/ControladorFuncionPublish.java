@@ -10,11 +10,8 @@ import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
-import datatypes.DtFuncion;
-import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorFuncion;
-import logica.Funcion;
 
 @WebService
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
@@ -30,7 +27,6 @@ public class ControladorFuncionPublish {
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-			
 		}
 	}
 
@@ -39,30 +35,31 @@ public class ControladorFuncionPublish {
 		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorFuncion", this);
 		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorFuncion");
 	}
-	
+
 	@WebMethod(exclude = true)
 	public Endpoint getEndpoint() {
-        return endpoint;
+		return endpoint;
 	}
-	
-	//LOS MÉTODOS QUE VAMOS A PUBLICAR
-	@WebMethod
-	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion{
-		icon.altaFuncion(dtFuncion, nombreEspectaculo, imagen);
-	}
-	
-	@WebMethod
-	public List<DtFuncion> listarFunciones(String nomEsp){
-		return icon.listarFunciones(nomEsp);
-	}
-	
-	@WebMethod
-	public List<String> getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador){
-		return icon.getFuncionesVigentesRegistradasPorEspectador(nicknameEspectador);
-	}
-	
-	@WebMethod
-	public Funcion obtenerFuncion(String nombre){ // Ok Seba 23-10-2021
-		return icon.obtenerFuncion(nombre);
-	}
+
+	// LOS MÉTODOS QUE VAMOS A PUBLICAR
+
+	//  @WebMethod
+	//	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) {
+	//		icon.altaFuncion(dtFuncion, nombreEspectaculo, imagen);
+	//  }
+
+	//	@WebMethod
+	//  public List<DtFuncion> listarFunciones(String nomEsp) {
+	//		return icon.listarFunciones(nomEsp);
+	//	}
+
+	//	@WebMethod
+	//	public List<String> getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador) {
+	//		return icon.getFuncionesVigentesRegistradasPorEspectador(nicknameEspectador);
+	//	}
+
+	//	@WebMethod
+	//	public Funcion obtenerFuncion(String nombre) {
+	//		return icon.obtenerFuncion(nombre);
+	//	}
 }

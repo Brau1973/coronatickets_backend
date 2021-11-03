@@ -26,7 +26,6 @@ public class ControladorRegistroPublish {
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-			
 		}
 	}
 
@@ -35,12 +34,12 @@ public class ControladorRegistroPublish {
 		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorRegistro", this);
 		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorRegistro");
 	}
-	
+
 	@WebMethod(exclude = true)
 	public Endpoint getEndpoint() {
-        return endpoint;
+		return endpoint;
 	}
-	
+
 	//LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
 	public void altaRegistro(DtRegistro dtRegistro, String nicknameEspectador) {

@@ -37,49 +37,49 @@ public class ControladorEspectaculoPublish {
 
 	@WebMethod(exclude = true)
 	public void publicar() {
-		System.out.println("http://" );
-		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador", this);
-		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador");
+		System.out.println("http://");
+		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorEspectaculo", this);
+		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorEspectaculo");
 	}
-	
+
 	@WebMethod(exclude = true)
 	public Endpoint getEndpoint() {
-        return endpoint;
+		return endpoint;
 	}
-	
-	//LOS MÉTODOS QUE VAMOS A PUBLICAR
+
+	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion{
+	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion {
 		icon.altaEspectaculo(dte, nombrePlataforma);
 	}
-	
+
 	@WebMethod
-	public Espectaculo obtenerEspectaculo(String nombre){
+	public Espectaculo obtenerEspectaculo(String nombre) {
 		return icon.obtenerEspectaculo(nombre);
 	}
-	
+
 	@WebMethod
-	public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma){
+	public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma) {
 		return icon.listarEspectaculos(nombrePlataforma);
 	}
-	
+
 	@WebMethod
-	public List<DtEspectaculo> obtenerAllDtEspectaculos(String nickname){
+	public List<DtEspectaculo> obtenerAllDtEspectaculos(String nickname) {
 		return icon.obtenerAllDtEspectaculos(nickname);
 	}
-	
+
 	@WebMethod
-	public List<DtEspectaculo> listEntityToDtEsp(List<Espectaculo> liste){
+	public List<DtEspectaculo> listEntityToDtEsp(List<Espectaculo> liste) {
 		return icon.listEntityToDtEsp(liste);
 	}
-	
+
 	@WebMethod
-	public List<Espectaculo> obtenerEspectaculo2(String plataforma){
+	public List<Espectaculo> obtenerEspectaculo2(String plataforma) {
 		return icon.obtenerEspectaculo2(plataforma);
 	}
-	
+
 	@WebMethod
-	public List<String> obtenerEspectaculosArtista(String nickname){ // veer
+	public List<String> obtenerEspectaculosArtista(String nickname) { // veer
 		return icon.obtenerEspectaculosArtista(nickname);
 	}
 }

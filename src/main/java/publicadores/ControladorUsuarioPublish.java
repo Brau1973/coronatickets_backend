@@ -31,7 +31,7 @@ public class ControladorUsuarioPublish {
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-			
+
 		}
 	}
 
@@ -40,75 +40,75 @@ public class ControladorUsuarioPublish {
 		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorUsuario", this);
 		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorUsuario");
 	}
-	
+
 	@WebMethod(exclude = true)
 	public Endpoint getEndpoint() {
-        return endpoint;
+		return endpoint;
 	}
-	
-	//LOS MÉTODOS QUE VAMOS A PUBLICAR
+
+	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaUsuario(DtUsuario dtu) throws UsuarioRepetidoExcepcion{
+	public void altaUsuario(DtUsuario dtu) throws UsuarioRepetidoExcepcion {
 		icon.altaUsuario(dtu);
 	}
-	
+
 	@WebMethod
-	public boolean emailRepetido(String email){
+	public boolean emailRepetido(String email) {
 		return icon.emailRepetido(email);
 	}
-	
+
 	@WebMethod
-	public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir){
+	public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir) {
 		icon.seguirUsuario(nicknameUsuario, nicknameUsuarioASeguir);
 	}
-	
+
 	@WebMethod
-	public void dejarDeSeguirUsuario(String nicknameUsuario, String nicknameUsuarioADejarDeSeguir){
+	public void dejarDeSeguirUsuario(String nicknameUsuario, String nicknameUsuarioADejarDeSeguir) {
 		icon.dejarDeSeguirUsuario(nicknameUsuario, nicknameUsuarioADejarDeSeguir);
 	}
-	
+
 	@WebMethod
-	public Usuario obtenerUsuario(String nickname){
+	public Usuario obtenerUsuario(String nickname) {
 		return icon.obtenerUsuario(nickname);
 	}
-	
+
 	@WebMethod
-	public Artista obtenerArtista(String nickname){
+	public Artista obtenerArtista(String nickname) {
 		return icon.obtenerArtista(nickname);
 	}
-	
+
 	@WebMethod
-	public List<String> listarNicknameUsuarios(){
+	public List<String> listarNicknameUsuarios() {
 		return icon.listarNicknameUsuarios();
 	}
-	
+
 	@WebMethod
-	public List<String> listarNicknameArtistas(){
+	public List<String> listarNicknameArtistas() {
 		return icon.listarNicknameArtistas();
 	}
-	
+
 	@WebMethod
-	public List<String> listarNicknameEspectadores(){
+	public List<String> listarNicknameEspectadores() {
 		return icon.listarNicknameEspectadores();
 	}
-	
+
 	@WebMethod
-	public List<String> listarNicknameUsuariosNoSeguidos(String nickname){
+	public List<String> listarNicknameUsuariosNoSeguidos(String nickname) {
 		return icon.listarNicknameUsuariosNoSeguidos(nickname);
 	}
-	
+
 	@WebMethod
-	public List<String> listarNicknameUsuariosSeguidos(String nickname){
+	public List<String> listarNicknameUsuariosSeguidos(String nickname) {
 		return icon.listarNicknameUsuariosSeguidos(nickname);
 	}
-	
+
 	@WebMethod
-	public DtUsuario getLoginUsuario(String nickname){
+	public DtUsuario getLoginUsuario(String nickname) {
 		return icon.getLoginUsuario(nickname);
 	}
-	
+
 	@WebMethod
-	public DtUsuario getLoginUsuarioMail(String mail){
+	public DtUsuario getLoginUsuarioMail(String mail) {
 		return icon.getLoginUsuarioMail(mail);
 	}
 }

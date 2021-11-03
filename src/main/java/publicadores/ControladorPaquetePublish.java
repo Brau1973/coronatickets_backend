@@ -29,7 +29,7 @@ public class ControladorPaquetePublish {
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-			
+
 		}
 	}
 
@@ -38,30 +38,30 @@ public class ControladorPaquetePublish {
 		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorPaquete", this);
 		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorPaquete");
 	}
-	
+
 	@WebMethod(exclude = true)
 	public Endpoint getEndpoint() {
-        return endpoint;
+		return endpoint;
 	}
-	
-	//LOS MÉTODOS QUE VAMOS A PUBLICAR
+
+	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaPaquete(PaqueteEspectaculos pEsp){
+	public void altaPaquete(PaqueteEspectaculos pEsp) {
 		icon.altaPaquete(pEsp);
 	}
-	
+
 	@WebMethod
-	public Boolean existePaquete(String nombre){
+	public Boolean existePaquete(String nombre) {
 		return icon.existePaquete(nombre);
 	}
-	
+
 	@WebMethod
-	public List<DtPaqueteEspectaculo> obtenerPaquetes(){
+	public List<DtPaqueteEspectaculo> obtenerPaquetes() {
 		return icon.obtenerPaquetes();
 	}
-	
+
 	@WebMethod
-	public void agregarEspectaculo(String paquete, String espectaculo){
+	public void agregarEspectaculo(String paquete, String espectaculo) {
 		icon.agregarEspectaculo(paquete, espectaculo);
 	}
 }
