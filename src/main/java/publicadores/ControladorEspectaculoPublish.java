@@ -29,16 +29,17 @@ public class ControladorEspectaculoPublish {
 		icon = fabrica.getIControladorEspectaculo();
 		try {
 			configuracion = new WebServiceConfiguracion();
+			System.out.println("config ok" );
 		} catch (Exception ex) {
-			
+			System.out.println("Exception config" );
 		}
 	}
 
 	@WebMethod(exclude = true)
 	public void publicar() {
 		System.out.println("http://" );
-		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorEspectaculo", this);
-		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorEspectaculo");
+		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador", this);
+		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador");
 	}
 	
 	@WebMethod(exclude = true)
