@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import datatypes.DtPlataforma;
-import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.IControladorPlataforma;
 import manejadores.ManejadorPlataforma;
 
@@ -101,12 +100,12 @@ public class AltaPlataforma extends JInternalFrame{
 		 String descripcion = this.txtDescripcion.getText();
 		 String url = this.txtUrl.getText();
 		 DtPlataforma dtPlataforma = new DtPlataforma(nombre,descripcion,url);
-	     try{
+	//     try{
 		  this.iconP.altaPlataforma(dtPlataforma);
-		  JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
-	     }catch(PlataformaRepetidaExcepcion e){
-		  JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
-	     }
+	//	  JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
+	//     }catch(PlataformaRepetidaExcepcion e){
+	//	  JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+	//     }
 	     limpiarFormulario();
 	     setVisible(false);
 	 }
@@ -130,7 +129,7 @@ public class AltaPlataforma extends JInternalFrame{
     private boolean modificarDatos(){
 	     ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 	     if(mP.buscarPlataforma(txtNombre.getText()) != null){
-		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre de la plataforma ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
+		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre de la plataforma ya existe\nï¿½Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
 		  if(respuesta != JOptionPane.YES_NO_OPTION){
 		      limpiarFormulario();
 		      setVisible(false);
