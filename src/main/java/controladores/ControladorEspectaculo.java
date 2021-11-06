@@ -18,7 +18,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 	public ControladorEspectaculo() {
 		super();
 	}
-
+	@Override
 	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma){
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		if (mE.buscarEspectaculo(dte.getNombre()) == null) {
@@ -39,24 +39,28 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 			throw new EspectaculoRepetidoExcepcion("El espectaculo con el nombre " + dte.getNombre() + " ya existe.");
 		}*/
 	}
-
+	
+	@Override
 	public Espectaculo obtenerEspectaculo(String nombre) {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		return mE.buscarEspectaculo(nombre);
 	}
 
+	@Override
 	public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma) {
 		ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 		Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);
 		return plataforma.getEspectaculosDt();
 	}
 
+	@Override
 	public List<DtEspectaculo> obtenerAllDtEspectaculos(String nickname) { // Ok Seba 22-10-2021
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		List<Espectaculo> listEsp = mE.obtenerEspectaculoArtista(nickname);
 		return listEntityToDtEsp(listEsp);
 	}
 
+	@Override
 	public List<DtEspectaculo> listEntityToDtEsp(List<Espectaculo> liste) { // Ok Seba 22-10-2021
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 		for (Espectaculo e : liste) {
@@ -66,11 +70,13 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 		return listEspectaculosDt;
 	}
 
+	@Override
 	public List<Espectaculo> obtenerEspectaculo2(String plataforma) {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		return mE.obtenerEspectaculoBD(plataforma);
 	}
 
+	@Override
 	public List<String> obtenerEspectaculosArtista(String nickname) { // veer
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		return mE.obtenerEspectaculodeArtista(nickname);

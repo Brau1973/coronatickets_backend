@@ -26,6 +26,7 @@ public class ControladorRegistroPublish {
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
+			System.out.println("Exception config Registro");
 		}
 	}
 

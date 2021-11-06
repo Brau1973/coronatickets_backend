@@ -20,12 +20,13 @@ import datatypes.DtPlataforma;
 import datatypes.DtRegistro;
 import interfaces.Fabrica;
 import interfaces.IControladorFuncion;
+import interfaces.IControladorPlataforma;
 import interfaces.IControladorRegistro;
 import interfaces.IControladorUsuario;
 
 @SuppressWarnings("serial")
 public class RegistroFuncion extends JInternalFrame {
-	//	private IControladorPlataforma iconP;
+		private IControladorPlataforma iconP;
 	private IControladorUsuario iconU;
 	private IControladorFuncion iconF;
 	private IControladorRegistro iconR;
@@ -159,7 +160,7 @@ public class RegistroFuncion extends JInternalFrame {
 
 	public void iniciarlizarComboBox() {
 		comboPlataforma.removeAllItems();
-		listPlataformas = null;//iconP.listarPlataformas();
+		listPlataformas = iconP.listarPlataformas();
 		listPlataformas.forEach((p) -> {
 			comboPlataforma.addItem(p.getNombre());
 		});

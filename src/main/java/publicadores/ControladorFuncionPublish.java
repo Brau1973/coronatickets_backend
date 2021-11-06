@@ -27,6 +27,7 @@ public class ControladorFuncionPublish {
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
+			System.out.println("Exception config Funcion");
 		}
 	}
 

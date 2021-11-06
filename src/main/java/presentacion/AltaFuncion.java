@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -24,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -32,7 +34,7 @@ import com.toedter.calendar.JDateChooser;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
-
+import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
@@ -52,7 +54,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 	private JTextField txtNombre, txturl;
 	private JSpinner spinHora, spinMin;
 	private JDateChooser fechaFuncion, fechaAlta;
-	//private JTextArea areaDeTexto;
+	private JTextArea areaDeTexto;
 	private JComboBox<String> comboArtista, comboEspectaculos, comboPlataforma;
 	private JList<String> listaArtistasSeleccionados;
 	private DefaultListModel<String> modelo;
@@ -220,7 +222,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		comboPlataforma.removeAllItems();
 		comboArtista.removeAllItems();
 
-		listPlataformas=iconP.listarPlataformasStr();
+		listPlataformas = iconP.listarPlataformasStr();
 		listPlataformas.forEach((p) -> {
 			comboPlataforma.addItem(p);
 		});
@@ -289,12 +291,12 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 				}
 
 				DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro, listArtistasSeleccionados);
-				//	try{
-				this.iconF.altaFuncion(dtFuncion, strespectaculo, selectedImage);
-				//	JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");
-				//	}catch(FuncionYaRegistradaEnEspectaculoExcepcion msg){
-				//		JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
-				//}
+				try {
+					this.iconF.altaFuncion(dtFuncion, strespectaculo, selectedImage);
+					//	JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");
+				} catch (Exception e2) {
+					//		JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+				}
 				limpiarFormulario();
 				setVisible(false);
 			}
@@ -340,5 +342,22 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		listArtistasSeleccionados = new ArrayList<String>();
 		listArtistasSeleccionados.clear();
 	}
+	private void guardarArchivo(){ //ver
+		try{
+			String nombre = "";
+			JFileChooser file = new JFileChooser();
+			file.showSaveDialog(this);
+			File guarda = file.getSelectedFile();
 
+			if(guarda != null){
+				nombre = file.getSelectedFile().getName();
+				FileWriter save = new FileWriter(guarda + ".doc");
+				save.write(areaDeTexto.getText());
+				save.close();
+				JOptionPane.showMessageDialog(null, "El archivo se a guardado Exitosamente", "Informaci�n", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}catch(IOException ex){
+			JOptionPane.showMessageDialog(null, "Su archivo no se ha guardado", "Advertencia", JOptionPane.WARNING_MESSAGE);
+		}
+	}
 }

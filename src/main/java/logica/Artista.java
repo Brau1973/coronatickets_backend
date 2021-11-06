@@ -18,7 +18,7 @@ public class Artista extends Usuario{
     }
 
     public Artista(){
-    	super();
+    //	super();
     }
 
     public String getDescripcion(){

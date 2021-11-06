@@ -1,5 +1,6 @@
 package publicadores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jws.WebMethod;
@@ -29,6 +30,7 @@ public class ControladorPlataformaPublish {
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
+			System.out.println("Exception config Plataforma");
 		}
 	}
 
@@ -74,7 +76,7 @@ public class ControladorPlataformaPublish {
 		return iconP.buscarPlataforma(nombrePlataforma);
 	}
 
-	@WebMethod (exclude = true)
+	@WebMethod  (exclude = true) // VER
 	public DtPlataforma[] mapListEntityToDt(List<Plataforma> p) {
 		List<DtPlataforma> lst = iconP.mapListEntityToDt(p);
 		DtPlataforma[] ret = new DtPlataforma[lst.size()];

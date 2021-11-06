@@ -36,7 +36,7 @@ public class Usuario{
 	private byte[] imagen;
 	
 	public Usuario(){
-		super();
+		//super();
 	}
 	
 	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia, byte[] imagen){

@@ -30,7 +30,7 @@ public class ControladorPaquete implements IControladorPaquete {
 		ManejadorPaquete mP = ManejadorPaquete.getInstancia();
 		return mapListEntityToDt(mP.obtenerPaquetes());
 	}
-
+	@Override
 	public List<DtPaqueteEspectaculo> mapListEntityToDt(List<PaqueteEspectaculos> p) {
 		List<DtPaqueteEspectaculo> ret = new ArrayList<DtPaqueteEspectaculo>();
 		for (PaqueteEspectaculos paq : p) {
@@ -39,7 +39,7 @@ public class ControladorPaquete implements IControladorPaquete {
 		}
 		return ret;
 	}
-
+	@Override
 	public DtPaqueteEspectaculo mapEntityToDt(PaqueteEspectaculos p) {
 		DtPaqueteEspectaculo ret = new DtPaqueteEspectaculo(p.getNombre(), p.getDescripcion(), p.getFechaInicio(), p.getFechaFin(), p.getFechaAlta(), p.getDescuento());
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();

@@ -10,8 +10,9 @@ import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
+import datatypes.DtArtista;
+import datatypes.DtEspectador;
 import datatypes.DtUsuario;
-import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorUsuario;
 import logica.Artista;
@@ -31,7 +32,7 @@ public class ControladorUsuarioPublish {
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-
+			System.out.println("Exception config Usuario");
 		}
 	}
 
@@ -47,9 +48,19 @@ public class ControladorUsuarioPublish {
 	}
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
-	@WebMethod (exclude = true)
-	public void altaUsuario(DtUsuario dtu) throws Exception {
+	@WebMethod(exclude = true)
+	public void altaUsuario(DtUsuario dtu) {
 		iconU.altaUsuario(dtu);
+	}
+
+	@WebMethod
+	public void altaDtArtista(DtArtista dtArtista) { // throws UsuarioRepetidoExcepcion {
+		iconU.altaDtArtista(dtArtista);
+	}
+
+	@WebMethod
+	public void altaDtEspectador(DtEspectador dtEspectador) { // throws UsuarioRepetidoExcepcion {
+		iconU.altaDtEspectador(dtEspectador);
 	}
 
 	@WebMethod

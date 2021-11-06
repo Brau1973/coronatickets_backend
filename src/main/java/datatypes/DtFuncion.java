@@ -16,9 +16,9 @@ public class DtFuncion {
 	private Date registro;
 	private List<String> artistas = new ArrayList<String>();
 
-	public DtFuncion() {
+	/*public DtFuncion() {
 		super();
-	}
+	}*/
 
 	public DtFuncion(String nombre, Date fecha, Time horaInicio, Date registro, List<String> artistas) {
 	//	super();

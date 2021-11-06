@@ -27,12 +27,6 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 	private JMenuItem menuItAltaUsuario, menuItModificarDatosUsuario, menuItConsultaUsuario, menuItAltaEspectaculo, menuItConsultaEspectaculo;
 	private JMenuItem menuItConsultaPaqueteEspectaculo, menuItCreaPaqueteEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
 	private JMenuItem menuItAgregarEspectaculoAPaquete;
-	
-	private Fabrica fabrica = Fabrica.getInstancia();
-	private IControladorPlataforma iconP;
-	private IControladorUsuario iconU;
-	private IControladorFuncion iconF;
-	private IControladorEspectaculo iconE;
 
 	private AltaUsuario internalFrameAltaUsuario;
 	private ConsultarUsuario internalFrameConsultaUsuario;
@@ -46,7 +40,13 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 	private RegistroFuncion internalFrameRegistroFuncion;
 	private CreaPaqueteEspectaculo internalFrameCreaPaqueteEspectaculo;
 	private AgregarEspectaculoAPaquete internalFrameAgregarEspectaculoAPaquete;
-
+    
+	private Fabrica fabrica = Fabrica.getInstancia();
+	private IControladorPlataforma iconP;
+	private IControladorUsuario iconU;
+	private IControladorFuncion iconF;
+	private IControladorEspectaculo iconE;
+	
 	// Constructor
 	public FrmPrincipal() {
 		ControladorPlataformaPublish cp = new ControladorPlataformaPublish();

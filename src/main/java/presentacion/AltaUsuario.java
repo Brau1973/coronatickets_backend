@@ -27,7 +27,6 @@ import com.toedter.calendar.JDateChooser;
 import datatypes.DtArtista;
 import datatypes.DtEspectador;
 import datatypes.DtUsuario;
-import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControladorUsuario;
 import manejadores.ManejadorUsuario;
 

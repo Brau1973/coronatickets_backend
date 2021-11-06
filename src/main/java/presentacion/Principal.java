@@ -1,27 +1,28 @@
 package presentacion;
 
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 
-public class Principal {
-public static void main(String[] args) {
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrmPrincipal frameInicio = new FrmPrincipal();
-					frameInicio.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-}
-
-//public class Principal{
-//    public static void main(String[] args){
-//	 FrmPrincipal frmInicio = new FrmPrincipal();
-//	 frmInicio.setVisible(true);
-// Fabrica.getInstancia().getIControladorEspectaculo().listarEspectaculos();
-//    }
+//public class Principal {
+//public static void main(String[] args) {
+//
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					FrmPrincipal frameInicio = new FrmPrincipal();
+//					frameInicio.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 //}
+public class Principal{
+    public static void main(String[] args){
+	 FrmPrincipal frmInicio = new FrmPrincipal();
+	 frmInicio.setVisible(true);
+
+	 // Fabrica.getInstancia().getIControladorEspectaculo().listarEspectaculos();
+
+    }
+}
