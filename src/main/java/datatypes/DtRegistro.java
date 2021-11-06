@@ -1,7 +1,10 @@
 package datatypes;
 
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DtRegistro {
 	private String funcion;
 	private Date fechaRegistro;

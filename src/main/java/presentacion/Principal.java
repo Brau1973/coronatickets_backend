@@ -3,13 +3,13 @@ package presentacion;
 import java.awt.EventQueue;
 
 public class Principal {
-	public static void main(String[] args) {
+public static void main(String[] args) {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrmPrincipal frame = new FrmPrincipal();
-					frame.setVisible(true);
+					FrmPrincipal frameInicio = new FrmPrincipal();
+					frameInicio.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

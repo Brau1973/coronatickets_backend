@@ -8,7 +8,7 @@ import logica.Artista;
 import logica.Usuario;
 
 public interface IControladorUsuario{
-	public void altaUsuario(DtUsuario u) throws UsuarioRepetidoExcepcion;
+	public void altaUsuario(DtUsuario u);
 
 	public void modificarUsuario(Usuario nuevo);
 

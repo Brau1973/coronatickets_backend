@@ -20,13 +20,13 @@ import logica.Espectaculo;
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public class ControladorEspectaculoPublish {
 	private Fabrica fabrica;
-	private IControladorEspectaculo icon;
+	private IControladorEspectaculo iconE;
 	private WebServiceConfiguracion configuracion;
 	private Endpoint endpoint;
 
 	public ControladorEspectaculoPublish() {
 		fabrica = Fabrica.getInstancia();
-		icon = fabrica.getIControladorEspectaculo();
+		iconE = fabrica.getIControladorEspectaculo();
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
@@ -35,7 +35,6 @@ public class ControladorEspectaculoPublish {
 
 	@WebMethod(exclude = true)
 	public void publicar() {
-		System.out.println("http://");
 		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorEspectaculo", this);
 		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorEspectaculo");
 	}
@@ -47,37 +46,52 @@ public class ControladorEspectaculoPublish {
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion {
-		icon.altaEspectaculo(dte, nombrePlataforma);
+	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma){
+		iconE.altaEspectaculo(dte, nombrePlataforma);
 	}
 
 	@WebMethod
 	public Espectaculo obtenerEspectaculo(String nombre) {
-		return icon.obtenerEspectaculo(nombre);
+		return iconE.obtenerEspectaculo(nombre);
 	}
 
 	@WebMethod
-	public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma) {
-		return icon.listarEspectaculos(nombrePlataforma);
+	public DtEspectaculo[] listarEspectaculos(String nombrePlataforma) { //vere
+		List<DtEspectaculo> lst=iconE.listarEspectaculos(nombrePlataforma);
+		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
+	}
+	
+	@WebMethod
+	public DtEspectaculo[] obtenerAllDtEspectaculos(String nickname) { //ver
+		List<DtEspectaculo> lst=iconE.obtenerAllDtEspectaculos(nickname);
+		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
+	}
+
+	@WebMethod (exclude = true)
+	public DtEspectaculo[] listEntityToDtEsp(List<Espectaculo> liste) {
+		List<DtEspectaculo> lst=iconE.listEntityToDtEsp(liste);
+		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
 	}
 
 	@WebMethod
-	public List<DtEspectaculo> obtenerAllDtEspectaculos(String nickname) {
-		return icon.obtenerAllDtEspectaculos(nickname);
+	public Espectaculo[] obtenerEspectaculo2(String plataforma) {
+		List<Espectaculo> lst=iconE.obtenerEspectaculo2(plataforma);
+		Espectaculo[] arr=new Espectaculo[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
 	}
 
 	@WebMethod
-	public List<DtEspectaculo> listEntityToDtEsp(List<Espectaculo> liste) {
-		return icon.listEntityToDtEsp(liste);
-	}
-
-	@WebMethod
-	public List<Espectaculo> obtenerEspectaculo2(String plataforma) {
-		return icon.obtenerEspectaculo2(plataforma);
-	}
-
-	@WebMethod
-	public List<String> obtenerEspectaculosArtista(String nickname) { // veer
-		return icon.obtenerEspectaculosArtista(nickname);
+	public String[] obtenerEspectaculosArtista(String nickname) { // veer
+		List<String> lst=iconE.obtenerEspectaculosArtista(nickname);
+		String[] arr=new String[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
 	}
 }

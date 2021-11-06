@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import datatypes.DtFuncion;
-import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
@@ -30,9 +29,7 @@ public class ControladorFuncion implements IControladorFuncion {
 		Espectaculo espectaculo = iconE.obtenerEspectaculo(nombreEspectaculo);
 
 		if (espectaculo.funcionYaRegistrada(dtFuncion.getNombre())) {
-			// throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion " +
-			// dtFuncion.getNombre() + " ya esta registrada en el espectaculo " +
-			// espectaculo.getNombre());
+			// throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion " + dtFuncion.getNombre() + " ya esta registrada en el espectaculo " + espectaculo.getNombre());
 		} else {
 			ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 			IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
@@ -52,8 +49,7 @@ public class ControladorFuncion implements IControladorFuncion {
 		return espectaculo.getFuncionesDt();
 	}
 
-	public List<String> getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador) { // DEVUELVE TODAS LAS FUNCIONES (NOMBRES) EN LAS QUE SE REGISTRO UN ESPECTAODR
-																									// DADO, Y ESTAS SIGUEN VIGENTES
+	public List<String> getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador) { // DEVUELVE TODAS LAS FUNCIONES (NOMBRES) EN LAS QUE SE REGISTRO UN ESPECTAODR																							// DADO, Y ESTAS SIGUEN VIGENTES
 		List<String> funcionesARetornar = new ArrayList<String>();
 
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();

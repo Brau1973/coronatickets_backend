@@ -10,7 +10,6 @@ import logica.Espectaculo;
 import logica.PaqueteEspectaculos;
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorPaquete;
-import manejadores.ManejadorPlataforma;
 
 public class ControladorPaquete implements IControladorPaquete {
 
@@ -55,7 +54,7 @@ public class ControladorPaquete implements IControladorPaquete {
 	@Override
 	public void agregarEspectaculo(String paquete, String espectaculo) {
 		ManejadorPaquete mP = ManejadorPaquete.getInstancia();
-		ManejadorPlataforma mPlat = ManejadorPlataforma.getInstancia();
+	//	ManejadorPlataforma mPlat = ManejadorPlataforma.getInstancia();
 		ManejadorEspectaculo mEsp = ManejadorEspectaculo.getInstancia();
 		PaqueteEspectaculos paq = mP.buscarPaquete(paquete);
 		System.out.println("Espectaculo = " + espectaculo);

@@ -3,6 +3,7 @@ package datatypes;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class DtArtista extends DtUsuario{
 	private String descripcion;
 	private String biografia;
