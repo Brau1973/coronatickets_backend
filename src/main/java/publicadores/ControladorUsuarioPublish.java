@@ -10,12 +10,16 @@ import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
+import datatypes.DtArtista;
+import datatypes.DtEspectador;
 import datatypes.DtUsuario;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorUsuario;
 import logica.Artista;
+import logica.Espectador;
 import logica.Usuario;
+import manejadores.ManejadorUsuario;
 
 @WebService
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
@@ -47,9 +51,14 @@ public class ControladorUsuarioPublish {
 	}
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
-	@WebMethod
-	public void altaUsuario(DtUsuario dtu) throws UsuarioRepetidoExcepcion {
-		icon.altaUsuario(dtu);
+	@WebMethod	
+	public void altaDtArtista(DtArtista dtArtista) throws UsuarioRepetidoExcepcion {
+		icon.altaDtArtista(dtArtista);
+	}
+	
+	@WebMethod	
+	public void altaDtEspectador(DtEspectador dtEspectador) throws UsuarioRepetidoExcepcion {
+		icon.altaDtEspectador(dtEspectador);
 	}
 
 	@WebMethod
@@ -78,28 +87,70 @@ public class ControladorUsuarioPublish {
 	}
 
 	@WebMethod
-	public List<String> listarNicknameUsuarios() {
-		return icon.listarNicknameUsuarios();
+	public String[] listarNicknameUsuarios() {
+		List<String> nicknames = icon.listarNicknameUsuarios();
+	
+		int i = 0;
+		String[] ret = new String[nicknames.size()];
+		for (String nickname : nicknames) {
+			ret[i] = nickname;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
-	public List<String> listarNicknameArtistas() {
-		return icon.listarNicknameArtistas();
+	public String[] listarNicknameArtistas() {
+		List<String> nicknames = icon.listarNicknameArtistas();
+		
+		int i = 0;
+		String[] ret = new String[nicknames.size()];
+		for (String nickname : nicknames) {
+			ret[i] = nickname;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
-	public List<String> listarNicknameEspectadores() {
-		return icon.listarNicknameEspectadores();
+	public String[] listarNicknameEspectadores() {
+		List<String> nicknames = icon.listarNicknameEspectadores();
+		
+		int i = 0;
+		String[] ret = new String[nicknames.size()];
+		for (String nickname : nicknames) {
+			ret[i] = nickname;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
-	public List<String> listarNicknameUsuariosNoSeguidos(String nickname) {
-		return icon.listarNicknameUsuariosNoSeguidos(nickname);
+	public String[] listarNicknameUsuariosNoSeguidos(String nickname) {
+		
+		List<String> nicknames = icon.listarNicknameUsuariosNoSeguidos(nickname);
+		
+		int i = 0;
+		String[] ret = new String[nicknames.size()];
+		for (String nick : nicknames) {
+			ret[i] = nick;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
-	public List<String> listarNicknameUsuariosSeguidos(String nickname) {
-		return icon.listarNicknameUsuariosSeguidos(nickname);
+	public String[] listarNicknameUsuariosSeguidos(String nickname) {
+		
+		List<String> nicknames = icon.listarNicknameUsuariosSeguidos(nickname);
+		
+		int i = 0;
+		String[] ret = new String[nicknames.size()];
+		for (String nick : nicknames) {
+			ret[i] = nick;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod

@@ -59,27 +59,70 @@ public class ControladorEspectaculoPublish {
 	}
 
 	@WebMethod
-	public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma) {
-		return icon.listarEspectaculos(nombrePlataforma);
+	public DtEspectaculo[] listarEspectaculos(String nombrePlataforma) {
+		List<DtEspectaculo> espectaculos = icon.listarEspectaculos(nombrePlataforma);
+		
+		int i = 0;
+		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
+		for (DtEspectaculo espec : espectaculos) {
+			ret[i] = espec;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
-	public List<DtEspectaculo> obtenerAllDtEspectaculos(String nickname) {
-		return icon.obtenerAllDtEspectaculos(nickname);
+	public DtEspectaculo[] obtenerAllDtEspectaculos(String nickname) {
+		List<DtEspectaculo> espectaculos = icon.obtenerAllDtEspectaculos(nickname);
+		
+		int i = 0;
+		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
+		for (DtEspectaculo espec : espectaculos) {
+			ret[i] = espec;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
-	public List<DtEspectaculo> listEntityToDtEsp(List<Espectaculo> liste) {
-		return icon.listEntityToDtEsp(liste);
+	public DtEspectaculo[] listEntityToDtEsp(List<Espectaculo> liste) {
+		
+		List<DtEspectaculo> espectaculos = icon.listEntityToDtEsp(liste);
+		
+		int i = 0;
+		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
+		for (DtEspectaculo espec : espectaculos) {
+			ret[i] = espec;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
-	public List<Espectaculo> obtenerEspectaculo2(String plataforma) {
-		return icon.obtenerEspectaculo2(plataforma);
+	public Espectaculo[] obtenerEspectaculo2(String plataforma) {
+		
+		List<Espectaculo> espectaculos = icon.obtenerEspectaculo2(plataforma);
+		
+		int i = 0;
+		Espectaculo[] ret = new Espectaculo[espectaculos.size()];
+		for (Espectaculo espec : espectaculos) {
+			ret[i] = espec;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
-	public List<String> obtenerEspectaculosArtista(String nickname) { // veer
-		return icon.obtenerEspectaculosArtista(nickname);
+	public String[] obtenerEspectaculosArtista(String nickname) { // veer
+
+		List<String> espectaculos = icon.obtenerEspectaculosArtista(nickname);
+		
+		int i = 0;
+		String[] ret = new String[espectaculos.size()];
+		for (String espec : espectaculos) {
+			ret[i] = espec;
+			i++;
+		}
+		return ret;
 	}
 }
