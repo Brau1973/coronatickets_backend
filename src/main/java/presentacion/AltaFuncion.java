@@ -34,7 +34,6 @@ import com.toedter.calendar.JDateChooser;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
-import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
@@ -342,6 +341,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		listArtistasSeleccionados = new ArrayList<String>();
 		listArtistasSeleccionados.clear();
 	}
+	@SuppressWarnings("unused")
 	private void guardarArchivo(){ //ver
 		try{
 			String nombre = "";

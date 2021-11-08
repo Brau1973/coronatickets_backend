@@ -214,6 +214,14 @@ public class ControladorUsuario implements IControladorUsuario {
 		return dt;
 	}
 
+	public DtArtista getLoginArtista(String nickname) {
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		Usuario entity = mU.buscarUsuario(nickname);
+		DtArtista dt = new DtArtista(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), entity.getContrasenia(), entity.getImagen(), null, null, ((Artista) entity).getDescripcion(), ((Artista) entity).getBiografia(), ((Artista) entity).getLink());
+		
+		return dt;
+	}
+	
 	@Override
 	public DtUsuario getLoginUsuarioMail(String mail) {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();

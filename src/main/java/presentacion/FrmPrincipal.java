@@ -50,7 +50,7 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 	// Constructor
 	public FrmPrincipal() {
 		ControladorPlataformaPublish cp = new ControladorPlataformaPublish();
-		cp.publicarP();
+		cp.publicar();
 		iconP = fabrica.getIControladorPlataforma();
 		
 		ControladorFuncionPublish cf = new ControladorFuncionPublish();

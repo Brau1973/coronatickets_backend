@@ -1,6 +1,5 @@
 package publicadores;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.jws.WebMethod;
@@ -35,7 +34,7 @@ public class ControladorPlataformaPublish {
 	}
 
 	@WebMethod(exclude = true)
-	public void publicarP() {
+	public void publicar() {
 		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorPlataforma", this);
 		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorPlataforma");
 	}
