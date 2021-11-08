@@ -3,11 +3,10 @@ package interfaces;
 import java.util.List;
 
 import datatypes.DtEspectaculo;
-import excepciones.EspectaculoRepetidoExcepcion;
 import logica.Espectaculo;
 
 public interface IControladorEspectaculo{
-    public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion;
+    public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma);
 
     public Espectaculo obtenerEspectaculo(String nombre);
 

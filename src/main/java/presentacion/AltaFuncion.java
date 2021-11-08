@@ -43,7 +43,7 @@ import interfaces.IControladorUsuario;
 import manejadores.ManejadorFuncion;
 
 @SuppressWarnings("serial")
-public class AltaFuncion extends JInternalFrame implements ActionListener{
+public class AltaFuncion extends JInternalFrame implements ActionListener {
 	private IControladorFuncion iconF;
 	private IControladorPlataforma iconP;
 	private IControladorUsuario iconU;
@@ -65,7 +65,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	private List<String> listArtistasSeleccionados;
 
 	// Constructor
-	public AltaFuncion(IControladorFuncion iconF){
+	public AltaFuncion(IControladorFuncion iconF) {
 		iconU = Fabrica.getInstancia().getIControladorUsuario();
 		iconP = Fabrica.getInstancia().getIControladorPlataforma();
 		iconE = Fabrica.getInstancia().getIControladorEspectaculo();
@@ -147,8 +147,8 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 
 		btnCopiar = new JButton(">>>");
 		btnCopiar.setBounds(220, 250, 70, 30);
-		btnCopiar.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent evento){
+		btnCopiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evento) {
 				agregarNombre();
 			}
 		});
@@ -209,7 +209,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 		btnCancelar.addActionListener(this);
 	}
 
-	private void agregarNombre(){
+	private void agregarNombre() {
 		String nombre = this.comboArtista.getSelectedItem().toString();
 		modelo.addElement(nombre);
 		listaArtistasSeleccionados.setModel(modelo);
@@ -218,7 +218,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 	}
 
 	// Inicializar ComboBox
-	public void iniciarlizarComboBox(){
+	public void iniciarlizarComboBox() {
 		comboPlataforma.removeAllItems();
 		comboArtista.removeAllItems();
 
@@ -237,14 +237,14 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void actionPerformed(ActionEvent e){
-		if(e.getSource() == comboPlataforma){
-			if(this.comboPlataforma.getSelectedItem() != null){
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == comboPlataforma) {
+			if (this.comboPlataforma.getSelectedItem() != null) {
 				String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
 				listEspectaculos = iconE.listarEspectaculos(strPlataforma);
-				if(listEspectaculos.isEmpty()){
+				if (listEspectaculos.isEmpty()) {
 					comboEspectaculos.removeAllItems();
-				}else{
+				} else {
 					comboEspectaculos.removeAllItems();
 					listEspectaculos.forEach((Dtesp) -> {
 						comboEspectaculos.addItem(Dtesp.getNombre());
@@ -253,16 +253,16 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 			}
 		}
 
-		if(e.getSource() == btnAbrir){ 
+		if (e.getSource() == btnAbrir) {
 			JFileChooser browseImageFile = new JFileChooser();
 			FileNameExtensionFilter fnef = new FileNameExtensionFilter("IMAGES", "png", "jpg", "jpeg");
 			browseImageFile.addChoosableFileFilter(fnef);
 			int showOpenDialogue = browseImageFile.showOpenDialog(null);
 
-			if(showOpenDialogue == JFileChooser.APPROVE_OPTION){
+			if (showOpenDialogue == JFileChooser.APPROVE_OPTION) {
 				File selectedImageFile = browseImageFile.getSelectedFile();
 				String selectedImagePath = selectedImageFile.getAbsolutePath();
-		
+
 				// JOptionPane.showMessageDialog(null, selectedImagePath);
 				ImageIcon ii = new ImageIcon(selectedImagePath);
 				Image image = ii.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
@@ -272,8 +272,8 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 			}
 		}
 
-		if(e.getSource() == btnAceptar){
-			if(checkFormulario() && modificarDatos()){
+		if (e.getSource() == btnAceptar) {
+			if (checkFormulario() && modificarDatos()) {
 				String nombreFuncion = this.txtNombre.getText();
 				Date FechaFuncion = this.fechaFuncion.getDate();
 				int hora = Integer.parseInt(this.spinHora.getValue().toString());
@@ -284,44 +284,44 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 
 				String url = this.txturl.getText();
 				byte[] selectedImage = null;
-				try{
+				try {
 					selectedImage = Files.readAllBytes(Paths.get(url));
-				}catch(IOException e1){
+				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 
 				DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro, listArtistasSeleccionados);
-			//	try{
+				try {
 					this.iconF.altaFuncion(dtFuncion, strespectaculo, selectedImage);
-				//	JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");
-			//	}catch(FuncionYaRegistradaEnEspectaculoExcepcion msg){
-			//		JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
-				//}
+					//	JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");
+				} catch (Exception e2) {
+					//		JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+				}
 				limpiarFormulario();
 				setVisible(false);
 			}
 		}
 
-		if(e.getSource() == btnCancelar){
+		if (e.getSource() == btnCancelar) {
 			limpiarFormulario();
 			setVisible(false);
 		}
 	}
 
-	private boolean checkFormulario(){
-		if(!txtNombre.getText().isEmpty() && fechaFuncion.getDate() != null && fechaAlta.getDate() != null){
-		}else{
+	private boolean checkFormulario() {
+		if (!txtNombre.getText().isEmpty() && fechaFuncion.getDate() != null && fechaAlta.getDate() != null) {
+		} else {
 			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;
 	}
 
-	private boolean modificarDatos(){
+	private boolean modificarDatos() {
 		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-		if(mF.buscarFuncion(txtNombre.getText()) != null){
+		if (mF.buscarFuncion(txtNombre.getText()) != null) {
 			int respuesta = JOptionPane.showConfirmDialog(null, "El noimbre de la funcion ya existe\n�Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
-			if(respuesta != JOptionPane.YES_NO_OPTION){
+			if (respuesta != JOptionPane.YES_NO_OPTION) {
 				limpiarFormulario();
 				setVisible(false);
 			}
@@ -330,7 +330,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 		return true;
 	}
 
-	private void limpiarFormulario(){
+	private void limpiarFormulario() {
 		this.txtNombre.setText("");
 		this.fechaFuncion.setDate(null);
 		this.spinHora.setValue(0);
@@ -338,11 +338,10 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 		this.fechaAlta.setDate(null);
 	}
 
-	public void limpiarListaArtistas(){
+	public void limpiarListaArtistas() {
 		listArtistasSeleccionados = new ArrayList<String>();
 		listArtistasSeleccionados.clear();
 	}
-
 	private void guardarArchivo(){ //ver
 		try{
 			String nombre = "";
@@ -361,5 +360,4 @@ public class AltaFuncion extends JInternalFrame implements ActionListener{
 			JOptionPane.showMessageDialog(null, "Su archivo no se ha guardado", "Advertencia", JOptionPane.WARNING_MESSAGE);
 		}
 	}
-
 }

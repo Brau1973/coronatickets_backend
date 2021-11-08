@@ -167,12 +167,11 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
     }
 
     // Inicializar ComboBox
-    @SuppressWarnings("static-access")
     public void iniciarlizarComboBox(){
 	 comboPlataforma.removeAllItems();
 	 comboArtista.removeAllItems();
 
-	 listPlataformas = iconP.listarPlataformasStr();
+	 listPlataformas=iconP.listarPlataformasStr();
 	 listPlataformas.forEach((p) -> {
 	     comboPlataforma.addItem(p);
 	 });

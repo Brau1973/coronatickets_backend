@@ -10,10 +10,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import interfaces.Fabrica;
+import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
-import publicadores.ControladorFuncionPublish;
+import interfaces.IControladorUsuario;
 import publicadores.ControladorPlataformaPublish;
+import publicadores.ControladorUsuarioPublish;
+import publicadores.ControladorEspectaculoPublish;
+import publicadores.ControladorFuncionPublish;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame implements ActionListener {
@@ -24,33 +28,43 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 	private JMenuItem menuItConsultaPaqueteEspectaculo, menuItCreaPaqueteEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
 	private JMenuItem menuItAgregarEspectaculoAPaquete;
 
-	//	private AltaUsuario internalFrameAltaUsuario;
-	//	private ConsultarUsuario internalFrameConsultaUsuario;
-	//	private ModificarDatosUsuario internalFrameModificarDatosUsuario;
-	//	private AltaEspectaculo internalFrameAltaEspectaculo;
-	//	private ConsultaEspectaculo internalFrameConsultaEspectaculo;
-	//	private ConsultaPaqueteEspectaculos internalFrameConsultaPaqueteEspectaculo;
-
+	private AltaUsuario internalFrameAltaUsuario;
+	private ConsultarUsuario internalFrameConsultaUsuario;
+	private ModificarDatosUsuario internalFrameModificarDatosUsuario;
+	private AltaEspectaculo internalFrameAltaEspectaculo;
+	private ConsultaEspectaculo internalFrameConsultaEspectaculo;
+	private ConsultaPaqueteEspectaculos internalFrameConsultaPaqueteEspectaculo;
 	private AltaPlataforma internalFrameAltaPlataforma;
 	private AltaFuncion internalFrameAltaFuncion;
-	/* private ConsultaFuncion internalFrameConsultaFuncion; private RegistroFuncion internalFrameRegistroFuncion; private CreaPaqueteEspectaculo internalFrameCreaPaqueteEspectaculo; private AgregarEspectaculoAPaquete internalFrameAgregarEspectaculoAPaquete; */
-
+	private ConsultaFuncion internalFrameConsultaFuncion;
+	private RegistroFuncion internalFrameRegistroFuncion;
+	private CreaPaqueteEspectaculo internalFrameCreaPaqueteEspectaculo;
+	private AgregarEspectaculoAPaquete internalFrameAgregarEspectaculoAPaquete;
+    
+	private Fabrica fabrica = Fabrica.getInstancia();
 	private IControladorPlataforma iconP;
+	private IControladorUsuario iconU;
 	private IControladorFuncion iconF;
-	//	private IControladorEspectaculo iconE = fabrica.getIControladorEspectaculo();
-	//	private IControladorUsuario iconU = fabrica.getIControladorUsuario();
-
+	private IControladorEspectaculo iconE;
+	
 	// Constructor
 	public FrmPrincipal() {
 		ControladorPlataformaPublish cp = new ControladorPlataformaPublish();
-		cp.publicar();
-		Fabrica fabrica = Fabrica.getInstancia();
+		cp.publicarP();
 		iconP = fabrica.getIControladorPlataforma();
-		//ControladorFuncionPublish cf = new ControladorFuncionPublish();
-		//cf.publicar();
-		//	Fabrica fabrica = Fabrica.getInstancia();
-		//iconF = fabrica.getIControladorFuncion();
-
+		
+		ControladorFuncionPublish cf = new ControladorFuncionPublish();
+		cf.publicar();
+		iconF = fabrica.getIControladorFuncion();
+		
+		ControladorUsuarioPublish cu = new ControladorUsuarioPublish();
+		cu.publicar();
+		iconU = fabrica.getIControladorUsuario();
+		
+		ControladorEspectaculoPublish ce = new ControladorEspectaculoPublish();
+		ce.publicar();
+		iconE = fabrica.getIControladorEspectaculo();
+		
 		inicializar();
 		setTitle("coronaTickets.uy");
 		setSize(800, 750);
@@ -62,7 +76,6 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 	private void inicializar() {
 		contenedor = getContentPane();
 		contenedor.setLayout(null);
-
 		// JMenu
 		menuInicio = new JMenu();
 		menuUsuario = new JMenu();
@@ -158,46 +171,66 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 
 		// Casos de uso
 		inFrmAltaUsuario();
-		/* inFrmConsultaUsuario(); inFrmModificarDatosUsuario(); inFrmAltaEspectaculo(); inFrmConsultaEspectaculo(); */
+		inFrmConsultaUsuario();
+		inFrmModificarDatosUsuario();
+		inFrmAltaEspectaculo();
+		inFrmConsultaEspectaculo();
 		inFrmAltaPlataforma();
-
 		inFrmAltaFuncion();
-		/* inFrmConsultaFuncion(); inFrmRegistroFuncion(); inFrmConsultaPaqueteEspectaculos(); inFrmCreaPaqueteEspectaculo(); inFrmAgregarEspectaculoAPaquete(); */
+		inFrmConsultaFuncion();
+		inFrmRegistroFuncion();
+		inFrmConsultaPaqueteEspectaculos();
+		inFrmCreaPaqueteEspectaculo();
+		inFrmAgregarEspectaculoAPaquete();
 	}
 
 	// InternalFrame Alta Usuario
 	private void inFrmAltaUsuario() {
-		/* internalFrameAltaUsuario = new AltaUsuario(iconU); internalFrameAltaUsuario.setVisible(false); contenedor.add(internalFrameAltaUsuario); */
+		internalFrameAltaUsuario = new AltaUsuario(iconU);
+		internalFrameAltaUsuario.setVisible(false);
+		contenedor.add(internalFrameAltaUsuario);
 	}
 
 	// InternalFrame Consulta Usuario
 	private void inFrmConsultaUsuario() {
-		/* internalFrameConsultaUsuario = new ConsultarUsuario(iconU); internalFrameConsultaUsuario.setVisible(false); contenedor.add(internalFrameConsultaUsuario); */
+		internalFrameConsultaUsuario = new ConsultarUsuario(iconU);
+		internalFrameConsultaUsuario.setVisible(false);
+		contenedor.add(internalFrameConsultaUsuario);
 	}
 
 	// InternalFrame Modificar Datos Usuario
 	private void inFrmModificarDatosUsuario() {
-		/* internalFrameModificarDatosUsuario = new ModificarDatosUsuario(iconU); internalFrameModificarDatosUsuario.setVisible(false); contenedor.add(internalFrameModificarDatosUsuario); */
+		internalFrameModificarDatosUsuario = new ModificarDatosUsuario(iconU);
+		internalFrameModificarDatosUsuario.setVisible(false);
+		contenedor.add(internalFrameModificarDatosUsuario);
 	}
 
 	// InternalFrame Alta de Espectaculo // 79S
 	private void inFrmAltaEspectaculo() {
-		/* internalFrameAltaEspectaculo = new AltaEspectaculo(iconE); internalFrameAltaEspectaculo.setVisible(false); contenedor.add(internalFrameAltaEspectaculo); */
+		internalFrameAltaEspectaculo = new AltaEspectaculo(iconE);
+		internalFrameAltaEspectaculo.setVisible(false);
+		contenedor.add(internalFrameAltaEspectaculo);
 	}
 
 	// InternalFrame Consulta Espectaculo
 	private void inFrmConsultaEspectaculo() {
-		/* internalFrameConsultaEspectaculo = new ConsultaEspectaculo(); internalFrameConsultaEspectaculo.setVisible(false); contenedor.add(internalFrameConsultaEspectaculo); */
+		internalFrameConsultaEspectaculo = new ConsultaEspectaculo();
+		internalFrameConsultaEspectaculo.setVisible(false);
+		contenedor.add(internalFrameConsultaEspectaculo);
 	}
 
 	// InternalFrame Crear Paquete de espectaculo
 	private void inFrmCreaPaqueteEspectaculo() {
-		/* internalFrameCreaPaqueteEspectaculo = new CreaPaqueteEspectaculo(); internalFrameCreaPaqueteEspectaculo.setVisible(false); contenedor.add(internalFrameCreaPaqueteEspectaculo); */
+		internalFrameCreaPaqueteEspectaculo = new CreaPaqueteEspectaculo();
+		internalFrameCreaPaqueteEspectaculo.setVisible(false);
+		contenedor.add(internalFrameCreaPaqueteEspectaculo);
 	}
 
 	// InternalFrame Consultar Paquete de espectaculo
 	private void inFrmConsultaPaqueteEspectaculos() {
-		/* internalFrameConsultaPaqueteEspectaculo = new ConsultaPaqueteEspectaculos(); internalFrameConsultaPaqueteEspectaculo.setVisible(false); contenedor.add(internalFrameConsultaPaqueteEspectaculo); */
+		internalFrameConsultaPaqueteEspectaculo = new ConsultaPaqueteEspectaculos();
+		internalFrameConsultaPaqueteEspectaculo.setVisible(false);
+		contenedor.add(internalFrameConsultaPaqueteEspectaculo);
 	}
 
 	// InternalFrame Alta Plataforma
@@ -216,30 +249,60 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 
 	// InternalFrame Consulta Funcion
 	private void inFrmConsultaFuncion() {
-		/* internalFrameConsultaFuncion = new ConsultaFuncion(iconF); internalFrameConsultaFuncion.setVisible(false); contenedor.add(internalFrameConsultaFuncion); */
+		internalFrameConsultaFuncion = new ConsultaFuncion(iconF);
+		internalFrameConsultaFuncion.setVisible(false);
+		contenedor.add(internalFrameConsultaFuncion);
 	}
 
 	// InternalFrame Registro Funcion
 	private void inFrmRegistroFuncion() {
-		/* internalFrameRegistroFuncion = new RegistroFuncion(); internalFrameRegistroFuncion.setVisible(false); contenedor.add(internalFrameRegistroFuncion); */
+		internalFrameRegistroFuncion = new RegistroFuncion();
+		internalFrameRegistroFuncion.setVisible(false);
+		contenedor.add(internalFrameRegistroFuncion);
 	}
 
 	// InternalFrame Agregar espectaculo a Paquete
 	private void inFrmAgregarEspectaculoAPaquete() {
-		/* internalFrameAgregarEspectaculoAPaquete = new AgregarEspectaculoAPaquete(); internalFrameAgregarEspectaculoAPaquete.setVisible(false); contenedor.add(internalFrameAgregarEspectaculoAPaquete); */
+		internalFrameAgregarEspectaculoAPaquete = new AgregarEspectaculoAPaquete();
+		internalFrameAgregarEspectaculoAPaquete.setVisible(false);
+		contenedor.add(internalFrameAgregarEspectaculoAPaquete);
 	}
 
 	// Eventos
 	public void actionPerformed(ActionEvent e) {
-		/* internalFrameAltaUsuario.setVisible(false); internalFrameConsultaUsuario.setVisible(false); internalFrameModificarDatosUsuario.setVisible(false); internalFrameAltaEspectaculo.setVisible(false); internalFrameConsultaEspectaculo.setVisible(false); */
+		internalFrameAltaUsuario.setVisible(false);
+		internalFrameConsultaUsuario.setVisible(false);
+		internalFrameModificarDatosUsuario.setVisible(false);
+		internalFrameAltaEspectaculo.setVisible(false);
+		internalFrameConsultaEspectaculo.setVisible(false);
 		internalFrameAltaPlataforma.setVisible(false);
 		internalFrameAltaFuncion.setVisible(false);
-		/* internalFrameConsultaFuncion.setVisible(false); internalFrameRegistroFuncion.setVisible(false); internalFrameConsultaPaqueteEspectaculo.setVisible(false); internalFrameCreaPaqueteEspectaculo.setVisible(false); internalFrameAgregarEspectaculoAPaquete.setVisible(false); */
+		internalFrameConsultaFuncion.setVisible(false);
+		internalFrameRegistroFuncion.setVisible(false);
+		internalFrameConsultaPaqueteEspectaculo.setVisible(false);
+		internalFrameCreaPaqueteEspectaculo.setVisible(false);
+		internalFrameAgregarEspectaculoAPaquete.setVisible(false);
 
 		switch (e.getActionCommand()) {
-		/* case "Alta de Usuario": internalFrameAltaUsuario.setVisible(true); break; case "Modificar Datos de Usuario": internalFrameModificarDatosUsuario.iniciarlizarComboBox(); internalFrameModificarDatosUsuario.setVisible(true); break; case "Consulta de Usuario":
-		 * internalFrameConsultaUsuario.iniciaComboBoxU(); internalFrameConsultaUsuario.setVisible(true); break; case "Alta de Espectaculo": internalFrameAltaEspectaculo.iniciarlizarComboBox(); internalFrameAltaEspectaculo.setVisible(true); break; case "Consulta de Espectaculo":
-		 * internalFrameConsultaEspectaculo.iniciarlizarComboBox(); internalFrameConsultaEspectaculo.setVisible(true); break; */
+		case "Alta de Usuario":
+			internalFrameAltaUsuario.setVisible(true);
+			break;
+		case "Modificar Datos de Usuario":
+			internalFrameModificarDatosUsuario.iniciarlizarComboBox();
+			internalFrameModificarDatosUsuario.setVisible(true);
+			break;
+		case "Consulta de Usuario":
+			internalFrameConsultaUsuario.iniciaComboBoxU();
+			internalFrameConsultaUsuario.setVisible(true);
+			break;
+		case "Alta de Espectaculo":
+			internalFrameAltaEspectaculo.iniciarlizarComboBox();
+			internalFrameAltaEspectaculo.setVisible(true);
+			break;
+		case "Consulta de Espectaculo":
+			internalFrameConsultaEspectaculo.iniciarlizarComboBox();
+			internalFrameConsultaEspectaculo.setVisible(true);
+			break;
 		case "Alta de Plataforma":
 			internalFrameAltaPlataforma.setVisible(true);
 			break;
@@ -248,13 +311,28 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 			internalFrameAltaFuncion.iniciarlizarComboBox();
 			internalFrameAltaFuncion.setVisible(true);
 			break;
-		/* case "Consulta de Funcion de Espectaculo": internalFrameConsultaFuncion.inicializarComboBox(); internalFrameConsultaFuncion.limpiarFormulario(); internalFrameConsultaFuncion.setVisible(true); break; case "Registro a Funcion de Espectaculo": internalFrameRegistroFuncion.iniciarlizarComboBox();
-		 * internalFrameRegistroFuncion.setVisible(true); break; case "Crear Paquete de Espectaculo": internalFrameCreaPaqueteEspectaculo.setVisible(true); break; case "Consulta de Paquete de Espectaculos": internalFrameConsultaPaqueteEspectaculo.iniciarlizarComboBox();
-		 * internalFrameConsultaPaqueteEspectaculo.setVisible(true); break; */
-		/* case "Agregar Espectaculo a Paquete": System.out.println("menu agregar"); */
-		//		 iconU.seguirUsuario("Alexis Sanchez", "CR7");
-		//		 iconU.seguirUsuario("CR7", "Alexis Sanchez");
-		/* internalFrameAgregarEspectaculoAPaquete.iniciarlizarComboBox(); internalFrameAgregarEspectaculoAPaquete.setVisible(true); break; */
+		case "Consulta de Funcion de Espectaculo":
+			internalFrameConsultaFuncion.inicializarComboBox();
+			internalFrameConsultaFuncion.limpiarFormulario();
+			internalFrameConsultaFuncion.setVisible(true);
+			break;
+		case "Registro a Funcion de Espectaculo":
+			internalFrameRegistroFuncion.iniciarlizarComboBox();
+			internalFrameRegistroFuncion.setVisible(true);
+			break;
+		case "Crear Paquete de Espectaculo":
+			internalFrameCreaPaqueteEspectaculo.setVisible(true);
+			break;
+		case "Consulta de Paquete de Espectaculos":
+			internalFrameConsultaPaqueteEspectaculo.iniciarlizarComboBox();
+			internalFrameConsultaPaqueteEspectaculo.setVisible(true);
+			break;
+		case "Agregar Espectaculo a Paquete":
+			//System.out.println("menu agregar");
+			/* iconU.seguirUsuario("Alexis Sanchez", "CR7"); iconU.seguirUsuario("CR7", "Alexis Sanchez"); */
+			internalFrameAgregarEspectaculoAPaquete.iniciarlizarComboBox();
+			internalFrameAgregarEspectaculoAPaquete.setVisible(true);
+			break;
 		default:
 			break;
 		}

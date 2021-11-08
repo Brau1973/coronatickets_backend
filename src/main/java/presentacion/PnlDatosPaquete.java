@@ -30,7 +30,7 @@ public class PnlDatosPaquete extends JInternalFrame{
     private JLabel lblEspectaculos, lblRegistro, lblNombPaquete, lblDescPaquete, lblURL, lblCosto, lblCantidadMaxima;
     private JTextField textNombreEspectaculo, textCantidadMaxima, textArtistaOrganizador, textDescripcion, textDuracion, textCosto, textURL, textRegistro, textCantidadMinima;
     private JTable tablaEspectaculos;
-    private JLabel txtNombEspectaculo, txtDescripcion, txtNombPaquete, txtDescripcionPaquete, txtCosto, txtDuracion;
+    private JLabel txtNombPaquete, txtDescripcionPaquete;//, txtCosto, txtDuraciontxtNombEspectaculo, txtDescripcion, 
     private Border borderPnlEspectaculos, borderPnlPaquete;
     static final int X_LABEL = 15;
     static final int X_TEXT = 200;

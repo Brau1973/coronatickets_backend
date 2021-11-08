@@ -11,12 +11,8 @@ import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
-
-import com.toedter.calendar.JDateChooser;
 
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
@@ -26,17 +22,16 @@ import logica.Espectaculo;
 import logica.Espectador;
 import logica.Usuario;
 import manejadores.ManejadorEspectaculo;
-import manejadores.ManejadorFuncion;
 import manejadores.ManejadorUsuario;
 
 @SuppressWarnings("serial")
 public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 
    private JPanel miPanel;
-   private JScrollPane panel;
+//   private JScrollPane panel;
    private JLabel lblTitulo, lblBuscar;
-   private JDateChooser dateFechaNac;
-   private JTable tabUsuario;
+ //  private JDateChooser dateFechaNac;
+ //  private JTable tabUsuario;
    private JComboBox<String> comboUsuarios;
    private JTextArea jtextarea;
    private List<Usuario> listUsuarios;
@@ -115,8 +110,8 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	  Usuario u = iconU.obtenerUsuario(strUsuario);
 	  SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	  ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-	  List<Espectaculo> usuario = mE.obtenerEspectaculo(); //ver
-	  ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+	//  List<Espectaculo> usuario = mE.obtenerEspectaculo(); //ver
+	//  ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 	  String datos = "";
 	  String op = "";
 	  if(u instanceof Artista){

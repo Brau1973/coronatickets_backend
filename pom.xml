@@ -5,7 +5,7 @@
 	<groupId>com.coronaTickets</groupId>
 	<artifactId>coronaTickets</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
+	
 	<properties>
 		<maven.copiler.source>1.8</maven.copiler.source>
 		<maven.copiler.target>1.8</maven.copiler.target>
@@ -13,11 +13,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.sun.xml.ws</groupId>
-			<artifactId>jaxws-rt</artifactId>
-			<version>2.3.3</version>
-		</dependency>
 		<dependency>
 			<groupId>com.toedter</groupId>
 			<artifactId>jcalendar</artifactId>
@@ -58,7 +53,11 @@
 			<artifactId>jaxws-api</artifactId>
 			<version>2.3.1</version>
 		</dependency>
-	
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>2.3.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>

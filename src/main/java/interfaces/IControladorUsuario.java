@@ -2,13 +2,18 @@ package interfaces;
 
 import java.util.List;
 
+import datatypes.DtArtista;
+import datatypes.DtEspectador;
 import datatypes.DtUsuario;
-import excepciones.UsuarioRepetidoExcepcion;
 import logica.Artista;
 import logica.Usuario;
 
-public interface IControladorUsuario{
-	public void altaUsuario(DtUsuario u) throws UsuarioRepetidoExcepcion;
+public interface IControladorUsuario {
+	public void altaUsuario(DtUsuario u);
+
+	public void altaDtArtista(DtArtista dtArtista);
+
+	public void altaDtEspectador(DtEspectador dtEspectador);
 
 	public void modificarUsuario(Usuario nuevo);
 
@@ -31,7 +36,7 @@ public interface IControladorUsuario{
 	public List<String> listarNicknameUsuariosSeguidos(String nickname);
 
 	public DtUsuario getLoginUsuario(String nickname);
-	
+
 	public boolean emailRepetido(String email);
 
 	public DtUsuario getLoginUsuarioMail(String mail);

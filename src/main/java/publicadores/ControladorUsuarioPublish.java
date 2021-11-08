@@ -10,8 +10,9 @@ import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
+import datatypes.DtArtista;
+import datatypes.DtEspectador;
 import datatypes.DtUsuario;
-import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorUsuario;
 import logica.Artista;
@@ -21,17 +22,17 @@ import logica.Usuario;
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public class ControladorUsuarioPublish {
 	private Fabrica fabrica;
-	private IControladorUsuario icon;
+	private IControladorUsuario iconU;
 	private WebServiceConfiguracion configuracion;
 	private Endpoint endpoint;
 
 	public ControladorUsuarioPublish() {
 		fabrica = Fabrica.getInstancia();
-		icon = fabrica.getIControladorUsuario();
+		iconU = fabrica.getIControladorUsuario();
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-
+			System.out.println("Exception config Usuario");
 		}
 	}
 
@@ -47,68 +48,93 @@ public class ControladorUsuarioPublish {
 	}
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
+	@WebMethod(exclude = true)
+	public void altaUsuario(DtUsuario dtu) {
+		iconU.altaUsuario(dtu);
+	}
+
 	@WebMethod
-	public void altaUsuario(DtUsuario dtu) throws UsuarioRepetidoExcepcion {
-		icon.altaUsuario(dtu);
+	public void altaDtArtista(DtArtista dtArtista) { // throws UsuarioRepetidoExcepcion {
+		iconU.altaDtArtista(dtArtista);
+	}
+
+	@WebMethod
+	public void altaDtEspectador(DtEspectador dtEspectador) { // throws UsuarioRepetidoExcepcion {
+		iconU.altaDtEspectador(dtEspectador);
 	}
 
 	@WebMethod
 	public boolean emailRepetido(String email) {
-		return icon.emailRepetido(email);
+		return iconU.emailRepetido(email);
 	}
 
 	@WebMethod
 	public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir) {
-		icon.seguirUsuario(nicknameUsuario, nicknameUsuarioASeguir);
+		iconU.seguirUsuario(nicknameUsuario, nicknameUsuarioASeguir);
 	}
 
 	@WebMethod
 	public void dejarDeSeguirUsuario(String nicknameUsuario, String nicknameUsuarioADejarDeSeguir) {
-		icon.dejarDeSeguirUsuario(nicknameUsuario, nicknameUsuarioADejarDeSeguir);
+		iconU.dejarDeSeguirUsuario(nicknameUsuario, nicknameUsuarioADejarDeSeguir);
 	}
 
 	@WebMethod
 	public Usuario obtenerUsuario(String nickname) {
-		return icon.obtenerUsuario(nickname);
+		return iconU.obtenerUsuario(nickname);
 	}
 
 	@WebMethod
 	public Artista obtenerArtista(String nickname) {
-		return icon.obtenerArtista(nickname);
+		return iconU.obtenerArtista(nickname);
 	}
 
 	@WebMethod
-	public List<String> listarNicknameUsuarios() {
-		return icon.listarNicknameUsuarios();
+	public String[] listarNicknameUsuarios() {
+		List<String> lst = iconU.listarNicknameUsuarios();
+		String[] arr = new String[lst.size()];
+		arr = lst.toArray(arr);
+		return arr;
 	}
 
 	@WebMethod
-	public List<String> listarNicknameArtistas() {
-		return icon.listarNicknameArtistas();
+	public String[] listarNicknameArtistas() {
+		List<String> lst = iconU.listarNicknameArtistas();
+		String[] arr = new String[lst.size()];
+		arr = lst.toArray(arr);
+		return arr;
 	}
 
 	@WebMethod
-	public List<String> listarNicknameEspectadores() {
-		return icon.listarNicknameEspectadores();
+	public String[] listarNicknameEspectadores() {
+		List<String> lst = iconU.listarNicknameEspectadores();
+		String[] arr = new String[lst.size()];
+		arr = lst.toArray(arr);
+		return arr;
 	}
 
 	@WebMethod
-	public List<String> listarNicknameUsuariosNoSeguidos(String nickname) {
-		return icon.listarNicknameUsuariosNoSeguidos(nickname);
+	public String[] listarNicknameUsuariosNoSeguidos(String nickname) {
+		List<String> lst = iconU.listarNicknameUsuariosNoSeguidos(nickname);
+		String[] arr = new String[lst.size()];
+		arr = lst.toArray(arr);
+		return arr;
 	}
 
 	@WebMethod
-	public List<String> listarNicknameUsuariosSeguidos(String nickname) {
-		return icon.listarNicknameUsuariosSeguidos(nickname);
+	public String[] listarNicknameUsuariosSeguidos(String nickname) {
+		List<String> lst = iconU.listarNicknameUsuariosSeguidos(nickname);
+		String[] arr = new String[lst.size()];
+		arr = lst.toArray(arr);
+		return arr;
 	}
 
 	@WebMethod
 	public DtUsuario getLoginUsuario(String nickname) {
-		return icon.getLoginUsuario(nickname);
+		return iconU.getLoginUsuario(nickname);
 	}
 
 	@WebMethod
 	public DtUsuario getLoginUsuarioMail(String mail) {
-		return icon.getLoginUsuarioMail(mail);
+		return iconU.getLoginUsuarioMail(mail);
 	}
 }
