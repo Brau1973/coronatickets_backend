@@ -58,7 +58,7 @@ public class ControladorEspectaculoPublish {
 
 	@WebMethod
 	public DtEspectaculo[] listarEspectaculos(String nombrePlataforma) {
-		List<DtEspectaculo> espectaculos = icon.listarEspectaculos(nombrePlataforma);
+		List<DtEspectaculo> espectaculos = iconE.listarEspectaculos(nombrePlataforma);
 		
 		int i = 0;
 		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
@@ -71,7 +71,7 @@ public class ControladorEspectaculoPublish {
 	
 	@WebMethod
 	public DtEspectaculo[] obtenerAllDtEspectaculos(String nickname) {
-		List<DtEspectaculo> espectaculos = icon.obtenerAllDtEspectaculos(nickname);
+		List<DtEspectaculo> espectaculos = iconE.obtenerAllDtEspectaculos(nickname);
 		
 		int i = 0;
 		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
@@ -82,24 +82,23 @@ public class ControladorEspectaculoPublish {
 		return ret;
 	}
 
-	@WebMethod
-	public DtEspectaculo[] listEntityToDtEsp(List<Espectaculo> liste) {
-		
-		List<DtEspectaculo> espectaculos = icon.listEntityToDtEsp(liste);
-		
-		int i = 0;
-		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
-		for (DtEspectaculo espec : espectaculos) {
-			ret[i] = espec;
-			i++;
-		}
-		return ret;
-
-	}
+//	@WebMethod
+//	public DtEspectaculo[] listEntityToDtEsp(List<Espectaculo> liste){
+//		
+//		List<DtEspectaculo> espectaculos = iconE.listEntityToDtEsp(liste);
+//		
+//		int i = 0;
+//		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
+//		for (DtEspectaculo espec : espectaculos) {
+//			ret[i] = espec;
+//			i++;
+//		}
+//		return ret;
+//	}
 
 	@WebMethod
 	public Espectaculo[] obtenerEspectaculo2(String plataforma) {
-		List<Espectaculo> espectaculos = icon.obtenerEspectaculo2(plataforma);
+		List<Espectaculo> espectaculos = iconE.obtenerEspectaculo2(plataforma);
 		
 		int i = 0;
 		Espectaculo[] ret = new Espectaculo[espectaculos.size()];
@@ -108,12 +107,11 @@ public class ControladorEspectaculoPublish {
 			i++;
 		}
 		return ret;
-
 	}
 
 	@WebMethod
 	public String[] obtenerEspectaculosArtista(String nickname) { // veer
-		List<String> espectaculos = icon.obtenerEspectaculosArtista(nickname);
+		List<String> espectaculos = iconE.obtenerEspectaculosArtista(nickname);
 		
 		int i = 0;
 		String[] ret = new String[espectaculos.size()];

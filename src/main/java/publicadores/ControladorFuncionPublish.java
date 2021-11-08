@@ -33,8 +33,10 @@ public class ControladorFuncionPublish {
 
 	@WebMethod(exclude = true)
 	public void publicar() {
-		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorFuncion", this);
-		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorFuncion");
+		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":"
+				+ configuracion.getConfigOf("#WS_PORT") + "/controladorFuncion", this);
+		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT")
+				+ "/controladorFuncion");
 	}
 
 	@WebMethod(exclude = true)
@@ -48,39 +50,34 @@ public class ControladorFuncionPublish {
 		iconF.altaFuncion(dtFuncion, nombreEspectaculo, imagen);
 	}
 
-	  @WebMethod
-		public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) {
-			icon.altaFuncion(dtFuncion, nombreEspectaculo, imagen);
-	  }
+	@WebMethod
+	public DtFuncion[] listarFunciones(String nomEsp) {
+		List<DtFuncion> funciones = iconF.listarFunciones(nomEsp);
 
-		@WebMethod
-	  public DtFuncion[] listarFunciones(String nomEsp) {
-			List<DtFuncion> funciones = icon.listarFunciones(nomEsp);
-			
-			int i = 0;
-			DtFuncion[] ret = new DtFuncion[funciones.size()];
-			for (DtFuncion fun : funciones) {
-				ret[i] = fun;
-				i++;
-			}
-			return ret;
+		int i = 0;
+		DtFuncion[] ret = new DtFuncion[funciones.size()];
+		for (DtFuncion fun : funciones) {
+			ret[i] = fun;
+			i++;
 		}
+		return ret;
+	}
 
-		@WebMethod
-		public String[] getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador) {
-			List<String> funciones = icon.getFuncionesVigentesRegistradasPorEspectador(nicknameEspectador);
-			
-			int i = 0;
-			String[] ret = new String[funciones.size()];
-			for (String fun : funciones) {
-				ret[i] = fun;
-				i++;
-			}
-			return ret;
-		}
+	@WebMethod
+	public String[] getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador) {
+		List<String> funciones = iconF.getFuncionesVigentesRegistradasPorEspectador(nicknameEspectador);
 
-		@WebMethod
-		public Funcion obtenerFuncion(String nombre) {
-			return icon.obtenerFuncion(nombre);
+		int i = 0;
+		String[] ret = new String[funciones.size()];
+		for (String fun : funciones) {
+			ret[i] = fun;
+			i++;
 		}
+		return ret;
+	}
+
+	@WebMethod
+	public Funcion obtenerFuncion(String nombre) {
+		return iconF.obtenerFuncion(nombre);
+	}
 }

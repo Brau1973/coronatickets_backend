@@ -15,9 +15,9 @@ public interface IControladorUsuario {
 
 	public void altaDtEspectador(DtEspectador dtEspectador);
 
-	public void altaDtArtista(DtArtista dtArtista) throws UsuarioRepetidoExcepcion ;
+	//public void altaDtArtista(DtArtista dtArtista) throws UsuarioRepetidoExcepcion ;
 	
-	public void altaDtEspectador(DtEspectador dtEspectador) throws UsuarioRepetidoExcepcion ;
+	//public void altaDtEspectador(DtEspectador dtEspectador) throws UsuarioRepetidoExcepcion ;
 	
 	public void modificarUsuario(Usuario nuevo);
 

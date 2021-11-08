@@ -92,7 +92,7 @@ public class ControladorUsuarioPublish {
 
 	@WebMethod
 	public String[] listarNicknameUsuarios() {
-		List<String> nicknames = icon.listarNicknameUsuarios();
+		List<String> nicknames = iconU.listarNicknameUsuarios();
 	
 		int i = 0;
 		String[] ret = new String[nicknames.size()];
@@ -105,7 +105,7 @@ public class ControladorUsuarioPublish {
 
 	@WebMethod
 	public String[] listarNicknameArtistas() {
-		List<String> nicknames = icon.listarNicknameArtistas();
+		List<String> nicknames = iconU.listarNicknameArtistas();
 		
 		int i = 0;
 		String[] ret = new String[nicknames.size()];
@@ -118,7 +118,7 @@ public class ControladorUsuarioPublish {
 
 	@WebMethod
 	public String[] listarNicknameEspectadores() {
-		List<String> nicknames = icon.listarNicknameEspectadores();
+		List<String> nicknames = iconU.listarNicknameEspectadores();
 		
 		int i = 0;
 		String[] ret = new String[nicknames.size()];
@@ -131,7 +131,7 @@ public class ControladorUsuarioPublish {
 
 	@WebMethod
 	public String[] listarNicknameUsuariosNoSeguidos(String nickname) {
-		List<String> nicknames = icon.listarNicknameUsuariosNoSeguidos(nickname);
+		List<String> nicknames = iconU.listarNicknameUsuariosNoSeguidos(nickname);
 		
 		int i = 0;
 		String[] ret = new String[nicknames.size()];
@@ -144,7 +144,7 @@ public class ControladorUsuarioPublish {
 
 	@WebMethod
 	public String[] listarNicknameUsuariosSeguidos(String nickname) {
-		List<String> nicknames = icon.listarNicknameUsuariosSeguidos(nickname);
+		List<String> nicknames = iconU.listarNicknameUsuariosSeguidos(nickname);
 		
 		int i = 0;
 		String[] ret = new String[nicknames.size()];
