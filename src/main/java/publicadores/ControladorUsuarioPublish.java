@@ -134,6 +134,11 @@ public class ControladorUsuarioPublish {
 	}
 
 	@WebMethod
+	public DtArtista getLoginArtista(String nickname) {
+		return iconU.getLoginArtista(nickname);
+	}
+	
+	@WebMethod
 	public DtUsuario getLoginUsuarioMail(String mail) {
 		return iconU.getLoginUsuarioMail(mail);
 	}
