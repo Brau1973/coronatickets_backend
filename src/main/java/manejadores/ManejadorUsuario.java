@@ -13,6 +13,7 @@ import persistencia.Conexion;
 
 @SuppressWarnings("unused")
 public class ManejadorUsuario{
+
     private static ManejadorUsuario instancia = null;
     private static EntityManager em;
     private static EntityManagerFactory emf;
@@ -109,4 +110,5 @@ public class ManejadorUsuario{
 	 EntityManager em = conexion.getEntityManager();
     	 return em.find(Artista.class, nickname);
     }
+
 }

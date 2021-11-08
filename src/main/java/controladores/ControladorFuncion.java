@@ -19,19 +19,21 @@ import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
 import manejadores.ManejadorUsuario;
 
-public class ControladorFuncion implements IControladorFuncion{
+public class ControladorFuncion implements IControladorFuncion {
 
-	public ControladorFuncion(){
+	public ControladorFuncion() {
 		super();
 	}
 
-	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion{
+	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) {
 		IControladorEspectaculo iconE = Fabrica.getInstancia().getIControladorEspectaculo();
 		Espectaculo espectaculo = iconE.obtenerEspectaculo(nombreEspectaculo);
 
-		if(espectaculo.funcionYaRegistrada(dtFuncion.getNombre())){
-			throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion " + dtFuncion.getNombre() + " ya esta registrada en el espectaculo " + espectaculo.getNombre());
-		}else{
+		if (espectaculo.funcionYaRegistrada(dtFuncion.getNombre())) {
+			// throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion " +
+			// dtFuncion.getNombre() + " ya esta registrada en el espectaculo " +
+			// espectaculo.getNombre());
+		} else {
 			ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 			IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
 			List<Artista> artistas = new ArrayList<Artista>();
@@ -44,13 +46,14 @@ public class ControladorFuncion implements IControladorFuncion{
 		}
 	}
 
-	public List<DtFuncion> listarFunciones(String nomEsp){
+	public List<DtFuncion> listarFunciones(String nomEsp) {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		Espectaculo espectaculo = mE.buscarEspectaculo(nomEsp);
 		return espectaculo.getFuncionesDt();
 	}
 
-	public List<String> getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador){ // DEVUELVE TODAS LAS FUNCIONES (NOMBRES) EN LAS QUE SE REGISTRO UN ESPECTAODR DADO, Y ESTAS SIGUEN VIGENTES
+	public List<String> getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador) { // DEVUELVE TODAS LAS FUNCIONES (NOMBRES) EN LAS QUE SE REGISTRO UN ESPECTAODR
+																									// DADO, Y ESTAS SIGUEN VIGENTES
 		List<String> funcionesARetornar = new ArrayList<String>();
 
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
@@ -59,18 +62,18 @@ public class ControladorFuncion implements IControladorFuncion{
 		List<Registro> registrosEspectador = new ArrayList<Registro>();
 		registrosEspectador = espectador.getRegistros();
 
-		for(Registro registro :registrosEspectador){
+		for (Registro registro : registrosEspectador) {
 			Date fecha = new Date();
 			System.out.println(fecha);
 			Funcion funcion = registro.getFuncion();
-			if(funcion.getFecha().after(fecha) || funcion.getFecha().equals(fecha)){ // CARGA SOLAMENTE LAS FUNCIONES VIGENTES
+			if (funcion.getFecha().after(fecha) || funcion.getFecha().equals(fecha)) { // CARGA SOLAMENTE LAS FUNCIONES VIGENTES
 				funcionesARetornar.add(funcion.getNombre());
 			}
 		}
 		return funcionesARetornar;
 	}
 
-	public Funcion obtenerFuncion(String nombre){ // Ok Seba 23-10-2021
+	public Funcion obtenerFuncion(String nombre) { // Ok Seba 23-10-2021
 		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 		return mF.buscarFuncion(nombre);
 	}
