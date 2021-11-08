@@ -27,7 +27,6 @@ import com.toedter.calendar.JDateChooser;
 import datatypes.DtArtista;
 import datatypes.DtEspectador;
 import datatypes.DtUsuario;
-import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControladorUsuario;
 import manejadores.ManejadorUsuario;
 
@@ -289,7 +288,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 						this.iconU.altaUsuario(dte);
 						JOptionPane.showMessageDialog(this, "el Espectador se ha creado con Exito");
 
-					}catch(UsuarioRepetidoExcepcion x){
+					}catch(Exception x){
 						JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 					}
 					limpiarFormulario();
@@ -304,7 +303,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 
 						this.iconU.altaUsuario(dta);
 						JOptionPane.showMessageDialog(this, "el Artista se ha creado con Exito");
-					}catch(UsuarioRepetidoExcepcion x){
+					}catch(Exception x){
 						JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 					}
 					limpiarFormulario();

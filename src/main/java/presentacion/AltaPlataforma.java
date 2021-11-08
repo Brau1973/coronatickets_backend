@@ -95,20 +95,21 @@ public class AltaPlataforma extends JInternalFrame{
     }
 
     protected void actionListenerGuardar(ActionEvent al){
-	 if(checkFormulario()&&modificarDatos()){
+//	 if(checkFormulario()&&modificarDatos()){
 		 String nombre = this.txtNombre.getText();
 		 String descripcion = this.txtDescripcion.getText();
 		 String url = this.txtUrl.getText();
-		 DtPlataforma dtPlataforma = new DtPlataforma(nombre,descripcion,url);
-	//     try{
-		  this.iconP.altaPlataforma(dtPlataforma);
+		 DtPlataforma dtP= new DtPlataforma(nombre,descripcion,url);
+//	   try{
+	  this.iconP.altaPlataforma(dtP);
+//this.iconP.agregarPlataforma(nombre, descripcion, url);
 	//	  JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
-	//     }catch(PlataformaRepetidaExcepcion e){
+//    }catch(Exception e){
 	//	  JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
-	//     }
+  //  }
 	     limpiarFormulario();
 	     setVisible(false);
-	 }
+	// }
     }
 
     protected void actionListenerCancelar(ActionEvent ca){
@@ -116,7 +117,8 @@ public class AltaPlataforma extends JInternalFrame{
 	     setVisible(false);
     }
     
-    private boolean checkFormulario(){
+    @SuppressWarnings("unused")
+	private boolean checkFormulario(){
 		if (this.txtNombre.getText().isEmpty() || this.txtDescripcion.getText().isEmpty() || this.txtUrl.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error",
 					JOptionPane.ERROR_MESSAGE);
@@ -126,7 +128,8 @@ public class AltaPlataforma extends JInternalFrame{
 		}
     }
 
-    private boolean modificarDatos(){
+    @SuppressWarnings("unused")
+	private boolean modificarDatos(){
 	     ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 	     if(mP.buscarPlataforma(txtNombre.getText()) != null){
 		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre de la plataforma ya existe\n�Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);

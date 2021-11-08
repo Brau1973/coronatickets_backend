@@ -11,7 +11,6 @@ import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
 import datatypes.DtEspectaculo;
-import excepciones.EspectaculoRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import logica.Espectaculo;
@@ -20,25 +19,23 @@ import logica.Espectaculo;
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public class ControladorEspectaculoPublish {
 	private Fabrica fabrica;
-	private IControladorEspectaculo icon;
+	private IControladorEspectaculo iconE;
 	private WebServiceConfiguracion configuracion;
 	private Endpoint endpoint;
 
 	public ControladorEspectaculoPublish() {
 		fabrica = Fabrica.getInstancia();
-		icon = fabrica.getIControladorEspectaculo();
+		iconE = fabrica.getIControladorEspectaculo();
 		try {
 			configuracion = new WebServiceConfiguracion();
 			System.out.println("config ok" );
 		} catch (Exception ex) {
-			System.out.println("Exception config" );
+			System.out.println("Exception config Espectaculo");
 		}
 	}
 
 	@WebMethod(exclude = true)
 	public void publicar() {
-		System.out.println("http://");
-		System.out.println("1http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorEspectaculo");
 		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorEspectaculo", this);
 		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorEspectaculo");
 	}
@@ -50,13 +47,13 @@ public class ControladorEspectaculoPublish {
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion {
-		icon.altaEspectaculo(dte, nombrePlataforma);
+	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma){//throws EspectaculoRepetidoExcepcion {
+		iconE.altaEspectaculo(dte, nombrePlataforma);
 	}
 
 	@WebMethod
 	public Espectaculo obtenerEspectaculo(String nombre) {
-		return icon.obtenerEspectaculo(nombre);
+		return iconE.obtenerEspectaculo(nombre);
 	}
 
 	@WebMethod
@@ -71,7 +68,7 @@ public class ControladorEspectaculoPublish {
 		}
 		return ret;
 	}
-
+	
 	@WebMethod
 	public DtEspectaculo[] obtenerAllDtEspectaculos(String nickname) {
 		List<DtEspectaculo> espectaculos = icon.obtenerAllDtEspectaculos(nickname);
@@ -97,11 +94,11 @@ public class ControladorEspectaculoPublish {
 			i++;
 		}
 		return ret;
+
 	}
 
 	@WebMethod
 	public Espectaculo[] obtenerEspectaculo2(String plataforma) {
-		
 		List<Espectaculo> espectaculos = icon.obtenerEspectaculo2(plataforma);
 		
 		int i = 0;
@@ -111,11 +108,11 @@ public class ControladorEspectaculoPublish {
 			i++;
 		}
 		return ret;
+
 	}
 
 	@WebMethod
 	public String[] obtenerEspectaculosArtista(String nickname) { // veer
-
 		List<String> espectaculos = icon.obtenerEspectaculosArtista(nickname);
 		
 		int i = 0;

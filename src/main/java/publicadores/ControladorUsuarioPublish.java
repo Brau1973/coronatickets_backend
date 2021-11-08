@@ -13,7 +13,6 @@ import configuraciones.WebServiceConfiguracion;
 import datatypes.DtArtista;
 import datatypes.DtEspectador;
 import datatypes.DtUsuario;
-import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorUsuario;
 import logica.Artista;
@@ -25,17 +24,17 @@ import manejadores.ManejadorUsuario;
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public class ControladorUsuarioPublish {
 	private Fabrica fabrica;
-	private IControladorUsuario icon;
+	private IControladorUsuario iconU;
 	private WebServiceConfiguracion configuracion;
 	private Endpoint endpoint;
 
 	public ControladorUsuarioPublish() {
 		fabrica = Fabrica.getInstancia();
-		icon = fabrica.getIControladorUsuario();
+		iconU = fabrica.getIControladorUsuario();
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-
+			System.out.println("Exception config Usuario");
 		}
 	}
 
@@ -51,39 +50,44 @@ public class ControladorUsuarioPublish {
 	}
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
-	@WebMethod	
-	public void altaDtArtista(DtArtista dtArtista) throws UsuarioRepetidoExcepcion {
-		icon.altaDtArtista(dtArtista);
+	@WebMethod(exclude = true)
+	public void altaUsuario(DtUsuario dtu) {
+		iconU.altaUsuario(dtu);
 	}
-	
-	@WebMethod	
-	public void altaDtEspectador(DtEspectador dtEspectador) throws UsuarioRepetidoExcepcion {
-		icon.altaDtEspectador(dtEspectador);
+
+	@WebMethod
+	public void altaDtArtista(DtArtista dtArtista) { // throws UsuarioRepetidoExcepcion {
+		iconU.altaDtArtista(dtArtista);
+	}
+
+	@WebMethod
+	public void altaDtEspectador(DtEspectador dtEspectador) { // throws UsuarioRepetidoExcepcion {
+		iconU.altaDtEspectador(dtEspectador);
 	}
 
 	@WebMethod
 	public boolean emailRepetido(String email) {
-		return icon.emailRepetido(email);
+		return iconU.emailRepetido(email);
 	}
 
 	@WebMethod
 	public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir) {
-		icon.seguirUsuario(nicknameUsuario, nicknameUsuarioASeguir);
+		iconU.seguirUsuario(nicknameUsuario, nicknameUsuarioASeguir);
 	}
 
 	@WebMethod
 	public void dejarDeSeguirUsuario(String nicknameUsuario, String nicknameUsuarioADejarDeSeguir) {
-		icon.dejarDeSeguirUsuario(nicknameUsuario, nicknameUsuarioADejarDeSeguir);
+		iconU.dejarDeSeguirUsuario(nicknameUsuario, nicknameUsuarioADejarDeSeguir);
 	}
 
 	@WebMethod
 	public Usuario obtenerUsuario(String nickname) {
-		return icon.obtenerUsuario(nickname);
+		return iconU.obtenerUsuario(nickname);
 	}
 
 	@WebMethod
 	public Artista obtenerArtista(String nickname) {
-		return icon.obtenerArtista(nickname);
+		return iconU.obtenerArtista(nickname);
 	}
 
 	@WebMethod
@@ -127,7 +131,6 @@ public class ControladorUsuarioPublish {
 
 	@WebMethod
 	public String[] listarNicknameUsuariosNoSeguidos(String nickname) {
-		
 		List<String> nicknames = icon.listarNicknameUsuariosNoSeguidos(nickname);
 		
 		int i = 0;
@@ -141,7 +144,6 @@ public class ControladorUsuarioPublish {
 
 	@WebMethod
 	public String[] listarNicknameUsuariosSeguidos(String nickname) {
-		
 		List<String> nicknames = icon.listarNicknameUsuariosSeguidos(nickname);
 		
 		int i = 0;
@@ -155,11 +157,16 @@ public class ControladorUsuarioPublish {
 
 	@WebMethod
 	public DtUsuario getLoginUsuario(String nickname) {
-		return icon.getLoginUsuario(nickname);
+		return iconU.getLoginUsuario(nickname);
 	}
 
 	@WebMethod
+	public DtArtista getLoginArtista(String nickname) {
+		return iconU.getLoginArtista(nickname);
+	}
+	
+	@WebMethod
 	public DtUsuario getLoginUsuarioMail(String mail) {
-		return icon.getLoginUsuarioMail(mail);
+		return iconU.getLoginUsuarioMail(mail);
 	}
 }

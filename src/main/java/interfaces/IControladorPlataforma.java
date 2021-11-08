@@ -6,6 +6,7 @@ import datatypes.DtPlataforma;
 import logica.Plataforma;
 
 public interface IControladorPlataforma{
+	//public void agregarPlataforma(DtPlataforma dtp);
 	public void altaPlataforma(DtPlataforma dtPlataforma);
 
 	public List<DtPlataforma> listarPlataformas();

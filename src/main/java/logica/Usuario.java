@@ -35,6 +35,10 @@ public class Usuario{
 	@Column(name = "imagen")
 	private byte[] imagen;
 	
+	public Usuario(){
+		//super();
+	}
+	
 	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia, byte[] imagen){
 		super();
 		this.nickname = nickname;
@@ -44,9 +48,6 @@ public class Usuario{
 		this.fNacimiento = fNacimiento;
 		this.contrasenia = contrasenia;
 		this.imagen = imagen;
-	}
-
-	public Usuario(){
 	}
 
 	public String getNickname(){

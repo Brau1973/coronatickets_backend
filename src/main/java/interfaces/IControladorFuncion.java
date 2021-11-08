@@ -3,7 +3,6 @@ package interfaces;
 import java.util.List;
 
 import datatypes.DtFuncion;
-import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import logica.Funcion;
 
 public interface IControladorFuncion{

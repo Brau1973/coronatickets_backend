@@ -1,4 +1,3 @@
-
 package logica;
 
 import java.util.ArrayList;
@@ -55,28 +54,28 @@ public class Plataforma {
 		this.url = url;
 	}
 
-//	public List<DtEspectaculo> getEspectaculo() {
-//		ArrayList<DtEspectaculo> listaEspectaculos = new ArrayList<>();
-//		for(Espectaculo e:espectaculo) {
-//			System.out.println("Espectaculo: " +e.getDtEspectaculo().getNombre());
-//			listaEspectaculos.add(e.getDtEspectaculo());
-//		}
-//		return listaEspectaculos;
-//	}
+/*	public List<DtEspectaculo> getEspectaculo() {
+		ArrayList<DtEspectaculo> listaEspectaculos = new ArrayList<>();
+		for (Espectaculo e : espectaculo) {
+			System.out.println("Espectaculo: " + e.getDtEspectaculo().getNombre());
+			listaEspectaculos.add(e.getDtEspectaculo());
+		}
+		return listaEspectaculos;
+	}*/
 
-	public List<Espectaculo> getEspectaculo() { // NO SE DEBERIA USAR
+	public List<Espectaculo> getEspectaculo() { // NO SE DEBERIA USAR 
 		return espectaculo;
 	}
 
-	public List<DtEspectaculo> getEspectaculosDt(){
+	public List<DtEspectaculo> getEspectaculosDt() {
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 		for (Espectaculo e : espectaculo) {
-			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(),this.nombre,e.getNombre(),e.getDescripcion(),e.getDuracion(),e.getCantMinEsp(),e.getCantMaxEsp(),e.getUrl(),e.getCosto(),e.getRegistro());
+			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), this.nombre, e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro());
 			listEspectaculosDt.add(DtEspec);
 		}
 		return listEspectaculosDt;
 	}
-	
+
 	public void aniadirEspectaculo(Espectaculo espectaculo) {
 		this.espectaculo.add(espectaculo);
 	}

@@ -16,16 +16,17 @@ import interfaces.IControladorRegistro;
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public class ControladorRegistroPublish {
 	private Fabrica fabrica;
-	private IControladorRegistro icon;
+	private IControladorRegistro iconR;
 	private WebServiceConfiguracion configuracion;
 	private Endpoint endpoint;
 
 	public ControladorRegistroPublish() {
 		fabrica = Fabrica.getInstancia();
-		icon = fabrica.getIControladorRegistro();
+		iconR = fabrica.getIControladorRegistro();
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
+			System.out.println("Exception config Registro");
 		}
 	}
 
@@ -43,7 +44,7 @@ public class ControladorRegistroPublish {
 	//LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
 	public void altaRegistro(DtRegistro dtRegistro, String nicknameEspectador) {
-		icon.altaRegistro(dtRegistro, nicknameEspectador);
+		iconR.altaRegistro(dtRegistro, nicknameEspectador);
 	}
 
 }

@@ -1,22 +1,18 @@
 package manejadores;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-import datatypes.DtEspectaculo;
-import logica.Artista;
-import logica.Funcion;
 import logica.Plataforma;
 import persistencia.Conexion;
 
 @SuppressWarnings("unused")
 public class ManejadorPlataforma{
     private static ManejadorPlataforma instancia = null;
-    private static EntityManager em;
+   private static EntityManager em;
     private static EntityManagerFactory emf;
 
     private ManejadorPlataforma(){
@@ -55,7 +51,8 @@ public class ManejadorPlataforma{
 	 Conexion conexion = Conexion.getInstancia();
 	 EntityManager em = conexion.getEntityManager();
 	 Query query = em.createQuery("select p from Plataforma p");
-	 List<Plataforma> listPlataformas = (List<Plataforma>) query.getResultList();
+	 @SuppressWarnings("unchecked")
+	List<Plataforma> listPlataformas = (List<Plataforma>) query.getResultList();
 	 
 	 return listPlataformas;
     }

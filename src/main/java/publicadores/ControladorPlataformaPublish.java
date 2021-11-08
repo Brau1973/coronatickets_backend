@@ -16,20 +16,20 @@ import interfaces.IControladorPlataforma;
 import logica.Plataforma;
 
 @WebService
-@SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
+@SOAPBinding(style=Style.RPC,parameterStyle=ParameterStyle.WRAPPED)
 public class ControladorPlataformaPublish {
 	private Fabrica fabrica;
-	private IControladorPlataforma icon;
+	private IControladorPlataforma iconP;
 	private WebServiceConfiguracion configuracion;
 	private Endpoint endpoint;
 
 	public ControladorPlataformaPublish() {
 		fabrica = Fabrica.getInstancia();
-		icon = fabrica.getIControladorPlataforma();
+		iconP = fabrica.getIControladorPlataforma();
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-
+			System.out.println("Exception config Plataforma");
 		}
 	}
 
@@ -46,13 +46,13 @@ public class ControladorPlataformaPublish {
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaPlataforma(DtPlataforma dtPlataforma) {
-		icon.altaPlataforma(dtPlataforma);
+	public void altaPlataforma(DtPlataforma dtp) {
+		iconP.altaPlataforma(dtp);
 	}
 
 	@WebMethod
 	public DtPlataforma[] listarPlataformas() {
-		List<DtPlataforma> listPlataformas = icon.listarPlataformas();
+		List<DtPlataforma> listPlataformas = iconP.listarPlataformas();
 		int i = 0;
 		DtPlataforma[] ret = new DtPlataforma[listPlataformas.size()];
 		for (DtPlataforma dtp : listPlataformas) {
@@ -64,37 +64,28 @@ public class ControladorPlataformaPublish {
 
 	@WebMethod
 	public String[] listarPlataformasStr() {
-		List<String> listPlataformas = icon.listarPlataformasStr();
-		int i = 0;
-		String[] ret = new String[listPlataformas.size()];
-		for (String plataforma : listPlataformas) {
-			ret[i] = plataforma;
-			i++;
-		}
+		List<String> lst = iconP.listarPlataformasStr();
+		String[] arr = new String[lst.size()];
+		arr = lst.toArray(arr);
+		return arr;
+	}
+	
+	@WebMethod
+	public Plataforma buscarPlataforma(String nombrePlataforma) {
+		return iconP.buscarPlataforma(nombrePlataforma);
+	}
+
+	@WebMethod  (exclude = true) // VER
+	public DtPlataforma[] mapListEntityToDt(List<Plataforma> p) {
+		List<DtPlataforma> lst = iconP.mapListEntityToDt(p);
+		DtPlataforma[] ret = new DtPlataforma[lst.size()];
+		ret = lst.toArray(ret);
 		return ret;
 	}
 
 	@WebMethod
-	public Plataforma buscarPlataforma(String nombrePlataforma) {
-		return icon.buscarPlataforma(nombrePlataforma);
+	public DtPlataforma mapEntityToDt(Plataforma p) {
+		return iconP.mapEntityToDt(p);
 	}
-
-	// NO son necesarias?
-
-	//	  @WebMethod 
-	//	  public DtPlataforma[] mapListEntityToDt(Plataforma[] p) {
-	//	 // List<DtPlataforma> listPlataformas = icon.mapListEntityToDt(p); 
-	//		  int i = 0;
-	//	  DtPlataforma[] ret = new DtPlataforma[listPlataformas.size()];
-	//	  for(DtPlataforma dtp : listPlataformas) { 
-	//		  ret[i] = dtp; i++;
-	//		  } 
-	//	  return ret; 
-	//	  }
-	//	  
-	//	  @WebMethod 
-	//	  public DtPlataforma mapEntityToDt(Plataforma p) { 
-	//		  return icon.mapEntityToDt(p); 
-	//		  }
 
 }

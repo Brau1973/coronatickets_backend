@@ -29,6 +29,7 @@ public class ManejadorEspectaculo{
 		em.getTransaction().commit();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Espectaculo> obtenerEspectaculo(){
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
@@ -61,6 +62,7 @@ public class ManejadorEspectaculo{
 		return listEspectaculos;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Espectaculo> obtenerEspectaculoBD(String plataforma){ // CHECK USO
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
