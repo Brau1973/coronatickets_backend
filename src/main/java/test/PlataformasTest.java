@@ -12,6 +12,7 @@ import javax.xml.transform.OutputKeys;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Order;
 
 import datatypes.DtPlataforma;
 import excepciones.PlataformaRepetidaExcepcion;
@@ -34,7 +35,7 @@ public class PlataformasTest {
 			assertEquals(dt.getNombre(),dtBd.getNombre());
 		
 	}
-	
+
 	@Test
 	public void listarPlataformaTest() throws PlataformaRepetidaExcepcion {
 	
