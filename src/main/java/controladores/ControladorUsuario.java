@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import datatypes.DtArtista;
 import datatypes.DtEspectador;
 import datatypes.DtUsuario;
+import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControladorUsuario;
 import logica.Artista;
 import logica.Espectador;
@@ -22,13 +23,13 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void altaUsuario(DtUsuario dtu) {
+	public void altaUsuario(DtUsuario dtu) throws UsuarioRepetidoExcepcion {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 
 		if (mU.buscarUsuario(dtu.getNickname()) != null) {
-			//throw new Exception("El nickname esta en uso");
+			throw new UsuarioRepetidoExcepcion("Error", "El nickname " + dtu.getNickname() + " esta en uso");
 		} else if (emailRepetido(dtu.getEmail())) {
-			//throw new Exception("El email esta en uso");
+			throw new UsuarioRepetidoExcepcion("Error", "El email " + dtu.getEmail() + " esta en uso");
 		}
 
 		if (dtu instanceof DtArtista) {

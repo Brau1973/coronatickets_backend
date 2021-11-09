@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import datatypes.DtPlataforma;
+import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.IControladorPlataforma;
 import manejadores.ManejadorPlataforma;
 
@@ -76,7 +77,12 @@ public class AltaPlataforma extends JInternalFrame{
 	 btnGuardar = new JButton("Guardar");
 	 btnGuardar.addActionListener(new ActionListener(){
 	     public void actionPerformed(ActionEvent e){
-		  actionListenerGuardar(e);
+		  try {
+			actionListenerGuardar(e);
+		} catch (PlataformaRepetidaExcepcion e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	     }
 	 });
 	 btnGuardar.setBounds(200, Y_DIST * 6, 115, 25);
@@ -94,22 +100,21 @@ public class AltaPlataforma extends JInternalFrame{
 	 
     }
 
-    protected void actionListenerGuardar(ActionEvent al){
-//	 if(checkFormulario()&&modificarDatos()){
+    protected void actionListenerGuardar(ActionEvent al) throws PlataformaRepetidaExcepcion{
+	 if(checkFormulario()&&modificarDatos()){
 		 String nombre = this.txtNombre.getText();
 		 String descripcion = this.txtDescripcion.getText();
 		 String url = this.txtUrl.getText();
 		 DtPlataforma dtP= new DtPlataforma(nombre,descripcion,url);
-//	   try{
+	   try{
 	  this.iconP.altaPlataforma(dtP);
-//this.iconP.agregarPlataforma(nombre, descripcion, url);
-	//	  JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
-//    }catch(Exception e){
-	//	  JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
-  //  }
+		  JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
+    }catch(Exception e){
+		  JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+    }
 	     limpiarFormulario();
 	     setVisible(false);
-	// }
+	}
     }
 
     protected void actionListenerCancelar(ActionEvent ca){

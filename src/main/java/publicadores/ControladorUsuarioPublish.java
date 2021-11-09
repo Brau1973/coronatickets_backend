@@ -13,6 +13,7 @@ import configuraciones.WebServiceConfiguracion;
 import datatypes.DtArtista;
 import datatypes.DtEspectador;
 import datatypes.DtUsuario;
+import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorUsuario;
 import logica.Artista;
@@ -49,7 +50,7 @@ public class ControladorUsuarioPublish {
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod(exclude = true)
-	public void altaUsuario(DtUsuario dtu) {
+	public void altaUsuario(DtUsuario dtu) throws UsuarioRepetidoExcepcion {
 		iconU.altaUsuario(dtu);
 	}
 

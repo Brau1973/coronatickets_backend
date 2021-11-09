@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import datatypes.DtEspectaculo;
+import excepciones.EspectaculoRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorPlataforma;
@@ -19,7 +20,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 		super();
 	}
 	@Override
-	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma){
+	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion{
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		if (mE.buscarEspectaculo(dte.getNombre()) == null) {
 
@@ -35,9 +36,9 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 			plataforma.aniadirEspectaculo(espectaculo);
 
 			mE.agregarEspectaculo(espectaculo);
-		} /*else {
-			throw new EspectaculoRepetidoExcepcion("El espectaculo con el nombre " + dte.getNombre() + " ya existe.");
-		}*/
+		} else {
+			throw new EspectaculoRepetidoExcepcion("Error", "El espectaculo con el nombre " + dte.getNombre() + " ya existe.");
+		}
 	}
 	
 	@Override

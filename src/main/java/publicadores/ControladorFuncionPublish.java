@@ -9,6 +9,7 @@ import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
 import configuraciones.WebServiceConfiguracion;
 import datatypes.DtFuncion;
+import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorFuncion;
 import logica.Funcion;
@@ -44,7 +45,7 @@ public class ControladorFuncionPublish {
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) {
+	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion {
 		iconF.altaFuncion(dtFuncion, nombreEspectaculo, imagen);
 	}
 
