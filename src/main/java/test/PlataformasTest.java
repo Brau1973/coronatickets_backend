@@ -25,7 +25,7 @@ public class PlataformasTest {
 	IControladorPlataforma iconPlat = Fabrica.getInstancia().getIControladorPlataforma();
 	DtPlataforma dt;
 	
-	
+	@Order(value = 1)
 	@Test
 	public void altaPlataformaTest() throws PlataformaRepetidaExcepcion {
 		
@@ -35,7 +35,7 @@ public class PlataformasTest {
 			assertEquals(dt.getNombre(),dtBd.getNombre());
 		
 	}
-
+	@Order(value = 2)
 	@Test
 	public void listarPlataformaTest() throws PlataformaRepetidaExcepcion {
 	
@@ -59,6 +59,7 @@ public class PlataformasTest {
 			
 		
 	}
+	@Order(value = 3)
 	@Test(expected = PlataformaRepetidaExcepcion.class)
 	public void plataformaRepetidaTest() throws PlataformaRepetidaExcepcion {
 		
