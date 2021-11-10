@@ -33,10 +33,8 @@ public class ControladorFuncionPublish {
 
 	@WebMethod(exclude = true)
 	public void publicar() {
-		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":"
-				+ configuracion.getConfigOf("#WS_PORT") + "/controladorFuncion", this);
-		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT")
-				+ "/controladorFuncion");
+		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorFuncion", this);
+		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorFuncion");
 	}
 
 	@WebMethod(exclude = true)
@@ -52,28 +50,18 @@ public class ControladorFuncionPublish {
 
 	@WebMethod
 	public DtFuncion[] listarFunciones(String nomEsp) {
-		List<DtFuncion> funciones = iconF.listarFunciones(nomEsp);
-
-		int i = 0;
-		DtFuncion[] ret = new DtFuncion[funciones.size()];
-		for (DtFuncion fun : funciones) {
-			ret[i] = fun;
-			i++;
-		}
-		return ret;
+		List<DtFuncion> lst = iconF.listarFunciones(nomEsp);
+		DtFuncion[] arr = new DtFuncion[lst.size()];
+		arr = lst.toArray(arr);
+		return arr;
 	}
 
 	@WebMethod
 	public String[] getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador) {
-		List<String> funciones = iconF.getFuncionesVigentesRegistradasPorEspectador(nicknameEspectador);
-
-		int i = 0;
-		String[] ret = new String[funciones.size()];
-		for (String fun : funciones) {
-			ret[i] = fun;
-			i++;
-		}
-		return ret;
+		List<String> lst = iconF.getFuncionesVigentesRegistradasPorEspectador(nicknameEspectador);
+		String[] arr = new String[lst.size()];
+		arr = lst.toArray(arr);
+		return arr;
 	}
 
 	@WebMethod
