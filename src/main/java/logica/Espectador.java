@@ -8,20 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Espectador extends Usuario{
+public class Espectador extends Usuario {
 
-	
 	@OneToMany
 	private List<Registro> registros = new ArrayList<>();
-	
-    public Espectador(){
-	 super();
-    }
-    
-	
-    public Espectador(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia, byte[] imagen){
-	 super(nickname, nombre, apellido, email, fNacimiento, contrasenia,imagen);
-    }
+
+	public Espectador() {
+		super();
+	}
+
+	public Espectador(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia, byte[] imagen) {
+		super(nickname, nombre, apellido, email, fNacimiento, contrasenia, imagen);
+	}
 
 	public List<Registro> getRegistros() {
 		return registros;
@@ -30,9 +28,9 @@ public class Espectador extends Usuario{
 	public void setRegistros(List<Registro> registros) {
 		this.registros = registros;
 	}
-	
+
 	public void agregarRegistro(Registro registro) {
 		this.registros.add(registro);
 	}
-	
+
 }

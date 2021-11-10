@@ -31,19 +31,19 @@ import interfaces.IControladorUsuario;
 import manejadores.ManejadorUsuario;
 
 @SuppressWarnings("serial")
-public class AltaUsuario extends JInternalFrame implements ActionListener{
+public class AltaUsuario extends JInternalFrame implements ActionListener {
 	private IControladorUsuario iconU;
 	private JPanel miPanel;
 	private JRadioButton rbtnEspectador, rbtnArtista;
-	private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblContrasenia, lblContrasenia2, lblDescripcion, lblBiografia, lblLink,jLabelImag,jLabelImage;
-	private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtContrasenia, txtContrasenia2, txtDescripcion, txtBiografia, txtLink,txturl;
+	private JLabel lblTitulo, lblNickname, lblNombre, lblApellido, lblEmail, lblfNacimiento, lblContrasenia, lblContrasenia2, lblDescripcion, lblBiografia, lblLink, jLabelImag, jLabelImage;
+	private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtContrasenia, txtContrasenia2, txtDescripcion, txtBiografia, txtLink, txturl;
 	private JDateChooser dateFechaNac;
 	private JButton btnAceptar, btnCancelar, btnAbrir;
 
 	private List<String> seguidos = new ArrayList<String>(); // Vacias porque recien se esta creando el usuario;
 	private List<String> seguidores = new ArrayList<String>();
 
-	public AltaUsuario(IControladorUsuario iconU){
+	public AltaUsuario(IControladorUsuario iconU) {
 		this.iconU = iconU;
 		miPanel = new JPanel();
 		miPanel.setLayout(null);
@@ -134,7 +134,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		txtContrasenia = new JTextField();
 		txtContrasenia.setBounds(155, 198, 260, 25);
 		miPanel.add(txtContrasenia);
-		
+
 		lblContrasenia2 = new JLabel();
 		lblContrasenia2.setText("Contrasenia:");
 		lblContrasenia2.setFont(new java.awt.Font("Verdana", 1, 12));
@@ -194,7 +194,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 
 		miPanel.add(btnAbrir);
 		btnAbrir.addActionListener(this);
-		
+
 		// Boton Aceptar
 		btnAceptar = new JButton();
 		btnAceptar.setText("Aceptar");
@@ -211,7 +211,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 	}
 
 	// protected void actionListenerAceptar(ActionEvent e) {
-	public void actionPerformed(ActionEvent e){
+	public void actionPerformed(ActionEvent e) {
 		String strNickname = this.txtNickname.getText();
 		String strNombre = this.txtNombre.getText();
 		String strApellido = this.txtApellido.getText();
@@ -221,8 +221,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		String strDescripcion = this.txtDescripcion.getText();
 		String strBiografia = this.txtBiografia.getText();
 		String strLink = this.txtLink.getText();
-		if(e.getSource() == rbtnEspectador){
-			if(rbtnEspectador.isSelected()){
+		if (e.getSource() == rbtnEspectador) {
+			if (rbtnEspectador.isSelected()) {
 				btnAceptar.setBounds(155, 258, 127, 25);
 				btnCancelar.setBounds(286, 258, 127, 25);
 				lblDescripcion.setVisible(false);
@@ -235,9 +235,9 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 
 			}
 		}
-		
-		if(e.getSource() == rbtnArtista){
-			if(rbtnArtista.isSelected()){
+
+		if (e.getSource() == rbtnArtista) {
+			if (rbtnArtista.isSelected()) {
 				btnAceptar.setBounds(155, 350, 127, 25);
 				btnCancelar.setBounds(286, 350, 127, 25);
 				lblDescripcion.setVisible(true);
@@ -249,17 +249,17 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 				rbtnEspectador.setSelected(false);
 			}
 		}
-		
-		if(e.getSource() == btnAbrir){ 
+
+		if (e.getSource() == btnAbrir) {
 			JFileChooser browseImageFile = new JFileChooser();
 			FileNameExtensionFilter fnef = new FileNameExtensionFilter("IMAGES", "png", "jpg", "jpeg");
 			browseImageFile.addChoosableFileFilter(fnef);
 			int showOpenDialogue = browseImageFile.showOpenDialog(null);
 
-			if(showOpenDialogue == JFileChooser.APPROVE_OPTION){
+			if (showOpenDialogue == JFileChooser.APPROVE_OPTION) {
 				File selectedImageFile = browseImageFile.getSelectedFile();
 				String selectedImagePath = selectedImageFile.getAbsolutePath();
-		
+
 				// JOptionPane.showMessageDialog(null, selectedImagePath);
 				ImageIcon ii = new ImageIcon(selectedImagePath);
 				Image image = ii.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
@@ -268,42 +268,42 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 				this.txturl.setText(selectedImagePath);
 			}
 		}
-		
-		if(e.getSource() == btnAceptar){
+
+		if (e.getSource() == btnAceptar) {
 			String url = this.txturl.getText();
 			byte[] selectedImage = null;
-			if(url != null && !url.isEmpty()) {
-				try{
+			if (url != null && !url.isEmpty()) {
+				try {
 					selectedImage = Files.readAllBytes(Paths.get(url));
-				}catch(IOException e1){
+				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			}
-			if(rbtnEspectador.isSelected()){
-				if(checkFormulario() && modificarDatos()){
-					try{
+			if (rbtnEspectador.isSelected()) {
+				if (checkFormulario() && modificarDatos()) {
+					try {
 						// falta mirar chequeo de fecha
-						DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strContrasenia,selectedImage, seguidos, seguidores);
+						DtEspectador dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia, selectedImage);
 
-						this.iconU.altaUsuario(dte);
+						this.iconU.altaDtEspectador(dte);
 						JOptionPane.showMessageDialog(this, "el Espectador se ha creado con Exito");
 
-					}catch(Exception x){
+					} catch (Exception x) {
 						JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 					}
 					limpiarFormulario();
 					setVisible(false);
 				}
 			}
-			if(rbtnArtista.isSelected()){
-				if(checkFormulario2() && modificarDatos()){
-					try{
+			if (rbtnArtista.isSelected()) {
+				if (checkFormulario2() && modificarDatos()) {
+					try {
 						// falta mirar chequeo de fecha
-						DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, strContrasenia,selectedImage,seguidos, seguidores, strDescripcion, strBiografia, strLink);
+						DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia, selectedImage, strDescripcion, strBiografia, strLink);
 
 						this.iconU.altaUsuario(dta);
 						JOptionPane.showMessageDialog(this, "el Artista se ha creado con Exito");
-					}catch(Exception x){
+					} catch (Exception x) {
 						JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 					}
 					limpiarFormulario();
@@ -312,22 +312,21 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 			}
 		}
 
-		if(e.getSource() == btnCancelar){
+		if (e.getSource() == btnCancelar) {
 			limpiarFormulario();
 			setVisible(false);
 		}
 
 	}
 
-	private boolean checkFormulario(){
+	private boolean checkFormulario() {
 		String strNickname = this.txtNickname.getText();
 		String strNombre = this.txtNombre.getText();
 		String strApellido = this.txtApellido.getText();
 		String strEmail = this.txtEmail.getText();
 		String strContrasenia = this.txtContrasenia.getText();
 		String strContrasenia2 = this.txtContrasenia2.getText();
-		if(strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty() || strContrasenia.isEmpty()
-				|| strContrasenia2.isEmpty()){
+		if (strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty() || strContrasenia.isEmpty() || strContrasenia2.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
@@ -338,7 +337,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		return true;
 	}
 
-	private boolean checkFormulario2(){
+	private boolean checkFormulario2() {
 		String strNickname = this.txtNickname.getText();
 		String strNombre = this.txtNombre.getText();
 		String strApellido = this.txtApellido.getText();
@@ -347,14 +346,14 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		// Date dateFechaNac=this.dateFechaNac.getDate();
 		String strDescripcion = this.txtDescripcion.getText();
 
-		if(strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty() || strContrasenia.isEmpty() || strDescripcion.isEmpty()){
+		if (strNickname.isEmpty() || strNombre.isEmpty() || strApellido.isEmpty() || strEmail.isEmpty() || strContrasenia.isEmpty() || strDescripcion.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;
 	}
 
-	private boolean modificarDatos(){
+	private boolean modificarDatos() {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		if(mU.buscarUsuario(txtNickname.getText()) != null){
 			int respuesta = JOptionPane.showConfirmDialog(null, "El nickname del Usuario ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
@@ -367,7 +366,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener{
 		return true;
 	}
 
-	private void limpiarFormulario(){
+	private void limpiarFormulario() {
 		txtNickname.setText("");
 		txtNombre.setText("");
 		txtApellido.setText("");
