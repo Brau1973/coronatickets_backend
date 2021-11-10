@@ -11,6 +11,8 @@ import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
 import datatypes.DtEspectaculo;
+import datatypes.DtFuncion;
+import datatypes.DtPaqueteEspectaculo;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import logica.Espectaculo;
@@ -94,4 +96,22 @@ public class ControladorEspectaculoPublish {
 		arr=lst.toArray(arr);
 		return arr;
 	}
+	
+	@WebMethod
+	public DtFuncion[] obtenerEspectaculoFunciones(String nombreEsp){
+		List<DtFuncion> lst=iconE.obtenerEspectaculoFunciones(nombreEsp);
+		DtFuncion[] arr=new DtFuncion[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
+	}
+	
+	@WebMethod
+	public DtPaqueteEspectaculo[] obtenerEspectaculoPaquetes(String nombreEsp){
+		List<DtPaqueteEspectaculo> lst=iconE.obtenerEspectaculoPaquetes(nombreEsp);
+		DtPaqueteEspectaculo[] arr=new DtPaqueteEspectaculo[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
+	}
+	
+	
 }

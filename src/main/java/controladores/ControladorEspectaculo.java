@@ -5,6 +5,7 @@ import java.util.List;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
+import datatypes.DtPaqueteEspectaculo;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorPlataforma;
@@ -87,6 +88,11 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 	public List<DtFuncion> obtenerEspectaculoFunciones(String nombreEsp) {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		return mE.buscarEspectaculo(nombreEsp).getFuncionesDt();
+	}
+	
+	public List<DtPaqueteEspectaculo> obtenerEspectaculoPaquetes(String nombreEsp) {
+		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+		return mE.buscarEspectaculo(nombreEsp).getPaqueteEspectaculoDt();
 	}
 
 }

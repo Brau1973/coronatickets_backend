@@ -3,6 +3,8 @@ package interfaces;
 import java.util.List;
 
 import datatypes.DtEspectaculo;
+import datatypes.DtFuncion;
+import datatypes.DtPaqueteEspectaculo;
 import logica.Espectaculo;
 
 public interface IControladorEspectaculo{
@@ -20,4 +22,8 @@ public interface IControladorEspectaculo{
     
 	public List<DtEspectaculo> listEntityToDtEsp(List<Espectaculo> dte);
 	public List<DtEspectaculo> obtenerAllDtEspectaculos(String nickname);
+	
+	public List<DtFuncion> obtenerEspectaculoFunciones(String nombreEsp);
+	
+	public List<DtPaqueteEspectaculo> obtenerEspectaculoPaquetes(String nombreEsp);
 }
