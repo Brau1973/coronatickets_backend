@@ -42,26 +42,17 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void altaDtArtista(DtArtista dtArtista) {//throws UsuarioRepetidoExcepcion {
+	public void altaDtArtista(DtArtista dta) {//throws UsuarioRepetidoExcepcion {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-		//	if (mU.buscarUsuario(dtArtista.getNickname()) != null) {
-		//		throw new UsuarioRepetidoExcepcion("El nickname esta en uso");
-		//	} else if (emailRepetido(dtArtista.getEmail())) {
-		//		throw new UsuarioRepetidoExcepcion("El email esta en uso");
-		//	}
-		Usuario usuario = new Artista(dtArtista.getNickname(), dtArtista.getNombre(), dtArtista.getApellido(), dtArtista.getEmail(), dtArtista.getfNacimiento(), dtArtista.getContrasenia(), dtArtista.getImagen(), ((DtArtista) dtArtista).getDescripcion(), ((DtArtista) dtArtista).getBiografia(), ((DtArtista) dtArtista).getLink());
+		Usuario usuario = new Artista(dta.getNickname(), dta.getNombre(), dta.getApellido(), dta.getEmail(), dta.getfNacimiento(), dta.getContrasenia(), dta.getImagen(), ((DtArtista) dta).getDescripcion(), ((DtArtista) dta).getBiografia(), ((DtArtista) dta).getLink());
 		mU.altaUsuario(usuario);
 	}
 
 	@Override
-	public void altaDtEspectador(DtEspectador dtEspectador) {// throws UsuarioRepetidoExcepcion {
+	public void altaDtEspectador(DtEspectador dte) {// throws UsuarioRepetidoExcepcion {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-		//	if (mU.buscarUsuario(dtEspectador.getNickname()) != null) {
-		//			throw new UsuarioRepetidoExcepcion("El nickname esta en uso");
-		//	} else if (emailRepetido(dtEspectador.getEmail())) {
-		//		throw new UsuarioRepetidoExcepcion("El email esta en uso");
-		//	}
-		Usuario usuario = new Espectador(dtEspectador.getNickname(), dtEspectador.getNombre(), dtEspectador.getApellido(), dtEspectador.getEmail(), dtEspectador.getfNacimiento(), dtEspectador.getContrasenia(), dtEspectador.getImagen());
+		Usuario usuario = new Espectador(dte.getNickname(), dte.getNombre(), dte.getApellido(), dte.getEmail(), dte.getfNacimiento(), dte.getContrasenia(), dte.getImagen());
+		System.out.println("******estoy en altaDtEspectador");
 		mU.altaUsuario(usuario);
 	}
 
@@ -206,9 +197,9 @@ public class ControladorUsuario implements IControladorUsuario {
 		DtUsuario dt = null;
 		if (entity != null) {
 			if (entity instanceof Artista) {
-				dt = new DtArtista(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), entity.getContrasenia(), entity.getImagen(), null, null, ((Artista) entity).getDescripcion(), ((Artista) entity).getBiografia(), ((Artista) entity).getLink());
+				dt = new DtArtista(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), null, null, entity.getContrasenia(), entity.getImagen(), ((Artista) entity).getDescripcion(), ((Artista) entity).getBiografia(), ((Artista) entity).getLink());
 			} else {
-				dt = new DtEspectador(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), entity.getContrasenia(), entity.getImagen(), null, null);
+				dt = new DtEspectador(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), null, null, entity.getContrasenia(), entity.getImagen());
 			}
 		}
 		return dt;
@@ -217,11 +208,11 @@ public class ControladorUsuario implements IControladorUsuario {
 	public DtArtista getLoginArtista(String nickname) {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		Usuario entity = mU.buscarUsuario(nickname);
-		DtArtista dt = new DtArtista(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), entity.getContrasenia(), entity.getImagen(), null, null, ((Artista) entity).getDescripcion(), ((Artista) entity).getBiografia(), ((Artista) entity).getLink());
-		
+		DtArtista dt = new DtArtista(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), null, null, entity.getContrasenia(), entity.getImagen(), ((Artista) entity).getDescripcion(), ((Artista) entity).getBiografia(), ((Artista) entity).getLink());
+
 		return dt;
 	}
-	
+
 	@Override
 	public DtUsuario getLoginUsuarioMail(String mail) {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
@@ -229,9 +220,9 @@ public class ControladorUsuario implements IControladorUsuario {
 		DtUsuario dt = null;
 		if (entity != null) {
 			if (entity instanceof Artista) {
-				dt = new DtArtista(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), entity.getContrasenia(), entity.getImagen(), null, null, ((Artista) entity).getDescripcion(), ((Artista) entity).getBiografia(), ((Artista) entity).getLink());
+				dt = new DtArtista(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), null, null, entity.getContrasenia(), entity.getImagen(), ((Artista) entity).getDescripcion(), ((Artista) entity).getBiografia(), ((Artista) entity).getLink());
 			} else {
-				dt = new DtEspectador(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), entity.getContrasenia(), entity.getImagen(), null, null);
+				dt = new DtEspectador(entity.getNickname(), entity.getNombre(), entity.getApellido(), entity.getEmail(), entity.getfNacimiento(), null, null, entity.getContrasenia(), entity.getImagen());
 			}
 		}
 		return dt;

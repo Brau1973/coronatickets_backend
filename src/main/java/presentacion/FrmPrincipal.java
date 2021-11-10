@@ -12,12 +12,14 @@ import javax.swing.JMenuItem;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
+import interfaces.IControladorPaquete;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
 import publicadores.ControladorPlataformaPublish;
 import publicadores.ControladorUsuarioPublish;
 import publicadores.ControladorEspectaculoPublish;
 import publicadores.ControladorFuncionPublish;
+import publicadores.ControladorPaquetePublish;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame implements ActionListener {
@@ -46,6 +48,7 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 	private IControladorUsuario iconU;
 	private IControladorFuncion iconF;
 	private IControladorEspectaculo iconE;
+	private IControladorPaquete iconPE;
 	
 	// Constructor
 	public FrmPrincipal() {
@@ -64,6 +67,12 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		ControladorEspectaculoPublish ce = new ControladorEspectaculoPublish();
 		ce.publicar();
 		iconE = fabrica.getIControladorEspectaculo();
+		
+		
+		ControladorPaquetePublish cpa = new ControladorPaquetePublish();
+		cpa.publicar();
+		iconPE = fabrica.getIControladorPaquete();
+		
 		
 		inicializar();
 		setTitle("coronaTickets.uy");

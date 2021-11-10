@@ -11,9 +11,9 @@ import logica.Usuario;
 public interface IControladorUsuario {
 	public void altaUsuario(DtUsuario u);
 
-	public void altaDtArtista(DtArtista dtArtista);
+	public void altaDtArtista(DtArtista dta);
 
-	public void altaDtEspectador(DtEspectador dtEspectador);
+	public void altaDtEspectador(DtEspectador dte);
 
 	public void modificarUsuario(Usuario nuevo);
 
@@ -36,6 +36,7 @@ public interface IControladorUsuario {
 	public List<String> listarNicknameUsuariosSeguidos(String nickname);
 
 	public DtUsuario getLoginUsuario(String nickname);
+
 	public DtArtista getLoginArtista(String nickname);
 
 	public boolean emailRepetido(String email);

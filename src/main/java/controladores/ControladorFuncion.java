@@ -23,6 +23,7 @@ public class ControladorFuncion implements IControladorFuncion {
 	public ControladorFuncion() {
 		super();
 	}
+
 	@Override
 	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) {
 		IControladorEspectaculo iconE = Fabrica.getInstancia().getIControladorEspectaculo();
@@ -70,6 +71,7 @@ public class ControladorFuncion implements IControladorFuncion {
 		}
 		return funcionesARetornar;
 	}
+
 	@Override
 	public Funcion obtenerFuncion(String nombre) { // Ok Seba 23-10-2021
 		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
