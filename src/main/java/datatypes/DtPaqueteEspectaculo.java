@@ -16,6 +16,10 @@ public class DtPaqueteEspectaculo {
 	private int descuento;
 	private List<DtEspectaculo> espectaculos = new ArrayList<DtEspectaculo>();
 
+	public DtPaqueteEspectaculo() {
+		super();
+	}
+	
 	public DtPaqueteEspectaculo(String nombre, String descripcion, Date fechaInicio, Date fechaFin, Date fechaAlta, int descuento) {
 		super();
 		this.nombre = nombre;

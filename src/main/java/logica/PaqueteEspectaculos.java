@@ -23,7 +23,7 @@ public class PaqueteEspectaculos{
     private int descuento;
 
     public PaqueteEspectaculos(){
-    	//super();
+    	super();
     }
 
     public PaqueteEspectaculos(String nombre, String descripcion, Date fechaInicio, Date fechaFin, Date fechaAlta, int descuento){

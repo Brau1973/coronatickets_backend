@@ -46,7 +46,7 @@ public class ControladorEspectaculoPublish {
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma){//throws EspectaculoRepetidoExcepcion {
+	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma){
 		iconE.altaEspectaculo(dte, nombrePlataforma);
 	}
 
