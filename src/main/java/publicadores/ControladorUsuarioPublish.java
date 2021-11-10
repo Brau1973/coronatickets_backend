@@ -55,12 +55,12 @@ public class ControladorUsuarioPublish {
 	}
 
 	@WebMethod
-	public void altaDtArtista(DtArtista dtArtista) { // throws UsuarioRepetidoExcepcion {
+	public void altaDtArtista(DtArtista dtArtista)  throws UsuarioRepetidoExcepcion {
 		iconU.altaDtArtista(dtArtista);
 	}
 
 	@WebMethod
-	public void altaDtEspectador(DtEspectador dtEspectador) { // throws UsuarioRepetidoExcepcion {
+	public void altaDtEspectador(DtEspectador dtEspectador) throws UsuarioRepetidoExcepcion {
 		iconU.altaDtEspectador(dtEspectador);
 	}
 

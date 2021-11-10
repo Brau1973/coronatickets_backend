@@ -43,13 +43,13 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void altaDtArtista(DtArtista dtArtista) {//throws UsuarioRepetidoExcepcion {
+	public void altaDtArtista(DtArtista dtArtista) throws UsuarioRepetidoExcepcion {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-		//	if (mU.buscarUsuario(dtArtista.getNickname()) != null) {
-		//		throw new UsuarioRepetidoExcepcion("El nickname esta en uso");
-		//	} else if (emailRepetido(dtArtista.getEmail())) {
-		//		throw new UsuarioRepetidoExcepcion("El email esta en uso");
-		//	}
+			if (mU.buscarUsuario(dtArtista.getNickname()) != null) {
+				throw new UsuarioRepetidoExcepcion("Error", "El nickname esta en uso");
+			} else if (emailRepetido(dtArtista.getEmail())) {
+				throw new UsuarioRepetidoExcepcion("Error", "El email esta en uso");
+			}
 		Usuario usuario = new Artista(dtArtista.getNickname(), dtArtista.getNombre(), dtArtista.getApellido(), dtArtista.getEmail(), dtArtista.getfNacimiento(), dtArtista.getContrasenia(), dtArtista.getImagen(), ((DtArtista) dtArtista).getDescripcion(), ((DtArtista) dtArtista).getBiografia(), ((DtArtista) dtArtista).getLink());
 		mU.altaUsuario(usuario);
 	}

@@ -12,9 +12,9 @@ import logica.Usuario;
 public interface IControladorUsuario {
 	public void altaUsuario(DtUsuario u) throws UsuarioRepetidoExcepcion;
 
-	public void altaDtArtista(DtArtista dtArtista);
+	public void altaDtArtista(DtArtista dtArtista) throws UsuarioRepetidoExcepcion;
 
-	public void altaDtEspectador(DtEspectador dtEspectador);
+	public void altaDtEspectador(DtEspectador dtEspectador) throws UsuarioRepetidoExcepcion;
 
 	public void modificarUsuario(Usuario nuevo);
 
