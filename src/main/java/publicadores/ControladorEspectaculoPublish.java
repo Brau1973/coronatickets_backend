@@ -28,6 +28,7 @@ public class ControladorEspectaculoPublish {
 		iconE = fabrica.getIControladorEspectaculo();
 		try {
 			configuracion = new WebServiceConfiguracion();
+			System.out.println("config ok" );
 		} catch (Exception ex) {
 			System.out.println("Exception config Espectaculo");
 		}
@@ -56,42 +57,68 @@ public class ControladorEspectaculoPublish {
 	}
 
 	@WebMethod
-	public DtEspectaculo[] listarEspectaculos(String nombrePlataforma) { //vere
-		List<DtEspectaculo> lst=iconE.listarEspectaculos(nombrePlataforma);
-		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
-		arr=lst.toArray(arr);
-		return arr;
+	public DtEspectaculo[] listarEspectaculos(String nombrePlataforma) {
+		List<DtEspectaculo> espectaculos = iconE.listarEspectaculos(nombrePlataforma);
+		
+		int i = 0;
+		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
+		for (DtEspectaculo espec : espectaculos) {
+			ret[i] = espec;
+			i++;
+		}
+		return ret;
 	}
 	
 	@WebMethod
-	public DtEspectaculo[] obtenerAllDtEspectaculos(String nickname) { //ver
-		List<DtEspectaculo> lst=iconE.obtenerAllDtEspectaculos(nickname);
-		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
-		arr=lst.toArray(arr);
-		return arr;
+	public DtEspectaculo[] obtenerAllDtEspectaculos(String nickname) {
+		List<DtEspectaculo> espectaculos = iconE.obtenerAllDtEspectaculos(nickname);
+		
+		int i = 0;
+		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
+		for (DtEspectaculo espec : espectaculos) {
+			ret[i] = espec;
+			i++;
+		}
+		return ret;
 	}
 
-	@WebMethod (exclude = true) //ver
-	public DtEspectaculo[] listEntityToDtEsp(List<Espectaculo> liste) {
-		List<DtEspectaculo> lst=iconE.listEntityToDtEsp(liste);
-		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
-		arr=lst.toArray(arr);
-		return arr;
-	}
+//	@WebMethod
+//	public DtEspectaculo[] listEntityToDtEsp(List<Espectaculo> liste){
+//		
+//		List<DtEspectaculo> espectaculos = iconE.listEntityToDtEsp(liste);
+//		
+//		int i = 0;
+//		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
+//		for (DtEspectaculo espec : espectaculos) {
+//			ret[i] = espec;
+//			i++;
+//		}
+//		return ret;
+//	}
 
 	@WebMethod
 	public Espectaculo[] obtenerEspectaculo2(String plataforma) {
-		List<Espectaculo> lst=iconE.obtenerEspectaculo2(plataforma);
-		Espectaculo[] arr=new Espectaculo[lst.size()];
-		arr=lst.toArray(arr);
-		return arr;
+		List<Espectaculo> espectaculos = iconE.obtenerEspectaculo2(plataforma);
+		
+		int i = 0;
+		Espectaculo[] ret = new Espectaculo[espectaculos.size()];
+		for (Espectaculo espec : espectaculos) {
+			ret[i] = espec;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
 	public String[] obtenerEspectaculosArtista(String nickname) { // veer
-		List<String> lst=iconE.obtenerEspectaculosArtista(nickname);
-		String[] arr=new String[lst.size()];
-		arr=lst.toArray(arr);
-		return arr;
+		List<String> espectaculos = iconE.obtenerEspectaculosArtista(nickname);
+		
+		int i = 0;
+		String[] ret = new String[espectaculos.size()];
+		for (String espec : espectaculos) {
+			ret[i] = espec;
+			i++;
+		}
+		return ret;
 	}
 }

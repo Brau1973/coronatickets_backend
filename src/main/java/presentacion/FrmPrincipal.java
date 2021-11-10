@@ -14,6 +14,7 @@ import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPaquete;
 import interfaces.IControladorPlataforma;
+
 import interfaces.IControladorUsuario;
 import publicadores.ControladorPlataformaPublish;
 import publicadores.ControladorUsuarioPublish;
@@ -26,8 +27,10 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 	private Container contenedor;
 	private JMenuBar barraMenu;
 	private JMenu menuInicio, menuUsuario, menuEspectaculo, menuAyuda, menuPlataforma, menuFuncion, menuPaquete;
-	private JMenuItem menuItAltaUsuario, menuItModificarDatosUsuario, menuItConsultaUsuario, menuItAltaEspectaculo, menuItConsultaEspectaculo;
-	private JMenuItem menuItConsultaPaqueteEspectaculo, menuItCreaPaqueteEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
+	private JMenuItem menuItAltaUsuario, menuItModificarDatosUsuario, menuItConsultaUsuario, menuItAltaEspectaculo,
+			menuItConsultaEspectaculo;
+	private JMenuItem menuItConsultaPaqueteEspectaculo, menuItCreaPaqueteEspectaculo, menuItAltaPlataforma,
+			menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
 	private JMenuItem menuItAgregarEspectaculoAPaquete;
 
 	private AltaUsuario internalFrameAltaUsuario;
@@ -68,11 +71,9 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		ce.publicar();
 		iconE = fabrica.getIControladorEspectaculo();
 		
-		
-		ControladorPaquetePublish cpa = new ControladorPaquetePublish();
-		cpa.publicar();
+		ControladorPaquetePublish cpe = new ControladorPaquetePublish();
+		cpe.publicar();
 		iconPE = fabrica.getIControladorPaquete();
-		
 		
 		inicializar();
 		setTitle("coronaTickets.uy");
@@ -184,6 +185,7 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		inFrmModificarDatosUsuario();
 		inFrmAltaEspectaculo();
 		inFrmConsultaEspectaculo();
+
 		inFrmAltaPlataforma();
 		inFrmAltaFuncion();
 		inFrmConsultaFuncion();

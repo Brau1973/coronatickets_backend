@@ -16,7 +16,9 @@ import datatypes.DtUsuario;
 import interfaces.Fabrica;
 import interfaces.IControladorUsuario;
 import logica.Artista;
+import logica.Espectador;
 import logica.Usuario;
+import manejadores.ManejadorUsuario;
 
 @WebService
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
@@ -90,42 +92,67 @@ public class ControladorUsuarioPublish {
 
 	@WebMethod
 	public String[] listarNicknameUsuarios() {
-		List<String> lst = iconU.listarNicknameUsuarios();
-		String[] arr = new String[lst.size()];
-		arr = lst.toArray(arr);
-		return arr;
+		List<String> nicknames = iconU.listarNicknameUsuarios();
+	
+		int i = 0;
+		String[] ret = new String[nicknames.size()];
+		for (String nickname : nicknames) {
+			ret[i] = nickname;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
 	public String[] listarNicknameArtistas() {
-		List<String> lst = iconU.listarNicknameArtistas();
-		String[] arr = new String[lst.size()];
-		arr = lst.toArray(arr);
-		return arr;
+		List<String> nicknames = iconU.listarNicknameArtistas();
+		
+		int i = 0;
+		String[] ret = new String[nicknames.size()];
+		for (String nickname : nicknames) {
+			ret[i] = nickname;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
 	public String[] listarNicknameEspectadores() {
-		List<String> lst = iconU.listarNicknameEspectadores();
-		String[] arr = new String[lst.size()];
-		arr = lst.toArray(arr);
-		return arr;
+		List<String> nicknames = iconU.listarNicknameEspectadores();
+		
+		int i = 0;
+		String[] ret = new String[nicknames.size()];
+		for (String nickname : nicknames) {
+			ret[i] = nickname;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
 	public String[] listarNicknameUsuariosNoSeguidos(String nickname) {
-		List<String> lst = iconU.listarNicknameUsuariosNoSeguidos(nickname);
-		String[] arr = new String[lst.size()];
-		arr = lst.toArray(arr);
-		return arr;
+		List<String> nicknames = iconU.listarNicknameUsuariosNoSeguidos(nickname);
+		
+		int i = 0;
+		String[] ret = new String[nicknames.size()];
+		for (String nick : nicknames) {
+			ret[i] = nick;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
 	public String[] listarNicknameUsuariosSeguidos(String nickname) {
-		List<String> lst = iconU.listarNicknameUsuariosSeguidos(nickname);
-		String[] arr = new String[lst.size()];
-		arr = lst.toArray(arr);
-		return arr;
+		List<String> nicknames = iconU.listarNicknameUsuariosSeguidos(nickname);
+		
+		int i = 0;
+		String[] ret = new String[nicknames.size()];
+		for (String nick : nicknames) {
+			ret[i] = nick;
+			i++;
+		}
+		return ret;
 	}
 
 	@WebMethod
