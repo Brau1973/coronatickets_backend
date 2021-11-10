@@ -55,8 +55,14 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void altaDtEspectador(DtEspectador dte) {// throws UsuarioRepetidoExcepcion {
+	public void altaDtEspectador(DtEspectador dte) throws UsuarioRepetidoExcepcion {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		
+		if (mU.buscarUsuario(dte.getNickname()) != null) {
+			throw new UsuarioRepetidoExcepcion("Error", "El nickname esta en uso");
+		} else if (emailRepetido(dte.getEmail())) {
+			throw new UsuarioRepetidoExcepcion("Error", "El email esta en uso");
+		}
 		Usuario usuario = new Espectador(dte.getNickname(), dte.getNombre(), dte.getApellido(), dte.getEmail(), dte.getfNacimiento(), dte.getContrasenia(), dte.getImagen());
 		System.out.println("******estoy en altaDtEspectador");
 		mU.altaUsuario(usuario);
