@@ -5,10 +5,11 @@ import java.util.List;
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
 import datatypes.DtPaqueteEspectaculo;
+import excepciones.EspectaculoRepetidoExcepcion;
 import logica.Espectaculo;
 
 public interface IControladorEspectaculo{
-    public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma);
+    public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion;
 
     public Espectaculo obtenerEspectaculo(String nombre);
 

@@ -126,7 +126,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 		miPanel.add(dateFechaNac);
 
 		lblContrasenia = new JLabel();
-		lblContrasenia.setText("Contraseña:");
+		lblContrasenia.setText("Contrasenia:");
 		lblContrasenia.setFont(new java.awt.Font("Verdana", 1, 12));
 		lblContrasenia.setBounds(10, 200, 150, 25);
 		miPanel.add(lblContrasenia);
@@ -136,7 +136,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 		miPanel.add(txtContrasenia);
 
 		lblContrasenia2 = new JLabel();
-		lblContrasenia2.setText("Contraseña:");
+		lblContrasenia2.setText("Contrasenia:");
 		lblContrasenia2.setFont(new java.awt.Font("Verdana", 1, 12));
 		lblContrasenia2.setBounds(10, 230, 150, 25);
 		miPanel.add(lblContrasenia2);
@@ -330,8 +330,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 			JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
-		if (!strContrasenia.equals(strContrasenia2)) {
-			JOptionPane.showMessageDialog(this, "Las Contraseñas deben ser iguales", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+		if(!strContrasenia.equals(strContrasenia2)) {
+			JOptionPane.showMessageDialog(this, "Las Contrasenias deben ser iguales", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;
@@ -355,9 +355,9 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 
 	private boolean modificarDatos() {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-		if (mU.buscarUsuario(txtNickname.getText()) != null) {
-			int respuesta = JOptionPane.showConfirmDialog(null, "El nickname del Usuario ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
-			if (respuesta != JOptionPane.YES_NO_OPTION) {
+		if(mU.buscarUsuario(txtNickname.getText()) != null){
+			int respuesta = JOptionPane.showConfirmDialog(null, "El nickname del Usuario ya existe\n�Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
+			if(respuesta != JOptionPane.YES_NO_OPTION){
 				limpiarFormulario();
 				setVisible(false);
 			}
