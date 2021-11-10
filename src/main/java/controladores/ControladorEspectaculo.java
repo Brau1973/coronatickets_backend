@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import datatypes.DtEspectaculo;
+import datatypes.DtFuncion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorPlataforma;
@@ -13,6 +14,7 @@ import logica.Espectaculo;
 import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorPlataforma;
+
 
 public class ControladorEspectaculo implements IControladorEspectaculo {
 	public ControladorEspectaculo() {
@@ -80,6 +82,11 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 	public List<String> obtenerEspectaculosArtista(String nickname) { // veer
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		return mE.obtenerEspectaculodeArtista(nickname);
+	}
+	
+	public List<DtFuncion> obtenerEspectaculoFunciones(String nombreEsp) {
+		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+		return mE.buscarEspectaculo(nombreEsp).getFuncionesDt();
 	}
 
 }
