@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +33,7 @@ import com.toedter.calendar.JDateChooser;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
+import datatypes.DtHora;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
@@ -234,7 +234,6 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		modelo.clear();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == comboPlataforma) {
@@ -277,7 +276,8 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 				Date FechaFuncion = this.fechaFuncion.getDate();
 				int hora = Integer.parseInt(this.spinHora.getValue().toString());
 				int minutos = Integer.parseInt(this.spinMin.getValue().toString());
-				Time horaInicio = new Time(hora, minutos, 0);
+				//Time horaInicio = new Time(hora, minutos, 0);
+				DtHora horaInicio = new DtHora(hora, minutos, 0);
 				Date fechaRegistro = this.fechaAlta.getDate();
 				String strespectaculo = (String) this.comboEspectaculos.getSelectedItem();
 
@@ -341,22 +341,23 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		listArtistasSeleccionados = new ArrayList<String>();
 		listArtistasSeleccionados.clear();
 	}
+
 	@SuppressWarnings("unused")
-	private void guardarArchivo(){ //ver
-		try{
+	private void guardarArchivo() { //ver
+		try {
 			String nombre = "";
 			JFileChooser file = new JFileChooser();
 			file.showSaveDialog(this);
 			File guarda = file.getSelectedFile();
 
-			if(guarda != null){
+			if (guarda != null) {
 				nombre = file.getSelectedFile().getName();
 				FileWriter save = new FileWriter(guarda + ".doc");
 				save.write(areaDeTexto.getText());
 				save.close();
 				JOptionPane.showMessageDialog(null, "El archivo se a guardado Exitosamente", "Informaci�n", JOptionPane.INFORMATION_MESSAGE);
 			}
-		}catch(IOException ex){
+		} catch (IOException ex) {
 			JOptionPane.showMessageDialog(null, "Su archivo no se ha guardado", "Advertencia", JOptionPane.WARNING_MESSAGE);
 		}
 	}

@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import datatypes.DtArtista;
 import datatypes.DtEspectador;
 import datatypes.DtUsuario;
+import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControladorUsuario;
 import logica.Artista;
 import logica.Espectador;
@@ -22,13 +23,13 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void altaUsuario(DtUsuario dtu) {
+	public void altaUsuario(DtUsuario dtu) throws UsuarioRepetidoExcepcion {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 
 		if (mU.buscarUsuario(dtu.getNickname()) != null) {
-			//throw new Exception("El nickname esta en uso");
+			throw new UsuarioRepetidoExcepcion("Error", "El nickname " + dtu.getNickname() + " esta en uso");
 		} else if (emailRepetido(dtu.getEmail())) {
-			//throw new Exception("El email esta en uso");
+			throw new UsuarioRepetidoExcepcion("Error", "El email " + dtu.getEmail() + " esta en uso");
 		}
 
 		if (dtu instanceof DtArtista) {
@@ -42,9 +43,14 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void altaDtArtista(DtArtista dta) {//throws UsuarioRepetidoExcepcion {
+	public void altaDtArtista(DtArtista dtArtista) throws UsuarioRepetidoExcepcion {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-		Usuario usuario = new Artista(dta.getNickname(), dta.getNombre(), dta.getApellido(), dta.getEmail(), dta.getfNacimiento(), dta.getContrasenia(), dta.getImagen(), ((DtArtista) dta).getDescripcion(), ((DtArtista) dta).getBiografia(), ((DtArtista) dta).getLink());
+			if (mU.buscarUsuario(dtArtista.getNickname()) != null) {
+				throw new UsuarioRepetidoExcepcion("Error", "El nickname esta en uso");
+			} else if (emailRepetido(dtArtista.getEmail())) {
+				throw new UsuarioRepetidoExcepcion("Error", "El email esta en uso");
+			}
+		Usuario usuario = new Artista(dtArtista.getNickname(), dtArtista.getNombre(), dtArtista.getApellido(), dtArtista.getEmail(), dtArtista.getfNacimiento(), dtArtista.getContrasenia(), dtArtista.getImagen(), ((DtArtista) dtArtista).getDescripcion(), ((DtArtista) dtArtista).getBiografia(), ((DtArtista) dtArtista).getLink());
 		mU.altaUsuario(usuario);
 	}
 

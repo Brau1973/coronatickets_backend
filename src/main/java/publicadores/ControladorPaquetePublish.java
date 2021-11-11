@@ -29,7 +29,7 @@ public class ControladorPaquetePublish {
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-			System.out.println("Exception config Paquete");
+
 		}
 	}
 

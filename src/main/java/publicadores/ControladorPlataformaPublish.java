@@ -11,6 +11,7 @@ import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
 import datatypes.DtPlataforma;
+import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorPlataforma;
 import logica.Plataforma;
@@ -46,7 +47,7 @@ public class ControladorPlataformaPublish {
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaPlataforma(DtPlataforma dtp) {
+	public void altaPlataforma(DtPlataforma dtp) throws PlataformaRepetidaExcepcion {
 		iconP.altaPlataforma(dtp);
 	}
 

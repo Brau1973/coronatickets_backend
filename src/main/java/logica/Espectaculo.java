@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
+import datatypes.DtHora;
 import datatypes.DtPaqueteEspectaculo;
 
 @Entity
@@ -179,12 +180,15 @@ public class Espectaculo {
 
 	public List<DtFuncion> getFuncionesDt() {
 		List<DtFuncion> listFuncionesDt = new ArrayList<DtFuncion>();
+	
 		for (Funcion f : funciones) {
 			List<String> artistas = new ArrayList<String>();
 			for (Artista a : f.getArtistas()) {
 				artistas.add(a.getNickname());
 			}
-			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getFecha(), f.getHoraInicio(), f.getRegistro(), artistas);
+			DtHora horaInicio = new DtHora(f.getHoraInicio().getHours(), f.getHoraInicio().getMinutes(), 0);
+			
+			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getFecha(), horaInicio, f.getRegistro(), artistas);
 			listFuncionesDt.add(DtFuncion);
 		}
 		return listFuncionesDt;

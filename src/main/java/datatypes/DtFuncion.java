@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class DtFuncion {
 	private String nombre;
 	private Date fecha;
-	private Time horaInicio;
+	private DtHora horaInicio;
 	private Date registro;
 	private List<String> artistas = new ArrayList<String>();
 
@@ -20,7 +20,7 @@ public class DtFuncion {
 		super();
 	}
 
-	public DtFuncion(String nombre, Date fecha, Time horaInicio, Date registro, List<String> artistas) {
+	public DtFuncion(String nombre, Date fecha, DtHora horaInicio, Date registro, List<String> artistas) {
 		super();
 		this.nombre = nombre;
 		this.fecha = fecha;
@@ -37,7 +37,7 @@ public class DtFuncion {
 		return fecha;
 	}
 
-	public Time getHoraInicio() {
+	public DtHora getHoraInicio() {
 		return horaInicio;
 	}
 

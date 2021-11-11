@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import datatypes.DtFuncion;
+import datatypes.DtHora;
 
 @SuppressWarnings("serial")
 public class PnlDatosFuncion extends JInternalFrame{
@@ -87,7 +88,7 @@ public class PnlDatosFuncion extends JInternalFrame{
 	 SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	 String datosFecha = formatoFecha.format(funcion.getFecha());
 	 String datosReg = formatoFecha.format(funcion.getRegistro());
-	 Time horaInicio = funcion.getHoraInicio();
+	 DtHora horaInicio = funcion.getHoraInicio();
 	 txtNombFuncion.setText(funcion.getNombre());
 	 txtFecha.setText(String.valueOf(datosFecha));
 	 txtHoraInicio.setText(horaInicio.toString());

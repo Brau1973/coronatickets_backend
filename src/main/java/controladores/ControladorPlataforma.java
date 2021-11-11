@@ -5,6 +5,7 @@ import java.util.List;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtPlataforma;
+import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.IControladorPlataforma;
 import logica.Espectaculo;
 import logica.Plataforma;
@@ -16,12 +17,12 @@ public class ControladorPlataforma implements IControladorPlataforma {
 		super();
 	}
 
-	public void altaPlataforma(DtPlataforma dtPlataforma) {// throws PlataformaRepetidaExcepcion {
+	public void altaPlataforma(DtPlataforma dtPlataforma) throws PlataformaRepetidaExcepcion {
 		ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 		Plataforma plataforma = mP.buscarPlataforma(dtPlataforma.getNombre());
 		if (plataforma != null) {
 			System.out.println("La plataforma existe");
-			//throw new PlataformaRepetidaExcepcion("la plataforma " + dtPlataforma.getNombre() + " ya esta existe");
+			throw new PlataformaRepetidaExcepcion("Error", "La plataforma " + dtPlataforma.getNombre() + " ya esta existe");
 		} else {
 			plataforma = new Plataforma(dtPlataforma.getNombre(), dtPlataforma.getDescripcion(), dtPlataforma.getUrl());
 			mP.altaPlataforma(plataforma);

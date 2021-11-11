@@ -1,10 +1,12 @@
 package controladores;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import datatypes.DtFuncion;
+import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
@@ -25,12 +27,12 @@ public class ControladorFuncion implements IControladorFuncion {
 	}
 
 	@Override
-	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) {
+	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion {
 		IControladorEspectaculo iconE = Fabrica.getInstancia().getIControladorEspectaculo();
 		Espectaculo espectaculo = iconE.obtenerEspectaculo(nombreEspectaculo);
 
 		if (espectaculo.funcionYaRegistrada(dtFuncion.getNombre())) {
-			// throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion " + dtFuncion.getNombre() + " ya esta registrada en el espectaculo " + espectaculo.getNombre());
+			throw new FuncionYaRegistradaEnEspectaculoExcepcion("Error", "La Funcion " + dtFuncion.getNombre() + " ya esta registrada en el espectaculo " + espectaculo.getNombre());
 		} else {
 			ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 			IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
@@ -38,7 +40,8 @@ public class ControladorFuncion implements IControladorFuncion {
 			dtFuncion.getArtistas().forEach((a) -> {
 				artistas.add(iconU.obtenerArtista(a));
 			});
-			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(), dtFuncion.getRegistro(), artistas, imagen);
+			Time horaInicio = new Time(dtFuncion.getHoraInicio().getHoras(), dtFuncion.getHoraInicio().getMinutos(), 0);
+			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), horaInicio, dtFuncion.getRegistro(), artistas, imagen);
 			espectaculo.agregarFuncion(funcionACrear);
 			mF.agregarFuncion(funcionACrear);
 		}

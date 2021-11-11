@@ -11,6 +11,7 @@ import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
 import datatypes.DtEspectaculo;
+import excepciones.EspectaculoRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import logica.Espectaculo;
@@ -46,7 +47,7 @@ public class ControladorEspectaculoPublish {
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma){
+	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion {
 		iconE.altaEspectaculo(dte, nombrePlataforma);
 	}
 

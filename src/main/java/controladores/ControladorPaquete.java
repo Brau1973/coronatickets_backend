@@ -13,10 +13,6 @@ import manejadores.ManejadorPaquete;
 
 public class ControladorPaquete implements IControladorPaquete {
 
-	public ControladorPaquete() {
-		super();
-	}
-
 	@Override
 	public void altaPaquete(PaqueteEspectaculos pEsp) {
 		ManejadorPaquete mP = ManejadorPaquete.getInstancia();
@@ -34,7 +30,6 @@ public class ControladorPaquete implements IControladorPaquete {
 		ManejadorPaquete mP = ManejadorPaquete.getInstancia();
 		return mapListEntityToDt(mP.obtenerPaquetes());
 	}
-
 	@Override
 	public List<DtPaqueteEspectaculo> mapListEntityToDt(List<PaqueteEspectaculos> p) {
 		List<DtPaqueteEspectaculo> ret = new ArrayList<DtPaqueteEspectaculo>();
@@ -44,7 +39,6 @@ public class ControladorPaquete implements IControladorPaquete {
 		}
 		return ret;
 	}
-
 	@Override
 	public DtPaqueteEspectaculo mapEntityToDt(PaqueteEspectaculos p) {
 		DtPaqueteEspectaculo ret = new DtPaqueteEspectaculo(p.getNombre(), p.getDescripcion(), p.getFechaInicio(), p.getFechaFin(), p.getFechaAlta(), p.getDescuento());
@@ -60,7 +54,7 @@ public class ControladorPaquete implements IControladorPaquete {
 	@Override
 	public void agregarEspectaculo(String paquete, String espectaculo) {
 		ManejadorPaquete mP = ManejadorPaquete.getInstancia();
-		//	ManejadorPlataforma mPlat = ManejadorPlataforma.getInstancia();
+	//	ManejadorPlataforma mPlat = ManejadorPlataforma.getInstancia();
 		ManejadorEspectaculo mEsp = ManejadorEspectaculo.getInstancia();
 		PaqueteEspectaculos paq = mP.buscarPaquete(paquete);
 		System.out.println("Espectaculo = " + espectaculo);

@@ -2,12 +2,13 @@ package interfaces;
 
 import java.util.List;
 
+import excepciones.PlataformaRepetidaExcepcion;
 import datatypes.DtPlataforma;
 import logica.Plataforma;
 
 public interface IControladorPlataforma{
 	//public void agregarPlataforma(DtPlataforma dtp);
-	public void altaPlataforma(DtPlataforma dtPlataforma);
+	public void altaPlataforma(DtPlataforma dtPlataforma) throws PlataformaRepetidaExcepcion;
 
 	public List<DtPlataforma> listarPlataformas();
 
