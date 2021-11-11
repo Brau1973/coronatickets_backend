@@ -33,7 +33,7 @@ import interfaces.IControladorRegistro;
 import interfaces.IControladorUsuario;
 import logica.Plataforma;
 
-public class EspectaculoTest2 {
+public class EspectaculoTest {
 
 	IControladorPlataforma iconPlataforma = Fabrica.getInstancia().getIControladorPlataforma();
 	DtPlataforma dtPla;

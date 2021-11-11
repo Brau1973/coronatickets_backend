@@ -40,6 +40,17 @@ public class UsuarioTest {
 	
 	@Test
 	@Order(4)
+	
+	
+	public void altaUsuarioTest() throws UsuarioRepetidoExcepcion{
+		
+		dtu = new DtUsuario("nicknameUsuario", "nombreUsuario", "apellidoUsuario", "email@Usuario", new Date(), null,null,"contraseniaUsuario", null);
+		iconUsuario.altaUsuario(dtu);
+		
+		
+	
+}
+	@Test
 	public void altaEspectadorTest() throws UsuarioRepetidoExcepcion{
 			
 			dte = new DtEspectador("nicknameEspectador", "nombreEspectador", "apellidoEspectador", "email@Espectador", new Date(), "contraseniaEspectador", null, null, null);
@@ -55,7 +66,10 @@ public class UsuarioTest {
 			dta = new DtArtista("nicknameArtista", "nombreArtista", "apellidoArtista", "email@Artista", new Date(), "contraseniaArtista", null, null, null, "descripcionArtista", "biografiaArtista", "linkArtista");
 			iconUsuario.altaDtArtista(dta);
 			Usuario dtBd = iconUsuario.obtenerUsuario(dta.getNickname());
+			Usuario dtBdu = iconUsuario.obtenerArtista(dta.getNickname());
+			iconUsuario.modificarUsuario(dtBdu);
 			assertEquals(dta.getNickname(),dtBd.getNickname());
+			assertEquals(dta.getNickname(),dtBdu.getNickname());
 		
 	}
 	@Test
@@ -97,15 +111,41 @@ public class UsuarioTest {
 			
 		
 	}
-	
-	@Test(expected = UsuarioRepetidoExcepcion.class)
+	@Test
 	@Order(9)
-	public void usuarioRepetidoTest() throws UsuarioRepetidoExcepcion {
-		dtu = new DtEspectador("nicknameEspectador2", "nombreEspectador2", "apellidoEspectador2", "email@Espectador", new Date(), "contraseniaEspectador2", null, null, null);
-		iconUsuario.altaUsuario(dtu);
-		iconUsuario.altaUsuario(dtu);
+	public void seguirUsuarioTest() throws UsuarioRepetidoExcepcion {
 
-			
+
+		dte = new DtEspectador("nicknameEspectador2", "nombreEspectador2", "apellidoEspectador2", "email@Espectador2", new Date(), "contraseniaEspectador2", null, null, null);
+		iconUsuario.altaDtEspectador(dte);
+		dta = new DtArtista("nicknameArtista2", "nombreArtista2", "apellidoArtista2", "email@Artista2", new Date(), "contraseniaArtista2", null, null, null, "descripcionArtista2", "biografiaArtista2", "linkArtista2");
+		iconUsuario.altaDtArtista(dta);
+		
+		iconUsuario.seguirUsuario(dte.getNickname(), dta.getNickname());
+		List<String> listaSeguidos = iconUsuario.listarNicknameUsuariosSeguidos(dta.getNickname());
+		iconUsuario.dejarDeSeguirUsuario(dte.getNickname(), dta.getNickname());	
+		List<String> listaNoSeguidos = iconUsuario.listarNicknameUsuariosNoSeguidos(dta.getNickname());
+//		
 	}
+	@Test
+	public void loginTest() throws UsuarioRepetidoExcepcion {
+
+
+		dte = new DtEspectador("nicknameEspectador3", "nombreEspectador3", "apellidoEspectador3", "email@Espectador3", new Date(), "contraseniaEspectador3", null, null, null);
+		iconUsuario.altaDtEspectador(dte);
+		iconUsuario.getLoginUsuario(dte.getNickname());
+		iconUsuario.getLoginUsuarioMail(dte.getEmail());
+	}
+	
+	
+//	@Test(expected = UsuarioRepetidoExcepcion.class)
+//	@Order(9)
+//	public void usuarioRepetidoTest() throws UsuarioRepetidoExcepcion {
+//		dtu = new DtEspectador("nicknameEspectador2", "nombreEspectador2", "apellidoEspectador2", "email@Espectador", new Date(), "contraseniaEspectador2", null, null, null);
+//		iconUsuario.altaUsuario(dtu);
+//		iconUsuario.altaUsuario(dtu);
+//
+//			
+//	}
 	
 }
