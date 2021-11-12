@@ -1,6 +1,5 @@
 package controladores;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,8 +39,7 @@ public class ControladorFuncion implements IControladorFuncion {
 			dtFuncion.getArtistas().forEach((a) -> {
 				artistas.add(iconU.obtenerArtista(a));
 			});
-			Time horaInicio = new Time(dtFuncion.getHoraInicio().getHoras(), dtFuncion.getHoraInicio().getMinutos(), 0);
-			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), horaInicio, dtFuncion.getRegistro(), artistas, imagen);
+			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(), dtFuncion.getRegistro(), artistas, imagen);
 			espectaculo.agregarFuncion(funcionACrear);
 			mF.agregarFuncion(funcionACrear);
 		}

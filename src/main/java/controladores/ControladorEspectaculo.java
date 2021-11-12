@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import datatypes.DtEspectaculo;
+import datatypes.DtFuncion;
+import datatypes.DtPaqueteEspectaculo;
 import excepciones.EspectaculoRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
@@ -19,8 +21,9 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 	public ControladorEspectaculo() {
 		super();
 	}
+
 	@Override
-	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion{
+	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		if (mE.buscarEspectaculo(dte.getNombre()) == null) {
 
@@ -40,7 +43,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 			throw new EspectaculoRepetidoExcepcion("Error", "El espectaculo con el nombre " + dte.getNombre() + " ya existe.");
 		}
 	}
-	
+
 	@Override
 	public Espectaculo obtenerEspectaculo(String nombre) {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
@@ -83,4 +86,14 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 		return mE.obtenerEspectaculodeArtista(nickname);
 	}
 
+	public List<DtFuncion> obtenerEspectaculoFunciones(String nombreEsp) {
+		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+		return mE.buscarEspectaculo(nombreEsp).getFuncionesDt();
+	}
+
+	public List<DtPaqueteEspectaculo> obtenerEspectaculoPaquetes(String nombreEsp) {
+		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+		return mE.buscarEspectaculo(nombreEsp).getPaqueteEspectaculoDt();
+	}
+	
 }

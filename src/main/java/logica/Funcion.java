@@ -13,8 +13,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import datatypes.DtHora;
-
 @Entity
 public class Funcion{
 	@Id

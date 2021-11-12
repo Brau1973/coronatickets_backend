@@ -122,7 +122,6 @@ public class AltaPlataforma extends JInternalFrame{
 	     setVisible(false);
     }
     
-    @SuppressWarnings("unused")
 	private boolean checkFormulario(){
 		if (this.txtNombre.getText().isEmpty() || this.txtDescripcion.getText().isEmpty() || this.txtUrl.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error",
@@ -133,8 +132,7 @@ public class AltaPlataforma extends JInternalFrame{
 		}
     }
 
-    @SuppressWarnings("unused")
-	private boolean modificarDatos(){
+    private boolean modificarDatos(){
 	     ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 	     if(mP.buscarPlataforma(txtNombre.getText()) != null){
 		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre de la plataforma ya existe\n�Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);

@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +34,6 @@ import com.toedter.calendar.JDateChooser;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
-import datatypes.DtHora;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
@@ -234,6 +234,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		modelo.clear();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == comboPlataforma) {
@@ -276,9 +277,12 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 				Date FechaFuncion = this.fechaFuncion.getDate();
 				int hora = Integer.parseInt(this.spinHora.getValue().toString());
 				int minutos = Integer.parseInt(this.spinMin.getValue().toString());
-				//Time horaInicio = new Time(hora, minutos, 0);
-				DtHora horaInicio = new DtHora(hora, minutos, 0);
+				Time horaInicio = new Time(hora, minutos, 0);
 				Date fechaRegistro = this.fechaAlta.getDate();
+				FechaFuncion.setHours(hora);
+				FechaFuncion.setMinutes(minutos);
+				FechaFuncion.setSeconds(0);
+			
 				String strespectaculo = (String) this.comboEspectaculos.getSelectedItem();
 
 				String url = this.txturl.getText();
@@ -292,9 +296,10 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 				DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro, listArtistasSeleccionados);
 				try {
 					this.iconF.altaFuncion(dtFuncion, strespectaculo, selectedImage);
-					//	JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");
+					JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");
 				} catch (Exception e2) {
-					//		JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this, "error, la funcion no se ha creado");
+					//	JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
 				}
 				limpiarFormulario();
 				setVisible(false);

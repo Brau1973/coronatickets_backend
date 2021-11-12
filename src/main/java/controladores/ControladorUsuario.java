@@ -55,10 +55,15 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void altaDtEspectador(DtEspectador dte) {// throws UsuarioRepetidoExcepcion {
+	public void altaDtEspectador(DtEspectador dte) throws UsuarioRepetidoExcepcion {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		
+		if (mU.buscarUsuario(dte.getNickname()) != null) {
+			throw new UsuarioRepetidoExcepcion("Error", "El nickname esta en uso");
+		} else if (emailRepetido(dte.getEmail())) {
+			throw new UsuarioRepetidoExcepcion("Error", "El email esta en uso");
+		}
 		Usuario usuario = new Espectador(dte.getNickname(), dte.getNombre(), dte.getApellido(), dte.getEmail(), dte.getfNacimiento(), dte.getContrasenia(), dte.getImagen());
-		System.out.println("******estoy en altaDtEspectador");
 		mU.altaUsuario(usuario);
 	}
 
@@ -71,7 +76,8 @@ public class ControladorUsuario implements IControladorUsuario {
 		}
 		return false;
 	}
-
+	
+	@Override
 	public void seguirUsuario(String nicknameUsuario, String nicknameUsuarioASeguir) {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		Usuario usuario = mU.buscarUsuario(nicknameUsuario);
@@ -131,7 +137,7 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public List<String> listarNicknameArtistas() {
+	public List<String> listarNicknameArtistas() { //repetida
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		List<String> listStringArtistas = new ArrayList<String>();
 		List<Artista> listArtistas = new ArrayList<Artista>();
@@ -210,7 +216,8 @@ public class ControladorUsuario implements IControladorUsuario {
 		}
 		return dt;
 	}
-
+	
+	@Override
 	public DtArtista getLoginArtista(String nickname) {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		Usuario entity = mU.buscarUsuario(nickname);
