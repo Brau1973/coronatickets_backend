@@ -63,8 +63,8 @@ public class FFuncionTest {
 				"descripcionArtistaFuncion", "biografiaArtistaFuncion", "linkArtistaFuncion");
 			iconUsuario.altaDtArtista(dtArt);
 			
-//			dtEspectador = new DtEspectador("nicknameEspectadorFuncion", "nombreEspectadorFuncion", "apellidoEspectadorFuncion", "email@EspectadorFuncion", new Date (), "contraseniaEspectadorFuncion", null,null,null);
-//				iconUsuario.altaUsuario(dtEspectador);
+			dtEspectador = new DtEspectador("nicknameEspectadorFuncion", "nombreEspectadorFuncion", "apellidoEspectadorFuncion", "email@EspectadorFuncion", new Date (), "contraseniaEspectadorFuncion", null,null,null);
+			iconUsuario.altaUsuario(dtEspectador);
 			
 			dtEsp = new DtEspectaculo(dtArt.getNickname(), dtPla.getNombre(), "nombreEspectaculoFuncion", "descripcionEspectaculoFuncion", 58, 50, 200, "urlEspectaculoFuncion", 150, new Date());
 			iconEspectaculo.altaEspectaculo(dtEsp, dtPla.getNombre());
@@ -77,6 +77,11 @@ public class FFuncionTest {
 			boolean testOK = true;
 			List<DtFuncion> lstFunc = iconFuncion.listarFunciones(dtEsp.getNombre());
 			
+			List<String> lstFunc = iconFuncion.getFuncionesVigentesRegistradasPorEspectador(dtEsp.getNombre());
+			if(lstFunc.isEmpty()){
+				testOK = false;
+			}
+
 			if (lstFunc.size() != 2) {
 				testOK = false;
 			}

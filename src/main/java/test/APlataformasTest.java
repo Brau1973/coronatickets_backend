@@ -47,7 +47,9 @@ public class APlataformasTest {
 			dt = new DtPlataforma("Plataforma5Test", "Descripcion", "Url");
 			iconPlat.altaPlataforma(dt);
 			List<String> listastr = iconPlat.listarPlataformasStr();
+			List<DtPlataforma> lstDtPlat = iconPlat.listarPlataformas();
 			assertTrue(
+			(listastr.size() == lstDtPlat.size()) &&
 			((listastr.stream().anyMatch(a -> (a == "Plataforma3Test")))&& 
 			(listastr.stream().anyMatch(a -> (a == "Plataforma4Test")))&& 
 			(listastr.stream().anyMatch(a -> (a == "Plataforma5Test"))))	
