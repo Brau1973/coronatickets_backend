@@ -1,37 +1,26 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.transform.OutputKeys;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import datatypes.DtArtista;
 import datatypes.DtEspectador;
-import datatypes.DtPlataforma;
 import datatypes.DtUsuario;
-import excepciones.PlataformaRepetidaExcepcion;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.Fabrica;
-import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
-import logica.Plataforma;
 import logica.Usuario;
-@TestMethodOrder(OrderAnnotation.class)
-public class UsuarioTest {
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class BUsuarioTest {
 
 	IControladorUsuario iconUsuario = Fabrica.getInstancia().getIControladorUsuario();
 	DtEspectador dte;
@@ -40,8 +29,6 @@ public class UsuarioTest {
 	
 	@Test
 	@Order(4)
-	
-	
 	public void altaUsuarioTest() throws UsuarioRepetidoExcepcion{
 		
 		dtu = new DtUsuario("nicknameUsuario", "nombreUsuario", "apellidoUsuario", "email@Usuario", new Date(), null,null,"contraseniaUsuario", null);
@@ -51,6 +38,7 @@ public class UsuarioTest {
 	
 }
 	@Test
+	@Order(5)
 	public void altaEspectadorTest() throws UsuarioRepetidoExcepcion{
 			
 			dte = new DtEspectador("nicknameEspectador", "nombreEspectador", "apellidoEspectador", "email@Espectador", new Date(), "contraseniaEspectador", null, null, null);
@@ -60,7 +48,7 @@ public class UsuarioTest {
 		
 	}
 	@Test
-	@Order(5)
+	@Order(6)
 	public void altaArtistaTest() throws UsuarioRepetidoExcepcion{
 		
 			dta = new DtArtista("nicknameArtista", "nombreArtista", "apellidoArtista", "email@Artista", new Date(), "contraseniaArtista", null, null, null, "descripcionArtista", "biografiaArtista", "linkArtista");
@@ -73,7 +61,7 @@ public class UsuarioTest {
 		
 	}
 	@Test
-	@Order(6)
+	@Order(7)
 	public void listarNicknameArtistasTest() {
 
 			List<String> listaArt = iconUsuario.listarNicknameArtistas();
@@ -81,12 +69,10 @@ public class UsuarioTest {
 			listaArt.stream().anyMatch(a ->  (a == "nicknameArtista"))
 			
 			);
-	
-			
-		
 	}
+	
 	@Test
-	@Order(7)
+	@Order(8)
 	public void listarNicknameEspectadoresTest() {
 
 			List<String> listaEsp = iconUsuario.listarNicknameEspectadores();
@@ -94,12 +80,10 @@ public class UsuarioTest {
 			listaEsp.stream().anyMatch(e ->  (e == "nicknameEspectador"))
 			
 			);
-	
-			
-		
 	}
+	
 	@Test
-	@Order(8)
+	@Order(9)
 	public void listarNicknameUsuariosTest() {
 
 			List<String> listaUser = iconUsuario.listarNicknameUsuarios();
@@ -107,15 +91,11 @@ public class UsuarioTest {
 			listaUser.stream().anyMatch(u ->  (u == "nicknameEspectador")) ||listaUser.stream().anyMatch(a ->  (a == "nicknameArtista"))
 			
 			);
-	
-			
-		
 	}
+	
 	@Test
-	@Order(9)
+	@Order(10)	
 	public void seguirUsuarioTest() throws UsuarioRepetidoExcepcion {
-
-
 		dte = new DtEspectador("nicknameEspectador2", "nombreEspectador2", "apellidoEspectador2", "email@Espectador2", new Date(), "contraseniaEspectador2", null, null, null);
 		iconUsuario.altaDtEspectador(dte);
 		dta = new DtArtista("nicknameArtista2", "nombreArtista2", "apellidoArtista2", "email@Artista2", new Date(), "contraseniaArtista2", null, null, null, "descripcionArtista2", "biografiaArtista2", "linkArtista2");
@@ -123,23 +103,32 @@ public class UsuarioTest {
 		
 		iconUsuario.seguirUsuario(dte.getNickname(), dta.getNickname());
 		List<String> listaSeguidos = iconUsuario.listarNicknameUsuariosSeguidos(dta.getNickname());
+		
+		List<String> lstSeguidos = iconUsuario.listarNicknameUsuariosSeguidos(dte.getNickname());
+		String nicknameSeguido = lstSeguidos.get(0);
+		
 		iconUsuario.dejarDeSeguirUsuario(dte.getNickname(), dta.getNickname());	
-		List<String> listaNoSeguidos = iconUsuario.listarNicknameUsuariosNoSeguidos(dta.getNickname());
-//		
+		List<String> listaNoSeguidos = iconUsuario.listarNicknameUsuariosSeguidos(dte.getNickname());
+		
+		assertTrue(nicknameSeguido.equals(dta.getNickname()) && listaNoSeguidos.isEmpty());
 	}
+	
+	
 	@Test
+	@Order(11)
 	public void loginTest() throws UsuarioRepetidoExcepcion {
 
-
-		dte = new DtEspectador("nicknameEspectador3", "nombreEspectador3", "apellidoEspectador3", "email@Espectador3", new Date(), "contraseniaEspectador3", null, null, null);
+		dte = new DtEspectador("nicknameEspectadorLogin", "nombreEspectadorLogin", "apellidoEspectadorLogin", "email@EspectadorLogin", new Date(), "contraseniaEspectadorLogin", null, null, null);
 		iconUsuario.altaDtEspectador(dte);
-		iconUsuario.getLoginUsuario(dte.getNickname());
-		iconUsuario.getLoginUsuarioMail(dte.getEmail());
+		DtUsuario dtUsuario =  iconUsuario.getLoginUsuario(dte.getNickname());
+		boolean loginOK = dtUsuario.getNickname().equals(dte.getNickname());
+		boolean emailRepetido = iconUsuario.emailRepetido(dte.getEmail());
+		assertTrue(emailRepetido && loginOK);
 	}
 	
 	
-//	@Test(expected = UsuarioRepetidoExcepcion.class)
-//	@Order(9)
+//	@Test()
+//	@Order(12)
 //	public void usuarioRepetidoTest() throws UsuarioRepetidoExcepcion {
 //		dtu = new DtEspectador("nicknameEspectador2", "nombreEspectador2", "apellidoEspectador2", "email@Espectador", new Date(), "contraseniaEspectador2", null, null, null);
 //		iconUsuario.altaUsuario(dtu);

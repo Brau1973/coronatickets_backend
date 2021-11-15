@@ -6,6 +6,7 @@ import datatypes.DtPaqueteEspectaculo;
 import logica.PaqueteEspectaculos;
 
 public interface IControladorPaquete {
+	
 	public void altaPaquete(PaqueteEspectaculos pEsp);
 
 	public Boolean existePaquete(String nombre);
@@ -14,7 +15,4 @@ public interface IControladorPaquete {
 
 	public void agregarEspectaculo(String paquete, String espectaculo);
 
-	DtPaqueteEspectaculo mapEntityToDt(PaqueteEspectaculos p);
-
-	public List<DtPaqueteEspectaculo> mapListEntityToDt(List<PaqueteEspectaculos> p);
 }

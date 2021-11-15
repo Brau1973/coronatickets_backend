@@ -1,18 +1,18 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.transform.OutputKeys;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import datatypes.DtPlataforma;
 import excepciones.PlataformaRepetidaExcepcion;
@@ -20,14 +20,14 @@ import interfaces.Fabrica;
 import interfaces.IControladorPlataforma;
 import logica.Plataforma;
 
-
-public class PlataformasTest {
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class APlataformasTest {
 
 	IControladorPlataforma iconPlat = Fabrica.getInstancia().getIControladorPlataforma();
 	DtPlataforma dt;
 	
-//@Order(value = 1)
 	@Test
+	@Order(1)
 	public void altaPlataformaTest() throws PlataformaRepetidaExcepcion {
 		
 			dt = new DtPlataforma("Plataforma1Test", "Descripcion", "Url");
@@ -36,8 +36,8 @@ public class PlataformasTest {
 			assertEquals(dt.getNombre(),dtBd.getNombre());
 		
 	}
-	//@Order(value = 2)
 	@Test
+	@Order(2)
 	public void listarPlataformaTest() throws PlataformaRepetidaExcepcion {
 	
 			dt = new DtPlataforma("Plataforma3Test", "Descripcion", "Url");
@@ -46,12 +46,8 @@ public class PlataformasTest {
 			iconPlat.altaPlataforma(dt);
 			dt = new DtPlataforma("Plataforma5Test", "Descripcion", "Url");
 			iconPlat.altaPlataforma(dt);
-			List<DtPlataforma> lista = iconPlat.listarPlataformas();
 			List<String> listastr = iconPlat.listarPlataformasStr();
 			assertTrue(
-			((lista.stream().anyMatch(a -> (a.getNombre() == "Plataforma3Test")))&& 
-			(lista.stream().anyMatch(a -> (a.getNombre() == "Plataforma4Test")))&& 
-			(lista.stream().anyMatch(a -> (a.getNombre() == "Plataforma5Test")))) && 
 			((listastr.stream().anyMatch(a -> (a == "Plataforma3Test")))&& 
 			(listastr.stream().anyMatch(a -> (a == "Plataforma4Test")))&& 
 			(listastr.stream().anyMatch(a -> (a == "Plataforma5Test"))))	

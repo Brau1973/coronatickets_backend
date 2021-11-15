@@ -1,8 +1,6 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -14,9 +12,10 @@ import java.util.Timer;
 import javax.xml.transform.OutputKeys;
 
 import org.hibernate.mapping.Array;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import datatypes.DtArtista;
 import datatypes.DtEspectaculo;
@@ -33,7 +32,8 @@ import interfaces.IControladorRegistro;
 import interfaces.IControladorUsuario;
 import logica.Plataforma;
 
-public class EspectaculoTest {
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class ERegistroTest {
 
 	IControladorPlataforma iconPlataforma = Fabrica.getInstancia().getIControladorPlataforma();
 	DtPlataforma dtPla;
@@ -52,31 +52,29 @@ public class EspectaculoTest {
 	
 	
 	@Test
+	@Order(15)
 	public void altaRegistro(){
 			try {
 			dtPla = new DtPlataforma("nombrePlataforma", "descripcionPlataforma", "urlPlataforma");
 			iconPlataforma.altaPlataforma(dtPla);
 					
-			dtArt = new DtArtista("nicknameArtista", "nombreArtista", "apellidoArtista", "email@Artista", new Date (), "contraseniaArtista", null,null,null,
-				"descripcionArtista", "biografiaArtista", "linkArtista");
-			iconUsuario.altaUsuario(dtArt);
+			dtArt = new DtArtista("nicknameArtistaRegistro", "nombreArtistaRegistro", "apellidoArtistaRegistro", "email@ArtistaRegistro", new Date (), "contraseniaArtistaRegistro", null,null,null,
+				"descripcionArtistaRegistro", "biografiaArtistaRegistro", "linkArtistaRegistro");
+			iconUsuario.altaDtArtista(dtArt);
 			
-			dtEspectador = new DtEspectador("nicknameEspectador", "nombreEspectador", "apellidoEspectador", "email@Espectador", new Date (), "contraseniaEspectador", null,null,null);
+			dtEspectador = new DtEspectador("nicknameEspectadorRegistro", "nombreEspectadorRegistro", "apellidoEspectadorRegistro", "email@EspectadorRegistro", new Date (), "contraseniaEspectadorRegistro", null,null,null);
 				iconUsuario.altaUsuario(dtEspectador);
 			
-			dtEsp = new DtEspectaculo(dtArt.getNombre(), dtPla.getNombre(), "nombreEspectaculo", "descripcionEspectaculo", 58, 50, 200, "urlEspectaculo", 150, new Date());
+			dtEsp = new DtEspectaculo(dtArt.getNickname(), dtPla.getNombre(), "nombreEspectaculoRegistro", "descripcionEspectaculoRegistro", 58, 50, 200, "urlEspectaculoRegistro", 150, new Date());
 			iconEspectaculo.altaEspectaculo(dtEsp, dtPla.getNombre());
 			
-			dtFunc = new DtFuncion("nombreFuncion", new Date(), new Time(02,05,55), new Date(), new ArrayList<String>());
+			dtFunc = new DtFuncion("nombreFuncionRegistro", new Date(), new Time(02,05,55), new Date(), new ArrayList<String>());
 			iconFuncion.altaFuncion(dtFunc, dtEsp.getNombre(), null); 
 					
 			
 			dtReg = new DtRegistro(dtFunc.getNombre(), new Date(), 150);
 			iconRegistro.altaRegistro(dtReg, dtEspectador.getNickname());
 			
-			//DtRegistro dtRegistro = iconRegistro. buscarPlataforma(dt.getNombre());
-			//DtRegistro dtRegistro = iconRegistro. buscarPlataforma(dt.getNombre());
-		//	assertEquals(dt.getNombre(),dtBd.getNombre());
 			assertTrue(true);
 			//TODO
 			}catch(Exception e) {

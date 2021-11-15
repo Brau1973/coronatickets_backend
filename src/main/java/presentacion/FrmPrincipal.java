@@ -53,8 +53,8 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 
 	// Constructor
 	public FrmPrincipal() {
-		ControladorPlataformaPublish cp = new ControladorPlataformaPublish();
-		cp.publicar();
+//		ControladorPlataformaPublish cp = new ControladorPlataformaPublish();
+//		cp.publicar();
 
 //		ControladorEspectaculoPublish cEspectaculoPublish = new ControladorEspectaculoPublish();
 //		cEspectaculoPublish.publicar();
