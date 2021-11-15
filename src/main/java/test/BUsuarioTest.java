@@ -2,6 +2,7 @@ package test;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
@@ -96,6 +97,7 @@ public class BUsuarioTest {
 	@Test
 	@Order(10)	
 	public void seguirUsuarioTest() throws UsuarioRepetidoExcepcion {
+
 		dte = new DtEspectador("nicknameEspectador2", "nombreEspectador2", "apellidoEspectador2", "email@Espectador2", new Date(), "contraseniaEspectador2", null, null, null);
 		iconUsuario.altaDtEspectador(dte);
 		dta = new DtArtista("nicknameArtista2", "nombreArtista2", "apellidoArtista2", "email@Artista2", new Date(), "contraseniaArtista2", null, null, null, "descripcionArtista2", "biografiaArtista2", "linkArtista2");
@@ -110,7 +112,12 @@ public class BUsuarioTest {
 		iconUsuario.dejarDeSeguirUsuario(dte.getNickname(), dta.getNickname());	
 		List<String> listaNoSeguidos = iconUsuario.listarNicknameUsuariosSeguidos(dte.getNickname());
 		
-		assertTrue(nicknameSeguido.equals(dta.getNickname()) && listaNoSeguidos.isEmpty());
+		List<String> lstNoSeguidos = iconUsuario.listarNicknameUsuariosNoSeguidos(dte.getNickname());
+		
+		assertTrue(nicknameSeguido.equals(dta.getNickname()) && listaNoSeguidos.isEmpty() && lstNoSeguidos.stream().anyMatch(e ->  (e == dta.getNickname())));
+	
+	
+		
 	}
 	
 	
@@ -124,17 +131,40 @@ public class BUsuarioTest {
 		boolean loginOK = dtUsuario.getNickname().equals(dte.getNickname());
 		boolean emailRepetido = iconUsuario.emailRepetido(dte.getEmail());
 		assertTrue(emailRepetido && loginOK);
+		
+		dte = new DtEspectador("nicknameEspectadorLogin2", "nombreEspectadorLogin2", "apellidoEspectadorLogin2", "email@EspectadorLogin2", new Date(), "contraseniaEspectadorLogin2", null, null, null);
+		iconUsuario.altaDtEspectador(dte);
+		DtUsuario dtUsuario2 =  iconUsuario.getLoginUsuarioMail(dte.getEmail());
+		boolean loginOK2 = dtUsuario2.getEmail().equals(dte.getEmail());
+		boolean emailRepetido2 = iconUsuario.emailRepetido(dte.getEmail());
+		assertTrue(emailRepetido2 && loginOK2);
+		
+		
+		
 	}
 	
 	
-//	@Test()
-//	@Order(12)
-//	public void usuarioRepetidoTest() throws UsuarioRepetidoExcepcion {
-//		dtu = new DtEspectador("nicknameEspectador2", "nombreEspectador2", "apellidoEspectador2", "email@Espectador", new Date(), "contraseniaEspectador2", null, null, null);
-//		iconUsuario.altaUsuario(dtu);
-//		iconUsuario.altaUsuario(dtu);
-//
-//			
-//	}
+	@Test()
+	@Order(12)
+	public void usuarioRepetidoTest() throws UsuarioRepetidoExcepcion {
+		dtu = new DtEspectador("nicknameEspectador2", "nombreEspectador2", "apellidoEspectador2", "email@Espectador", new Date(), "contraseniaEspectador2", null, null, null);
+		assertThrows(UsuarioRepetidoExcepcion.class, ()->iconUsuario.altaUsuario(dtu));
+			
+	}
+	@Test()
+	@Order(13)
+	public void artistaRepetidoTest() throws UsuarioRepetidoExcepcion {
+		dta = new DtArtista("nicknameArtista", "nombreArtista", "apellidoArtista", "email@Artista", new Date(), "contraseniaArtista", null, null, null, "descripcionArtista", "biografiaArtista", "linkArtista");
+		
+		assertThrows(UsuarioRepetidoExcepcion.class, ()->iconUsuario.altaDtArtista(dta));
+		
+	}
+	@Test()
+	@Order(14)
+	public void espectadorRepetidoTest() throws UsuarioRepetidoExcepcion {
+		dte = new DtEspectador("nicknameEspectador2", "nombreEspectador2", "apellidoEspectador2", "email@Espectador", new Date(), "contraseniaEspectador2", null, null, null);
+		assertThrows(UsuarioRepetidoExcepcion.class, ()->iconUsuario.altaDtEspectador(dte));
+			
+	}
 	
 }

@@ -60,16 +60,7 @@ public class ControladorFuncion implements IControladorFuncion {
 		Espectador espectador = mU.buscarEspectador(nicknameEspectador);
 
 		List<Registro> registrosEspectador = new ArrayList<Registro>();
-		registrosEspectador = espectador.getRegistros();
-
-		for (Registro registro : registrosEspectador) {
-			Date fecha = new Date();
-			System.out.println(fecha);
-			Funcion funcion = registro.getFuncion();
-			if (funcion.getFecha().after(fecha) || funcion.getFecha().equals(fecha)) { // CARGA SOLAMENTE LAS FUNCIONES VIGENTES
-				funcionesARetornar.add(funcion.getNombre());
-			}
-		}
+		
 		return funcionesARetornar;
 	}
 

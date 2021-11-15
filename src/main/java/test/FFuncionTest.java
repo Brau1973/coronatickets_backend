@@ -77,8 +77,8 @@ public class FFuncionTest {
 			boolean testOK = true;
 			List<DtFuncion> lstFunc = iconFuncion.listarFunciones(dtEsp.getNombre());
 			
-			List<String> lstFunc = iconFuncion.getFuncionesVigentesRegistradasPorEspectador(dtEsp.getNombre());
-			if(lstFunc.isEmpty()){
+			List<String> lstFunc3 = iconFuncion.getFuncionesVigentesRegistradasPorEspectador(dtEsp.getNombre());
+			if(!lstFunc3.isEmpty()){
 				testOK = false;
 			}
 
