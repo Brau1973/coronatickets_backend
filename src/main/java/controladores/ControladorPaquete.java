@@ -12,6 +12,9 @@ import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorPaquete;
 
 public class ControladorPaquete implements IControladorPaquete {
+	public ControladorPaquete() {
+		super();
+	}
 
 	@Override
 	public void altaPaquete(PaqueteEspectaculos pEsp) {

@@ -174,7 +174,7 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame {
 		comboPaquetes.setSelectedItem(SELECCIONE);
 		comboPlataformas.addItem(SELECCIONE);
 		comboPlataformas.setSelectedItem(SELECCIONE);
-		iconP.listarPlataformas();
+		listPlataformas=iconP.listarPlataformas();
 		listPlataformas.forEach((p) -> {
 			comboPlataformas.addItem(p.getNombre());
 		});

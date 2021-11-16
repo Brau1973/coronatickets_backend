@@ -26,7 +26,7 @@ import interfaces.IControladorUsuario;
 
 @SuppressWarnings("serial")
 public class RegistroFuncion extends JInternalFrame {
-		private IControladorPlataforma iconP;
+	private IControladorPlataforma iconP;
 	private IControladorUsuario iconU;
 	private IControladorFuncion iconF;
 	private IControladorRegistro iconR;
@@ -47,7 +47,7 @@ public class RegistroFuncion extends JInternalFrame {
 
 	// Constructor
 	public RegistroFuncion() {
-	//	iconP = Fabrica.getInstancia().getIControladorPlataforma();
+		//	iconP = Fabrica.getInstancia().getIControladorPlataforma();
 		iconU = Fabrica.getInstancia().getIControladorUsuario();
 		iconF = Fabrica.getInstancia().getIControladorFuncion();
 		iconR = Fabrica.getInstancia().getIControladorRegistro();
@@ -159,11 +159,11 @@ public class RegistroFuncion extends JInternalFrame {
 	}
 
 	public void iniciarlizarComboBox() {
-		comboPlataforma.removeAllItems();
-		listPlataformas = iconP.listarPlataformas();
-		listPlataformas.forEach((p) -> {
-			comboPlataforma.addItem(p.getNombre());
-		});
+//		comboPlataforma.removeAllItems();
+//		listPlataformas = iconP.listarPlataformas();
+//		listPlataformas.forEach((p) -> {
+//			comboPlataforma.addItem(p.getNombre());
+//		});
 
 		comboEspectadores.removeAllItems();
 		listEspectadores = iconU.listarNicknameEspectadores();
@@ -196,15 +196,26 @@ public class RegistroFuncion extends JInternalFrame {
 	}
 
 	private void cargarComboEspectaculo(DtPlataforma plataforma) {
-		/* comboEspectaculos.removeAllItems(); comboEspectaculos.addItem(SELECCIONE); comboEspectaculos.setSelectedItem(SELECCIONE); for (DtEspectaculo espectaculo : plataforma.getEspectaculo()) { comboEspectaculos.addItem(espectaculo.getNombre()); } */
+		comboEspectaculos.removeAllItems();
+		comboEspectaculos.addItem(SELECCIONE);
+		comboEspectaculos.setSelectedItem(SELECCIONE);
+		for (DtEspectaculo espectaculo : plataforma.getEspectaculo()) {
+			comboEspectaculos.addItem(espectaculo.getNombre());
+		}
 	}
 
 	private void listenerComboEspectaculo(ItemEvent e) {
-		/* if (e.getStateChange() == ItemEvent.SELECTED) { if (!e.getItem().equals(SELECCIONE)) { espectaculoSelected = plataformaSelected.getEspectaculo().stream() .filter(p -> (p.getNombre() == e.getItem())).findFirst().get(); cargarComboFuncion(espectaculoSelected); } else if
-		 * (e.getItem().equals(SELECCIONE)) { comboFunciones.removeAllItems(); } } */
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			if (!e.getItem().equals(SELECCIONE)) {
+				espectaculoSelected = plataformaSelected.getEspectaculo().stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
+				cargarComboFuncion(espectaculoSelected);
+			} else if (e.getItem().equals(SELECCIONE)) {
+				comboFunciones.removeAllItems();
+			}
+		}
 	}
 
-	@SuppressWarnings("unused")
+
 	private void cargarComboFuncion(DtEspectaculo espectaculo) {
 		comboFunciones.removeAllItems();
 		comboFunciones.addItem(SELECCIONE);
@@ -248,7 +259,7 @@ public class RegistroFuncion extends JInternalFrame {
 				}
 			} else if (e.getItem().equals(SELECCIONE)) {
 				comboFuncionesDelEspectador.removeAllItems();
-				;
+			
 			}
 
 		}

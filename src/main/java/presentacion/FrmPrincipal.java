@@ -42,38 +42,37 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 	private RegistroFuncion internalFrameRegistroFuncion;
 	private CreaPaqueteEspectaculo internalFrameCreaPaqueteEspectaculo;
 	private AgregarEspectaculoAPaquete internalFrameAgregarEspectaculoAPaquete;
-    
+
 	private Fabrica fabrica = Fabrica.getInstancia();
 	private IControladorPlataforma iconP;
 	private IControladorUsuario iconU;
 	private IControladorFuncion iconF;
+	private IControladorPaquete iconPa;
 	private IControladorEspectaculo iconE;
-	private IControladorPaquete iconPE;
-	
+
 	// Constructor
 	public FrmPrincipal() {
+		ControladorUsuarioPublish cu = new ControladorUsuarioPublish();
+		cu.publicar();
+		iconU = fabrica.getIControladorUsuario();
+
 		ControladorPlataformaPublish cp = new ControladorPlataformaPublish();
 		cp.publicar();
 		iconP = fabrica.getIControladorPlataforma();
+
+		ControladorEspectaculoPublish ce = new ControladorEspectaculoPublish();
+		ce.publicar();
+		iconE = fabrica.getIControladorEspectaculo();
+
+		ControladorPaquetePublish cpa = new ControladorPaquetePublish();
+		cpa.publicar();
+		iconPa = fabrica.getIControladorPaquete();
 		
 		ControladorFuncionPublish cf = new ControladorFuncionPublish();
 		cf.publicar();
 		iconF = fabrica.getIControladorFuncion();
-		
-		ControladorUsuarioPublish cu = new ControladorUsuarioPublish();
-		cu.publicar();
-		iconU = fabrica.getIControladorUsuario();
-		
-		ControladorEspectaculoPublish ce = new ControladorEspectaculoPublish();
-		ce.publicar();
-		iconE = fabrica.getIControladorEspectaculo();
-		
-		
-		ControladorPaquetePublish cpa = new ControladorPaquetePublish();
-		cpa.publicar();
-		iconPE = fabrica.getIControladorPaquete();
-		
-		
+
+
 		inicializar();
 		setTitle("coronaTickets.uy");
 		setSize(800, 750);

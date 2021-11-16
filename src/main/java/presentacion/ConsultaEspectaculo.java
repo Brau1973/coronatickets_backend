@@ -300,10 +300,11 @@ public class ConsultaEspectaculo extends JInternalFrame {
 		// comboPaquetes.removeAllItems();
 		comboPlataforma.addItem(SELECCIONE);
 		comboPlataforma.setSelectedItem(SELECCIONE);
-		iconP.listarPlataformas();
+		listPlataformas=iconP.listarPlataformas();
 		listPlataformas.forEach((p) -> {
 			comboPlataforma.addItem(p.getNombre());
 		});
+		
 	}
 
 }

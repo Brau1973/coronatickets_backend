@@ -110,7 +110,7 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener{
 	  Usuario u = iconU.obtenerUsuario(strUsuario);
 	  SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	  ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-	//  List<Espectaculo> usuario = mE.obtenerEspectaculo(); //ver
+	 // List<Espectaculo> usuario = mE.obtenerEspectaculo(); //ver
 	//  ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 	  String datos = "";
 	  String op = "";
