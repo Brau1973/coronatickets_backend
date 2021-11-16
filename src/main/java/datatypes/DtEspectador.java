@@ -3,11 +3,18 @@ package datatypes;
 import java.util.Date;
 import java.util.List;
 
-public class DtEspectador extends DtUsuario{
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
-
-	public DtEspectador(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia, byte[] imagen, List<String> seguidos, List<String> seguidores){
-		super(nickname, nombre, apellido, email, fNacimiento, seguidos, seguidores, contrasenia, imagen);
-
+@XmlAccessorType(XmlAccessType.FIELD)
+public class DtEspectador extends DtUsuario {
+	private static final long serialVersionUID = 1L;
+	public DtEspectador() {
+		super();
 	}
+
+	public DtEspectador(String nickname, String nombre, String apellido, String email, Date fNacimiento, List<String> seguidos, List<String> seguidores, String contrasenia, byte[] imagen) {
+		super(nickname, nombre, apellido, email, fNacimiento, seguidos, seguidores, contrasenia, imagen);
+	}
+
 }

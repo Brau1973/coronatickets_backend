@@ -9,13 +9,13 @@ import excepciones.UsuarioRepetidoExcepcion;
 import logica.Artista;
 import logica.Usuario;
 
-public interface IControladorUsuario{
+public interface IControladorUsuario {
 	public void altaUsuario(DtUsuario u) throws UsuarioRepetidoExcepcion;
 
-	public void altaDtArtista(DtArtista dtArtista) throws UsuarioRepetidoExcepcion ;
-	
-	public void altaDtEspectador(DtEspectador dtEspectador) throws UsuarioRepetidoExcepcion ;
-	
+	public void altaDtArtista(DtArtista dtArtista) throws UsuarioRepetidoExcepcion;
+
+	public void altaDtEspectador(DtEspectador dtEspectador) throws UsuarioRepetidoExcepcion;
+
 	public void modificarUsuario(Usuario nuevo);
 
 	public Usuario obtenerUsuario(String nickname);
@@ -37,7 +37,9 @@ public interface IControladorUsuario{
 	public List<String> listarNicknameUsuariosSeguidos(String nickname);
 
 	public DtUsuario getLoginUsuario(String nickname);
-	
+
+	public DtArtista getLoginArtista(String nickname);
+
 	public boolean emailRepetido(String email);
 
 	public DtUsuario getLoginUsuarioMail(String mail);

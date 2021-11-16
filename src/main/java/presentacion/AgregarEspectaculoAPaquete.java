@@ -13,7 +13,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 import datatypes.DtEspectaculo;
@@ -35,9 +34,9 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame {
 	static final int HEIGHT_FIELD = 25;
 	static final String SELECCIONE = "Seleccione";
 	private JComboBox<String> comboPlataformas, comboPaquetes, comboEspectaculo;
-	private String[] header = { "Nombre", "Descripcion", "etc," };
+/*	private String[] header = { "Nombre", "Descripcion", "etc," };
 	private String[][] data = {};
-	private JTable table;
+	private JTable table;*/
 	private IControladorPlataforma iconP;
 	private IControladorPaquete iconPaquete;
 	private List<DtPlataforma> listPlataformas;
@@ -107,10 +106,10 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame {
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			    actionListenerCancelar(e);
+				actionListenerCancelar(e);
 			}
 
-		});		
+		});
 		btnCancelar.setBounds(325, Y_DIST * 6, 115, 25);
 		miPanel.add(btnCancelar);
 	}
@@ -118,8 +117,7 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame {
 	private void listenerComboPlataforma(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			if (!e.getItem().equals(SELECCIONE)) {
-				plataformaSelected = listPlataformas.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst()
-						.get();
+				plataformaSelected = listPlataformas.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
 				if (paqueteSelected != null) {
 					cargarComboEspectaculo(plataformaSelected, paqueteSelected);
 				}
@@ -161,8 +159,7 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame {
 		comboEspectaculo.addItem(SELECCIONE);
 		comboEspectaculo.setSelectedItem(SELECCIONE);
 		for (DtEspectaculo espectaculo : plataforma.getEspectaculo()) {
-			Optional<DtEspectaculo> op = paquete.getEspectaculos().stream()
-					.filter(e -> (e.getNombre() == espectaculo.getNombre())).findFirst();
+			Optional<DtEspectaculo> op = paquete.getEspectaculos().stream().filter(e -> (e.getNombre() == espectaculo.getNombre())).findFirst();
 			if (!op.isPresent()) {
 				comboEspectaculo.addItem(espectaculo.getNombre());
 			}
@@ -177,7 +174,7 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame {
 		comboPaquetes.setSelectedItem(SELECCIONE);
 		comboPlataformas.addItem(SELECCIONE);
 		comboPlataformas.setSelectedItem(SELECCIONE);
-		listPlataformas = iconP.listarPlataformas();
+		listPlataformas=iconP.listarPlataformas();
 		listPlataformas.forEach((p) -> {
 			comboPlataformas.addItem(p.getNombre());
 		});
@@ -190,15 +187,15 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame {
 	private void actionListenerGuardar(ActionEvent al) {
 		if (paqueteSelected != null && plataformaSelected != null && !espectaculoSelected.isEmpty()) {
 			iconPaquete.agregarEspectaculo(paqueteSelected.getNombre(), espectaculoSelected);
-			  JOptionPane.showMessageDialog(this, "Se agrego el espectaculo al paquete con Exito");
-			  iniciarlizarComboBox();
+			JOptionPane.showMessageDialog(this, "Se agrego el espectaculo al paquete con Exito");
+			iniciarlizarComboBox();
 		} else {
-			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	private void actionListenerCancelar(ActionEvent al){
-	      setVisible(false);
+
+	private void actionListenerCancelar(ActionEvent al) {
+		setVisible(false);
 	}
-	
+
 }

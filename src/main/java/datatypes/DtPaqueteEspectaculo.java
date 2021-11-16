@@ -3,9 +3,10 @@ package datatypes;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
-import logica.Espectaculo;
-
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DtPaqueteEspectaculo {
 	private String nombre;
 	private String descripcion;
@@ -13,10 +14,9 @@ public class DtPaqueteEspectaculo {
 	private Date fechaFin;
 	private Date fechaAlta;
 	private int descuento;
-    private List<DtEspectaculo> espectaculos = new ArrayList<DtEspectaculo>();
+	private List<DtEspectaculo> espectaculos = new ArrayList<DtEspectaculo>();
 
-	public DtPaqueteEspectaculo(String nombre, String descripcion, Date fechaInicio, Date fechaFin, Date fechaAlta,
-			int descuento) {
+	public DtPaqueteEspectaculo(String nombre, String descripcion, Date fechaInicio, Date fechaFin, Date fechaAlta, int descuento) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -57,5 +57,5 @@ public class DtPaqueteEspectaculo {
 	public void setEspectaculos(List<DtEspectaculo> espectaculos) {
 		this.espectaculos = espectaculos;
 	}
-	
+
 }

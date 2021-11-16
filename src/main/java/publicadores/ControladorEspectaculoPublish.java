@@ -11,6 +11,8 @@ import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
 import datatypes.DtEspectaculo;
+import datatypes.DtFuncion;
+import datatypes.DtPaqueteEspectaculo;
 import excepciones.EspectaculoRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
@@ -20,24 +22,22 @@ import logica.Espectaculo;
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public class ControladorEspectaculoPublish {
 	private Fabrica fabrica;
-	private IControladorEspectaculo icon;
+	private IControladorEspectaculo iconE;
 	private WebServiceConfiguracion configuracion;
 	private Endpoint endpoint;
 
 	public ControladorEspectaculoPublish() {
 		fabrica = Fabrica.getInstancia();
-		icon = fabrica.getIControladorEspectaculo();
+		iconE = fabrica.getIControladorEspectaculo();
 		try {
 			configuracion = new WebServiceConfiguracion();
-			System.out.println("config ok" );
 		} catch (Exception ex) {
-			System.out.println("Exception config" );
+			System.out.println("Exception config Espectaculo");
 		}
 	}
 
 	@WebMethod(exclude = true)
 	public void publicar() {
-		System.out.println("http://");
 		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorEspectaculo", this);
 		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorEspectaculo");
 	}
@@ -50,79 +50,67 @@ public class ControladorEspectaculoPublish {
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
 	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion {
-		icon.altaEspectaculo(dte, nombrePlataforma);
+		iconE.altaEspectaculo(dte, nombrePlataforma);
 	}
 
 	@WebMethod
 	public Espectaculo obtenerEspectaculo(String nombre) {
-		return icon.obtenerEspectaculo(nombre);
+		return iconE.obtenerEspectaculo(nombre);
 	}
 
 	@WebMethod
-	public DtEspectaculo[] listarEspectaculos(String nombrePlataforma) {
-		List<DtEspectaculo> espectaculos = icon.listarEspectaculos(nombrePlataforma);
-		
-		int i = 0;
-		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
-		for (DtEspectaculo espec : espectaculos) {
-			ret[i] = espec;
-			i++;
-		}
-		return ret;
+	public DtEspectaculo[] listarEspectaculos(String nombrePlataforma) { //vere
+		List<DtEspectaculo> lst=iconE.listarEspectaculos(nombrePlataforma);
+		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
+	}
+	
+	@WebMethod
+	public DtEspectaculo[] obtenerAllDtEspectaculos(String nickname) { //ver
+		List<DtEspectaculo> lst=iconE.obtenerAllDtEspectaculos(nickname);
+		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
 	}
 
-	@WebMethod
-	public DtEspectaculo[] obtenerAllDtEspectaculos(String nickname) {
-		List<DtEspectaculo> espectaculos = icon.obtenerAllDtEspectaculos(nickname);
-		
-		int i = 0;
-		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
-		for (DtEspectaculo espec : espectaculos) {
-			ret[i] = espec;
-			i++;
-		}
-		return ret;
-	}
-
-	@WebMethod
+	@WebMethod (exclude = true) //ver
 	public DtEspectaculo[] listEntityToDtEsp(List<Espectaculo> liste) {
-		
-		List<DtEspectaculo> espectaculos = icon.listEntityToDtEsp(liste);
-		
-		int i = 0;
-		DtEspectaculo[] ret = new DtEspectaculo[espectaculos.size()];
-		for (DtEspectaculo espec : espectaculos) {
-			ret[i] = espec;
-			i++;
-		}
-		return ret;
+		List<DtEspectaculo> lst=iconE.listEntityToDtEsp(liste);
+		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
 	}
 
 	@WebMethod
 	public Espectaculo[] obtenerEspectaculo2(String plataforma) {
-		
-		List<Espectaculo> espectaculos = icon.obtenerEspectaculo2(plataforma);
-		
-		int i = 0;
-		Espectaculo[] ret = new Espectaculo[espectaculos.size()];
-		for (Espectaculo espec : espectaculos) {
-			ret[i] = espec;
-			i++;
-		}
-		return ret;
+		List<Espectaculo> lst=iconE.obtenerEspectaculo2(plataforma);
+		Espectaculo[] arr=new Espectaculo[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
 	}
 
 	@WebMethod
 	public String[] obtenerEspectaculosArtista(String nickname) { // veer
-
-		List<String> espectaculos = icon.obtenerEspectaculosArtista(nickname);
-		
-		int i = 0;
-		String[] ret = new String[espectaculos.size()];
-		for (String espec : espectaculos) {
-			ret[i] = espec;
-			i++;
-		}
-		return ret;
+		List<String> lst=iconE.obtenerEspectaculosArtista(nickname);
+		String[] arr=new String[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
+	}
+	
+	@WebMethod
+	public DtFuncion[] obtenerEspectaculoFunciones(String nombreEsp){
+		List<DtFuncion> lst=iconE.obtenerEspectaculoFunciones(nombreEsp);
+		DtFuncion[] arr=new DtFuncion[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
+	}
+	
+	@WebMethod
+	public DtPaqueteEspectaculo[] obtenerEspectaculoPaquetes(String nombreEsp){
+		List<DtPaqueteEspectaculo> lst=iconE.obtenerEspectaculoPaquetes(nombreEsp);
+		DtPaqueteEspectaculo[] arr=new DtPaqueteEspectaculo[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
 	}
 }

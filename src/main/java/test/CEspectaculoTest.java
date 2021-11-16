@@ -50,7 +50,7 @@ public class CEspectaculoTest {
 			dtPla = new DtPlataforma("nombrePlataformaEspectaculo", "descripcionPlataformaEspectaculo", "urlPlataformaEspectaculo");
 			iconPlataforma.altaPlataforma(dtPla);
 					
-			dtArt = new DtArtista("nicknameArtistaEspectaculo", "nombreArtistaEspectaculo", "apellidoArtistaEspectaculo", "email@ArtistaEspectaculo", new Date(), "contraseniaArtistaEspectaculo", null,null,null,
+			dtArt = new DtArtista("nicknameArtistaEspectaculo", "nombreArtistaEspectaculo", "apellidoArtistaEspectaculo", "email@ArtistaEspectaculo", new Date(),null, null, "contraseniaArtistaEspectaculo", null,
 				"descripcionArtistaEspectaculo", "biografiaArtistaEspectaculo", "linkArtistaEspectaculo");
 			iconUsuario.altaUsuario(dtArt);
 			
@@ -73,7 +73,7 @@ public class CEspectaculoTest {
 			dtPla = new DtPlataforma("nombrePlataformaEspectaculo2", "descripcionPlataformaEspectaculo2", "urlPlataformaEspectaculo2");
 			iconPlataforma.altaPlataforma(dtPla);
 					
-			dtArt = new DtArtista("nicknameArtistaEspectaculo2", "nombreArtistaEspectaculo2", "apellidoArtistaEspectaculo2", "email@ArtistaEspectaculo2", new Date(), "contraseniaArtistaEspectaculo2", null,null,null,
+			dtArt = new DtArtista("nicknameArtistaEspectaculo2", "nombreArtistaEspectaculo2", "apellidoArtistaEspectaculo2", "email@ArtistaEspectaculo2", new Date(),null, null, "contraseniaArtistaEspectaculo2",null,
 				"descripcionArtistaEspectaculo2", "biografiaArtistaEspectaculo2", "linkArtistaEspectaculo2");
 			iconUsuario.altaUsuario(dtArt);
 			

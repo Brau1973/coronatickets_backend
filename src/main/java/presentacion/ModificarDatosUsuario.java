@@ -151,6 +151,7 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 		});
 	}
 
+	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e){
 		String strnick = this.txtNickname.getText();
 		String strnombre = this.txtNombre.getText();

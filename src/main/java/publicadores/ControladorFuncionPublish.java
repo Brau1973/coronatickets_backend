@@ -1,16 +1,15 @@
 package publicadores;
 
 import java.util.List;
-
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
-
 import configuraciones.WebServiceConfiguracion;
 import datatypes.DtFuncion;
+import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorFuncion;
 import logica.Funcion;
@@ -19,16 +18,17 @@ import logica.Funcion;
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public class ControladorFuncionPublish {
 	private Fabrica fabrica;
-	private IControladorFuncion icon;
+	private IControladorFuncion iconF;
 	private WebServiceConfiguracion configuracion;
 	private Endpoint endpoint;
 
 	public ControladorFuncionPublish() {
 		fabrica = Fabrica.getInstancia();
-		icon = fabrica.getIControladorFuncion();
+		iconF = fabrica.getIControladorFuncion();
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
+			System.out.println("Exception config Funcion");
 		}
 	}
 
@@ -44,40 +44,29 @@ public class ControladorFuncionPublish {
 	}
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
+	@WebMethod
+	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion {
+		iconF.altaFuncion(dtFuncion, nombreEspectaculo, imagen);
+	}
 
-	  @WebMethod
-		public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) {
-			icon.altaFuncion(dtFuncion, nombreEspectaculo, imagen);
-	  }
+	@WebMethod
+	public DtFuncion[] listarFunciones(String nomEsp) {
+		List<DtFuncion> lst = iconF.listarFunciones(nomEsp);
+		DtFuncion[] arr = new DtFuncion[lst.size()];
+		arr = lst.toArray(arr);
+		return arr;
+	}
 
-		@WebMethod
-	  public DtFuncion[] listarFunciones(String nomEsp) {
-			List<DtFuncion> funciones = icon.listarFunciones(nomEsp);
-			
-			int i = 0;
-			DtFuncion[] ret = new DtFuncion[funciones.size()];
-			for (DtFuncion fun : funciones) {
-				ret[i] = fun;
-				i++;
-			}
-			return ret;
-		}
+	@WebMethod
+	public String[] getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador) {
+		List<String> lst = iconF.getFuncionesVigentesRegistradasPorEspectador(nicknameEspectador);
+		String[] arr = new String[lst.size()];
+		arr = lst.toArray(arr);
+		return arr;
+	}
 
-		@WebMethod
-		public String[] getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador) {
-			List<String> funciones = icon.getFuncionesVigentesRegistradasPorEspectador(nicknameEspectador);
-			
-			int i = 0;
-			String[] ret = new String[funciones.size()];
-			for (String fun : funciones) {
-				ret[i] = fun;
-				i++;
-			}
-			return ret;
-		}
-
-		@WebMethod
-		public Funcion obtenerFuncion(String nombre) {
-			return icon.obtenerFuncion(nombre);
-		}
+	@WebMethod
+	public Funcion obtenerFuncion(String nombre) {
+		return iconF.obtenerFuncion(nombre);
+	}
 }

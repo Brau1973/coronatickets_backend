@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import com.toedter.calendar.JDateChooser;
 
 import datatypes.DtEspectaculo;
-import datatypes.DtEspectador;
 import datatypes.DtFuncion;
 import datatypes.DtPlataforma;
 import datatypes.DtRegistro;
@@ -24,7 +23,6 @@ import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorRegistro;
 import interfaces.IControladorUsuario;
-import logica.Plataforma;
 
 @SuppressWarnings("serial")
 public class RegistroFuncion extends JInternalFrame {
@@ -34,10 +32,8 @@ public class RegistroFuncion extends JInternalFrame {
 	private IControladorRegistro iconR;
 	private JButton btnAceptar, btnCancelar;
 	private JPanel miPanel;
-	private JLabel lblPlataforma, lblEspectaculos, lblFunciones, lblNombre, lblFecha, lblHora, lblArtistasInv,
-			lblEspectadores, lblRegistro, lblFuncionesDelEspectador;
-	private JComboBox<String> comboEspectaculos, comboPlataforma, comboFunciones, comboEspectadores, comboRegistro,
-			comboFuncionesDelEspectador;
+	private JLabel lblPlataforma, lblEspectaculos, lblFunciones, lblFecha, lblEspectadores, lblRegistro, lblFuncionesDelEspectador;
+	private JComboBox<String> comboEspectaculos, comboPlataforma, comboFunciones, comboEspectadores, comboRegistro, comboFuncionesDelEspectador;
 	static final String SELECCIONE = "Seleccione";
 	private DtPlataforma plataformaSelected;
 	private DtEspectaculo espectaculoSelected;
@@ -51,7 +47,7 @@ public class RegistroFuncion extends JInternalFrame {
 
 	// Constructor
 	public RegistroFuncion() {
-		iconP = Fabrica.getInstancia().getIControladorPlataforma();
+		//	iconP = Fabrica.getInstancia().getIControladorPlataforma();
 		iconU = Fabrica.getInstancia().getIControladorUsuario();
 		iconF = Fabrica.getInstancia().getIControladorFuncion();
 		iconR = Fabrica.getInstancia().getIControladorRegistro();
@@ -147,11 +143,11 @@ public class RegistroFuncion extends JInternalFrame {
 		btnAceptar.setText("Aceptar");
 		btnAceptar.setBounds(200, 460, 115, 25);
 		miPanel.add(btnAceptar);
-	    btnAceptar.addActionListener(new ActionListener(){
-		     public void actionPerformed(ActionEvent e){
-				  actionListenerAceptar(e);
-			     }
-	    });
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionListenerAceptar(e);
+			}
+		});
 
 		// Boton Cancelar
 		btnCancelar = new JButton();
@@ -163,11 +159,11 @@ public class RegistroFuncion extends JInternalFrame {
 	}
 
 	public void iniciarlizarComboBox() {
-		comboPlataforma.removeAllItems();
-		listPlataformas = iconP.listarPlataformas();
-		listPlataformas.forEach((p) -> {
-			comboPlataforma.addItem(p.getNombre());
-		});
+//		comboPlataforma.removeAllItems();
+//		listPlataformas = iconP.listarPlataformas();
+//		listPlataformas.forEach((p) -> {
+//			comboPlataforma.addItem(p.getNombre());
+//		});
 
 		comboEspectadores.removeAllItems();
 		listEspectadores = iconU.listarNicknameEspectadores();
@@ -175,23 +171,22 @@ public class RegistroFuncion extends JInternalFrame {
 			comboEspectadores.addItem(e);
 		});
 	}
-	
+
 	private void actionListenerAceptar(ActionEvent e) {
 		String funcion = comboFunciones.getSelectedItem().toString();
 		String espectador = comboEspectadores.getSelectedItem().toString();
 		float costo = 200;
 		Date fechaRegistro = this.fechaRegistro.getDate();
-		DtRegistro dtRegistro = new DtRegistro(funcion,fechaRegistro,costo);
-		
-		iconR.altaRegistro(dtRegistro,espectador);
-		
+		DtRegistro dtRegistro = new DtRegistro(funcion, fechaRegistro, costo);
+
+		iconR.altaRegistro(dtRegistro, espectador);
+
 	}
 
 	private void listenerComboPlataforma(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			if (!e.getItem().equals(SELECCIONE)) {
-				plataformaSelected = listPlataformas.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst()
-						.get();
+				plataformaSelected = listPlataformas.stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
 				cargarComboEspectaculo(plataformaSelected);
 			} else if (e.getItem().equals(SELECCIONE)) {
 				comboEspectaculos.removeAllItems();
@@ -212,14 +207,14 @@ public class RegistroFuncion extends JInternalFrame {
 	private void listenerComboEspectaculo(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			if (!e.getItem().equals(SELECCIONE)) {
-				espectaculoSelected = plataformaSelected.getEspectaculo().stream()
-						.filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
+				espectaculoSelected = plataformaSelected.getEspectaculo().stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
 				cargarComboFuncion(espectaculoSelected);
 			} else if (e.getItem().equals(SELECCIONE)) {
 				comboFunciones.removeAllItems();
 			}
 		}
 	}
+
 
 	private void cargarComboFuncion(DtEspectaculo espectaculo) {
 		comboFunciones.removeAllItems();
@@ -239,8 +234,7 @@ public class RegistroFuncion extends JInternalFrame {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			if (!e.getItem().equals(SELECCIONE)) {
 				pnlDatosFuncion.setVisible(true);
-				funcionSelected = espectaculoSelected.getFunciones().stream()
-						.filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
+				funcionSelected = espectaculoSelected.getFunciones().stream().filter(p -> (p.getNombre() == e.getItem())).findFirst().get();
 				pnlDatosFuncion.cargarPanel(funcionSelected);
 				// iconF.getCantidadEspectadoresRegistrados(funcionSelected.getNombre());
 			} else if (e.getItem().equals(SELECCIONE)) {
@@ -254,8 +248,7 @@ public class RegistroFuncion extends JInternalFrame {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			if (!e.getItem().equals(SELECCIONE)) {
 				String espectadorSelected = comboEspectadores.getSelectedItem().toString();
-				listFuncionesRegistradasEspectador = iconF
-						.getFuncionesVigentesRegistradasPorEspectador(espectadorSelected);
+				listFuncionesRegistradasEspectador = iconF.getFuncionesVigentesRegistradasPorEspectador(espectadorSelected);
 				if (listFuncionesRegistradasEspectador.isEmpty()) {
 					comboFuncionesDelEspectador.removeAllItems();
 				} else {
@@ -266,7 +259,7 @@ public class RegistroFuncion extends JInternalFrame {
 				}
 			} else if (e.getItem().equals(SELECCIONE)) {
 				comboFuncionesDelEspectador.removeAllItems();
-				;
+			
 			}
 
 		}

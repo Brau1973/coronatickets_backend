@@ -5,6 +5,7 @@ import java.util.List;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtPlataforma;
+import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.IControladorPlataforma;
 import logica.Espectaculo;
 import logica.Plataforma;
@@ -16,22 +17,26 @@ public class ControladorPlataforma implements IControladorPlataforma {
 		super();
 	}
 
-	public void altaPlataforma(DtPlataforma dtPlataforma) {
+	public void altaPlataforma(DtPlataforma dtPlataforma) throws PlataformaRepetidaExcepcion {
 		ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 		Plataforma plataforma = mP.buscarPlataforma(dtPlataforma.getNombre());
-//	if (plataforma != null)
-		// throw new PlataformaRepetidaExcepcion("la plataforma " +
-		// dtPlataforma.getNombre() + " ya esta existe");
-		plataforma = new Plataforma(dtPlataforma.getNombre(), dtPlataforma.getDescripcion(), dtPlataforma.getUrl());
-		mP.altaPlataforma(plataforma);
+		if (plataforma != null) {
+			System.out.println("La plataforma existe");
+			throw new PlataformaRepetidaExcepcion("Error", "La plataforma " + dtPlataforma.getNombre() + " ya esta existe");
+		} else {
+			plataforma = new Plataforma(dtPlataforma.getNombre(), dtPlataforma.getDescripcion(), dtPlataforma.getUrl());
+			mP.altaPlataforma(plataforma);
+		}
 	}
 
+	@Override
 	public List<DtPlataforma> listarPlataformas() {
 		ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 		List<Plataforma> listPlat = mP.obtenerPlataforma();
 		return mapListEntityToDt(listPlat);
 	}
 
+	@Override
 	public List<String> listarPlataformasStr() {
 		ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 
@@ -46,12 +51,14 @@ public class ControladorPlataforma implements IControladorPlataforma {
 		return listPlataformasStr;
 	}
 
+	@Override
 	public Plataforma buscarPlataforma(String nombrePlataforma) {
 		ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 		Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);
 		return plataforma;
 	}
 
+	@Override
 	public List<DtPlataforma> mapListEntityToDt(List<Plataforma> p) {
 		List<DtPlataforma> ret = new ArrayList<DtPlataforma>();
 		p.forEach((plat) -> {
@@ -61,6 +68,7 @@ public class ControladorPlataforma implements IControladorPlataforma {
 		return ret;
 	}
 
+	@Override
 	public DtPlataforma mapEntityToDt(Plataforma p) {
 		DtPlataforma ret = new DtPlataforma(p.getNombre(), p.getDescripcion(), p.getUrl());
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();

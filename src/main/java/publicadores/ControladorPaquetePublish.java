@@ -19,17 +19,17 @@ import logica.PaqueteEspectaculos;
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public class ControladorPaquetePublish {
 	private Fabrica fabrica;
-	private IControladorPaquete icon;
+	private IControladorPaquete iconPa;
 	private WebServiceConfiguracion configuracion;
 	private Endpoint endpoint;
 
 	public ControladorPaquetePublish() {
 		fabrica = Fabrica.getInstancia();
-		icon = fabrica.getIControladorPaquete();
+		iconPa = fabrica.getIControladorPaquete();
 		try {
 			configuracion = new WebServiceConfiguracion();
 		} catch (Exception ex) {
-
+			System.out.println("Exception config Paquete");
 		}
 	}
 
@@ -47,21 +47,24 @@ public class ControladorPaquetePublish {
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
 	public void altaPaquete(PaqueteEspectaculos pEsp) {
-		icon.altaPaquete(pEsp);
+		iconPa.altaPaquete(pEsp);
 	}
 
 	@WebMethod
 	public Boolean existePaquete(String nombre) {
-		return icon.existePaquete(nombre);
+		return iconPa.existePaquete(nombre);
 	}
 
 	@WebMethod
-	public List<DtPaqueteEspectaculo> obtenerPaquetes() {
-		return icon.obtenerPaquetes();
+	public DtPaqueteEspectaculo[] obtenerPaquetes() {
+		List<DtPaqueteEspectaculo> lst = iconPa.obtenerPaquetes();
+		DtPaqueteEspectaculo[] ret = new DtPaqueteEspectaculo[lst.size()];
+		ret = lst.toArray(ret);
+		return ret;
 	}
 
 	@WebMethod
 	public void agregarEspectaculo(String paquete, String espectaculo) {
-		icon.agregarEspectaculo(paquete, espectaculo);
+		iconPa.agregarEspectaculo(paquete, espectaculo);
 	}
 }

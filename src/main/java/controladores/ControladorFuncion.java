@@ -25,14 +25,13 @@ public class ControladorFuncion implements IControladorFuncion {
 		super();
 	}
 
-	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) {
+	@Override
+	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion {
 		IControladorEspectaculo iconE = Fabrica.getInstancia().getIControladorEspectaculo();
 		Espectaculo espectaculo = iconE.obtenerEspectaculo(nombreEspectaculo);
 
 		if (espectaculo.funcionYaRegistrada(dtFuncion.getNombre())) {
-			// throw new FuncionYaRegistradaEnEspectaculoExcepcion("La Funcion " +
-			// dtFuncion.getNombre() + " ya esta registrada en el espectaculo " +
-			// espectaculo.getNombre());
+			throw new FuncionYaRegistradaEnEspectaculoExcepcion("Error", "La Funcion " + dtFuncion.getNombre() + " ya esta registrada en el espectaculo " + espectaculo.getNombre());
 		} else {
 			ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 			IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
@@ -46,14 +45,15 @@ public class ControladorFuncion implements IControladorFuncion {
 		}
 	}
 
+	@Override
 	public List<DtFuncion> listarFunciones(String nomEsp) {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		Espectaculo espectaculo = mE.buscarEspectaculo(nomEsp);
 		return espectaculo.getFuncionesDt();
 	}
 
-	public List<String> getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador) { // DEVUELVE TODAS LAS FUNCIONES (NOMBRES) EN LAS QUE SE REGISTRO UN ESPECTAODR
-																									// DADO, Y ESTAS SIGUEN VIGENTES
+	@Override
+	public List<String> getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador) { // DEVUELVE TODAS LAS FUNCIONES (NOMBRES) EN LAS QUE SE REGISTRO UN ESPECTAODR																							// DADO, Y ESTAS SIGUEN VIGENTES
 		List<String> funcionesARetornar = new ArrayList<String>();
 
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
@@ -64,6 +64,7 @@ public class ControladorFuncion implements IControladorFuncion {
 		return funcionesARetornar;
 	}
 
+	@Override
 	public Funcion obtenerFuncion(String nombre) { // Ok Seba 23-10-2021
 		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 		return mF.buscarFuncion(nombre);

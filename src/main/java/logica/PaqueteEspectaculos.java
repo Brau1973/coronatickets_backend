@@ -23,7 +23,8 @@ public class PaqueteEspectaculos{
     private int descuento;
 
     public PaqueteEspectaculos(){
-    };
+    	//super();
+    }
 
     public PaqueteEspectaculos(String nombre, String descripcion, Date fechaInicio, Date fechaFin, Date fechaAlta, int descuento){
 	 this.nombre = nombre;
@@ -93,5 +94,4 @@ public class PaqueteEspectaculos{
     public void setFechaAlta(Date fechaAlta){
 	 this.fechaAlta = fechaAlta;
     }
-
 }

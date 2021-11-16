@@ -59,11 +59,11 @@ public class FFuncionTest {
 			dtPla = new DtPlataforma("nombrePlataformaFuncion", "descripcionPlataformaFuncion", "urlPlataformaFuncion");
 			iconPlataforma.altaPlataforma(dtPla);
 					
-			dtArt = new DtArtista("nicknameArtistaFuncion", "nombreArtistaFuncion", "apellidoArtistaFuncion", "email@ArtistaFuncion", new Date (), "contraseniaArtistaRegistro", null,null,null,
+			dtArt = new DtArtista("nicknameArtistaFuncion", "nombreArtistaFuncion", "apellidoArtistaFuncion", "email@ArtistaFuncion", new Date (),null, null, "contraseniaArtistaRegistro", null,
 				"descripcionArtistaFuncion", "biografiaArtistaFuncion", "linkArtistaFuncion");
 			iconUsuario.altaDtArtista(dtArt);
 			
-			dtEspectador = new DtEspectador("nicknameEspectadorFuncion", "nombreEspectadorFuncion", "apellidoEspectadorFuncion", "email@EspectadorFuncion", new Date (), "contraseniaEspectadorFuncion", null,null,null);
+			dtEspectador = new DtEspectador("nicknameEspectadorFuncion", "nombreEspectadorFuncion", "apellidoEspectadorFuncion", "email@EspectadorFuncion", new Date (),null, null, "contraseniaEspectadorFuncion",null);
 			iconUsuario.altaUsuario(dtEspectador);
 			
 			dtEsp = new DtEspectaculo(dtArt.getNickname(), dtPla.getNombre(), "nombreEspectaculoFuncion", "descripcionEspectaculoFuncion", 58, 50, 200, "urlEspectaculoFuncion", 150, new Date());

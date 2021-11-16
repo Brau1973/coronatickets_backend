@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Registro{
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;

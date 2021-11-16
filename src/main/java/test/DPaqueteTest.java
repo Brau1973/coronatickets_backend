@@ -59,7 +59,7 @@ public class DPaqueteTest {
 			dtPla = new DtPlataforma("nombrePlataformaPaquete", "descripcionPlataformaPaquete", "urlPlataformaPaquete");
 			iconPlataforma.altaPlataforma(dtPla);
 					
-			dtArt = new DtArtista("nicknameArtistaPaquete", "nombreArtistaPaquete", "apellidoArtistaPaquete", "email@ArtistaPaquete", new Date(), "contraseniaArtistaPaquete", null,null,null,
+			dtArt = new DtArtista("nicknameArtistaPaquete", "nombreArtistaPaquete", "apellidoArtistaPaquete", "email@ArtistaPaquete", new Date(), null, null,"contraseniaArtistaPaquete",null,
 				"descripcionArtistaPaquete", "biografiaArtistaPaquete", "linkArtistaPaquete");
 			iconUsuario.altaUsuario(dtArt);
 			
