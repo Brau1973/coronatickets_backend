@@ -1,4 +1,5 @@
 # coronatickets_backend
+####(Still working on it / todavia trabajando ) :construction_worker: :construction:
 
 ## Descripcion General del Proyecto entero (coronatickets_backend - coronatickets_frontend)
 Este proyecto tiene como objetivo el desarrollo de un sistema de espectaculos.
