@@ -16,8 +16,6 @@ import datatypes.DtUsuario;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorUsuario;
-import logica.Artista;
-import logica.Usuario;
 
 @WebService
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)

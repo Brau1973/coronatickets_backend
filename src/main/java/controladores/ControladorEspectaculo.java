@@ -7,10 +7,7 @@ import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
 import datatypes.DtPaqueteEspectaculo;
 import excepciones.EspectaculoRepetidoExcepcion;
-import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
-import interfaces.IControladorPlataforma;
-import interfaces.IControladorUsuario;
 import logica.Artista;
 import logica.Espectaculo;
 import logica.Plataforma;
@@ -27,9 +24,6 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion{
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		if (mE.buscarEspectaculo(dte.getNombre()) == null) {
-
-			IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
-			IControladorPlataforma iconP = Fabrica.getInstancia().getIControladorPlataforma();
 
 			ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 			Artista artistaOrganizador = mU.buscarArtista(dte.getArtista());

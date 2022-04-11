@@ -6,10 +6,7 @@ import java.util.List;
 
 import datatypes.DtFuncion;
 import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
-import interfaces.Fabrica;
-import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
-import interfaces.IControladorUsuario;
 import logica.Artista;
 import logica.Espectaculo;
 import logica.Espectador;
@@ -35,7 +32,6 @@ public class ControladorFuncion implements IControladorFuncion {
 			throw new FuncionYaRegistradaEnEspectaculoExcepcion("Error", "La Funcion " + dtFuncion.getNombre() + " ya esta registrada en el espectaculo " + espectaculo.getNombre());
 		} else {
 			ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-			IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
 			List<Artista> artistas = new ArrayList<Artista>();
 			dtFuncion.getArtistas().forEach((a) -> {
 				artistas.add(mU.buscarArtista(a));

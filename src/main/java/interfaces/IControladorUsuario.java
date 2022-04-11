@@ -6,8 +6,6 @@ import datatypes.DtArtista;
 import datatypes.DtEspectador;
 import datatypes.DtUsuario;
 import excepciones.UsuarioRepetidoExcepcion;
-import logica.Artista;
-import logica.Usuario;
 
 public interface IControladorUsuario {
 	public void altaUsuario(DtUsuario u) throws UsuarioRepetidoExcepcion;
