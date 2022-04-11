@@ -29,6 +29,7 @@ public class ControladorFuncion implements IControladorFuncion {
 	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		Espectaculo espectaculo = mE.buscarEspectaculo(nombreEspectaculo);
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 
 		if (espectaculo.funcionYaRegistrada(dtFuncion.getNombre())) {
 			throw new FuncionYaRegistradaEnEspectaculoExcepcion("Error", "La Funcion " + dtFuncion.getNombre() + " ya esta registrada en el espectaculo " + espectaculo.getNombre());
@@ -37,7 +38,7 @@ public class ControladorFuncion implements IControladorFuncion {
 			IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
 			List<Artista> artistas = new ArrayList<Artista>();
 			dtFuncion.getArtistas().forEach((a) -> {
-				artistas.add(iconU.obtenerArtista(a));
+				artistas.add(mU.buscarArtista(a));
 			});
 			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(), dtFuncion.getRegistro(), artistas, imagen);
 			espectaculo.agregarFuncion(funcionACrear);

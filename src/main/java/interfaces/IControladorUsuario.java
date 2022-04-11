@@ -16,11 +16,7 @@ public interface IControladorUsuario {
 
 	public void altaDtEspectador(DtEspectador dtEspectador) throws UsuarioRepetidoExcepcion;
 
-	public void modificarUsuario(Usuario nuevo);
-
-	public Usuario obtenerUsuario(String nickname);
-
-	public Artista obtenerArtista(String nickname);
+	public void modificarUsuario(DtUsuario nuevo);
 
 	public List<String> listarNicknameUsuarios();
 

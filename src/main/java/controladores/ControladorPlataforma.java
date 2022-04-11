@@ -52,13 +52,6 @@ public class ControladorPlataforma implements IControladorPlataforma {
 	}
 
 	@Override
-	public Plataforma buscarPlataforma(String nombrePlataforma) {
-		ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
-		Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);
-		return plataforma;
-	}
-
-	@Override
 	public List<DtPlataforma> mapListEntityToDt(List<Plataforma> p) {
 		List<DtPlataforma> ret = new ArrayList<DtPlataforma>();
 		p.forEach((plat) -> {
