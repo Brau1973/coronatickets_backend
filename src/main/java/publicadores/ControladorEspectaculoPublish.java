@@ -54,11 +54,6 @@ public class ControladorEspectaculoPublish {
 	}
 
 	@WebMethod
-	public Espectaculo obtenerEspectaculo(String nombre) {
-		return iconE.obtenerEspectaculo(nombre);
-	}
-
-	@WebMethod
 	public DtEspectaculo[] listarEspectaculos(String nombrePlataforma) { //vere
 		List<DtEspectaculo> lst=iconE.listarEspectaculos(nombrePlataforma);
 		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
@@ -78,14 +73,6 @@ public class ControladorEspectaculoPublish {
 	public DtEspectaculo[] listEntityToDtEsp(List<Espectaculo> liste) {
 		List<DtEspectaculo> lst=iconE.listEntityToDtEsp(liste);
 		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
-		arr=lst.toArray(arr);
-		return arr;
-	}
-
-	@WebMethod
-	public Espectaculo[] obtenerEspectaculo2(String plataforma) {
-		List<Espectaculo> lst=iconE.obtenerEspectaculo2(plataforma);
-		Espectaculo[] arr=new Espectaculo[lst.size()];
 		arr=lst.toArray(arr);
 		return arr;
 	}

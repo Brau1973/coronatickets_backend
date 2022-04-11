@@ -27,8 +27,8 @@ public class ControladorFuncion implements IControladorFuncion {
 
 	@Override
 	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion {
-		IControladorEspectaculo iconE = Fabrica.getInstancia().getIControladorEspectaculo();
-		Espectaculo espectaculo = iconE.obtenerEspectaculo(nombreEspectaculo);
+		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+		Espectaculo espectaculo = mE.buscarEspectaculo(nombreEspectaculo);
 
 		if (espectaculo.funcionYaRegistrada(dtFuncion.getNombre())) {
 			throw new FuncionYaRegistradaEnEspectaculoExcepcion("Error", "La Funcion " + dtFuncion.getNombre() + " ya esta registrada en el espectaculo " + espectaculo.getNombre());
@@ -71,12 +71,6 @@ public class ControladorFuncion implements IControladorFuncion {
 			}
 		}
 		return funcionesARetornar;
-	}
-
-	@Override
-	public Funcion obtenerFuncion(String nombre) { // Ok Seba 23-10-2021
-		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-		return mF.buscarFuncion(nombre);
 	}
 }
 // public int getCantidadEspectadoresRegistrados(String nombreFuncion){

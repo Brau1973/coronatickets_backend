@@ -31,8 +31,9 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 			IControladorPlataforma iconP = Fabrica.getInstancia().getIControladorPlataforma();
 
 			Artista artistaOrganizador = iconU.obtenerArtista(dte.getArtista());
-
-			Plataforma plataforma = iconP.buscarPlataforma(nombrePlataforma);
+			
+			ManejadorPlataforma mP = ManejadorPlataforma.getInstancia(); 
+			Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);
 
 			Espectaculo espectaculo = new Espectaculo(artistaOrganizador, dte.getNombre(), dte.getDescripcion(), dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
 
@@ -42,12 +43,6 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 		} else {
 			throw new EspectaculoRepetidoExcepcion("Error", "El espectaculo con el nombre " + dte.getNombre() + " ya existe.");
 		}
-	}
-	
-	@Override
-	public Espectaculo obtenerEspectaculo(String nombre) {
-		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-		return mE.buscarEspectaculo(nombre);
 	}
 
 	@Override
@@ -72,12 +67,6 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 			listEspectaculosDt.add(DtEspec);
 		}
 		return listEspectaculosDt;
-	}
-
-	@Override
-	public List<Espectaculo> obtenerEspectaculo2(String plataforma) {
-		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-		return mE.obtenerEspectaculoBD(plataforma);
 	}
 
 	@Override
