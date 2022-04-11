@@ -80,16 +80,6 @@ public class ControladorUsuarioPublish {
 	}
 
 	@WebMethod
-	public Usuario obtenerUsuario(String nickname) {
-		return iconU.obtenerUsuario(nickname);
-	}
-
-	@WebMethod
-	public Artista obtenerArtista(String nickname) {
-		return iconU.obtenerArtista(nickname);
-	}
-
-	@WebMethod
 	public String[] listarNicknameUsuarios() {
 		List<String> lst = iconU.listarNicknameUsuarios();
 		String[] arr = new String[lst.size()];

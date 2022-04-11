@@ -14,8 +14,6 @@ public interface IControladorPlataforma{
 
 	public List<String> listarPlataformasStr();
 
-	public Plataforma buscarPlataforma(String nombrePlataforma);
-
 	public List<DtPlataforma> mapListEntityToDt(List<Plataforma> p);
 
 	public DtPlataforma mapEntityToDt(Plataforma p);

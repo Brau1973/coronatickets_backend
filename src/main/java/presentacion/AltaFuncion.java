@@ -292,7 +292,8 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 				DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro, listArtistasSeleccionados);
 				try {
 					this.iconF.altaFuncion(dtFuncion, strespectaculo, selectedImage);
-					//	JOptionPane.showMessageDialog(this, "la funcion se ha creado con Exito");
+					JOptionPane.showMessageDialog(null, "La Funcion se ha creado con exito", "Alta Funcion", JOptionPane.INFORMATION_MESSAGE);
+				    limpiarFormulario();
 				} catch (Exception e2) {
 					//		JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
 				}

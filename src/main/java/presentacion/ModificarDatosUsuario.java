@@ -16,10 +16,10 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import datatypes.DtArtista;
+import datatypes.DtEspectador;
+import datatypes.DtUsuario;
 import interfaces.IControladorUsuario;
-import logica.Artista;
-import logica.Espectador;
-import logica.Usuario;
 
 @SuppressWarnings("serial")
 public class ModificarDatosUsuario extends JInternalFrame implements ActionListener{
@@ -153,24 +153,26 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 
 	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e){
-		String strnick = this.txtNickname.getText();
-		String strnombre = this.txtNombre.getText();
-		String strapellido = this.txtApellido.getText();
-		String stremail = this.txtEmail.getText();
-		Date dateRegistro = this.dateFechaNac.getDate();
-		String strcontrasenia = this.txtContrasenia.getText();
 
 		if(e.getSource() == btnGuardar){
-			Usuario usuario = this.iconU.obtenerUsuario(strnick);
-			if(usuario instanceof Artista){
-				Usuario nuevo = new Artista(strnick, strnombre, strapellido, stremail, dateRegistro, strcontrasenia, null,((Artista) usuario).getDescripcion(), ((Artista) usuario).getBiografia(), ((Artista) usuario).getLink());
-				Artista artista = (Artista) nuevo;
-				this.iconU.modificarUsuario(artista);
+			String strnick = this.txtNickname.getText();
+			String strnombre = this.txtNombre.getText();
+			String strapellido = this.txtApellido.getText();
+			String stremail = this.txtEmail.getText();
+			Date dateRegistro = this.dateFechaNac.getDate();
+			String strcontrasenia = this.txtContrasenia.getText();
+			//Usuario usuario = this.iconU.obtenerUsuario(strnick);
+			DtUsuario usuario = iconU.obtenerInfoUsuario(strnick);
+			if(usuario instanceof DtArtista){				
+				DtUsuario nuevo = new DtArtista(strnick, strnombre, strapellido, stremail, dateRegistro, null, null, strcontrasenia,
+						null,((DtArtista) usuario).getDescripcion(), ((DtArtista) usuario).getBiografia(), ((DtArtista) usuario).getLink());
+				this.iconU.modificarUsuario(nuevo);
+				//this.iconU.modificarUsuario(artista);
 			}
-			if(usuario instanceof Espectador){
-				Usuario nuevo = new Espectador(strnick, strnombre, strapellido, stremail, dateRegistro, strcontrasenia,null);
-				Espectador espectador = (Espectador) nuevo;
-				this.iconU.modificarUsuario(espectador);
+			if(usuario instanceof DtEspectador){
+				DtUsuario nuevo = new DtEspectador(strnick, strnombre, strapellido, stremail, dateRegistro, null, null, strcontrasenia,null);
+				this.iconU.modificarUsuario(nuevo);
+				//this.iconU.modificarUsuario(espectador);
 			}
 			JOptionPane.showMessageDialog(null, "Datos modificados correctamente");
 			setVisible(false);
@@ -192,7 +194,8 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 
 		if(e.getSource() == comboUsuarios){
 			String strUsuario = this.comboUsuarios.getSelectedItem().toString();
-			Usuario u = this.iconU.obtenerUsuario(strUsuario);
+			//Usuario u = this.iconU.obtenerUsuario(strUsuario);
+			DtUsuario u = iconU.obtenerInfoUsuario(strUsuario);
 			txtNickname.setText(u.getNickname());
 			txtNombre.setText(u.getNombre());
 			txtApellido.setText(u.getApellido());

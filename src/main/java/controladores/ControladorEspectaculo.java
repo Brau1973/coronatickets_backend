@@ -16,6 +16,7 @@ import logica.Espectaculo;
 import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorPlataforma;
+import manejadores.ManejadorUsuario;
 
 
 public class ControladorEspectaculo implements IControladorEspectaculo {
@@ -30,7 +31,8 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 			IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
 			IControladorPlataforma iconP = Fabrica.getInstancia().getIControladorPlataforma();
 
-			Artista artistaOrganizador = iconU.obtenerArtista(dte.getArtista());
+			ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+			Artista artistaOrganizador = mU.buscarArtista(dte.getArtista());
 			
 			ManejadorPlataforma mP = ManejadorPlataforma.getInstancia(); 
 			Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);

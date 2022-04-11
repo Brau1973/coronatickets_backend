@@ -102,22 +102,29 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void modificarUsuario(Usuario nuevo) {
+	public void modificarUsuario(DtUsuario nuevo) {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
+		Usuario aMergear = null;
+		
+		if(nuevo instanceof DtArtista){	
+			aMergear = new Artista(nuevo.getNickname(), nuevo.getNombre(), nuevo.getApellido(), nuevo.getEmail(),
+										   nuevo.getfNacimiento(), nuevo.getContrasenia(), nuevo.getImagen(), ((DtArtista) nuevo).getDescripcion(),
+										   ((DtArtista) nuevo).getBiografia(), ((DtArtista) nuevo).getLink());
+		}
+		if(nuevo instanceof DtEspectador){
+			aMergear = new Espectador(nuevo.getNickname(), nuevo.getNombre(), nuevo.getApellido(), nuevo.getEmail(), 
+												 nuevo.getfNacimiento(), nuevo.getContrasenia(), nuevo.getImagen());
+		}
+
 		em.getTransaction().begin();
 		em.persist(mU.buscarUsuario(nuevo.getNickname()));
-		em.merge(nuevo);
+		em.merge(aMergear);
 		em.getTransaction().commit();
 	}
 
 	@Override
-	public Usuario obtenerUsuario(String nickname) { //MAL, SACAR, EN PROCESO DE BORRADO CON LA FUNCION OBTENERINFOUSUARIO
-		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-		return mU.buscarUsuario(nickname);
-	}
-	
 	public DtUsuario obtenerInfoUsuario(String nickname) {
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		DtUsuario dtUsuario = null;
@@ -132,12 +139,6 @@ public class ControladorUsuario implements IControladorUsuario {
 					usuario.getEmail(), usuario.getfNacimiento(), null, null, usuario.getContrasenia(), usuario.getImagen());
 		}
 		return dtUsuario;
-	}
-
-	@Override
-	public Artista obtenerArtista(String nickname) {
-		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-		return mU.buscarArtista(nickname);
 	}
 
 	@Override
