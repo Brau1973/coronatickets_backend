@@ -96,6 +96,7 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 
 	// Inicializar ComboBox
 	public void iniciaComboBoxU() {
+		comboUsuarios.removeAllItems();
 		listUsuariosStr = iconU.listarNicknameUsuarios();
 		listUsuariosStr.forEach((u) -> {
 			comboUsuarios.addItem(u);
@@ -109,31 +110,34 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == comboUsuarios) {
-			String strUsuario = (String) this.comboUsuarios.getSelectedItem();
-			DtUsuario dtusu = iconU.obtenerInfoUsuario(strUsuario);
-			String datos = "";
-			String op = "";
-			SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-			if (dtusu instanceof DtArtista) {
-				System.out.println("ARTISTA");
-				op = "--------Artistas--------\n\n";
-				
-				List<String> espArtista = iconE.obtenerEspectaculosArtista(strUsuario);
-				datos = "\n\nLista de espectaculos:";
-				for (String i : espArtista) {
-					datos = datos + "\n" + i.toString();
+			//String strUsuario = "";
+			if(this.comboUsuarios.getSelectedItem() != null) {
+				String strUsuario = this.comboUsuarios.getSelectedItem().toString();
+				DtUsuario dtusu = iconU.obtenerInfoUsuario(strUsuario);
+				String datos = "";
+				String op = "";
+				SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+				if (dtusu instanceof DtArtista) {
+					System.out.println("ARTISTA");
+					op = "--------Artistas--------\n\n";
+					
+					List<String> espArtista = iconE.obtenerEspectaculosArtista(strUsuario);
+					datos = "\n\nLista de espectaculos:";
+					for (String i : espArtista) {
+						datos = datos + "\n" + i.toString();
+					}
+					
+					jtextarea.setText(op + "Nombre: " + dtusu.getNombre() + "\nApellido: " + dtusu.getApellido() + "\nEmail: "
+							+ dtusu.getEmail() + "\nFecha: " + formatoFecha.format(dtusu.getfNacimiento()) + "\nDescripcion: "
+							+ ((DtArtista) dtusu).getDescripcion() + "\nBiografia: " +((DtArtista) dtusu).getBiografia() 
+							+ "\nLink: " +((DtArtista) dtusu).getLink() +  
+							datos);
+				} else if (dtusu instanceof DtEspectador) {
+					System.out.println("ESPECTADOR");
+					op = "--------Espectador--------\n\n";
+					jtextarea.setText(op + "Nombre: " + dtusu.getNombre() + "\nApellido: " + dtusu.getApellido() + "\nEmail: "
+							+ dtusu.getEmail() + "\nFecha: " + formatoFecha.format(dtusu.getfNacimiento()) + datos);
 				}
-				
-				jtextarea.setText(op + "Nombre: " + dtusu.getNombre() + "\nApellido: " + dtusu.getApellido() + "\nEmail: "
-						+ dtusu.getEmail() + "\nFecha: " + formatoFecha.format(dtusu.getfNacimiento()) + "\nDescripcion: "
-						+ ((DtArtista) dtusu).getDescripcion() + "\nBiografia: " +((DtArtista) dtusu).getBiografia() 
-						+ "\nLink: " +((DtArtista) dtusu).getLink() +  
-						datos);
-			} else if (dtusu instanceof DtEspectador) {
-				System.out.println("ESPECTADOR");
-				op = "--------Espectador--------\n\n";
-				jtextarea.setText(op + "Nombre: " + dtusu.getNombre() + "\nApellido: " + dtusu.getApellido() + "\nEmail: "
-						+ dtusu.getEmail() + "\nFecha: " + formatoFecha.format(dtusu.getfNacimiento()) + datos);
 			}
 		}
 	}

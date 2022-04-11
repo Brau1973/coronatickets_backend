@@ -108,7 +108,7 @@ public class AltaPlataforma extends JInternalFrame{
 		 DtPlataforma dtP= new DtPlataforma(nombre,descripcion,url);
 	   try{
 	  this.iconP.altaPlataforma(dtP);
-		  JOptionPane.showMessageDialog(this, "la plataforma se ha creado con Exito");
+		  JOptionPane.showMessageDialog(this, "Plataforma ingresada con Exito");
     }catch(Exception e){
 		  JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
     }

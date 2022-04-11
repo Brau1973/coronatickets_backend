@@ -286,7 +286,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 						DtEspectador dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia, selectedImage);
 
 						this.iconU.altaDtEspectador(dte);
-						JOptionPane.showMessageDialog(this, "el Espectador se ha creado con Exito");
+						JOptionPane.showMessageDialog(this, "Espectador ingresado con Exito");
 
 					} catch (Exception x) {
 						JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
@@ -302,7 +302,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 						DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia, selectedImage, strDescripcion, strBiografia, strLink);
 
 						this.iconU.altaUsuario(dta);
-						JOptionPane.showMessageDialog(this, "el Artista se ha creado con Exito");
+						JOptionPane.showMessageDialog(this, "Artista ingresado con Exito");
 					} catch (Exception x) {
 						JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 					}
@@ -373,6 +373,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 		txtEmail.setText("");
 		dateFechaNac.setDate(null);
 		txtContrasenia.setText("");
+		txtContrasenia2.setText("");
 		txtDescripcion.setText("");
 		txtBiografia.setText("");
 		txtLink.setText("");

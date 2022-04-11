@@ -310,6 +310,7 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 			break;
 		case "Consulta de Espectaculo":
 			internalFrameConsultaEspectaculo.iniciarlizarComboBox();
+			internalFrameConsultaEspectaculo.limpiarFormulario();
 			internalFrameConsultaEspectaculo.setVisible(true);
 			break;
 		case "Alta de Plataforma":

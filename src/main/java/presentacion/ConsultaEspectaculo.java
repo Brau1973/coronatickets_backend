@@ -244,7 +244,7 @@ public class ConsultaEspectaculo extends JInternalFrame {
 				this.textRegistro.setText(String.valueOf(datosFecha));
 				listFunciones = iconF.listarFunciones(strEspectaculo);
 				if (listFunciones.isEmpty()) {
-					JOptionPane.showMessageDialog(this, "El espectaculo no tiene funciones asociadas", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this, "El espectaculo no tiene funciones asociadas", "Warning", JOptionPane.WARNING_MESSAGE);
 					comboFunciones.removeAllItems();
 				} else {
 					comboFunciones.removeAllItems();
@@ -255,7 +255,7 @@ public class ConsultaEspectaculo extends JInternalFrame {
 				}
 
 				if (espectaculo.getPaquetes().isEmpty()) {
-					JOptionPane.showMessageDialog(this, "El espectaculo no tiene paquetes asociados", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this, "El espectaculo no tiene paquetes asociados", "Warning", JOptionPane.WARNING_MESSAGE);
 					comboPaquetes.removeAllItems();
 				} else {
 					comboPaquetes.removeAllItems();
@@ -300,10 +300,22 @@ public class ConsultaEspectaculo extends JInternalFrame {
 		// comboPaquetes.removeAllItems();
 		comboPlataforma.addItem(SELECCIONE);
 		comboPlataforma.setSelectedItem(SELECCIONE);
-		iconP.listarPlataformas();
+		listPlataformas = iconP.listarPlataformas();
 		listPlataformas.forEach((p) -> {
 			comboPlataforma.addItem(p.getNombre());
 		});
+	}
+	
+	public void limpiarFormulario() {
+		textNombreEspectaculo.setText("");
+		textArtistaOrganizador.setText("");
+		textDescripcion.setText("");
+		textDuracion.setText("");
+		textCantidadMinima.setText("");
+		textCantidadMaxima.setText("");
+		textURL.setText("");
+		textRegistro.setText("");
+		textCosto.setText("");
 	}
 
 }

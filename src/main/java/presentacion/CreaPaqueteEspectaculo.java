@@ -148,7 +148,7 @@ public class CreaPaqueteEspectaculo extends JInternalFrame{
 	     Integer.parseInt(this.txtDescuento.getText());
 	     PaqueteEspectaculos pe = new PaqueteEspectaculos(this.txtNombre.getText(), this.txtDescripcion.getText(), this.dateFechaInicio.getDate(), this.dateFechaFin.getDate(), this.dateFechaAlta.getDate(), Integer.parseInt(this.txtDescuento.getText()));
 	     iControladorPaquete.altaPaquete(pe);
-	     JOptionPane.showMessageDialog(null, "Paquete creado correctamente", "Alta Paquete", JOptionPane.INFORMATION_MESSAGE);
+	     JOptionPane.showMessageDialog(null, "Paquete ingresado con Exito", "Alta Paquete", JOptionPane.INFORMATION_MESSAGE);
 	     limpiarPantalla();
 	 }
     }
