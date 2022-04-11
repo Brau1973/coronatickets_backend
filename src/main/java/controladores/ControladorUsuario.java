@@ -113,9 +113,25 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public Usuario obtenerUsuario(String nickname) {
+	public Usuario obtenerUsuario(String nickname) { //MAL, SACAR, EN PROCESO DE BORRADO CON LA FUNCION OBTENERINFOUSUARIO
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		return mU.buscarUsuario(nickname);
+	}
+	
+	public DtUsuario obtenerInfoUsuario(String nickname) {
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		DtUsuario dtUsuario = null;
+		Usuario usuario = mU.buscarUsuario(nickname);
+		if(usuario instanceof Artista){
+			dtUsuario = new DtArtista(usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(),
+					usuario.getfNacimiento(), null, null, usuario.getContrasenia(), usuario.getImagen(),
+					((Artista) usuario).getDescripcion(),((Artista) usuario).getBiografia(), ((Artista) usuario).getLink());
+			
+		}else if (usuario instanceof Espectador) {
+			dtUsuario = new DtEspectador(usuario.getNickname(), usuario.getNombre(), usuario.getApellido(),
+					usuario.getEmail(), usuario.getfNacimiento(), null, null, usuario.getContrasenia(), usuario.getImagen());
+		}
+		return dtUsuario;
 	}
 
 	@Override

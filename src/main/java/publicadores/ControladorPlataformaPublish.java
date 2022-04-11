@@ -70,11 +70,6 @@ public class ControladorPlataformaPublish {
 		arr = lst.toArray(arr);
 		return arr;
 	}
-	
-	@WebMethod
-	public Plataforma buscarPlataforma(String nombrePlataforma) {
-		return iconP.buscarPlataforma(nombrePlataforma);
-	}
 
 	@WebMethod  (exclude = true) // VER
 	public DtPlataforma[] mapListEntityToDt(List<Plataforma> p) {

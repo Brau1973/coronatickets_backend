@@ -65,8 +65,4 @@ public class ControladorFuncionPublish {
 		return arr;
 	}
 
-	@WebMethod
-	public Funcion obtenerFuncion(String nombre) {
-		return iconF.obtenerFuncion(nombre);
-	}
 }

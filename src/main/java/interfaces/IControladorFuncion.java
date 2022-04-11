@@ -14,6 +14,5 @@ public interface IControladorFuncion{
 
     public List<String> getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador);
     
-    public Funcion obtenerFuncion(String nombre);
    // public int getCantidadEspectadoresRegistrados(String nombreFuncion);
 }
