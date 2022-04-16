@@ -1,12 +1,19 @@
 package presentacion;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -26,7 +33,7 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 
 	private JPanel miPanel;
 //   private JScrollPane panel;
-	private JLabel lblTitulo, lblBuscar;
+	private JLabel lblTitulo, lblBuscar,jLabelImage;
 	// private JDateChooser dateFechaNac;
 	// private JTable tabUsuario;
 	private JComboBox<String> comboUsuarios;
@@ -74,6 +81,10 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 		jtextarea.setOpaque(false);
 		jtextarea.setAutoscrolls(maximizable);
 		miPanel.add(jtextarea);
+		
+		jLabelImage = new JLabel();
+		jLabelImage.setBounds(10, 400, 140, 140);
+		miPanel.add(jLabelImage);
 
 		// Tabla Funciones de espectulos
 		/*
@@ -111,6 +122,7 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == comboUsuarios) {
 			//String strUsuario = "";
+			//jLabelImage.setIcon(null);
 			if(this.comboUsuarios.getSelectedItem() != null) {
 				String strUsuario = this.comboUsuarios.getSelectedItem().toString();
 				DtUsuario dtusu = iconU.obtenerInfoUsuario(strUsuario);
@@ -137,6 +149,22 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 					op = "--------Espectador--------\n\n";
 					jtextarea.setText(op + "Nombre: " + dtusu.getNombre() + "\nApellido: " + dtusu.getApellido() + "\nEmail: "
 							+ dtusu.getEmail() + "\nFecha: " + formatoFecha.format(dtusu.getfNacimiento()) + datos);
+				}
+				// CARGA POSIBLE IMAGEN
+				if(dtusu.getImagen()!= null) {
+					System.out.println("TENGO IMAGEN");
+					byte[] b = dtusu.getImagen();
+					BufferedImage image = null;
+					InputStream in = new ByteArrayInputStream(b);
+					//System.out.println("IN: " + b);
+					try{
+						image = ImageIO.read(in);
+					}catch(IOException e1){
+						e1.printStackTrace();
+					}
+					ImageIcon imgi = new ImageIcon(image);
+					Image imagei = imgi.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
+					jLabelImage.setIcon(new ImageIcon(imagei));
 				}
 			}
 		}

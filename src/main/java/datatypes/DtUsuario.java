@@ -18,8 +18,8 @@ public class DtUsuario implements Serializable {
 	private List<String> seguidos = new ArrayList<String>();
 	private List<String> seguidores = new ArrayList<String>();
 	private String contrasenia;
-	@Lob
-	@Column(name = "imagen")
+	//@Lob
+	//@Column(name = "imagen")
 	private byte[] imagen;
 	
 	public DtUsuario() {
