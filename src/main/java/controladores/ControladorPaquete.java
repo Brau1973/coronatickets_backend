@@ -1,6 +1,7 @@
 package controladores;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import datatypes.DtEspectaculo;
@@ -14,9 +15,12 @@ import manejadores.ManejadorPaquete;
 public class ControladorPaquete implements IControladorPaquete {
 
 	@Override
-	public void altaPaquete(PaqueteEspectaculos pEsp) {
+	public void altaPaquete(DtPaqueteEspectaculo dtPaqueteEsp) {
 		ManejadorPaquete mP = ManejadorPaquete.getInstancia();
-		mP.altaPaquete(pEsp);
+	    PaqueteEspectaculos pe = new PaqueteEspectaculos(dtPaqueteEsp.getNombre(),dtPaqueteEsp.getDescripcion()
+	    		,dtPaqueteEsp.getFechaInicio(),dtPaqueteEsp.getFechaFin(),dtPaqueteEsp.getFechaAlta(),
+	    		dtPaqueteEsp.getDescuento());
+		mP.altaPaquete(pe);
 	}
 
 	@Override

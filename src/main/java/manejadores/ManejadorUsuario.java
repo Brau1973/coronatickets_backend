@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import logica.Artista;
 import logica.Espectador;
@@ -66,12 +67,15 @@ public class ManejadorUsuario{
 		return em.find(Espectador.class, nickname);
 	}
 
+	
 	@SuppressWarnings("unchecked")
 	public List<Usuario> listarUsuarios(){
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
 		Query query = em.createQuery("select u from Usuario u");
+		//em.getTransaction().begin();
 		List<Usuario> listUsuarios = (List<Usuario>) query.getResultList();
+		//em.getTransaction().commit();
 		return listUsuarios;
 	}
 

@@ -80,5 +80,14 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		return mE.buscarEspectaculo(nombreEsp).getPaqueteEspectaculoDt();
 	}
+	
+	public boolean existeEspectaculo(String nombreEsp) {
+		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
+		if(mE.buscarEspectaculo(nombreEsp) != null){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 }

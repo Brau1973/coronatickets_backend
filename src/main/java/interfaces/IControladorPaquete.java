@@ -6,7 +6,7 @@ import datatypes.DtPaqueteEspectaculo;
 import logica.PaqueteEspectaculos;
 
 public interface IControladorPaquete {
-	public void altaPaquete(PaqueteEspectaculos pEsp);
+	public void altaPaquete(DtPaqueteEspectaculo dtPaqueteEsp);
 
 	public Boolean existePaquete(String nombre);
 

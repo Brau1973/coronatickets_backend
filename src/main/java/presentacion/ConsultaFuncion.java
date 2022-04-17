@@ -24,8 +24,6 @@ import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
-import logica.Funcion;
-import manejadores.ManejadorFuncion;
 
 @SuppressWarnings("serial")
 public class ConsultaFuncion extends JInternalFrame{
@@ -187,7 +185,6 @@ public class ConsultaFuncion extends JInternalFrame{
 					String strFuncion = this.comboFunciones.getSelectedItem().toString();
 					int i = 0;
 					String nombreFuncion;
-					Funcion func = new Funcion();
 					SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 					SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm");
 					artistasInvitadosAFuncion = "";
@@ -204,6 +201,7 @@ public class ConsultaFuncion extends JInternalFrame{
 						}
 						i++;
 					}
+					/*
 					ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 					func = mF.buscarFuncion(strFuncion);
 
@@ -221,6 +219,7 @@ public class ConsultaFuncion extends JInternalFrame{
 					jLabelImage.setIcon(new ImageIcon(imagei));
 					
 				//	System.out.println("IN: " + );
+					 */
 				}
 			}
 		}

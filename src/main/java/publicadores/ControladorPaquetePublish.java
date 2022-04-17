@@ -46,8 +46,8 @@ public class ControladorPaquetePublish {
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaPaquete(PaqueteEspectaculos pEsp) {
-		iconPa.altaPaquete(pEsp);
+	public void altaPaquete(DtPaqueteEspectaculo dtPaqueteEspe) {
+		iconPa.altaPaquete(dtPaqueteEspe);
 	}
 
 	@WebMethod

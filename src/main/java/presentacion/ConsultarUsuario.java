@@ -33,7 +33,7 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 
 	private JPanel miPanel;
 //   private JScrollPane panel;
-	private JLabel lblTitulo, lblBuscar,jLabelImage;
+	private JLabel lblTitulo, lblBuscar,jLabelImage,jLabelIamgeTxt;
 	// private JDateChooser dateFechaNac;
 	// private JTable tabUsuario;
 	private JComboBox<String> comboUsuarios;
@@ -71,19 +71,30 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 		comboUsuarios.setBounds(120, 38, 255, 25);
 		miPanel.add(comboUsuarios);
 		comboUsuarios.addActionListener(this);
-
+		
+		/*
+		jLabelIamgeTxt = new JLabel("IMAGEN AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: ");
+		jLabelIamgeTxt.setBounds(10, 65, 140, 4);
+		miPanel.add(jLabelIamgeTxt);	
+		*/
+		
 		jtextarea = new JTextArea(25, 150);
 		Border border = BorderFactory.createLineBorder(Color.GRAY);
-		jtextarea
-				.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+		jtextarea.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		jtextarea.setBounds(10, 70, 330, 300);
 		jtextarea.setFont(new java.awt.Font("Verdana", 1, 12));
 		jtextarea.setOpaque(false);
 		jtextarea.setAutoscrolls(maximizable);
 		miPanel.add(jtextarea);
 		
+		/*
+		jLabelIamgeTxt = new JLabel("IMAGEN AAAAAAAAAAAAAAAAAAAAAAAAAA: ");
+		jLabelIamgeTxt.setBounds(350, 150, 140, 140);
+		miPanel.add(jLabelIamgeTxt);	
+		*/
+		
 		jLabelImage = new JLabel();
-		jLabelImage.setBounds(10, 400, 140, 140);
+		jLabelImage.setBounds(350, 150, 140, 140);
 		miPanel.add(jLabelImage);
 
 		// Tabla Funciones de espectulos
@@ -112,17 +123,10 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 		listUsuariosStr.forEach((u) -> {
 			comboUsuarios.addItem(u);
 		});
-		/*
-		 * ManejadorUsuario mU = ManejadorUsuario.getInstancia(); listUsuarios =
-		 * mU.obtenerUsuario(); listUsuarios.forEach((u) -> {
-		 * comboUsuarios.addItem(u.getNickname()); });
-		 */
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == comboUsuarios) {
-			//String strUsuario = "";
-			//jLabelImage.setIcon(null);
 			if(this.comboUsuarios.getSelectedItem() != null) {
 				String strUsuario = this.comboUsuarios.getSelectedItem().toString();
 				DtUsuario dtusu = iconU.obtenerInfoUsuario(strUsuario);
@@ -159,7 +163,9 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 					//System.out.println("IN: " + b);
 					try{
 						image = ImageIO.read(in);
+						System.out.println("TENGO IMAGEN TRY");
 					}catch(IOException e1){
+						System.out.println("TENGO IMAGEN catch");
 						e1.printStackTrace();
 					}
 					ImageIcon imgi = new ImageIcon(image);

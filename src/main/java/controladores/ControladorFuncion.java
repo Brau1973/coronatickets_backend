@@ -69,6 +69,17 @@ public class ControladorFuncion implements IControladorFuncion {
 		}
 		return funcionesARetornar;
 	}
+	
+	@Override
+	public boolean existeFuncion(String nomFun) {
+		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+		if(mF.buscarFuncion(nomFun) != null){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 }
 // public int getCantidadEspectadoresRegistrados(String nombreFuncion){
 // ManejadorFuncion mF = ManejadorFuncion.getInstancia();

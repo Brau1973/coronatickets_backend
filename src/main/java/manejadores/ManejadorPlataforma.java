@@ -52,7 +52,7 @@ public class ManejadorPlataforma{
 	 EntityManager em = conexion.getEntityManager();
 	 Query query = em.createQuery("select p from Plataforma p");
 	 @SuppressWarnings("unchecked")
-	List<Plataforma> listPlataformas = (List<Plataforma>) query.getResultList();
+	 List<Plataforma> listPlataformas = (List<Plataforma>) query.getResultList();
 	 
 	 return listPlataformas;
     }

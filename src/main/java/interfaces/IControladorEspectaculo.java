@@ -23,4 +23,6 @@ public interface IControladorEspectaculo{
 	public List<DtFuncion> obtenerEspectaculoFunciones(String nombreEsp);
 	
 	public List<DtPaqueteEspectaculo> obtenerEspectaculoPaquetes(String nombreEsp);
+	
+	public boolean existeEspectaculo(String nombreEsp);
 }

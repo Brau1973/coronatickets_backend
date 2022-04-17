@@ -12,5 +12,7 @@ public interface IControladorFuncion{
 
     public List<String> getFuncionesVigentesRegistradasPorEspectador(String nicknameEspectador);
     
+    public boolean existeFuncion(String nomFun);
+    
    // public int getCantidadEspectadoresRegistrados(String nombreFuncion);
 }

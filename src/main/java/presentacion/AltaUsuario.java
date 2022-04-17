@@ -28,7 +28,6 @@ import datatypes.DtArtista;
 import datatypes.DtEspectador;
 import datatypes.DtUsuario;
 import interfaces.IControladorUsuario;
-import manejadores.ManejadorUsuario;
 
 @SuppressWarnings("serial")
 public class AltaUsuario extends JInternalFrame implements ActionListener {
@@ -175,13 +174,13 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 		txtLink.setBounds(155, 318, 260, 25);
 		miPanel.add(txtLink);
 
-		//jLabelImag = new JLabel("Seleccionar imagen"); // label imagen
-		//jLabelImag.setBounds(10, 400, 200, 20);
-		//miPanel.add(jLabelImag);
+		jLabelImag = new JLabel("Seleccionar imagen"); // label imagen
+		jLabelImag.setBounds(10, 400, 200, 20);
+		miPanel.add(jLabelImag);
 
-		//jLabelImage = new JLabel(); // label imagen
-		//jLabelImage.setBounds(230, 400, 140, 140);
-		//miPanel.add(jLabelImage);
+		jLabelImage = new JLabel(); // label imagen
+		jLabelImage.setBounds(230, 400, 140, 140);
+		miPanel.add(jLabelImage);
 
 		txturl = new JTextField(); // url
 		txturl.setBounds(202, 530, 200, 20);
@@ -249,7 +248,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 				rbtnEspectador.setSelected(false);
 			}
 		}
-/*
+
 		if (e.getSource() == btnAbrir) {
 			JFileChooser browseImageFile = new JFileChooser();
 			FileNameExtensionFilter fnef = new FileNameExtensionFilter("IMAGES", "png", "jpg", "jpeg");
@@ -268,7 +267,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 				this.txturl.setText(selectedImagePath);
 			}
 		}
-*/
+
 		if (e.getSource() == btnAceptar) {
 			String url = this.txturl.getText();
 			byte[] selectedImage = null;
@@ -354,8 +353,9 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 	}
 
 	private boolean modificarDatos() {
-		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
-		if(mU.buscarUsuario(txtNickname.getText()) != null){
+		//ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		//if(mU.buscarUsuario(txtNickname.getText()) != null){
+		if(this.iconU.obtenerInfoUsuario(txtNickname.getText()) != null){
 			int respuesta = JOptionPane.showConfirmDialog(null, "El nickname del Usuario ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
 			if(respuesta != JOptionPane.YES_NO_OPTION){
 				limpiarFormulario();

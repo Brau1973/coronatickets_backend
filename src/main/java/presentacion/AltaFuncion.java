@@ -39,7 +39,6 @@ import interfaces.IControladorEspectaculo;
 import interfaces.IControladorFuncion;
 import interfaces.IControladorPlataforma;
 import interfaces.IControladorUsuario;
-import manejadores.ManejadorFuncion;
 
 @SuppressWarnings("serial")
 public class AltaFuncion extends JInternalFrame implements ActionListener {
@@ -318,8 +317,9 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 	}
 
 	private boolean modificarDatos() {
-		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-		if (mF.buscarFuncion(txtNombre.getText()) != null) {
+		//ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+		//if (mF.buscarFuncion(txtNombre.getText()) != null) {
+		  if (this.iconF.existeFuncion(txtNombre.getText())) {
 			int respuesta = JOptionPane.showConfirmDialog(null, "El noimbre de la funcion ya existe\n�Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
 			if (respuesta != JOptionPane.YES_NO_OPTION) {
 				limpiarFormulario();

@@ -17,4 +17,6 @@ public interface IControladorPlataforma{
 	public List<DtPlataforma> mapListEntityToDt(List<Plataforma> p);
 
 	public DtPlataforma mapEntityToDt(Plataforma p);
+	
+	public boolean existePlataforma(String nombrePlataforma);
 }

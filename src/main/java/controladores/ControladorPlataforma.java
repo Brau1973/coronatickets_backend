@@ -74,5 +74,15 @@ public class ControladorPlataforma implements IControladorPlataforma {
 		ret.setEspectaculo(listEspectaculosDt);
 		return ret;
 	}
+	
+	@Override
+	public boolean existePlataforma(String nombrePlataforma) {
+		ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
+		if(mP.buscarPlataforma(nombrePlataforma) != null){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 }
