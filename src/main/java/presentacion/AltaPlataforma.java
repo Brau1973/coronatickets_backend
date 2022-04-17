@@ -139,7 +139,7 @@ public class AltaPlataforma extends JInternalFrame {
 		// if(mP.buscarPlataforma(txtNombre.getText()) != null){
 		if (this.iconP.existePlataforma(txtNombre.getText())) {
 			int respuesta = JOptionPane.showConfirmDialog(null,
-					"El nombre de la plataforma ya existe\nï¿½Desea modificar los datos?\n", "Advertencia",
+					"El nombre de la plataforma ya existe\n¿Desea modificar los datos?\n", "Advertencia",
 					JOptionPane.YES_NO_OPTION);
 			if (respuesta != JOptionPane.YES_NO_OPTION) {
 				limpiarFormulario();

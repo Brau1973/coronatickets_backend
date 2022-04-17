@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import datatypes.DtEspectaculo;
+import excepciones.EspectaculoRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
 import interfaces.IControladorPlataforma;
@@ -198,8 +199,8 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
 		      this.iconE.altaEspectaculo(dte, strplataforma);
 		      JOptionPane.showMessageDialog(null, "Espectaculo ingresado con Exito", "Agregar Espectaculo", JOptionPane.INFORMATION_MESSAGE);
 		      limpiarFormulario();
-		  }catch(Exception ex){
-		      System.out.println("Mensaje: " + ex.getMessage());
+		  }catch(EspectaculoRepetidoExcepcion ex){
+		      System.out.println("Mensaje: " + ex.getFaultInfo());
 		      JOptionPane.showMessageDialog(null, "Los datos ingresados no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
 		      limpiarFormulario();
 		  }
@@ -217,7 +218,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
 	     //ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 	     //if(mE.buscarEspectaculo(txtNombre.getText()) != null){
 		 if(this.iconE.existeEspectaculo(txtNombre.getText())){
-		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre del espectaculo ya existe\nï¿½Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
+		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre del espectaculo ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
 		  if(respuesta != JOptionPane.YES_NO_OPTION){
 		      limpiarFormulario();
 		      setVisible(false);

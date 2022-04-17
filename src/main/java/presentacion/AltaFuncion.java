@@ -279,13 +279,15 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 				Time horaInicio = new Time(hora, minutos, 0);
 				Date fechaRegistro = this.fechaAlta.getDate();
 				String strespectaculo = (String) this.comboEspectaculos.getSelectedItem();
+				byte[] selectedImage = null;
 
 				String url = this.txturl.getText();
-				byte[] selectedImage = null;
-				try {
-					selectedImage = Files.readAllBytes(Paths.get(url));
-				} catch (IOException e1) {
-					e1.printStackTrace();
+				if (url != null && !url.isEmpty()) {
+					try {
+						selectedImage = Files.readAllBytes(Paths.get(url));
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 
 				DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro, listArtistasSeleccionados);
@@ -320,7 +322,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		//ManejadorFuncion mF = ManejadorFuncion.getInstancia();
 		//if (mF.buscarFuncion(txtNombre.getText()) != null) {
 		  if (this.iconF.existeFuncion(txtNombre.getText())) {
-			int respuesta = JOptionPane.showConfirmDialog(null, "El noimbre de la funcion ya existe\nï¿½Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
+			int respuesta = JOptionPane.showConfirmDialog(null, "El noimbre de la funcion ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
 			if (respuesta != JOptionPane.YES_NO_OPTION) {
 				limpiarFormulario();
 				setVisible(false);

@@ -27,6 +27,7 @@ import com.toedter.calendar.JDateChooser;
 import datatypes.DtArtista;
 import datatypes.DtEspectador;
 import datatypes.DtUsuario;
+import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControladorUsuario;
 
 @SuppressWarnings("serial")
@@ -211,15 +212,6 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 
 	// protected void actionListenerAceptar(ActionEvent e) {
 	public void actionPerformed(ActionEvent e) {
-		String strNickname = this.txtNickname.getText();
-		String strNombre = this.txtNombre.getText();
-		String strApellido = this.txtApellido.getText();
-		String strEmail = this.txtEmail.getText();
-		Date dateFechaNac = this.dateFechaNac.getDate();
-		String strContrasenia = this.txtContrasenia.getText();
-		String strDescripcion = this.txtDescripcion.getText();
-		String strBiografia = this.txtBiografia.getText();
-		String strLink = this.txtLink.getText();
 		if (e.getSource() == rbtnEspectador) {
 			if (rbtnEspectador.isSelected()) {
 				btnAceptar.setBounds(155, 258, 127, 25);
@@ -231,7 +223,6 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 				txtBiografia.setVisible(false);
 				txtLink.setVisible(false);
 				rbtnArtista.setSelected(false);
-
 			}
 		}
 
@@ -269,6 +260,15 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 		}
 
 		if (e.getSource() == btnAceptar) {
+			String strNickname = this.txtNickname.getText();
+			String strNombre = this.txtNombre.getText();
+			String strApellido = this.txtApellido.getText();
+			String strEmail = this.txtEmail.getText();
+			Date dateFechaNac = this.dateFechaNac.getDate();
+			String strContrasenia = this.txtContrasenia.getText();
+			String strDescripcion = this.txtDescripcion.getText();
+			String strBiografia = this.txtBiografia.getText();
+			String strLink = this.txtLink.getText();
 			String url = this.txturl.getText();
 			byte[] selectedImage = null;
 			if (url != null && !url.isEmpty()) {
@@ -282,13 +282,14 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 				if (checkFormulario() && modificarDatos()) {
 					try {
 						// falta mirar chequeo de fecha
-						DtEspectador dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia, selectedImage);
-
-						this.iconU.altaDtEspectador(dte);
+						DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia, selectedImage);
+						
+						this.iconU.altaUsuario(dte);
 						JOptionPane.showMessageDialog(this, "Espectador ingresado con Exito");
-
-					} catch (Exception x) {
-						JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+						System.out.println("Try");
+					} catch (UsuarioRepetidoExcepcion x) {
+						System.out.println("Catch");
+						JOptionPane.showMessageDialog(this, x.getFaultInfo(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 					}
 					limpiarFormulario();
 					setVisible(false);
@@ -302,8 +303,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 
 						this.iconU.altaUsuario(dta);
 						JOptionPane.showMessageDialog(this, "Artista ingresado con Exito");
-					} catch (Exception x) {
-						JOptionPane.showMessageDialog(this, x.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+					} catch (UsuarioRepetidoExcepcion x) {
+						JOptionPane.showMessageDialog(this, x.getFaultInfo(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 					}
 					limpiarFormulario();
 					setVisible(false);
@@ -357,12 +358,15 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 		//if(mU.buscarUsuario(txtNickname.getText()) != null){
 		if(this.iconU.obtenerInfoUsuario(txtNickname.getText()) != null){
 			int respuesta = JOptionPane.showConfirmDialog(null, "El nickname del Usuario ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
-			if(respuesta != JOptionPane.YES_NO_OPTION){
+			if(respuesta == JOptionPane.NO_OPTION){
 				limpiarFormulario();
 				setVisible(false);
+				System.out.println("NO OPTION");
 			}
+			System.out.println("DESP IF NO OPTION");
 			return false;
 		}
+		System.out.println("NO EXISTE ESTE NICKNAME");
 		return true;
 	}
 
