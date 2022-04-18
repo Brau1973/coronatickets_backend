@@ -13,7 +13,6 @@ import configuraciones.WebServiceConfiguracion;
 import datatypes.DtPaqueteEspectaculo;
 import interfaces.Fabrica;
 import interfaces.IControladorPaquete;
-import logica.PaqueteEspectaculos;
 
 @WebService
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)

@@ -16,7 +16,7 @@ import datatypes.DtPaqueteEspectaculo;
 import excepciones.EspectaculoRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
-import logica.Espectaculo;
+//import logica.Espectaculo;
 
 @WebService
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
@@ -68,7 +68,7 @@ public class ControladorEspectaculoPublish {
 		arr=lst.toArray(arr);
 		return arr;
 	}
-
+	/*
 	@WebMethod (exclude = true) //ver
 	public DtEspectaculo[] listEntityToDtEsp(List<Espectaculo> liste) {
 		List<DtEspectaculo> lst=iconE.listEntityToDtEsp(liste);
@@ -76,7 +76,7 @@ public class ControladorEspectaculoPublish {
 		arr=lst.toArray(arr);
 		return arr;
 	}
-
+	*/
 	@WebMethod
 	public String[] obtenerEspectaculosArtista(String nickname) { // veer
 		List<String> lst=iconE.obtenerEspectaculosArtista(nickname);
