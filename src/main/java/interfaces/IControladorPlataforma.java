@@ -3,8 +3,8 @@ package interfaces;
 import java.util.List;
 
 import excepciones.PlataformaRepetidaExcepcion;
-import datatypes.DtPlataforma;
 import logica.Plataforma;
+import datatypes.DtPlataforma;
 
 public interface IControladorPlataforma{
 	//public void agregarPlataforma(DtPlataforma dtp);
@@ -13,10 +13,6 @@ public interface IControladorPlataforma{
 	public List<DtPlataforma> listarPlataformas();
 
 	public List<String> listarPlataformasStr();
-
-	public List<DtPlataforma> mapListEntityToDt(List<Plataforma> p);
-
-	public DtPlataforma mapEntityToDt(Plataforma p);
 	
 	public boolean existePlataforma(String nombrePlataforma);
 }

@@ -14,7 +14,6 @@ import datatypes.DtPlataforma;
 import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorPlataforma;
-//import logica.Plataforma;
 
 @WebService
 @SOAPBinding(style=Style.RPC,parameterStyle=ParameterStyle.WRAPPED)
@@ -70,19 +69,4 @@ public class ControladorPlataformaPublish {
 		arr = lst.toArray(arr);
 		return arr;
 	}
-
-	/*
-	@WebMethod  (exclude = true) // VER
-	public DtPlataforma[] mapListEntityToDt(List<Plataforma> p) {
-		List<DtPlataforma> lst = iconP.mapListEntityToDt(p);
-		DtPlataforma[] ret = new DtPlataforma[lst.size()];
-		ret = lst.toArray(ret);
-		return ret;
-	}
-
-	@WebMethod
-	public DtPlataforma mapEntityToDt(Plataforma p) {
-		return iconP.mapEntityToDt(p);
-	}
-	*/
 }

@@ -51,7 +51,6 @@ public class ControladorPlataforma implements IControladorPlataforma {
 		return listPlataformasStr;
 	}
 
-	@Override
 	public List<DtPlataforma> mapListEntityToDt(List<Plataforma> p) {
 		List<DtPlataforma> ret = new ArrayList<DtPlataforma>();
 		p.forEach((plat) -> {
@@ -61,7 +60,6 @@ public class ControladorPlataforma implements IControladorPlataforma {
 		return ret;
 	}
 
-	@Override
 	public DtPlataforma mapEntityToDt(Plataforma p) {
 		DtPlataforma ret = new DtPlataforma(p.getNombre(), p.getDescripcion(), p.getUrl());
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();

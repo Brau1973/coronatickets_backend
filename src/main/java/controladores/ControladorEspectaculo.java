@@ -55,7 +55,6 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 		return listEntityToDtEsp(listEsp);
 	}
 
-	@Override
 	public List<DtEspectaculo> listEntityToDtEsp(List<Espectaculo> liste) { // Ok Seba 22-10-2021
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 		for (Espectaculo e : liste) {
