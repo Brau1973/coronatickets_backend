@@ -1,5 +1,6 @@
 package controladores;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -78,6 +79,21 @@ public class ControladorFuncion implements IControladorFuncion {
 		}else{
 			return false;
 		}
+	}
+	
+	@Override
+	public DtFuncion getInfoFuncion (String nomFun) {
+		ManejadorFuncion mF = ManejadorFuncion.getInstancia();
+		Funcion funcion = (mF.buscarFuncion(nomFun));
+		
+		List<String> artistas = new ArrayList<String>();
+		for (Artista a : funcion.getArtistas()) {
+			artistas.add(a.getNickname());
+		}
+		
+		DtFuncion infoFuncion = new DtFuncion(funcion.getNombre(),funcion.getFecha(),funcion.getHoraInicio(),funcion.getRegistro(),artistas);
+		
+		return infoFuncion;
 	}
 	
 }

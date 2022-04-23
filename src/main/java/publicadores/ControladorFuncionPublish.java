@@ -64,5 +64,11 @@ public class ControladorFuncionPublish {
 		arr = lst.toArray(arr);
 		return arr;
 	}
+	
+	@WebMethod
+	public DtFuncion getInfoFuncion (String nomFun) {
+		DtFuncion infoFuncion = iconF.getInfoFuncion(nomFun);
+		return infoFuncion;
+	}
 
 }

@@ -14,5 +14,6 @@ public interface IControladorFuncion{
     
     public boolean existeFuncion(String nomFun);
     
+	public DtFuncion getInfoFuncion (String nomFun);
    // public int getCantidadEspectadoresRegistrados(String nombreFuncion);
 }
