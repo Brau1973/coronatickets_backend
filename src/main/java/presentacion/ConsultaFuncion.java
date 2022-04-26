@@ -39,6 +39,7 @@ public class ConsultaFuncion extends JInternalFrame{
 	private List<DtEspectaculo> listEspectaculos;
 	private List<DtFuncion> listFunciones;
 	private String artistasInvitadosAFuncion;
+	private DtFuncion dtFunc;
 
 	static final String SELECCIONE_PLAT = "Seleccione Plataforma";
 	static final String SELECCIONE_ESP = "Seleccione Espectaculo";
@@ -193,7 +194,7 @@ public class ConsultaFuncion extends JInternalFrame{
 						nombreFuncion = listFunciones.get(i).getNombre();
 						if(nombreFuncion == strFuncion){
 							encontre = true;
-							DtFuncion dtFunc = listFunciones.get(i);
+							dtFunc = listFunciones.get(i);
 							listFunciones.get(i).getArtistas().forEach((a) -> {
 								artistasInvitadosAFuncion += a + "\n";
 							});
@@ -201,11 +202,8 @@ public class ConsultaFuncion extends JInternalFrame{
 						}
 						i++;
 					}
-					/*
-					ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-					func = mF.buscarFuncion(strFuncion);
 
-					byte[] b = func.getImagen();
+					byte[] b = dtFunc.getImagen();
 					BufferedImage image = null;
 					InputStream in = new ByteArrayInputStream(b);
 				//System.out.println("IN: " + b);
@@ -219,7 +217,6 @@ public class ConsultaFuncion extends JInternalFrame{
 					jLabelImage.setIcon(new ImageIcon(imagei));
 					
 				//	System.out.println("IN: " + );
-					 */
 				}
 			}
 		}

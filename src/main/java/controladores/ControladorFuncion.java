@@ -1,9 +1,10 @@
 package controladores;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import datatypes.DtFuncion;
 import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
@@ -16,6 +17,7 @@ import logica.Registro;
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorFuncion;
 import manejadores.ManejadorUsuario;
+import persistencia.Conexion;
 
 public class ControladorFuncion implements IControladorFuncion {
 
@@ -24,7 +26,7 @@ public class ControladorFuncion implements IControladorFuncion {
 	}
 
 	@Override
-	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion {
+	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo) throws FuncionYaRegistradaEnEspectaculoExcepcion {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		Espectaculo espectaculo = mE.buscarEspectaculo(nombreEspectaculo);
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
@@ -37,7 +39,7 @@ public class ControladorFuncion implements IControladorFuncion {
 			dtFuncion.getArtistas().forEach((a) -> {
 				artistas.add(mU.buscarArtista(a));
 			});
-			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(), dtFuncion.getRegistro(), artistas, imagen);
+			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(), dtFuncion.getRegistro(), artistas, dtFuncion.getImagen());
 			espectaculo.agregarFuncion(funcionACrear);
 			mF.agregarFuncion(funcionACrear);
 		}
@@ -47,7 +49,23 @@ public class ControladorFuncion implements IControladorFuncion {
 	public List<DtFuncion> listarFunciones(String nomEsp) {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		Espectaculo espectaculo = mE.buscarEspectaculo(nomEsp);
-		return espectaculo.getFuncionesDt();
+		List<DtFuncion> listFuncionesDt = new ArrayList<DtFuncion>();
+		List<Funcion> listFunciones = espectaculo.getFunciones();
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		
+		
+		em.getTransaction().begin();
+		for (Funcion f : listFunciones) {
+			List<String> artistas = new ArrayList<String>();
+			for (Artista a : f.getArtistas()) {
+				artistas.add(a.getNickname());
+			}
+			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getFecha(), f.getHoraInicio(), f.getRegistro(), artistas,f.getImagen());
+			listFuncionesDt.add(DtFuncion);
+		}
+		em.getTransaction().commit();
+		return listFuncionesDt;
 	}
 
 	@Override
@@ -91,7 +109,7 @@ public class ControladorFuncion implements IControladorFuncion {
 			artistas.add(a.getNickname());
 		}
 		
-		DtFuncion infoFuncion = new DtFuncion(funcion.getNombre(),funcion.getFecha(),funcion.getHoraInicio(),funcion.getRegistro(),artistas);
+		DtFuncion infoFuncion = new DtFuncion(funcion.getNombre(),funcion.getFecha(),funcion.getHoraInicio(),funcion.getRegistro(),artistas, funcion.getImagen());
 		
 		return infoFuncion;
 	}

@@ -290,9 +290,9 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 					}
 				}
 
-				DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro, listArtistasSeleccionados);
+				DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro, listArtistasSeleccionados,selectedImage);
 				try {
-					this.iconF.altaFuncion(dtFuncion, strespectaculo, selectedImage);
+					this.iconF.altaFuncion(dtFuncion, strespectaculo);
 					JOptionPane.showMessageDialog(null, "Funcion ingresada con Exito", "Alta Funcion", JOptionPane.INFORMATION_MESSAGE);
 				    limpiarFormulario();
 				} catch (Exception e2) {
@@ -319,8 +319,6 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 	}
 
 	private boolean modificarDatos() {
-		//ManejadorFuncion mF = ManejadorFuncion.getInstancia();
-		//if (mF.buscarFuncion(txtNombre.getText()) != null) {
 		  if (this.iconF.existeFuncion(txtNombre.getText())) {
 			int respuesta = JOptionPane.showConfirmDialog(null, "El noimbre de la funcion ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
 			if (respuesta != JOptionPane.YES_NO_OPTION) {

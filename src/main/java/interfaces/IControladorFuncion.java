@@ -6,7 +6,7 @@ import datatypes.DtFuncion;
 import excepciones.FuncionYaRegistradaEnEspectaculoExcepcion;
 
 public interface IControladorFuncion{
-    public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion; //, FuncionRepetidaExcepcion;
+    public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo) throws FuncionYaRegistradaEnEspectaculoExcepcion; //, FuncionRepetidaExcepcion;
 
     public List<DtFuncion> listarFunciones(String nomEsp);
 

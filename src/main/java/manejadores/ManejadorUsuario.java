@@ -54,10 +54,12 @@ public class ManejadorUsuario{
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
 		Usuario user = null;
+		em.getTransaction().begin();
 		Query query = em.createQuery("select u from Usuario u where email = '" + mail + "'");
 		if(!query.getResultList().isEmpty()){
 			user = (Usuario) query.getSingleResult();
 		}
+		em.getTransaction().commit();
 		return user;
 	}
 
@@ -73,9 +75,9 @@ public class ManejadorUsuario{
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
 		Query query = em.createQuery("select u from Usuario u");
-		//em.getTransaction().begin();
+		em.getTransaction().begin();
 		List<Usuario> listUsuarios = (List<Usuario>) query.getResultList();
-		//em.getTransaction().commit();
+		em.getTransaction().commit();
 		return listUsuarios;
 	}
 

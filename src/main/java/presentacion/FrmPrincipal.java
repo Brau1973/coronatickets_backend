@@ -294,6 +294,7 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 
 		switch (e.getActionCommand()) {
 		case "Alta de Usuario":
+			internalFrameAltaUsuario.limpiarFormulario();
 			internalFrameAltaUsuario.setVisible(true);
 			break;
 		case "Modificar Datos de Usuario":

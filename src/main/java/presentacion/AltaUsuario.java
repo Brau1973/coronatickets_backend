@@ -39,6 +39,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 	private JTextField txtNickname, txtNombre, txtApellido, txtEmail, txtContrasenia, txtContrasenia2, txtDescripcion, txtBiografia, txtLink, txturl;
 	private JDateChooser dateFechaNac;
 	private JButton btnAceptar, btnCancelar, btnAbrir;
+	private byte[] selectedImage;
 
 	private List<String> seguidos = new ArrayList<String>(); // Vacias porque recien se esta creando el usuario;
 	private List<String> seguidores = new ArrayList<String>();
@@ -48,7 +49,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 		miPanel = new JPanel();
 		miPanel.setLayout(null);
 		getContentPane().add(miPanel);
-		setBounds(15, 15, 469, 434);
+		setBounds(15, 15, 800, 600);
 		setResizable(false);
 		setClosable(true);
 		setIconifiable(false);
@@ -257,6 +258,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 
 				this.txturl.setText(selectedImagePath);
 			}
+			
 		}
 
 		if (e.getSource() == btnAceptar) {
@@ -270,7 +272,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 			String strBiografia = this.txtBiografia.getText();
 			String strLink = this.txtLink.getText();
 			String url = this.txturl.getText();
-			byte[] selectedImage = null;
+			selectedImage = null;
 			if (url != null && !url.isEmpty()) {
 				try {
 					selectedImage = Files.readAllBytes(Paths.get(url));
@@ -370,7 +372,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 		return true;
 	}
 
-	private void limpiarFormulario() {
+	public void limpiarFormulario() {
 		txtNickname.setText("");
 		txtNombre.setText("");
 		txtApellido.setText("");
@@ -381,6 +383,9 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 		txtDescripcion.setText("");
 		txtBiografia.setText("");
 		txtLink.setText("");
+		txturl.setText("");
+		jLabelImage.setIcon(null);
+		selectedImage = null;
 	}
 
 }

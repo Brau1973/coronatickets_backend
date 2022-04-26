@@ -15,18 +15,20 @@ public class DtFuncion {
 	private Time horaInicio;
 	private Date registro;
 	private List<String> artistas = new ArrayList<String>();
+	private byte[] imagen;
 
 	public DtFuncion() {
 		super();
 	}
 
-	public DtFuncion(String nombre, Date fecha, Time horaInicio, Date registro, List<String> artistas) {
+	public DtFuncion(String nombre, Date fecha, Time horaInicio, Date registro, List<String> artistas, byte[] imagen) {
 		super();
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.horaInicio = horaInicio;
 		this.registro = registro;
 		this.artistas = artistas;
+		this.imagen = imagen; 
 	}
 
 	public String getNombre() {
@@ -47,6 +49,10 @@ public class DtFuncion {
 
 	public List<String> getArtistas() {
 		return artistas;
+	}
+
+	public byte[] getImagen() {
+		return imagen;
 	}
 
 }

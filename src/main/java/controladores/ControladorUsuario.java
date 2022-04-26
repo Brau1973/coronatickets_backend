@@ -64,7 +64,6 @@ public class ControladorUsuario implements IControladorUsuario {
 			throw new UsuarioRepetidoExcepcion("Error", "El email esta en uso");
 		}
 		Usuario usuario = new Espectador(dte.getNickname(), dte.getNombre(), dte.getApellido(), dte.getEmail(), dte.getfNacimiento(), dte.getContrasenia(), dte.getImagen());
-		System.out.println("******estoy en altaDtEspectador");
 		mU.altaUsuario(usuario);
 	}
 
@@ -143,13 +142,10 @@ public class ControladorUsuario implements IControladorUsuario {
 
 	@Override
 	public List<String> listarNicknameUsuarios() {
-		System.out.println("CONTROLADOR USUARIO COMIENZA LISTAR NICKNAMEUSUARIOS");
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		List<String> listStringUsuarios = new ArrayList<String>();
 		List<Usuario> listUsuarios = new ArrayList<Usuario>();
-		System.out.println("CONTROLADOR USUARIO PRE LLAMADA LISTAR USUARIOS DEL MANEJADOR");
 		listUsuarios = mU.listarUsuarios();
-		System.out.println("CONTROLADOR USUARIO POST LLAMADA ");
 		for (Usuario u : listUsuarios) {
 			listStringUsuarios.add(u.getNickname());
 		}

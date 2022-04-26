@@ -3,6 +3,8 @@ package controladores;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
 import datatypes.DtPaqueteEspectaculo;
@@ -14,30 +16,34 @@ import logica.Plataforma;
 import manejadores.ManejadorEspectaculo;
 import manejadores.ManejadorPlataforma;
 import manejadores.ManejadorUsuario;
-
+import persistencia.Conexion;
 
 public class ControladorEspectaculo implements IControladorEspectaculo {
 	public ControladorEspectaculo() {
 		super();
 	}
+
 	@Override
-	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion{
+	public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		if (mE.buscarEspectaculo(dte.getNombre()) == null) {
 
 			ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 			Artista artistaOrganizador = mU.buscarArtista(dte.getArtista());
-			
-			ManejadorPlataforma mP = ManejadorPlataforma.getInstancia(); 
+
+			ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 			Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);
 
-			Espectaculo espectaculo = new Espectaculo(artistaOrganizador, dte.getNombre(), dte.getDescripcion(), dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(), dte.getRegistro());
+			Espectaculo espectaculo = new Espectaculo(artistaOrganizador, dte.getNombre(), dte.getDescripcion(),
+					dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(),
+					dte.getRegistro());
 
 			plataforma.aniadirEspectaculo(espectaculo);
 
 			mE.agregarEspectaculo(espectaculo);
 		} else {
-			throw new EspectaculoRepetidoExcepcion("Error", "El espectaculo con el nombre " + dte.getNombre() + " ya existe.");
+			throw new EspectaculoRepetidoExcepcion("Error",
+					"El espectaculo con el nombre " + dte.getNombre() + " ya existe.");
 		}
 	}
 
@@ -45,20 +51,36 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 	public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma) {
 		ManejadorPlataforma mP = ManejadorPlataforma.getInstancia();
 		Plataforma plataforma = mP.buscarPlataforma(nombrePlataforma);
-		return plataforma.getEspectaculosDt();
+
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+
+		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
+
+		em.getTransaction().begin();
+		for (Espectaculo e : plataforma.getEspectaculo()) {
+			System.out.println("ITERANDO EN :" + e.getNombre());
+			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), nombrePlataforma, e.getNombre(),
+					e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(),
+					e.getRegistro());
+			listEspectaculosDt.add(DtEspec);
+		}
+		em.getTransaction().commit();
+		return listEspectaculosDt;
 	}
 
 	@Override
-	public List<DtEspectaculo> obtenerAllDtEspectaculos(String nickname) { // Ok Seba 22-10-2021
+	public List<DtEspectaculo> obtenerAllDtEspectaculos(String nickname) {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		List<Espectaculo> listEsp = mE.obtenerEspectaculoArtista(nickname);
 		return listEntityToDtEsp(listEsp);
 	}
 
-	public List<DtEspectaculo> listEntityToDtEsp(List<Espectaculo> liste) { // Ok Seba 22-10-2021
+	public List<DtEspectaculo> listEntityToDtEsp(List<Espectaculo> liste) {
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 		for (Espectaculo e : liste) {
-			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), "", e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro());
+			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), "", e.getNombre(), e.getDescripcion(),
+					e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro());
 			listEspectaculosDt.add(DtEspec);
 		}
 		return listEspectaculosDt;
@@ -69,22 +91,22 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		return mE.obtenerEspectaculodeArtista(nickname);
 	}
-	
+
 	public List<DtFuncion> obtenerEspectaculoFunciones(String nombreEsp) {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		return mE.buscarEspectaculo(nombreEsp).getFuncionesDt();
 	}
-	
+
 	public List<DtPaqueteEspectaculo> obtenerEspectaculoPaquetes(String nombreEsp) {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		return mE.buscarEspectaculo(nombreEsp).getPaqueteEspectaculoDt();
 	}
-	
+
 	public boolean existeEspectaculo(String nombreEsp) {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-		if(mE.buscarEspectaculo(nombreEsp) != null){
+		if (mE.buscarEspectaculo(nombreEsp) != null) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}

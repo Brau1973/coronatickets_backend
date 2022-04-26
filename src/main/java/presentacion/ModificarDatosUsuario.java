@@ -31,6 +31,7 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	private JComboBox<String> comboUsuarios;
 	private JButton btnGuardar, btnCancelar, btnMostrar;
 	private List<String> listUsuarios;
+	private byte[] imagenUsu;
 
 	// Constructor
 	public ModificarDatosUsuario(IControladorUsuario iconU){
@@ -161,18 +162,15 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 			String stremail = this.txtEmail.getText();
 			Date dateRegistro = this.dateFechaNac.getDate();
 			String strcontrasenia = this.txtContrasenia.getText();
-			//Usuario usuario = this.iconU.obtenerUsuario(strnick);
 			DtUsuario usuario = iconU.obtenerInfoUsuario(strnick);
 			if(usuario instanceof DtArtista){				
 				DtUsuario nuevo = new DtArtista(strnick, strnombre, strapellido, stremail, dateRegistro, null, null, strcontrasenia,
-						null,((DtArtista) usuario).getDescripcion(), ((DtArtista) usuario).getBiografia(), ((DtArtista) usuario).getLink());
+						imagenUsu,((DtArtista) usuario).getDescripcion(), ((DtArtista) usuario).getBiografia(), ((DtArtista) usuario).getLink());
 				this.iconU.modificarUsuario(nuevo);
-				//this.iconU.modificarUsuario(artista);
 			}
 			if(usuario instanceof DtEspectador){
-				DtUsuario nuevo = new DtEspectador(strnick, strnombre, strapellido, stremail, dateRegistro, null, null, strcontrasenia,null);
+				DtUsuario nuevo = new DtEspectador(strnick, strnombre, strapellido, stremail, dateRegistro, null, null, strcontrasenia,imagenUsu);
 				this.iconU.modificarUsuario(nuevo);
-				//this.iconU.modificarUsuario(espectador);
 			}
 			JOptionPane.showMessageDialog(null, "Datos modificados correctamente");
 			setVisible(false);
@@ -193,15 +191,17 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 		}
 
 		if(e.getSource() == comboUsuarios){
-			String strUsuario = this.comboUsuarios.getSelectedItem().toString();
-			//Usuario u = this.iconU.obtenerUsuario(strUsuario);
-			DtUsuario u = iconU.obtenerInfoUsuario(strUsuario);
-			txtNickname.setText(u.getNickname());
-			txtNombre.setText(u.getNombre());
-			txtApellido.setText(u.getApellido());
-			txtEmail.setText(u.getEmail());
-			dateFechaNac.setDate(u.getfNacimiento());
-			txtContrasenia.setText(u.getContrasenia());
+			if(this.comboUsuarios.getSelectedItem()!=null) {
+				String strUsuario = this.comboUsuarios.getSelectedItem().toString();
+				DtUsuario u = iconU.obtenerInfoUsuario(strUsuario);
+				txtNickname.setText(u.getNickname());
+				txtNombre.setText(u.getNombre());
+				txtApellido.setText(u.getApellido());
+				txtEmail.setText(u.getEmail());
+				dateFechaNac.setDate(u.getfNacimiento());
+				txtContrasenia.setText(u.getContrasenia());	
+				imagenUsu = u.getImagen();
+			}
 		}
 	}
 

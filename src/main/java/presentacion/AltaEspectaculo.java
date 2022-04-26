@@ -215,8 +215,6 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
 
     private boolean checkFormulario(){
 	 if(!txtNombre.getText().isEmpty() && !txtDescripcion.getText().isEmpty() && !txtDuracion.getText().isEmpty() && !txtUrl.getText().isEmpty() && txtCosto.getText() != null && dateFechaNac.getDate() != null){
-	     //ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
-	     //if(mE.buscarEspectaculo(txtNombre.getText()) != null){
 		 if(this.iconE.existeEspectaculo(txtNombre.getText())){
 		  int respuesta = JOptionPane.showConfirmDialog(null, "El nombre del espectaculo ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
 		  if(respuesta != JOptionPane.YES_NO_OPTION){

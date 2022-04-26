@@ -10,8 +10,6 @@ import excepciones.EspectaculoRepetidoExcepcion;
 public interface IControladorEspectaculo{
     public void altaEspectaculo(DtEspectaculo dte, String nombrePlataforma) throws EspectaculoRepetidoExcepcion;
 
-    // public void agregarFuncion(String nombreEspectaculo,String nombreFuncion) throws FuncionYaRegistradaEnEspectaculoExcepcion;
-
     public List<DtEspectaculo> listarEspectaculos(String nombrePlataforma);
     
     public List<String> obtenerEspectaculosArtista(String nickname);

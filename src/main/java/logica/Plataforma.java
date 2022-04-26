@@ -67,14 +67,21 @@ public class Plataforma {
 		return espectaculo;
 	}
 
+	/*
 	public List<DtEspectaculo> getEspectaculosDt() {
+		System.out.println("ENTRO A getEspectaculosDt");
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 		for (Espectaculo e : espectaculo) {
+			System.out.println("ITERANDO EN :"+e.getNombre());
 			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), this.nombre, e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro());
+			System.out.println("POST CREACION DT ESPEC");
 			listEspectaculosDt.add(DtEspec);
+			System.out.println("POST ADD");
 		}
+		System.out.println("TERMINO EL FOR, PRE RETURN");
 		return listEspectaculosDt;
 	}
+	*/
 
 	public void aniadirEspectaculo(Espectaculo espectaculo) {
 		this.espectaculo.add(espectaculo);

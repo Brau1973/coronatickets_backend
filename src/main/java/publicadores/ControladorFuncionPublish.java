@@ -45,8 +45,8 @@ public class ControladorFuncionPublish {
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo, byte[] imagen) throws FuncionYaRegistradaEnEspectaculoExcepcion {
-		iconF.altaFuncion(dtFuncion, nombreEspectaculo, imagen);
+	public void altaFuncion(DtFuncion dtFuncion, String nombreEspectaculo) throws FuncionYaRegistradaEnEspectaculoExcepcion {
+		iconF.altaFuncion(dtFuncion, nombreEspectaculo);
 	}
 
 	@WebMethod

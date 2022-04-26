@@ -48,7 +48,7 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 		miPanel = new JPanel();
 		miPanel.setLayout(null);
 		add(miPanel);
-		setBounds(15, 15, 460, 400);
+		setBounds(15, 15, 800, 600);
 		setResizable(false);
 		setClosable(true);
 		setIconifiable(false);
@@ -132,9 +132,10 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 				DtUsuario dtusu = iconU.obtenerInfoUsuario(strUsuario);
 				String datos = "";
 				String op = "";
+				jLabelImage.setIcon(null);
+				
 				SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 				if (dtusu instanceof DtArtista) {
-					System.out.println("ARTISTA");
 					op = "--------Artistas--------\n\n";
 					
 					List<String> espArtista = iconE.obtenerEspectaculosArtista(strUsuario);
@@ -149,23 +150,19 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 							+ "\nLink: " +((DtArtista) dtusu).getLink() +  
 							datos);
 				} else if (dtusu instanceof DtEspectador) {
-					System.out.println("ESPECTADOR");
 					op = "--------Espectador--------\n\n";
 					jtextarea.setText(op + "Nombre: " + dtusu.getNombre() + "\nApellido: " + dtusu.getApellido() + "\nEmail: "
 							+ dtusu.getEmail() + "\nFecha: " + formatoFecha.format(dtusu.getfNacimiento()) + datos);
 				}
 				// CARGA POSIBLE IMAGEN
 				if(dtusu.getImagen()!= null) {
-					System.out.println("TENGO IMAGEN");
 					byte[] b = dtusu.getImagen();
 					BufferedImage image = null;
 					InputStream in = new ByteArrayInputStream(b);
 					//System.out.println("IN: " + b);
 					try{
 						image = ImageIO.read(in);
-						System.out.println("TENGO IMAGEN TRY");
 					}catch(IOException e1){
-						System.out.println("TENGO IMAGEN catch");
 						e1.printStackTrace();
 					}
 					ImageIcon imgi = new ImageIcon(image);
