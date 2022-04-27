@@ -3,6 +3,8 @@ package controladores;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import datatypes.DtEspectaculo;
 import datatypes.DtPlataforma;
 import excepciones.PlataformaRepetidaExcepcion;
@@ -10,6 +12,7 @@ import interfaces.IControladorPlataforma;
 import logica.Espectaculo;
 import logica.Plataforma;
 import manejadores.ManejadorPlataforma;
+import persistencia.Conexion;
 
 public class ControladorPlataforma implements IControladorPlataforma {
 
@@ -63,12 +66,17 @@ public class ControladorPlataforma implements IControladorPlataforma {
 	public DtPlataforma mapEntityToDt(Plataforma p) {
 		DtPlataforma ret = new DtPlataforma(p.getNombre(), p.getDescripcion(), p.getUrl());
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		
+		em.getTransaction().begin();
 		for (Espectaculo e : p.getEspectaculo()) {
 			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), p.getNombre(), e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro());
 			DtEspec.setPaquetes(e.getPaqueteEspectaculoDt());
 			DtEspec.setFunciones(e.getFuncionesDt());
 			listEspectaculosDt.add(DtEspec);
 		}
+		em.getTransaction().commit();
 		ret.setEspectaculo(listEspectaculosDt);
 		return ret;
 	}

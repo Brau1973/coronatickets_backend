@@ -1,13 +1,17 @@
 package presentacion;
 
 import java.awt.Container;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
@@ -25,10 +29,12 @@ import publicadores.ControladorPaquetePublish;
 public class FrmPrincipal extends JFrame implements ActionListener {
 	private Container contenedor;
 	private JMenuBar barraMenu;
-	private JMenu menuInicio, menuUsuario, menuEspectaculo, menuAyuda, menuPlataforma, menuFuncion, menuPaquete;
+	private JMenu menuUsuario, menuEspectaculo, menuPlataforma, menuFuncion, menuPaquete;
 	private JMenuItem menuItAltaUsuario, menuItModificarDatosUsuario, menuItConsultaUsuario, menuItAltaEspectaculo, menuItConsultaEspectaculo;
 	private JMenuItem menuItConsultaPaqueteEspectaculo, menuItCreaPaqueteEspectaculo, menuItAltaPlataforma, menuItAltaFuncion, menuItConsultaFuncion, menuItRegistroFuncion;
 	private JMenuItem menuItAgregarEspectaculoAPaquete;
+	private JLabel jLabelImage;
+	private JPanel miPanel;
 
 	private AltaUsuario internalFrameAltaUsuario;
 	private ConsultarUsuario internalFrameConsultaUsuario;
@@ -44,71 +50,77 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 	private AgregarEspectaculoAPaquete internalFrameAgregarEspectaculoAPaquete;
     
 	private Fabrica fabrica = Fabrica.getInstancia();
-	private IControladorPlataforma iconP;
-	private IControladorUsuario iconU;
-	private IControladorFuncion iconF;
-	private IControladorEspectaculo iconE;
-	private IControladorPaquete iconPE;
+	private IControladorPlataforma iconP = fabrica.getIControladorPlataforma();;
+	private IControladorUsuario iconU = fabrica.getIControladorUsuario();;
+	private IControladorFuncion iconF = fabrica.getIControladorFuncion();
+	private IControladorEspectaculo iconE = fabrica.getIControladorEspectaculo();;
+	private IControladorPaquete iconPE = fabrica.getIControladorPaquete();;
 	
 	// Constructor
 	public FrmPrincipal() {
+		miPanel = new JPanel();
+		miPanel.setLayout(null);
+		getContentPane().add(miPanel);
+		setBounds(0, 0, 800, 800);
+		setResizable(false);
+		setTitle("coronaTickets.uy");
+		//setSize(800, 800);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// ------------ PUBLICO LOS WEB SERVICES SOAP -------------------------------------------------------------------------
+		
 		ControladorPlataformaPublish cp = new ControladorPlataformaPublish();
 		cp.publicar();
-		iconP = fabrica.getIControladorPlataforma();
-		
+
 		ControladorFuncionPublish cf = new ControladorFuncionPublish();
 		cf.publicar();
-		iconF = fabrica.getIControladorFuncion();
 		
 		ControladorUsuarioPublish cu = new ControladorUsuarioPublish();
 		cu.publicar();
-		iconU = fabrica.getIControladorUsuario();
 		
 		ControladorEspectaculoPublish ce = new ControladorEspectaculoPublish();
 		ce.publicar();
-		iconE = fabrica.getIControladorEspectaculo();
-		
 		
 		ControladorPaquetePublish cpa = new ControladorPaquetePublish();
 		cpa.publicar();
-		iconPE = fabrica.getIControladorPaquete();
 		
-		
+		// ------------ INICIALIZO BARRA DE OPCIONES -------------------------------------------------------------------------
 		inicializar();
-		setTitle("coronaTickets.uy");
-		setSize(800, 750);
-		setLocationRelativeTo(null);
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// ------------ SETEO IMAGEN DE PORTADA -------------------------------------------------------------------------
+		jLabelImage = new JLabel(); // label imagen
+		jLabelImage.setBounds(100, 60, 600, 400);
+		miPanel.add(jLabelImage);
+		
+		String imagePath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_backend\\aIgnorar\\Portada.png"; 
+		ImageIcon imageIcon = new ImageIcon(imagePath);
+		Image image = imageIcon.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
+		jLabelImage.setIcon(new ImageIcon(image));
+		//getContentPane().add(miPanel);
+		contenedor.add(miPanel);
 	}
 
 	private void inicializar() {
 		contenedor = getContentPane();
-		contenedor.setLayout(null);
+		//contenedor.setLayout(null);
+		
 		// JMenu
-		menuInicio = new JMenu();
-		menuUsuario = new JMenu();
-		menuEspectaculo = new JMenu();
-		menuPlataforma = new JMenu();
+		//menuInicio = new JMenu();
+		menuUsuario = new JMenu("Usuario");
+		menuEspectaculo = new JMenu("Espectaculo");
+		menuPlataforma = new JMenu("Plataforma");
 		menuPaquete = new JMenu("Paquete");
-		menuFuncion = new JMenu();
-		menuAyuda = new JMenu();
-		menuInicio.setText("Inicio");
-		menuUsuario.setText("Usuario");
-		menuEspectaculo.setText("Espectaculo");
-		menuPlataforma.setText("Plataforma");
-		menuFuncion.setText("Funciones");
-		menuAyuda.setText("Ayuda");
+		menuFuncion = new JMenu("Funciones");
 		barraMenu = new JMenuBar();
-		barraMenu.add(menuInicio);
 		barraMenu.add(menuUsuario);
 		barraMenu.add(menuEspectaculo);
 		barraMenu.add(menuPlataforma);
 		barraMenu.add(menuFuncion);
 		barraMenu.add(menuPaquete);
-		barraMenu.add(menuAyuda);
 		setJMenuBar(barraMenu);
-
+		
+		
 		// MenuItem
 		menuItAltaUsuario = new JMenuItem();
 		menuItConsultaUsuario = new JMenuItem();
@@ -177,7 +189,8 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		menuItRegistroFuncion.setText("Registro a Funcion de Espectaculo");
 		menuFuncion.add(menuItRegistroFuncion);
 		menuItRegistroFuncion.addActionListener(this);
-
+		
+		
 		// Casos de uso
 		inFrmAltaUsuario();
 		inFrmConsultaUsuario();
@@ -191,6 +204,7 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		inFrmConsultaPaqueteEspectaculos();
 		inFrmCreaPaqueteEspectaculo();
 		inFrmAgregarEspectaculoAPaquete();
+		
 	}
 
 	// InternalFrame Alta Usuario
@@ -214,7 +228,7 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		contenedor.add(internalFrameModificarDatosUsuario);
 	}
 
-	// InternalFrame Alta de Espectaculo // 79S
+	// InternalFrame Alta de Espectaculo 
 	private void inFrmAltaEspectaculo() {
 		internalFrameAltaEspectaculo = new AltaEspectaculo(iconE);
 		internalFrameAltaEspectaculo.setVisible(false);
@@ -293,6 +307,9 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		internalFrameAgregarEspectaculoAPaquete.setVisible(false);
 
 		switch (e.getActionCommand()) {
+		case "Inicio":
+			System.out.println("MENU INICIO");
+			break;
 		case "Alta de Usuario":
 			internalFrameAltaUsuario.limpiarFormulario();
 			internalFrameAltaUsuario.setVisible(true);
@@ -339,8 +356,6 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 			internalFrameConsultaPaqueteEspectaculo.setVisible(true);
 			break;
 		case "Agregar Espectaculo a Paquete":
-			//System.out.println("menu agregar");
-			/* iconU.seguirUsuario("Alexis Sanchez", "CR7"); iconU.seguirUsuario("CR7", "Alexis Sanchez"); */
 			internalFrameAgregarEspectaculoAPaquete.iniciarlizarComboBox();
 			internalFrameAgregarEspectaculoAPaquete.setVisible(true);
 			break;

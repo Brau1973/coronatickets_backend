@@ -39,7 +39,7 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 		miPanel = new JPanel();
 		miPanel.setLayout(null);
 		add(miPanel);
-		setBounds(15, 15, 460, 400);
+		setBounds(15, 15, 800, 600);
 		setResizable(false);
 		setClosable(true);
 		setIconifiable(false);

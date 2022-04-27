@@ -31,15 +31,13 @@ import interfaces.IControladorUsuario;
 @SuppressWarnings("serial")
 public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 
+	private IControladorUsuario iconU;
 	private JPanel miPanel;
-//   private JScrollPane panel;
-	private JLabel lblTitulo, lblBuscar,jLabelImage,jLabelIamgeTxt;
-	// private JDateChooser dateFechaNac;
-	// private JTable tabUsuario;
+	private JLabel lblTitulo, lblBuscar,jLabelImage;
 	private JComboBox<String> comboUsuarios;
 	private JTextArea jtextarea;
 	private List<String> listUsuariosStr;
-	IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
+	//IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
 	IControladorEspectaculo iconE = Fabrica.getInstancia().getIControladorEspectaculo();
 
 	// Constructor

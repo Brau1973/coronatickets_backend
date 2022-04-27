@@ -45,7 +45,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener{
 	 miPanel = new JPanel();
 	 miPanel.setLayout(null);
 	 add(miPanel);
-	 setBounds(15, 15, 475, 485);
+	 setBounds(15, 15, 800, 600);
 	 setResizable(false);
 	 setClosable(true);
 	 setIconifiable(false);
