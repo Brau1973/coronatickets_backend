@@ -1,9 +1,11 @@
 package presentacion;
 
+import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -36,7 +38,7 @@ public class ConsultaEspectaculo extends JInternalFrame {
 	private List<DtPaqueteEspectaculo> listPaqEspe;
 	//private List<DtPaqueteEspectaculo> listPaquetes;
 	private JLabel lblCantidadMaxima;
-	private JLabel lblURL, lblCosto, lblRegistro;
+	private JLabel lblURL, lblCosto, lblRegistro,jLabelImage;
 	private JTextField textNombreEspectaculo;
 	private JTextField textArtistaOrganizador, textDescripcion, textDuracion, textCantidadMinima, textCantidadMaxima, textURL, textRegistro, textCosto;
 	private JLabel lblFunciones;
@@ -47,6 +49,7 @@ public class ConsultaEspectaculo extends JInternalFrame {
 	private PnlDatosFuncion pnlDatosFuncion;
 	private DtPlataforma plataformaSelected;
 	//private String espectaculoSelected = "";
+	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\";
 
 	// Constructor
 	public ConsultaEspectaculo() {
@@ -191,14 +194,18 @@ public class ConsultaEspectaculo extends JInternalFrame {
 		textURL.setBackground(UIManager.getColor("Button.disabledForeground"));
 		textURL.setBounds(490, 190, 200, 20);
 		miPanel.add(textURL);
+		
+		jLabelImage = new JLabel();
+		jLabelImage.setBounds(370, 230, 140, 140);
+		miPanel.add(jLabelImage);
 
 		pnlDatosPaquete = new PnlDatosPaquete();
-		pnlDatosPaquete.setBounds(0, 210, 700, 500);
+		pnlDatosPaquete.setBounds(0, 510, 700, 500);
 		pnlDatosPaquete.setVisible(false);
 		miPanel.add(pnlDatosPaquete);
 
 		pnlDatosFuncion = new PnlDatosFuncion();
-		pnlDatosFuncion.setBounds(0, 210, 700, 500);
+		pnlDatosFuncion.setBounds(0, 410, 700, 500);
 		pnlDatosFuncion.setVisible(false);
 		miPanel.add(pnlDatosFuncion);
 	}
@@ -242,6 +249,11 @@ public class ConsultaEspectaculo extends JInternalFrame {
 				this.textURL.setText(espectaculo.getUrl());
 				this.textCosto.setText(String.valueOf(espectaculo.getCosto()));
 				this.textRegistro.setText(String.valueOf(datosFecha));
+				if(!espectaculo.getimageName().isEmpty()) {
+					ImageIcon imgi = new ImageIcon(this.imagenesSVPath+espectaculo.getimageName());
+					Image imagei = imgi.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
+					jLabelImage.setIcon(new ImageIcon(imagei));
+				}
 				listFunciones = iconF.listarFunciones(strEspectaculo);
 				if (listFunciones.isEmpty()) {
 					JOptionPane.showMessageDialog(this, "El espectaculo no tiene funciones asociadas", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -316,6 +328,7 @@ public class ConsultaEspectaculo extends JInternalFrame {
 		textURL.setText("");
 		textRegistro.setText("");
 		textCosto.setText("");
+		jLabelImage.setIcon(null);
 	}
 
 }

@@ -10,17 +10,19 @@ public class DtPlataforma {
 	private String nombre;
 	private String descripcion;
 	private String url;
+	private String imageName;
 	private List<DtEspectaculo> espectaculo;
 
 	public DtPlataforma() {
 		super();
 	}
 
-	public DtPlataforma(String nombre, String descripcion, String url) {
+	public DtPlataforma(String nombre, String descripcion, String url, String imageName) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.url = url;
+		this.imageName = imageName;
 	}
 
 	public String getNombre() {
@@ -41,6 +43,14 @@ public class DtPlataforma {
 
 	public void setEspectaculo(List<DtEspectaculo> espectaculo) {
 		this.espectaculo = espectaculo;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 }

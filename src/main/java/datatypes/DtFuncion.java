@@ -15,20 +15,20 @@ public class DtFuncion {
 	private Time horaInicio;
 	private Date registro;
 	private List<String> artistas = new ArrayList<String>();
-	private byte[] imagen;
+	private String imageName;
 
 	public DtFuncion() {
 		super();
 	}
-
-	public DtFuncion(String nombre, Date fecha, Time horaInicio, Date registro, List<String> artistas, byte[] imagen) {
+	
+	public DtFuncion(String nombre, Date fecha, Time horaInicio, Date registro, List<String> artistas,String imageName) {
 		super();
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.horaInicio = horaInicio;
 		this.registro = registro;
 		this.artistas = artistas;
-		this.imagen = imagen; 
+		this.imageName = imageName;
 	}
 
 	public String getNombre() {
@@ -51,8 +51,12 @@ public class DtFuncion {
 		return artistas;
 	}
 
-	public byte[] getImagen() {
-		return imagen;
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImagePath(String imageName) {
+		this.imageName = imageName;
 	}
 
 }

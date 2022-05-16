@@ -40,6 +40,7 @@ public class ConsultaFuncion extends JInternalFrame{
 	private List<DtFuncion> listFunciones;
 	private String artistasInvitadosAFuncion;
 	private DtFuncion dtFunc;
+	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\";
 
 	static final String SELECCIONE_PLAT = "Seleccione Plataforma";
 	static final String SELECCIONE_ESP = "Seleccione Espectaculo";
@@ -183,6 +184,7 @@ public class ConsultaFuncion extends JInternalFrame{
 		if(e.getStateChange() == ItemEvent.SELECTED){
 			if(!e.getItem().equals(SELECCIONE_FUNC)){
 				if(e.getSource() == comboFunciones){
+					limpiarFormulario();
 					String strFuncion = this.comboFunciones.getSelectedItem().toString();
 					int i = 0;
 					String nombreFuncion;
@@ -202,21 +204,13 @@ public class ConsultaFuncion extends JInternalFrame{
 						}
 						i++;
 					}
-
-					byte[] b = dtFunc.getImagen();
-					BufferedImage image = null;
-					InputStream in = new ByteArrayInputStream(b);
-				//System.out.println("IN: " + b);
-					try{
-						image = ImageIO.read(in);
-					}catch(IOException e1){
-						e1.printStackTrace();
+					if(dtFunc.getImageName() != null) {		
+						if(!dtFunc.getImageName().isEmpty()) {
+							ImageIcon imgi = new ImageIcon(this.imagenesSVPath+dtFunc.getImageName());
+							Image imagei = imgi.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
+							jLabelImage.setIcon(new ImageIcon(imagei));
+						}
 					}
-					ImageIcon imgi = new ImageIcon(image);
-					Image imagei = imgi.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
-					jLabelImage.setIcon(new ImageIcon(imagei));
-					
-				//	System.out.println("IN: " + );
 				}
 			}
 		}
@@ -224,6 +218,7 @@ public class ConsultaFuncion extends JInternalFrame{
 
 	public void limpiarFormulario(){
 		txtDatosFuncion.setText("");
+		jLabelImage.setIcon(null);
 	}
 
 }

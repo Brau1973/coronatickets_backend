@@ -36,7 +36,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 
 			Espectaculo espectaculo = new Espectaculo(artistaOrganizador, dte.getNombre(), dte.getDescripcion(),
 					dte.getDuracion(), dte.getCantMin(), dte.getCantMax(), dte.getUrl(), dte.getCosto(),
-					dte.getRegistro());
+					dte.getRegistro(), dte.getimageName());
 
 			plataforma.aniadirEspectaculo(espectaculo);
 
@@ -62,7 +62,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 			System.out.println("ITERANDO EN :" + e.getNombre());
 			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), nombrePlataforma, e.getNombre(),
 					e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(),
-					e.getRegistro());
+					e.getRegistro(), e.getimageName());
 			listEspectaculosDt.add(DtEspec);
 		}
 		em.getTransaction().commit();
@@ -80,7 +80,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 		for (Espectaculo e : liste) {
 			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), "", e.getNombre(), e.getDescripcion(),
-					e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro());
+					e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro(), e.getimageName());
 			listEspectaculosDt.add(DtEspec);
 		}
 		return listEspectaculosDt;

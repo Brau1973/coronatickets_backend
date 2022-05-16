@@ -23,6 +23,7 @@ public class Usuario{
 	private String email;
 	private Date fNacimiento;
 	private String contrasenia;
+	private String imageName;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Usuario> seguidos = new ArrayList<Usuario>();
@@ -30,15 +31,12 @@ public class Usuario{
 	@ManyToMany(mappedBy = "seguidos")
 	private List<Usuario> seguidores = new ArrayList<Usuario>();
 
-	@Lob
-	@Column(name = "imagen")
-	private byte[] imagen;
 	
 	public Usuario(){
 		super();
 	}
 	
-	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia, byte[] imagen){
+	public Usuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia,String imageName){
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
@@ -46,7 +44,7 @@ public class Usuario{
 		this.email = email;
 		this.fNacimiento = fNacimiento;
 		this.contrasenia = contrasenia;
-		this.imagen = imagen;
+		this.imageName = imageName;
 	}
 
 	public String getNickname(){
@@ -71,10 +69,6 @@ public class Usuario{
 
 	public String getContrasenia(){
 		return contrasenia;
-	}
-	
-	public byte[] getImagen(){
-		return imagen;
 	}
 	
 	public void setNickname(String nickname){
@@ -112,10 +106,6 @@ public class Usuario{
 	public void setSeguidores(List<Usuario> seguidores){
 		this.seguidores = seguidores;
 	}
-
-	public void setImagen(byte[] imagen){
-		this.imagen = imagen;
-	}
 	
 	// Modificar los seguidos
 	public void seguirUsuario(Usuario u){
@@ -143,6 +133,14 @@ public class Usuario{
 
 	public void setContrasenia(String contrasenia){
 		this.contrasenia = contrasenia;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 

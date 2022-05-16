@@ -6,10 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -26,24 +24,21 @@ public class Funcion{
 
 	@OneToMany(mappedBy = "funcion", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Registro> registros = new ArrayList<>();
-
-	@Lob
-	@Column(name = "imagen")
-	private byte[] imagen;
+	
+	private String imageName;
 
 	public Funcion(){
 		super();
 	}
 
-	public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, List<Artista> artistas, byte[] imagen){
+	public Funcion(String nombre, Date fecha, Time horaInicio, Date registro, List<Artista> artistas,String imageName){
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.horaInicio = horaInicio;
 		this.registro = registro;
 		this.artistas = artistas;
-		this.imagen = imagen;
+		this.imageName = imageName;
 	}
-
 
 	public String getNombre(){
 		return nombre;
@@ -63,10 +58,6 @@ public class Funcion{
 
 	public Date getRegistro(){
 		return registro;
-	}
-
-	public byte[] getImagen(){
-		return imagen;
 	}
 
 	public void setNombre(String nombre){
@@ -102,8 +93,12 @@ public class Funcion{
 		this.registros.add(registro);
 	}
 
-	public void setImagen(byte[] imagen){
-		this.imagen = imagen;
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 	// public List<Registro> getRegistros() {

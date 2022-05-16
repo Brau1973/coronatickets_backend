@@ -48,7 +48,7 @@ public class ControladorPaquete implements IControladorPaquete {
 		DtPaqueteEspectaculo ret = new DtPaqueteEspectaculo(p.getNombre(), p.getDescripcion(), p.getFechaInicio(), p.getFechaFin(), p.getFechaAlta(), p.getDescuento());
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 		for (Espectaculo e : p.getEspectaculos()) {
-			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), "", e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro());
+			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), "", e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro(), e.getimageName());
 			listEspectaculosDt.add(DtEspec);
 		}
 		ret.setEspectaculos(listEspectaculosDt);

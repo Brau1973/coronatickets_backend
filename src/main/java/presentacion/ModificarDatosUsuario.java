@@ -31,7 +31,7 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 	private JComboBox<String> comboUsuarios;
 	private JButton btnGuardar, btnCancelar, btnMostrar;
 	private List<String> listUsuarios;
-	private byte[] imagenUsu;
+	private String imagenUsu;
 
 	// Constructor
 	public ModificarDatosUsuario(IControladorUsuario iconU){
@@ -200,7 +200,7 @@ public class ModificarDatosUsuario extends JInternalFrame implements ActionListe
 				txtEmail.setText(u.getEmail());
 				dateFechaNac.setDate(u.getfNacimiento());
 				txtContrasenia.setText(u.getContrasenia());	
-				imagenUsu = u.getImagen();
+				imagenUsu = u.getImageName();
 			}
 		}
 	}

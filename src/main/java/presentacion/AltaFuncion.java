@@ -4,10 +4,15 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,7 +53,8 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 	private IControladorEspectaculo iconE;
 	private JButton btnAceptar, btnCancelar, btnCopiar, btnAbrir;
 	private JPanel miPanel;
-	private JLabel lblPlataforma, lblEspectaculos, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta, lblDots, lblTitulo, jLabelImage, jLabelImag;
+	private JLabel lblPlataforma, lblEspectaculos, lblNombre, lblFecha, lblHora, lblArtistasInv, lblFechaAlta, lblDots,
+			lblTitulo, jLabelImage, jLabelImag;
 	private JTextField txtNombre, txturl;
 	private JSpinner spinHora, spinMin;
 	private JDateChooser fechaFuncion, fechaAlta;
@@ -61,6 +67,9 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 	private List<DtEspectaculo> listEspectaculos;
 	private List<String> listArtistas;
 	private List<String> listArtistasSeleccionados;
+	private File archivo;
+	private byte[] imagen;
+	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\";
 
 	// Constructor
 	public AltaFuncion(IControladorFuncion iconF) {
@@ -236,7 +245,10 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		System.out.println("ACTION PERFORMED");
+		System.out.println("e.getSource(): " + e.getSource());
 		if (e.getSource() == comboPlataforma) {
+			System.out.println("COMBO PLATA");
 			if (this.comboPlataforma.getSelectedItem() != null) {
 				String strPlataforma = this.comboPlataforma.getSelectedItem().toString();
 				listEspectaculos = iconE.listarEspectaculos(strPlataforma);
@@ -252,26 +264,47 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		}
 
 		if (e.getSource() == btnAbrir) {
+			System.out.println("ABRIR");
 			JFileChooser browseImageFile = new JFileChooser();
 			FileNameExtensionFilter fnef = new FileNameExtensionFilter("IMAGES", "png", "jpg", "jpeg");
 			browseImageFile.addChoosableFileFilter(fnef);
 			int showOpenDialogue = browseImageFile.showOpenDialog(null);
 
 			if (showOpenDialogue == JFileChooser.APPROVE_OPTION) {
-				File selectedImageFile = browseImageFile.getSelectedFile();
-				String selectedImagePath = selectedImageFile.getAbsolutePath();
+				archivo = browseImageFile.getSelectedFile();
+				String selectedImagePath = archivo.getAbsolutePath();
+				if (archivo.canRead()) {
+					if (archivo.getName().endsWith("jpeg") || archivo.getName().endsWith("jpg")
+							|| archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
+						ImageIcon ii = new ImageIcon(selectedImagePath);
+						Image image = ii.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(),
+								Image.SCALE_SMOOTH);
+						jLabelImage.setIcon(new ImageIcon(image));
+						this.txturl.setText(selectedImagePath);
+					} else {
+						JOptionPane.showMessageDialog(null, "Archivo no compatible");
+					}
 
-				// JOptionPane.showMessageDialog(null, selectedImagePath);
-				ImageIcon ii = new ImageIcon(selectedImagePath);
-				Image image = ii.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
-				jLabelImage.setIcon(new ImageIcon(image));
-
-				this.txturl.setText(selectedImagePath);
+					/*
+					 * File selectedImageFile = browseImageFile.getSelectedFile(); String fileName =
+					 * selectedImageFile.getName(); String selectedImagePath =
+					 * selectedImageFile.getAbsolutePath();
+					 * 
+					 * // JOptionPane.showMessageDialog(null, selectedImagePath); ImageIcon ii = new
+					 * ImageIcon(selectedImagePath); Image image =
+					 * ii.getImage().getScaledInstance(jLabelImage.getWidth(),
+					 * jLabelImage.getHeight(), Image.SCALE_SMOOTH); jLabelImage.setIcon(new
+					 * ImageIcon(image));
+					 */
+					this.txturl.setText(selectedImagePath);
+				}
 			}
 		}
 
 		if (e.getSource() == btnAceptar) {
+			System.out.println("ENTRO EVENTO");
 			if (checkFormulario() && modificarDatos()) {
+				System.out.println("ENTRO IF CHECK MOD");
 				String nombreFuncion = this.txtNombre.getText();
 				Date FechaFuncion = this.fechaFuncion.getDate();
 				int hora = Integer.parseInt(this.spinHora.getValue().toString());
@@ -279,24 +312,17 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 				Time horaInicio = new Time(hora, minutos, 0);
 				Date fechaRegistro = this.fechaAlta.getDate();
 				String strespectaculo = (String) this.comboEspectaculos.getSelectedItem();
-				byte[] selectedImage = null;
-
-				String url = this.txturl.getText();
-				if (url != null && !url.isEmpty()) {
-					try {
-						selectedImage = Files.readAllBytes(Paths.get(url));
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-
-				DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro, listArtistasSeleccionados,selectedImage);
+				DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro,
+						listArtistasSeleccionados, archivo.getName());
 				try {
 					this.iconF.altaFuncion(dtFuncion, strespectaculo);
-					JOptionPane.showMessageDialog(null, "Funcion ingresada con Exito", "Alta Funcion", JOptionPane.INFORMATION_MESSAGE);
-				    limpiarFormulario();
+					String pathImagenAGuardar = imagenesSVPath + archivo.getName();
+					copiarArchivo(this.txturl.getText(), pathImagenAGuardar);
+					JOptionPane.showMessageDialog(null, "Funcion ingresada con Exito", "Alta Funcion",
+							JOptionPane.INFORMATION_MESSAGE);
+					limpiarFormulario();
 				} catch (Exception e2) {
-					//		JOptionPane.showMessageDialog(this, msg.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this, e2.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
 				}
 				limpiarFormulario();
 				setVisible(false);
@@ -309,18 +335,24 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		}
 	}
 
+
 	private boolean checkFormulario() {
+		System.out.println("CHECK FORM");
 		if (!txtNombre.getText().isEmpty() && fechaFuncion.getDate() != null && fechaAlta.getDate() != null) {
 		} else {
-			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error",
+					JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;
 	}
 
 	private boolean modificarDatos() {
-		  if (this.iconF.existeFuncion(txtNombre.getText())) {
-			int respuesta = JOptionPane.showConfirmDialog(null, "El noimbre de la funcion ya existe\n¿Desea modificar los datos?\n", "Advertencia", JOptionPane.YES_NO_OPTION);
+		System.out.println("MODIFICAR DATOS");
+		if (this.iconF.existeFuncion(txtNombre.getText())) {
+			int respuesta = JOptionPane.showConfirmDialog(null,
+					"El noimbre de la funcion ya existe\n¿Desea modificar los datos?\n", "Advertencia",
+					JOptionPane.YES_NO_OPTION);
 			if (respuesta != JOptionPane.YES_NO_OPTION) {
 				limpiarFormulario();
 				setVisible(false);
@@ -331,34 +363,36 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 	}
 
 	private void limpiarFormulario() {
+		comboPlataforma.removeAllItems();
+		comboEspectaculos.removeAllItems();
 		this.txtNombre.setText("");
 		this.fechaFuncion.setDate(null);
 		this.spinHora.setValue(0);
 		this.spinMin.setValue(0);
+		comboArtista.removeAllItems();
 		this.fechaAlta.setDate(null);
+		this.archivo = null;
+		jLabelImage.setIcon(null);
 	}
 
 	public void limpiarListaArtistas() {
 		listArtistasSeleccionados = new ArrayList<String>();
 		listArtistasSeleccionados.clear();
 	}
-	@SuppressWarnings("unused")
-	private void guardarArchivo(){ //ver
-		try{
-			String nombre = "";
-			JFileChooser file = new JFileChooser();
-			file.showSaveDialog(this);
-			File guarda = file.getSelectedFile();
 
-			if(guarda != null){
-				nombre = file.getSelectedFile().getName();
-				FileWriter save = new FileWriter(guarda + ".doc");
-				save.write(areaDeTexto.getText());
-				save.close();
-				JOptionPane.showMessageDialog(null, "El archivo se a guardado Exitosamente", "Informaciï¿½n", JOptionPane.INFORMATION_MESSAGE);
-			}
-		}catch(IOException ex){
-			JOptionPane.showMessageDialog(null, "Su archivo no se ha guardado", "Advertencia", JOptionPane.WARNING_MESSAGE);
+	public void copiarArchivo(String fromStr, String toStr) {
+		Path from = Paths.get(fromStr);
+		Path to = Paths.get(toStr);
+		System.out.println("fromStr: " + fromStr);
+		System.out.println("toStr: " + toStr);
+		// Reemplazamos el fichero si ya existe
+		CopyOption[] options = new CopyOption[] { StandardCopyOption.REPLACE_EXISTING,
+				StandardCopyOption.COPY_ATTRIBUTES };
+		try {
+			System.out.println("Try");
+			Files.copy(from, to, options);
+		} catch (Exception e) {
+			System.out.println("Catch");
 		}
 	}
 }

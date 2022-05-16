@@ -18,15 +18,13 @@ public class DtUsuario implements Serializable {
 	private List<String> seguidos = new ArrayList<String>();
 	private List<String> seguidores = new ArrayList<String>();
 	private String contrasenia;
-	//@Lob
-	//@Column(name = "imagen")
-	private byte[] imagen;
+	private String imageName;
 	
 	public DtUsuario() {
 		super();
 	}
 	
-	public DtUsuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, List<String> seguidos, List<String> seguidores, String contrasenia, byte[] imagen) {
+	public DtUsuario(String nickname, String nombre, String apellido, String email, Date fNacimiento, List<String> seguidos, List<String> seguidores, String contrasenia, String imageName) {
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
@@ -36,7 +34,7 @@ public class DtUsuario implements Serializable {
 		this.seguidos = seguidos;
 		this.seguidores = seguidores;
 		this.contrasenia = contrasenia;
-		this.imagen = imagen;
+		this.setImageName(imageName);
 	}
 
 	public String getNickname() {
@@ -71,10 +69,6 @@ public class DtUsuario implements Serializable {
 		return contrasenia;
 	}
 
-	public byte[] getImagen() {
-		return imagen;
-	}
-
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
@@ -107,8 +101,12 @@ public class DtUsuario implements Serializable {
 		this.contrasenia = contrasenia;
 	}
 
-	public void setImagen(byte[] imagen) {
-		this.imagen = imagen;
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 }

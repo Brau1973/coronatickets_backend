@@ -17,8 +17,8 @@ public class Espectador extends Usuario {
 		super();
 	}
 
-	public Espectador(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia, byte[] imagen) {
-		super(nickname, nombre, apellido, email, fNacimiento, contrasenia, imagen);
+	public Espectador(String nickname, String nombre, String apellido, String email, Date fNacimiento, String contrasenia, String imageName) {
+		super(nickname, nombre, apellido, email, fNacimiento, contrasenia, imageName);
 	}
 
 	public List<Registro> getRegistros() {

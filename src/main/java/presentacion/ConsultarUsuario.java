@@ -153,7 +153,8 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 							+ dtusu.getEmail() + "\nFecha: " + formatoFecha.format(dtusu.getfNacimiento()) + datos);
 				}
 				// CARGA POSIBLE IMAGEN
-				if(dtusu.getImagen()!= null) {
+				if(dtusu.getImageName() != null) {
+					/*
 					byte[] b = dtusu.getImagen();
 					BufferedImage image = null;
 					InputStream in = new ByteArrayInputStream(b);
@@ -163,7 +164,9 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 					}catch(IOException e1){
 						e1.printStackTrace();
 					}
-					ImageIcon imgi = new ImageIcon(image);
+					*/
+					//ImageIcon imgi = new ImageIcon(image);
+					ImageIcon imgi = new ImageIcon("C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\"+dtusu.getImageName());
 					Image imagei = imgi.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
 					jLabelImage.setIcon(new ImageIcon(imagei));
 				}

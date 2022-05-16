@@ -39,7 +39,7 @@ public class ControladorFuncion implements IControladorFuncion {
 			dtFuncion.getArtistas().forEach((a) -> {
 				artistas.add(mU.buscarArtista(a));
 			});
-			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(), dtFuncion.getRegistro(), artistas, dtFuncion.getImagen());
+			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(), dtFuncion.getRegistro(), artistas,dtFuncion.getImageName());
 			espectaculo.agregarFuncion(funcionACrear);
 			mF.agregarFuncion(funcionACrear);
 		}
@@ -61,7 +61,7 @@ public class ControladorFuncion implements IControladorFuncion {
 			for (Artista a : f.getArtistas()) {
 				artistas.add(a.getNickname());
 			}
-			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getFecha(), f.getHoraInicio(), f.getRegistro(), artistas,f.getImagen());
+			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getFecha(), f.getHoraInicio(), f.getRegistro(), artistas,f.getImageName());
 			listFuncionesDt.add(DtFuncion);
 		}
 		em.getTransaction().commit();
@@ -109,7 +109,7 @@ public class ControladorFuncion implements IControladorFuncion {
 			artistas.add(a.getNickname());
 		}
 		
-		DtFuncion infoFuncion = new DtFuncion(funcion.getNombre(),funcion.getFecha(),funcion.getHoraInicio(),funcion.getRegistro(),artistas, funcion.getImagen());
+		DtFuncion infoFuncion = new DtFuncion(funcion.getNombre(),funcion.getFecha(),funcion.getHoraInicio(),funcion.getRegistro(),artistas, funcion.getImageName());
 		
 		return infoFuncion;
 	}

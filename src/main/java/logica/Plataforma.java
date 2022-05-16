@@ -15,6 +15,7 @@ public class Plataforma {
 	private String nombre;
 	private String descripcion;
 	private String url;
+	private String imageName;
 
 	@OneToMany
 	private List<Espectaculo> espectaculo = new ArrayList<>();
@@ -23,11 +24,12 @@ public class Plataforma {
 		super();
 	}
 
-	public Plataforma(String nombre, String descripcion, String url) {
+	public Plataforma(String nombre, String descripcion, String url, String imageName) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.url = url;
+		this.imageName = imageName; 
 	}
 
 	public String getNombre() {
@@ -89,6 +91,14 @@ public class Plataforma {
 
 	public void setEspectaculo(List<Espectaculo> espectaculo) {
 		this.espectaculo = espectaculo;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 }

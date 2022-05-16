@@ -1,27 +1,40 @@
 package presentacion;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import datatypes.DtPlataforma;
 import excepciones.PlataformaRepetidaExcepcion;
 import interfaces.IControladorPlataforma;
 
 @SuppressWarnings("serial")
-public class AltaPlataforma extends JInternalFrame {
+public class AltaPlataforma extends JInternalFrame implements ActionListener {
 	private IControladorPlataforma iconP;
-	private JButton btnGuardar, btnCancelar;
+	private JButton btnGuardar, btnCancelar, btnAbrir;
 	private JPanel miPanel;
-	private JLabel lblTitulo, lblNombre, lblDescripcion, lblUrl;
+	private JLabel lblTitulo, lblNombre, lblDescripcion, lblUrl, jLabelImage, jLabelImag;
 	private JTextField txtNombre, txtDescripcion, txtUrl;
+	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\";
+	private File archivo;
+	private String imagePath;
 	static final int X_LABEL = 10;
 	static final int X_TEXT = 200;
 	static final int Y_DIST = 30;
@@ -71,48 +84,81 @@ public class AltaPlataforma extends JInternalFrame {
 		txtUrl = new JTextField();
 		txtUrl.setBounds(X_TEXT, Y_DIST * 4, WIDTH_TEXT, HEIGHT_FIELD);
 		miPanel.add(txtUrl);
+		
+		jLabelImag = new JLabel("Seleccionar imagen"); // label imagen
+		jLabelImag.setBounds(X_LABEL, Y_DIST * 5, WIDTH_LABEL, HEIGHT_FIELD);
+		miPanel.add(jLabelImag);
 
+		jLabelImage = new JLabel(); // label imagen
+		jLabelImage.setBounds(X_LABEL+200, Y_DIST * 7, WIDTH_LABEL-60, HEIGHT_FIELD+120);
+		miPanel.add(jLabelImage);
+
+		// Boton Abrir
+		btnAbrir = new JButton();
+		btnAbrir.setText("...");
+		btnAbrir.setBounds(X_TEXT, Y_DIST * 5, WIDTH_TEXT, HEIGHT_FIELD);
+
+		miPanel.add(btnAbrir);
+		btnAbrir.addActionListener(this);
+		
 		// Boton Guardar
 		btnGuardar = new JButton("Guardar");
-		btnGuardar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					actionListenerGuardar(e);
-				} catch (PlataformaRepetidaExcepcion e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-		btnGuardar.setBounds(200, Y_DIST * 6, 115, 25);
+		btnGuardar.setBounds(200, Y_DIST * 13, 115, 25);
 		miPanel.add(btnGuardar);
+		btnGuardar.addActionListener(this);
 
 		// Boton cancelar
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent c) {
-				actionListenerCancelar(c);
-			}
-		});
-		btnCancelar.setBounds(325, Y_DIST * 6, 115, 25);
+		btnCancelar.setBounds(325, Y_DIST * 13, 115, 25);
 		miPanel.add(btnCancelar);
+		btnCancelar.addActionListener(this);
 
 	}
-
-	protected void actionListenerGuardar(ActionEvent al) throws PlataformaRepetidaExcepcion {
-		if (checkFormulario() && modificarDatos()) {
-			String nombre = this.txtNombre.getText();
-			String descripcion = this.txtDescripcion.getText();
-			String url = this.txtUrl.getText();
-			DtPlataforma dtP = new DtPlataforma(nombre, descripcion, url);
-			try {
-				this.iconP.altaPlataforma(dtP);
-				JOptionPane.showMessageDialog(this, "Plataforma ingresada con Exito");
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAbrir) {
+			JFileChooser browseImageFile = new JFileChooser();
+			FileNameExtensionFilter fnef = new FileNameExtensionFilter("IMAGES", "png", "jpg", "jpeg");
+			browseImageFile.addChoosableFileFilter(fnef);
+			int showOpenDialogue = browseImageFile.showOpenDialog(null);
+	
+			if (showOpenDialogue == JFileChooser.APPROVE_OPTION) {
+				archivo = browseImageFile.getSelectedFile();
+				String selectedImagePath = archivo.getAbsolutePath();
+				if (archivo.canRead()) {
+					if (archivo.getName().endsWith("jpeg") || archivo.getName().endsWith("jpg")
+							|| archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
+						ImageIcon ii = new ImageIcon(selectedImagePath);
+						Image image = ii.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(),
+								Image.SCALE_SMOOTH);
+						jLabelImage.setIcon(new ImageIcon(image));
+						this.imagePath = selectedImagePath;
+					} else {
+						JOptionPane.showMessageDialog(null, "Archivo no compatible");
+					}
+					this.imagePath = selectedImagePath;
+				}
 			}
-			limpiarFormulario();
-			setVisible(false);
+			
+		}
+		
+		if (e.getSource() == btnGuardar){
+			if (checkFormulario() && modificarDatos()) {
+				String nombre = this.txtNombre.getText();
+				String descripcion = this.txtDescripcion.getText();
+				String url = this.txtUrl.getText();
+				DtPlataforma dtP = new DtPlataforma(nombre, descripcion, url, archivo.getName());
+				try {
+					this.iconP.altaPlataforma(dtP);
+					String pathImagenAGuardar = imagenesSVPath + archivo.getName();
+					copiarArchivo(this.imagePath, pathImagenAGuardar);
+					JOptionPane.showMessageDialog(this, "Plataforma ingresada con Exito");
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(this, ex.getMessage(), "Alta Plataforma", JOptionPane.ERROR_MESSAGE);
+				}
+				limpiarFormulario();
+				setVisible(false);
+			}
 		}
 	}
 
@@ -154,6 +200,22 @@ public class AltaPlataforma extends JInternalFrame {
 		txtNombre.setText("");
 		txtDescripcion.setText("");
 		txtUrl.setText("");
+	}
+	
+	public void copiarArchivo(String fromStr, String toStr) {
+		Path from = Paths.get(fromStr);
+		Path to = Paths.get(toStr);
+		System.out.println("fromStr: " + fromStr);
+		System.out.println("toStr: " + toStr);
+		// Reemplazamos el fichero si ya existe
+		CopyOption[] options = new CopyOption[] { StandardCopyOption.REPLACE_EXISTING,
+				StandardCopyOption.COPY_ATTRIBUTES };
+		try {
+			System.out.println("Try");
+			Files.copy(from, to, options);
+		} catch (Exception e) {
+			System.out.println("Catch");
+		}
 	}
 
 }

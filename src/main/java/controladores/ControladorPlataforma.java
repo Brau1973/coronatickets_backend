@@ -27,10 +27,11 @@ public class ControladorPlataforma implements IControladorPlataforma {
 			System.out.println("La plataforma existe");
 			throw new PlataformaRepetidaExcepcion("Error", "La plataforma " + dtPlataforma.getNombre() + " ya esta existe");
 		} else {
-			plataforma = new Plataforma(dtPlataforma.getNombre(), dtPlataforma.getDescripcion(), dtPlataforma.getUrl());
+			plataforma = new Plataforma(dtPlataforma.getNombre(), dtPlataforma.getDescripcion(), dtPlataforma.getUrl(), dtPlataforma.getImageName());
 			mP.altaPlataforma(plataforma);
 		}
 	}
+	
 
 	@Override
 	public List<DtPlataforma> listarPlataformas() {
@@ -64,14 +65,14 @@ public class ControladorPlataforma implements IControladorPlataforma {
 	}
 
 	public DtPlataforma mapEntityToDt(Plataforma p) {
-		DtPlataforma ret = new DtPlataforma(p.getNombre(), p.getDescripcion(), p.getUrl());
+		DtPlataforma ret = new DtPlataforma(p.getNombre(), p.getDescripcion(), p.getUrl(), p.getImageName());
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
 		
 		em.getTransaction().begin();
 		for (Espectaculo e : p.getEspectaculo()) {
-			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), p.getNombre(), e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro());
+			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), p.getNombre(), e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro(), e.getimageName());
 			DtEspec.setPaquetes(e.getPaqueteEspectaculoDt());
 			DtEspec.setFunciones(e.getFuncionesDt());
 			listEspectaculosDt.add(DtEspec);

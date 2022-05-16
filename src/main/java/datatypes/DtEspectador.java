@@ -13,8 +13,8 @@ public class DtEspectador extends DtUsuario {
 		super();
 	}
 
-	public DtEspectador(String nickname, String nombre, String apellido, String email, Date fNacimiento, List<String> seguidos, List<String> seguidores, String contrasenia, byte[] imagen) {
-		super(nickname, nombre, apellido, email, fNacimiento, seguidos, seguidores, contrasenia, imagen);
+	public DtEspectador(String nickname, String nombre, String apellido, String email, Date fNacimiento, List<String> seguidos, List<String> seguidores, String contrasenia, String imageName) {
+		super(nickname, nombre, apellido, email, fNacimiento, seguidos, seguidores, contrasenia, imageName);
 	}
 
 }

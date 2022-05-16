@@ -31,6 +31,7 @@ public class Espectaculo {
 	private String url;
 	private int costo;
 	private Date registro;
+	private String imageName;
 
 	@ManyToMany(mappedBy = "espectaculos")
 	private List<PaqueteEspectaculos> paquete = new ArrayList<PaqueteEspectaculos>();
@@ -42,7 +43,7 @@ public class Espectaculo {
 		super();
 	}
 
-	public Espectaculo(Artista artista, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro) {
+	public Espectaculo(Artista artista, String nombre, String descripcion, int duracion, int cantMinEsp, int cantMaxEsp, String url, int costo, Date registro, String imageName) {
 		super();
 		this.artista = artista;
 		this.nombre = nombre;
@@ -53,6 +54,7 @@ public class Espectaculo {
 		this.url = url;
 		this.costo = costo;
 		this.registro = registro;
+		this.imageName = imageName;
 
 	}
 
@@ -184,7 +186,7 @@ public class Espectaculo {
 			for (Artista a : f.getArtistas()) {
 				artistas.add(a.getNickname());
 			}
-			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getFecha(), f.getHoraInicio(), f.getRegistro(), artistas,f.getImagen());
+			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getFecha(), f.getHoraInicio(), f.getRegistro(), artistas,f.getImageName());
 			listFuncionesDt.add(DtFuncion);
 		}
 		return listFuncionesDt;
@@ -195,7 +197,7 @@ public class Espectaculo {
 		for (PaqueteEspectaculos p : paquete) {
 			List<DtEspectaculo> espectaculos = new ArrayList<DtEspectaculo>();
 			for (Espectaculo e : p.getEspectaculos()) {
-				DtEspectaculo dtEspec = new DtEspectaculo(e.getArtista(), p.getNombre(), e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro());
+				DtEspectaculo dtEspec = new DtEspectaculo(e.getArtista(), p.getNombre(), e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro(), e.getimageName());
 				espectaculos.add(dtEspec);
 			}
 			DtPaqueteEspectaculo dtPaqueteEspectaculo = new DtPaqueteEspectaculo(p.getNombre(), p.getDescripcion(), p.getFechaInicio(), p.getFechaFin(), p.getFechaAlta(), p.getDescuento());
@@ -203,6 +205,14 @@ public class Espectaculo {
 			listPaquetesDt.add(dtPaqueteEspectaculo);
 		}
 		return listPaquetesDt;
+	}
+
+	public String getimageName() {
+		return imageName;
+	}
+
+	public void setimageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 }

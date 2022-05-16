@@ -18,6 +18,7 @@ public class DtEspectaculo {
 	private String url;
 	private int costo;
 	private Date registro;
+	private String imageName;
 
 	private List<DtPaqueteEspectaculo> paquetes = new ArrayList<DtPaqueteEspectaculo>();
 	private List<DtFuncion> funciones = new ArrayList<DtFuncion>();
@@ -26,7 +27,7 @@ public class DtEspectaculo {
 		super();
 	}
 	
-	public DtEspectaculo(String artista, String plataforma, String nombre, String descripcion, int duracion, int cantMin, int cantMax, String url, int costo, Date registro) {
+	public DtEspectaculo(String artista, String plataforma, String nombre, String descripcion, int duracion, int cantMin, int cantMax, String url, int costo, Date registro, String imageName) {
 		super();
 		this.artista = artista;
 		this.plataforma = plataforma;
@@ -38,6 +39,7 @@ public class DtEspectaculo {
 		this.url = url;
 		this.costo = costo;
 		this.registro = registro;
+		this.imageName = imageName;
 	}
 
 	public String getArtista() {
@@ -94,6 +96,14 @@ public class DtEspectaculo {
 
 	public void setFunciones(List<DtFuncion> funcion) {
 		this.funciones = funcion;
+	}
+
+	public String getimageName() {
+		return imageName;
+	}
+
+	public void setimageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 }

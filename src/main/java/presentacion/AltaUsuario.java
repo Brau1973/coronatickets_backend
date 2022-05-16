@@ -5,8 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,6 +43,8 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 	private JDateChooser dateFechaNac;
 	private JButton btnAceptar, btnCancelar, btnAbrir;
 	private byte[] selectedImage;
+	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\";
+	private File selectedImageFile;
 
 	private List<String> seguidos = new ArrayList<String>(); // Vacias porque recien se esta creando el usuario;
 	private List<String> seguidores = new ArrayList<String>();
@@ -248,7 +253,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 			int showOpenDialogue = browseImageFile.showOpenDialog(null);
 
 			if (showOpenDialogue == JFileChooser.APPROVE_OPTION) {
-				File selectedImageFile = browseImageFile.getSelectedFile();
+				selectedImageFile = browseImageFile.getSelectedFile();
 				String selectedImagePath = selectedImageFile.getAbsolutePath();
 
 				// JOptionPane.showMessageDialog(null, selectedImagePath);
@@ -273,20 +278,14 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 			String strLink = this.txtLink.getText();
 			String url = this.txturl.getText();
 			selectedImage = null;
-			if (url != null && !url.isEmpty()) {
-				try {
-					selectedImage = Files.readAllBytes(Paths.get(url));
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
 			if (rbtnEspectador.isSelected()) {
 				if (checkFormulario() && modificarDatos()) {
 					try {
 						// falta mirar chequeo de fecha
-						DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia, selectedImage);
-						
+						DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia, selectedImageFile.getName());
 						this.iconU.altaUsuario(dte);
+						String pathImagenAGuardar = imagenesSVPath + selectedImageFile.getName();
+						copiarArchivo(this.txturl.getText(), pathImagenAGuardar);
 						JOptionPane.showMessageDialog(this, "Espectador ingresado con Exito");
 						System.out.println("Try");
 					} catch (UsuarioRepetidoExcepcion x) {
@@ -301,9 +300,10 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 				if (checkFormulario2() && modificarDatos()) {
 					try {
 						// falta mirar chequeo de fecha
-						DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia, selectedImage, strDescripcion, strBiografia, strLink);
-
+						DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia, selectedImageFile.getName(), strDescripcion, strBiografia, strLink);
 						this.iconU.altaUsuario(dta);
+						String pathImagenAGuardar = imagenesSVPath + selectedImageFile.getName();
+						copiarArchivo(this.txturl.getText(), pathImagenAGuardar);
 						JOptionPane.showMessageDialog(this, "Artista ingresado con Exito");
 					} catch (UsuarioRepetidoExcepcion x) {
 						JOptionPane.showMessageDialog(this, x.getFaultInfo(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
@@ -386,6 +386,22 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 		txturl.setText("");
 		jLabelImage.setIcon(null);
 		selectedImage = null;
+	}
+	
+	public void copiarArchivo(String fromStr, String toStr) {
+		Path from = Paths.get(fromStr);
+		Path to = Paths.get(toStr);
+		System.out.println("fromStr: " + fromStr);
+		System.out.println("toStr: " + toStr);
+		// Reemplazamos el fichero si ya existe
+		CopyOption[] options = new CopyOption[] { StandardCopyOption.REPLACE_EXISTING,
+				StandardCopyOption.COPY_ATTRIBUTES };
+		try {
+			System.out.println("Try");
+			Files.copy(from, to, options);
+		} catch (Exception e) {
+			System.out.println("Catch");
+		}
 	}
 
 }
