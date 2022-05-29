@@ -37,6 +37,8 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 	private JComboBox<String> comboUsuarios;
 	private JTextArea jtextarea;
 	private List<String> listUsuariosStr;
+	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\Usuarios\\";
+	private String imagenesSVPathUser;
 	//IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
 	IControladorEspectaculo iconE = Fabrica.getInstancia().getIControladorEspectaculo();
 
@@ -147,26 +149,16 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 							+ ((DtArtista) dtusu).getDescripcion() + "\nBiografia: " +((DtArtista) dtusu).getBiografia() 
 							+ "\nLink: " +((DtArtista) dtusu).getLink() +  
 							datos);
+					imagenesSVPathUser = this.imagenesSVPath+"Artistas\\";
 				} else if (dtusu instanceof DtEspectador) {
 					op = "--------Espectador--------\n\n";
 					jtextarea.setText(op + "Nombre: " + dtusu.getNombre() + "\nApellido: " + dtusu.getApellido() + "\nEmail: "
 							+ dtusu.getEmail() + "\nFecha: " + formatoFecha.format(dtusu.getfNacimiento()) + datos);
+					imagenesSVPathUser = this.imagenesSVPath+"Espectadores\\";
 				}
 				// CARGA POSIBLE IMAGEN
 				if(dtusu.getImageName() != null) {
-					/*
-					byte[] b = dtusu.getImagen();
-					BufferedImage image = null;
-					InputStream in = new ByteArrayInputStream(b);
-					//System.out.println("IN: " + b);
-					try{
-						image = ImageIO.read(in);
-					}catch(IOException e1){
-						e1.printStackTrace();
-					}
-					*/
-					//ImageIcon imgi = new ImageIcon(image);
-					ImageIcon imgi = new ImageIcon("C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\"+dtusu.getImageName());
+					ImageIcon imgi = new ImageIcon(imagenesSVPathUser+dtusu.getImageName());
 					Image imagei = imgi.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
 					jLabelImage.setIcon(new ImageIcon(imagei));
 				}

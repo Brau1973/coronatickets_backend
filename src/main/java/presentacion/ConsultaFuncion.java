@@ -40,7 +40,7 @@ public class ConsultaFuncion extends JInternalFrame{
 	private List<DtFuncion> listFunciones;
 	private String artistasInvitadosAFuncion;
 	private DtFuncion dtFunc;
-	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\";
+	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\Funciones\\";
 
 	static final String SELECCIONE_PLAT = "Seleccione Plataforma";
 	static final String SELECCIONE_ESP = "Seleccione Espectaculo";

@@ -49,7 +49,7 @@ public class ConsultaEspectaculo extends JInternalFrame {
 	private PnlDatosFuncion pnlDatosFuncion;
 	private DtPlataforma plataformaSelected;
 	//private String espectaculoSelected = "";
-	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\";
+	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\Espectaculos\\";
 
 	// Constructor
 	public ConsultaEspectaculo() {

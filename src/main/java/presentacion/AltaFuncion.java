@@ -69,7 +69,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 	private List<String> listArtistasSeleccionados;
 	private File archivo;
 	private byte[] imagen;
-	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\";
+	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\Funciones";
 
 	// Constructor
 	public AltaFuncion(IControladorFuncion iconF) {

@@ -32,7 +32,7 @@ public class AltaPlataforma extends JInternalFrame implements ActionListener {
 	private JPanel miPanel;
 	private JLabel lblTitulo, lblNombre, lblDescripcion, lblUrl, jLabelImage, jLabelImag;
 	private JTextField txtNombre, txtDescripcion, txtUrl;
-	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\";
+	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\Plataformas";
 	private File archivo;
 	private String imagePath;
 	static final int X_LABEL = 10;
