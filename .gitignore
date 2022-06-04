@@ -5,3 +5,5 @@
 .gitignore
 .project
 /aIgnorar/
+.idea/
+src/main/java/META-INF/MANIFEST.MF
