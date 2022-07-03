@@ -2,14 +2,19 @@ package interfaces;
 
 import java.util.List;
 
-import datatypes.DtPaqueteEspectaculo;
+import datatypes.DtEspectaculo;
+import datatypes.DtPaqueteEspectaculos;
 
 public interface IControladorPaquete {
-	public void altaPaquete(DtPaqueteEspectaculo dtPaqueteEsp);
+	public void altaPaquete(DtPaqueteEspectaculos dtPaqueteEsp);
 
 	public Boolean existePaquete(String nombre);
 
-	public List<DtPaqueteEspectaculo> obtenerPaquetes();
+	public List<DtPaqueteEspectaculos> obtenerPaquetes();
 
 	public void agregarEspectaculo(String paquete, String espectaculo);
+
+	List<DtEspectaculo> getEspectaculosDePaquete(String paquete);
+
+	DtPaqueteEspectaculos getInfoPaquete(String nomPaquete);
 }

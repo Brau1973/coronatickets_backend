@@ -21,7 +21,7 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 import datatypes.DtEspectaculo;
-import datatypes.DtPaqueteEspectaculo;
+import datatypes.DtPaqueteEspectaculos;
 import interfaces.Fabrica;
 import interfaces.IControladorPaquete;
 
@@ -45,8 +45,8 @@ public class PnlDatosPaquete extends JInternalFrame{
     private String[] header = {"Nombre", "Artista", "Descripción","Costo"};
     private String[][] data = {};
 
-    private DtPaqueteEspectaculo paqueteSelected;
-    List<DtPaqueteEspectaculo> lstPaquetes = new ArrayList<DtPaqueteEspectaculo>();
+    private DtPaqueteEspectaculos paqueteSelected;
+    List<DtPaqueteEspectaculos> lstPaquetes = new ArrayList<DtPaqueteEspectaculos>();
     IControladorPaquete iControladorPaquete = Fabrica.getInstancia().getIControladorPaquete();
 
     // Constructor
@@ -234,7 +234,7 @@ public class PnlDatosPaquete extends JInternalFrame{
     }
 
     // Inicializar panel
-    public void cargarPanel(DtPaqueteEspectaculo p, Boolean eventoTablaActivo){
+    public void cargarPanel(DtPaqueteEspectaculos p, Boolean eventoTablaActivo){
 	 this.eventoTablaActivo = eventoTablaActivo;
 	 DefaultTableModel tm = (DefaultTableModel) tablaEspectaculos.getModel();
 	 paqueteSelected = p;

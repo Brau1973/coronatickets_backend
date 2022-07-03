@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import datatypes.DtPaqueteEspectaculo;
+import datatypes.DtPaqueteEspectaculos;
 import interfaces.Fabrica;
 import interfaces.IControladorPaquete;
 
@@ -29,8 +29,8 @@ public class ConsultaPaqueteEspectaculos extends JInternalFrame{
 
     private PnlDatosPaquete pnlDatosPaquete;
 
-    private DtPaqueteEspectaculo paqueteSelected;
-    List<DtPaqueteEspectaculo> lstPaquetes = new ArrayList<DtPaqueteEspectaculo>();
+    private DtPaqueteEspectaculos paqueteSelected;
+    List<DtPaqueteEspectaculos> lstPaquetes = new ArrayList<DtPaqueteEspectaculos>();
 
     IControladorPaquete iControladorPaquete = Fabrica.getInstancia().getIControladorPaquete();
 

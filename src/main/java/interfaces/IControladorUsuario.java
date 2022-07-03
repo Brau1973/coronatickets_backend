@@ -26,9 +26,9 @@ public interface IControladorUsuario {
 
 	public void dejarDeSeguirUsuario(String nicknameUsuario, String nicknameUsuarioADejarDeSeguir);
 
-	public List<String> listarNicknameUsuariosNoSeguidos(String nickname);
+	public List<DtUsuario> listarUsuariosNoSeguidos(String nickname);
 
-	public List<String> listarNicknameUsuariosSeguidos(String nickname);
+	public List<DtUsuario> listarUsuariosSeguidos(String nickname);
 
 	public DtUsuario getLoginUsuario(String nickname);
 
@@ -39,4 +39,5 @@ public interface IControladorUsuario {
 	public DtUsuario getLoginUsuarioMail(String mail);
 	
 	public DtUsuario obtenerInfoUsuario(String nickname);
+
 }

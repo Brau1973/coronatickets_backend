@@ -10,7 +10,8 @@ import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
 
 import configuraciones.WebServiceConfiguracion;
-import datatypes.DtPaqueteEspectaculo;
+import datatypes.DtEspectaculo;
+import datatypes.DtPaqueteEspectaculos;
 import interfaces.Fabrica;
 import interfaces.IControladorPaquete;
 
@@ -45,7 +46,7 @@ public class ControladorPaquetePublish {
 
 	// LOS MÉTODOS QUE VAMOS A PUBLICAR
 	@WebMethod
-	public void altaPaquete(DtPaqueteEspectaculo dtPaqueteEspe) {
+	public void altaPaquete(DtPaqueteEspectaculos dtPaqueteEspe) {
 		iconPa.altaPaquete(dtPaqueteEspe);
 	}
 
@@ -55,9 +56,9 @@ public class ControladorPaquetePublish {
 	}
 
 	@WebMethod
-	public DtPaqueteEspectaculo[] obtenerPaquetes() {
-		List<DtPaqueteEspectaculo> lst = iconPa.obtenerPaquetes();
-		DtPaqueteEspectaculo[] ret = new DtPaqueteEspectaculo[lst.size()];
+	public DtPaqueteEspectaculos[] obtenerPaquetes() {
+		List<DtPaqueteEspectaculos> lst = iconPa.obtenerPaquetes();
+		DtPaqueteEspectaculos[] ret = new DtPaqueteEspectaculos[lst.size()];
 		ret = lst.toArray(ret);
 		return ret;
 	}
@@ -66,4 +67,18 @@ public class ControladorPaquetePublish {
 	public void agregarEspectaculo(String paquete, String espectaculo) {
 		iconPa.agregarEspectaculo(paquete, espectaculo);
 	}
+	
+	@WebMethod
+	public DtEspectaculo[] getEspectaculosDePaquete(String paquete) { 
+		List<DtEspectaculo> lst=iconPa.getEspectaculosDePaquete(paquete);
+		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
+		arr=lst.toArray(arr);
+		return arr;
+	}
+	
+	@WebMethod
+	public DtPaqueteEspectaculos getInfoPaquete (String nomPaquete) { 
+		return iconPa.getInfoPaquete(nomPaquete);
+	}
+	
 }

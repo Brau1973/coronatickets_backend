@@ -4,7 +4,7 @@ import java.util.List;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
-import datatypes.DtPaqueteEspectaculo;
+import datatypes.DtPaqueteEspectaculos;
 import excepciones.EspectaculoRepetidoExcepcion;
 
 public interface IControladorEspectaculo{
@@ -18,7 +18,7 @@ public interface IControladorEspectaculo{
 	
 	public List<DtFuncion> obtenerEspectaculoFunciones(String nombreEsp);
 	
-	public List<DtPaqueteEspectaculo> obtenerEspectaculoPaquetes(String nombreEsp);
+	public List<DtPaqueteEspectaculos> obtenerEspectaculoPaquetes(String nombreEsp);
 	
 	public boolean existeEspectaculo(String nombreEsp);
 }

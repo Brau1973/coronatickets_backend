@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
-import datatypes.DtPaqueteEspectaculo;
+import datatypes.DtPaqueteEspectaculos;
 import excepciones.EspectaculoRepetidoExcepcion;
 import interfaces.IControladorEspectaculo;
 import logica.Artista;
@@ -97,7 +97,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 		return mE.buscarEspectaculo(nombreEsp).getFuncionesDt();
 	}
 
-	public List<DtPaqueteEspectaculo> obtenerEspectaculoPaquetes(String nombreEsp) {
+	public List<DtPaqueteEspectaculos> obtenerEspectaculoPaquetes(String nombreEsp) {
 		ManejadorEspectaculo mE = ManejadorEspectaculo.getInstancia();
 		return mE.buscarEspectaculo(nombreEsp).getPaqueteEspectaculoDt();
 	}

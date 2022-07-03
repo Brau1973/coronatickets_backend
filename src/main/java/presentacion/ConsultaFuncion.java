@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -40,7 +41,7 @@ public class ConsultaFuncion extends JInternalFrame{
 	private List<DtFuncion> listFunciones;
 	private String artistasInvitadosAFuncion;
 	private DtFuncion dtFunc;
-	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\Funciones\\";
+	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\Espectaculos\\";
 
 	static final String SELECCIONE_PLAT = "Seleccione Plataforma";
 	static final String SELECCIONE_ESP = "Seleccione Espectaculo";
@@ -180,6 +181,7 @@ public class ConsultaFuncion extends JInternalFrame{
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void listenerComboFunciones(ItemEvent e){
 		if(e.getStateChange() == ItemEvent.SELECTED){
 			if(!e.getItem().equals(SELECCIONE_FUNC)){
@@ -200,7 +202,7 @@ public class ConsultaFuncion extends JInternalFrame{
 							listFunciones.get(i).getArtistas().forEach((a) -> {
 								artistasInvitadosAFuncion += a + "\n";
 							});
-							txtDatosFuncion.setText("Nombre: " + dtFunc.getNombre() + "\nFecha: " + formatoFecha.format(dtFunc.getFecha()) + "\nFecha Alta: " + formatoFecha.format(dtFunc.getRegistro()) + "\nHora Inicio: " + formatoHora.format(dtFunc.getHoraInicio()) + "\n--------Artistas-------- \n" + artistasInvitadosAFuncion);
+							txtDatosFuncion.setText("Nombre: " + dtFunc.getNombre() + "\nFecha Registro: " + formatoFecha.format(dtFunc.getRegistro()) + "\nFecha Funcion: " +formatoFecha.format(dtFunc.getFecha())  + "\nHora Inicio: " + dtFunc.getFecha().getHours()+":"+dtFunc.getFecha().getMinutes()/*formatoHora.format(dtFunc.getHoraInicio())*/ + "\n--------Artistas-------- \n" + artistasInvitadosAFuncion);
 						}
 						i++;
 					}

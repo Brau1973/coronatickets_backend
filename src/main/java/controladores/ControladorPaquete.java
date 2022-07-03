@@ -1,11 +1,10 @@
 package controladores;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import datatypes.DtEspectaculo;
-import datatypes.DtPaqueteEspectaculo;
+import datatypes.DtPaqueteEspectaculos;
 import interfaces.IControladorPaquete;
 import logica.Espectaculo;
 import logica.PaqueteEspectaculos;
@@ -15,7 +14,7 @@ import manejadores.ManejadorPaquete;
 public class ControladorPaquete implements IControladorPaquete {
 
 	@Override
-	public void altaPaquete(DtPaqueteEspectaculo dtPaqueteEsp) {
+	public void altaPaquete(DtPaqueteEspectaculos dtPaqueteEsp) {
 		ManejadorPaquete mP = ManejadorPaquete.getInstancia();
 	    PaqueteEspectaculos pe = new PaqueteEspectaculos(dtPaqueteEsp.getNombre(),dtPaqueteEsp.getDescripcion()
 	    		,dtPaqueteEsp.getFechaInicio(),dtPaqueteEsp.getFechaFin(),dtPaqueteEsp.getFechaAlta(),
@@ -30,22 +29,22 @@ public class ControladorPaquete implements IControladorPaquete {
 	}
 
 	@Override
-	public List<DtPaqueteEspectaculo> obtenerPaquetes() {
+	public List<DtPaqueteEspectaculos> obtenerPaquetes() {
 		ManejadorPaquete mP = ManejadorPaquete.getInstancia();
 		return mapListEntityToDt(mP.obtenerPaquetes());
 	}
 
-	public List<DtPaqueteEspectaculo> mapListEntityToDt(List<PaqueteEspectaculos> p) {
-		List<DtPaqueteEspectaculo> ret = new ArrayList<DtPaqueteEspectaculo>();
+	public List<DtPaqueteEspectaculos> mapListEntityToDt(List<PaqueteEspectaculos> p) {
+		List<DtPaqueteEspectaculos> ret = new ArrayList<DtPaqueteEspectaculos>();
 		for (PaqueteEspectaculos paq : p) {
-			DtPaqueteEspectaculo dtP = mapEntityToDt(paq);
+			DtPaqueteEspectaculos dtP = mapEntityToDt(paq);
 			ret.add(dtP);
 		}
 		return ret;
 	}
 
-	public DtPaqueteEspectaculo mapEntityToDt(PaqueteEspectaculos p) {
-		DtPaqueteEspectaculo ret = new DtPaqueteEspectaculo(p.getNombre(), p.getDescripcion(), p.getFechaInicio(), p.getFechaFin(), p.getFechaAlta(), p.getDescuento());
+	public DtPaqueteEspectaculos mapEntityToDt(PaqueteEspectaculos p) {
+		DtPaqueteEspectaculos ret = new DtPaqueteEspectaculos(p.getNombre(), p.getDescripcion(), p.getFechaInicio(), p.getFechaFin(), p.getFechaAlta(), p.getDescuento());
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 		for (Espectaculo e : p.getEspectaculos()) {
 			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), "", e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro(), e.getimageName());
@@ -67,6 +66,33 @@ public class ControladorPaquete implements IControladorPaquete {
 		paq.addEspectaculo(esp);
 		esp.agregarPaquete(paq);
 		mP.altaPaquete(paq);
+	}
+	
+	@Override
+	public List<DtEspectaculo> getEspectaculosDePaquete(String paquete) {
+		ManejadorPaquete mP = ManejadorPaquete.getInstancia();
+		ManejadorEspectaculo mEsp = ManejadorEspectaculo.getInstancia();
+		
+		PaqueteEspectaculos paq = mP.buscarPaquete(paquete);
+		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
+		
+		for (Espectaculo e : paq.getEspectaculos()) {
+			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), "", e.getNombre(),
+					e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(),
+					e.getRegistro(), e.getimageName());
+			listEspectaculosDt.add(DtEspec);
+		}
+		return listEspectaculosDt;
+	}
+	
+	@Override
+	public DtPaqueteEspectaculos getInfoPaquete (String nomPaquete) {
+		ManejadorPaquete mPaq = ManejadorPaquete.getInstancia();
+		PaqueteEspectaculos paquete= (mPaq.buscarPaquete(nomPaquete));
+		
+		DtPaqueteEspectaculos infoPaquete = new DtPaqueteEspectaculos(paquete.getNombre(),paquete.getDescripcion(),paquete.getFechaInicio(),paquete.getFechaFin(),paquete.getFechaAlta(),paquete.getDescuento());
+		
+		return infoPaquete;
 	}
 
 }

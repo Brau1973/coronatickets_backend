@@ -284,7 +284,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 						// falta mirar chequeo de fecha
 						DtUsuario dte = new DtEspectador(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia, selectedImageFile.getName());
 						this.iconU.altaUsuario(dte);
-						String pathImagenAGuardar = imagenesSVPath+"Espectadores\\"+selectedImageFile.getName();
+						String pathImagenAGuardar = imagenesSVPath+selectedImageFile.getName();
 						copiarArchivo(this.txturl.getText(), pathImagenAGuardar);
 						JOptionPane.showMessageDialog(this, "Espectador ingresado con Exito");
 						System.out.println("Try");
@@ -302,7 +302,7 @@ public class AltaUsuario extends JInternalFrame implements ActionListener {
 						// falta mirar chequeo de fecha
 						DtUsuario dta = new DtArtista(strNickname, strNombre, strApellido, strEmail, dateFechaNac, seguidos, seguidores, strContrasenia, selectedImageFile.getName(), strDescripcion, strBiografia, strLink);
 						this.iconU.altaUsuario(dta);
-						String pathImagenAGuardar = imagenesSVPath+"Artistas\\"+selectedImageFile.getName();
+						String pathImagenAGuardar = imagenesSVPath+selectedImageFile.getName();
 						copiarArchivo(this.txturl.getText(), pathImagenAGuardar);
 						JOptionPane.showMessageDialog(this, "Artista ingresado con Exito");
 					} catch (UsuarioRepetidoExcepcion x) {

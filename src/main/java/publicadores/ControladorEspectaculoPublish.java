@@ -12,7 +12,7 @@ import javax.xml.ws.Endpoint;
 import configuraciones.WebServiceConfiguracion;
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
-import datatypes.DtPaqueteEspectaculo;
+import datatypes.DtPaqueteEspectaculos;
 import excepciones.EspectaculoRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControladorEspectaculo;
@@ -68,15 +68,7 @@ public class ControladorEspectaculoPublish {
 		arr=lst.toArray(arr);
 		return arr;
 	}
-	/*
-	@WebMethod (exclude = true) //ver
-	public DtEspectaculo[] listEntityToDtEsp(List<Espectaculo> liste) {
-		List<DtEspectaculo> lst=iconE.listEntityToDtEsp(liste);
-		DtEspectaculo[] arr=new DtEspectaculo[lst.size()];
-		arr=lst.toArray(arr);
-		return arr;
-	}
-	*/
+	
 	@WebMethod
 	public String[] obtenerEspectaculosArtista(String nickname) { // veer
 		List<String> lst=iconE.obtenerEspectaculosArtista(nickname);
@@ -94,9 +86,9 @@ public class ControladorEspectaculoPublish {
 	}
 	
 	@WebMethod
-	public DtPaqueteEspectaculo[] obtenerEspectaculoPaquetes(String nombreEsp){
-		List<DtPaqueteEspectaculo> lst=iconE.obtenerEspectaculoPaquetes(nombreEsp);
-		DtPaqueteEspectaculo[] arr=new DtPaqueteEspectaculo[lst.size()];
+	public DtPaqueteEspectaculos[] obtenerEspectaculoPaquetes(String nombreEsp){
+		List<DtPaqueteEspectaculos> lst=iconE.obtenerEspectaculoPaquetes(nombreEsp);
+		DtPaqueteEspectaculos[] arr=new DtPaqueteEspectaculos[lst.size()];
 		arr=lst.toArray(arr);
 		return arr;
 	}

@@ -16,7 +16,7 @@ import javax.swing.UIManager;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
-import datatypes.DtPaqueteEspectaculo;
+import datatypes.DtPaqueteEspectaculos;
 import datatypes.DtPlataforma;
 import interfaces.Fabrica;
 import interfaces.IControladorFuncion;
@@ -35,7 +35,7 @@ public class ConsultaEspectaculo extends JInternalFrame {
 //	private List<DtEspectaculo> listEspectaculos;
 //	private List<Espectaculo> listEspectaculos2;
 	private List<DtFuncion> listFunciones;
-	private List<DtPaqueteEspectaculo> listPaqEspe;
+	private List<DtPaqueteEspectaculos> listPaqEspe;
 	//private List<DtPaqueteEspectaculo> listPaquetes;
 	private JLabel lblCantidadMaxima;
 	private JLabel lblURL, lblCosto, lblRegistro,jLabelImage;
@@ -43,7 +43,7 @@ public class ConsultaEspectaculo extends JInternalFrame {
 	private JTextField textArtistaOrganizador, textDescripcion, textDuracion, textCantidadMinima, textCantidadMaxima, textURL, textRegistro, textCosto;
 	private JLabel lblFunciones;
 	static final String SELECCIONE = "Seleccione";
-	private DtPaqueteEspectaculo paqueteSelected;
+	private DtPaqueteEspectaculos paqueteSelected;
 	private DtFuncion funcionSelect;
 	private PnlDatosPaquete pnlDatosPaquete;
 	private PnlDatosFuncion pnlDatosFuncion;

@@ -39,7 +39,7 @@ public class ControladorFuncion implements IControladorFuncion {
 			dtFuncion.getArtistas().forEach((a) -> {
 				artistas.add(mU.buscarArtista(a));
 			});
-			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(), dtFuncion.getRegistro(), artistas,dtFuncion.getImageName());
+			Funcion funcionACrear = new Funcion(dtFuncion.getNombre(), dtFuncion.getFecha(), dtFuncion.getHoraInicio(), dtFuncion.getRegistro(), artistas, espectaculo.getimageName());
 			espectaculo.agregarFuncion(funcionACrear);
 			mF.agregarFuncion(funcionACrear);
 		}

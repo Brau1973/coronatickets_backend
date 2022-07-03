@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 
 import datatypes.DtEspectaculo;
 import datatypes.DtFuncion;
-import datatypes.DtPaqueteEspectaculo;
+import datatypes.DtPaqueteEspectaculos;
 
 @Entity
 public class Espectaculo {
@@ -192,15 +192,15 @@ public class Espectaculo {
 		return listFuncionesDt;
 	}
 
-	public List<DtPaqueteEspectaculo> getPaqueteEspectaculoDt() {
-		List<DtPaqueteEspectaculo> listPaquetesDt = new ArrayList<DtPaqueteEspectaculo>();
+	public List<DtPaqueteEspectaculos> getPaqueteEspectaculoDt() {
+		List<DtPaqueteEspectaculos> listPaquetesDt = new ArrayList<DtPaqueteEspectaculos>();
 		for (PaqueteEspectaculos p : paquete) {
 			List<DtEspectaculo> espectaculos = new ArrayList<DtEspectaculo>();
 			for (Espectaculo e : p.getEspectaculos()) {
 				DtEspectaculo dtEspec = new DtEspectaculo(e.getArtista(), p.getNombre(), e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro(), e.getimageName());
 				espectaculos.add(dtEspec);
 			}
-			DtPaqueteEspectaculo dtPaqueteEspectaculo = new DtPaqueteEspectaculo(p.getNombre(), p.getDescripcion(), p.getFechaInicio(), p.getFechaFin(), p.getFechaAlta(), p.getDescuento());
+			DtPaqueteEspectaculos dtPaqueteEspectaculo = new DtPaqueteEspectaculos(p.getNombre(), p.getDescripcion(), p.getFechaInicio(), p.getFechaFin(), p.getFechaAlta(), p.getDescuento());
 			dtPaqueteEspectaculo.setEspectaculos(espectaculos);
 			listPaquetesDt.add(dtPaqueteEspectaculo);
 		}

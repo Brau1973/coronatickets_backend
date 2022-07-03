@@ -14,7 +14,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -181,25 +183,25 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		fechaAlta.setBounds(220, 330, 200, 20);
 		miPanel.add(fechaAlta);
 
-		jLabelImag = new JLabel("Seleccionar imagen"); // label imagen
-		jLabelImag.setBounds(10, 370, 200, 20);
-		miPanel.add(jLabelImag);
+//		jLabelImag = new JLabel("Seleccionar imagen"); // label imagen
+//		jLabelImag.setBounds(10, 370, 200, 20);
+//		miPanel.add(jLabelImag);
+//
+//		jLabelImage = new JLabel(); // label imagen
+//		jLabelImage.setBounds(230, 370, 140, 140);
+//		miPanel.add(jLabelImage);
+//
+//		txturl = new JTextField(); // url
+//		txturl.setBounds(202, 500, 200, 20);
+//		miPanel.add(txturl);
+//		txturl.setVisible(false);
 
-		jLabelImage = new JLabel(); // label imagen
-		jLabelImage.setBounds(230, 370, 140, 140);
-		miPanel.add(jLabelImage);
-
-		txturl = new JTextField(); // url
-		txturl.setBounds(202, 500, 200, 20);
-		miPanel.add(txturl);
-		txturl.setVisible(false);
-
-		btnAbrir = new JButton();
-		btnAbrir.setText("...");
-		btnAbrir.setBounds(130, 370, 40, 20);
-
-		miPanel.add(btnAbrir);
-		btnAbrir.addActionListener(this);
+		/*
+		 * btnAbrir = new JButton(); btnAbrir.setText("..."); btnAbrir.setBounds(130,
+		 * 370, 40, 20);
+		 * 
+		 * miPanel.add(btnAbrir); btnAbrir.addActionListener(this);
+		 */
 
 		// Boton Aceptar
 		btnAceptar = new JButton();
@@ -263,43 +265,37 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 			}
 		}
 
-		if (e.getSource() == btnAbrir) {
-			System.out.println("ABRIR");
-			JFileChooser browseImageFile = new JFileChooser();
-			FileNameExtensionFilter fnef = new FileNameExtensionFilter("IMAGES", "png", "jpg", "jpeg");
-			browseImageFile.addChoosableFileFilter(fnef);
-			int showOpenDialogue = browseImageFile.showOpenDialog(null);
-
-			if (showOpenDialogue == JFileChooser.APPROVE_OPTION) {
-				archivo = browseImageFile.getSelectedFile();
-				String selectedImagePath = archivo.getAbsolutePath();
-				if (archivo.canRead()) {
-					if (archivo.getName().endsWith("jpeg") || archivo.getName().endsWith("jpg")
-							|| archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
-						ImageIcon ii = new ImageIcon(selectedImagePath);
-						Image image = ii.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(),
-								Image.SCALE_SMOOTH);
-						jLabelImage.setIcon(new ImageIcon(image));
-						this.txturl.setText(selectedImagePath);
-					} else {
-						JOptionPane.showMessageDialog(null, "Archivo no compatible");
-					}
-
-					/*
-					 * File selectedImageFile = browseImageFile.getSelectedFile(); String fileName =
-					 * selectedImageFile.getName(); String selectedImagePath =
-					 * selectedImageFile.getAbsolutePath();
-					 * 
-					 * // JOptionPane.showMessageDialog(null, selectedImagePath); ImageIcon ii = new
-					 * ImageIcon(selectedImagePath); Image image =
-					 * ii.getImage().getScaledInstance(jLabelImage.getWidth(),
-					 * jLabelImage.getHeight(), Image.SCALE_SMOOTH); jLabelImage.setIcon(new
-					 * ImageIcon(image));
-					 */
-					this.txturl.setText(selectedImagePath);
-				}
-			}
-		}
+		/*
+		 * if (e.getSource() == btnAbrir) { System.out.println("ABRIR"); JFileChooser
+		 * browseImageFile = new JFileChooser(); FileNameExtensionFilter fnef = new
+		 * FileNameExtensionFilter("IMAGES", "png", "jpg", "jpeg");
+		 * browseImageFile.addChoosableFileFilter(fnef); int showOpenDialogue =
+		 * browseImageFile.showOpenDialog(null);
+		 * 
+		 * if (showOpenDialogue == JFileChooser.APPROVE_OPTION) { archivo =
+		 * browseImageFile.getSelectedFile(); String selectedImagePath =
+		 * archivo.getAbsolutePath(); if (archivo.canRead()) { if
+		 * (archivo.getName().endsWith("jpeg") || archivo.getName().endsWith("jpg") ||
+		 * archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
+		 * ImageIcon ii = new ImageIcon(selectedImagePath); Image image =
+		 * ii.getImage().getScaledInstance(jLabelImage.getWidth(),
+		 * jLabelImage.getHeight(), Image.SCALE_SMOOTH); jLabelImage.setIcon(new
+		 * ImageIcon(image)); this.txturl.setText(selectedImagePath); } else {
+		 * JOptionPane.showMessageDialog(null, "Archivo no compatible"); }
+		 * 
+		 * 
+		 * File selectedImageFile = browseImageFile.getSelectedFile(); String fileName =
+		 * selectedImageFile.getName(); String selectedImagePath =
+		 * selectedImageFile.getAbsolutePath();
+		 * 
+		 * // JOptionPane.showMessageDialog(null, selectedImagePath); ImageIcon ii = new
+		 * ImageIcon(selectedImagePath); Image image =
+		 * ii.getImage().getScaledInstance(jLabelImage.getWidth(),
+		 * jLabelImage.getHeight(), Image.SCALE_SMOOTH); jLabelImage.setIcon(new
+		 * ImageIcon(image));
+		 * 
+		 * this.txturl.setText(selectedImagePath); } } }
+		 */
 
 		if (e.getSource() == btnAceptar) {
 			System.out.println("ENTRO EVENTO");
@@ -309,15 +305,18 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 				Date FechaFuncion = this.fechaFuncion.getDate();
 				int hora = Integer.parseInt(this.spinHora.getValue().toString());
 				int minutos = Integer.parseInt(this.spinMin.getValue().toString());
+				FechaFuncion.setHours(hora);
+				FechaFuncion.setMinutes(minutos);		
+				
 				Time horaInicio = new Time(hora, minutos, 0);
 				Date fechaRegistro = this.fechaAlta.getDate();
 				String strespectaculo = (String) this.comboEspectaculos.getSelectedItem();
 				DtFuncion dtFuncion = new DtFuncion(nombreFuncion, FechaFuncion, horaInicio, fechaRegistro,
-						listArtistasSeleccionados, archivo.getName());
+						listArtistasSeleccionados, "");
 				try {
 					this.iconF.altaFuncion(dtFuncion, strespectaculo);
-					String pathImagenAGuardar = imagenesSVPath + archivo.getName();
-					copiarArchivo(this.txturl.getText(), pathImagenAGuardar);
+					// String pathImagenAGuardar = imagenesSVPath + archivo.getName();
+					// copiarArchivo(this.txturl.getText(), pathImagenAGuardar);
 					JOptionPane.showMessageDialog(null, "Funcion ingresada con Exito", "Alta Funcion",
 							JOptionPane.INFORMATION_MESSAGE);
 					limpiarFormulario();
@@ -334,7 +333,6 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 			setVisible(false);
 		}
 	}
-
 
 	private boolean checkFormulario() {
 		System.out.println("CHECK FORM");
@@ -372,7 +370,7 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		comboArtista.removeAllItems();
 		this.fechaAlta.setDate(null);
 		this.archivo = null;
-		jLabelImage.setIcon(null);
+		//jLabelImage.setIcon(null);
 	}
 
 	public void limpiarListaArtistas() {
@@ -380,19 +378,14 @@ public class AltaFuncion extends JInternalFrame implements ActionListener {
 		listArtistasSeleccionados.clear();
 	}
 
-	public void copiarArchivo(String fromStr, String toStr) {
-		Path from = Paths.get(fromStr);
-		Path to = Paths.get(toStr);
-		System.out.println("fromStr: " + fromStr);
-		System.out.println("toStr: " + toStr);
-		// Reemplazamos el fichero si ya existe
-		CopyOption[] options = new CopyOption[] { StandardCopyOption.REPLACE_EXISTING,
-				StandardCopyOption.COPY_ATTRIBUTES };
-		try {
-			System.out.println("Try");
-			Files.copy(from, to, options);
-		} catch (Exception e) {
-			System.out.println("Catch");
-		}
-	}
+	/*
+	 * public void copiarArchivo(String fromStr, String toStr) { Path from =
+	 * Paths.get(fromStr); Path to = Paths.get(toStr);
+	 * System.out.println("fromStr: " + fromStr); System.out.println("toStr: " +
+	 * toStr); // Reemplazamos el fichero si ya existe CopyOption[] options = new
+	 * CopyOption[] { StandardCopyOption.REPLACE_EXISTING,
+	 * StandardCopyOption.COPY_ATTRIBUTES }; try { System.out.println("Try");
+	 * Files.copy(from, to, options); } catch (Exception e) {
+	 * System.out.println("Catch"); } }
+	 */
 }

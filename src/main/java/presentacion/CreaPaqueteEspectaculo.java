@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-import datatypes.DtPaqueteEspectaculo;
+import datatypes.DtPaqueteEspectaculos;
 import interfaces.Fabrica;
 import interfaces.IControladorPaquete;
 
@@ -146,7 +146,7 @@ public class CreaPaqueteEspectaculo extends JInternalFrame{
     private void guardar(ActionEvent a){
 	 if(validateForm()){
 	     Integer.parseInt(this.txtDescuento.getText());
-	     DtPaqueteEspectaculo dtPaqueteEsp = new DtPaqueteEspectaculo(this.txtNombre.getText(), this.txtDescripcion.getText(), this.dateFechaInicio.getDate(), this.dateFechaFin.getDate(), this.dateFechaAlta.getDate(), Integer.parseInt(this.txtDescuento.getText())); 
+	     DtPaqueteEspectaculos dtPaqueteEsp = new DtPaqueteEspectaculos(this.txtNombre.getText(), this.txtDescripcion.getText(), this.dateFechaInicio.getDate(), this.dateFechaFin.getDate(), this.dateFechaAlta.getDate(), Integer.parseInt(this.txtDescuento.getText())); 
 	 	 iControladorPaquete.altaPaquete(dtPaqueteEsp);
 	     JOptionPane.showMessageDialog(null, "Paquete ingresado con Exito", "Alta Paquete", JOptionPane.INFORMATION_MESSAGE);
 	     limpiarPantalla();

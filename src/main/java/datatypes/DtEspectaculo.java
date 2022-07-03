@@ -20,7 +20,7 @@ public class DtEspectaculo {
 	private Date registro;
 	private String imageName;
 
-	private List<DtPaqueteEspectaculo> paquetes = new ArrayList<DtPaqueteEspectaculo>();
+	private List<DtPaqueteEspectaculos> paquetes = new ArrayList<DtPaqueteEspectaculos>();
 	private List<DtFuncion> funciones = new ArrayList<DtFuncion>();
 
 	public DtEspectaculo() {
@@ -82,7 +82,7 @@ public class DtEspectaculo {
 		return registro;
 	}
 
-	public List<DtPaqueteEspectaculo> getPaquetes() {
+	public List<DtPaqueteEspectaculos> getPaquetes() {
 		return paquetes;
 	}
 
@@ -90,7 +90,7 @@ public class DtEspectaculo {
 		return funciones;
 	}
 
-	public void setPaquetes(List<DtPaqueteEspectaculo> paquete) {
+	public void setPaquetes(List<DtPaqueteEspectaculos> paquete) {
 		this.paquetes = paquete;
 	}
 

@@ -149,16 +149,14 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 							+ ((DtArtista) dtusu).getDescripcion() + "\nBiografia: " +((DtArtista) dtusu).getBiografia() 
 							+ "\nLink: " +((DtArtista) dtusu).getLink() +  
 							datos);
-					imagenesSVPathUser = this.imagenesSVPath+"Artistas\\";
 				} else if (dtusu instanceof DtEspectador) {
 					op = "--------Espectador--------\n\n";
 					jtextarea.setText(op + "Nombre: " + dtusu.getNombre() + "\nApellido: " + dtusu.getApellido() + "\nEmail: "
 							+ dtusu.getEmail() + "\nFecha: " + formatoFecha.format(dtusu.getfNacimiento()) + datos);
-					imagenesSVPathUser = this.imagenesSVPath+"Espectadores\\";
 				}
 				// CARGA POSIBLE IMAGEN
 				if(dtusu.getImageName() != null) {
-					ImageIcon imgi = new ImageIcon(imagenesSVPathUser+dtusu.getImageName());
+					ImageIcon imgi = new ImageIcon(imagenesSVPath+dtusu.getImageName());
 					Image imagei = imgi.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
 					jLabelImage.setIcon(new ImageIcon(imagei));
 				}

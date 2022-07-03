@@ -102,17 +102,17 @@ public class ControladorUsuarioPublish {
 	}
 
 	@WebMethod
-	public String[] listarNicknameUsuariosNoSeguidos(String nickname) {
-		List<String> lst = iconU.listarNicknameUsuariosNoSeguidos(nickname);
-		String[] arr = new String[lst.size()];
+	public DtUsuario[] listarUsuariosNoSeguidos(String nickname) {
+		List<DtUsuario> lst = iconU.listarUsuariosNoSeguidos(nickname);
+		DtUsuario[] arr = new DtUsuario[lst.size()];
 		arr = lst.toArray(arr);
 		return arr;
 	}
 
 	@WebMethod
-	public String[] listarNicknameUsuariosSeguidos(String nickname) {
-		List<String> lst = iconU.listarNicknameUsuariosSeguidos(nickname);
-		String[] arr = new String[lst.size()];
+	public DtUsuario[] listarUsuariosSeguidos(String nickname) {
+		List<DtUsuario> lst = iconU.listarUsuariosSeguidos(nickname);
+		DtUsuario[] arr = new DtUsuario[lst.size()];
 		arr = lst.toArray(arr);
 		return arr;
 	}

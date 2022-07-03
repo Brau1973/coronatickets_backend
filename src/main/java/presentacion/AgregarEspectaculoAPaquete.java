@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import datatypes.DtEspectaculo;
-import datatypes.DtPaqueteEspectaculo;
+import datatypes.DtPaqueteEspectaculos;
 import datatypes.DtPlataforma;
 import interfaces.Fabrica;
 import interfaces.IControladorPaquete;
@@ -40,8 +40,8 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame {
 	private IControladorPlataforma iconP;
 	private IControladorPaquete iconPaquete;
 	private List<DtPlataforma> listPlataformas;
-	private List<DtPaqueteEspectaculo> listPaquetes;
-	private DtPaqueteEspectaculo paqueteSelected;
+	private List<DtPaqueteEspectaculos> listPaquetes;
+	private DtPaqueteEspectaculos paqueteSelected;
 	private DtPlataforma plataformaSelected;
 	private String espectaculoSelected = "";
 
@@ -154,7 +154,7 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame {
 		}
 	}
 
-	private void cargarComboEspectaculo(DtPlataforma plataforma, DtPaqueteEspectaculo paquete) {
+	private void cargarComboEspectaculo(DtPlataforma plataforma, DtPaqueteEspectaculos paquete) {
 		comboEspectaculo.removeAllItems();
 		comboEspectaculo.addItem(SELECCIONE);
 		comboEspectaculo.setSelectedItem(SELECCIONE);
@@ -174,7 +174,7 @@ public class AgregarEspectaculoAPaquete extends JInternalFrame {
 		comboPaquetes.setSelectedItem(SELECCIONE);
 		comboPlataformas.addItem(SELECCIONE);
 		comboPlataformas.setSelectedItem(SELECCIONE);
-		iconP.listarPlataformas();
+		listPlataformas = iconP.listarPlataformas();
 		listPlataformas.forEach((p) -> {
 			comboPlataformas.addItem(p.getNombre());
 		});
