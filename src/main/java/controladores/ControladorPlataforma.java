@@ -69,15 +69,12 @@ public class ControladorPlataforma implements IControladorPlataforma {
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		
-		em.getTransaction().begin();
 		for (Espectaculo e : p.getEspectaculo()) {
 			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), p.getNombre(), e.getNombre(), e.getDescripcion(), e.getDuracion(), e.getCantMinEsp(), e.getCantMaxEsp(), e.getUrl(), e.getCosto(), e.getRegistro(), e.getimageName());
 			DtEspec.setPaquetes(e.getPaqueteEspectaculoDt());
 			DtEspec.setFunciones(e.getFuncionesDt());
 			listEspectaculosDt.add(DtEspec);
 		}
-		em.getTransaction().commit();
 		ret.setEspectaculo(listEspectaculosDt);
 		return ret;
 	}

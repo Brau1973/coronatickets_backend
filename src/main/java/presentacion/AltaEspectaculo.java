@@ -49,7 +49,7 @@ public class AltaEspectaculo extends JInternalFrame implements ActionListener {
 	private List<String> listArtistas;
 	private File archivo;
 	private byte[] imagen;
-	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\Espectaculos";
+	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\Espectaculos\\";
 	private String txturl;
 	private JLabel jLabelImage, jLabelImag;
 	

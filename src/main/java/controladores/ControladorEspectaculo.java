@@ -57,7 +57,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 
 		List<DtEspectaculo> listEspectaculosDt = new ArrayList<DtEspectaculo>();
 
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		for (Espectaculo e : plataforma.getEspectaculo()) {
 			System.out.println("ITERANDO EN :" + e.getNombre());
 			DtEspectaculo DtEspec = new DtEspectaculo(e.getArtista(), nombrePlataforma, e.getNombre(),
@@ -65,7 +65,7 @@ public class ControladorEspectaculo implements IControladorEspectaculo {
 					e.getRegistro(), e.getimageName());
 			listEspectaculosDt.add(DtEspec);
 		}
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 		return listEspectaculosDt;
 	}
 
