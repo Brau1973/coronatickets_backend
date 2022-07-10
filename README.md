@@ -2,7 +2,7 @@
 (Still working on it / todavia trabajando ) :construction_worker: :construction:
 
 
-![Animation](https://user-images.githubusercontent.com/55444408/178127429-9632e87f-24c8-40b9-a310-f725d4db907a.gif)
+![Animation](https://user-images.githubusercontent.com/55444408/178153541-8669b28b-9be1-41e1-87ae-a56d0c3e3f52.gif)
 
 
 ## -English
