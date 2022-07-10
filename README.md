@@ -1,6 +1,10 @@
 # coronatickets_backend :construction_worker: :construction_worker: :construction: :construction:
 (Still working on it / todavia trabajando ) :construction_worker: :construction:
 
+
+https://user-images.githubusercontent.com/55444408/178127313-92c9fc5d-3416-48b2-a928-c33c181cebdb.mp4
+
+
 ## -English
 
 ### General Project Description (coronatickets_backend - coronatickets_frontend)
