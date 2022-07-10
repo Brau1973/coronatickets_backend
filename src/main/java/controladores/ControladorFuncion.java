@@ -55,7 +55,7 @@ public class ControladorFuncion implements IControladorFuncion {
 		EntityManager em = conexion.getEntityManager();
 		
 		
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		for (Funcion f : listFunciones) {
 			List<String> artistas = new ArrayList<String>();
 			for (Artista a : f.getArtistas()) {
@@ -64,7 +64,7 @@ public class ControladorFuncion implements IControladorFuncion {
 			DtFuncion DtFuncion = new DtFuncion(f.getNombre(), f.getFecha(), f.getHoraInicio(), f.getRegistro(), artistas,f.getImageName());
 			listFuncionesDt.add(DtFuncion);
 		}
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 		return listFuncionesDt;
 	}
 

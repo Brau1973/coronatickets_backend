@@ -39,7 +39,6 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 	private List<String> listUsuariosStr;
 	private String imagenesSVPath = "C:\\Users\\Braulio\\Documents\\Brau2015\\Desarrollo\\Portfolio\\coronatickets_frontend\\coronaTicketsWeb\\WebContent\\imagenes\\Usuarios\\";
 	private String imagenesSVPathUser;
-	//IControladorUsuario iconU = Fabrica.getInstancia().getIControladorUsuario();
 	IControladorEspectaculo iconE = Fabrica.getInstancia().getIControladorEspectaculo();
 
 	// Constructor
@@ -72,12 +71,6 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 		miPanel.add(comboUsuarios);
 		comboUsuarios.addActionListener(this);
 		
-		/*
-		jLabelIamgeTxt = new JLabel("IMAGEN AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: ");
-		jLabelIamgeTxt.setBounds(10, 65, 140, 4);
-		miPanel.add(jLabelIamgeTxt);	
-		*/
-		
 		jtextarea = new JTextArea(25, 150);
 		Border border = BorderFactory.createLineBorder(Color.GRAY);
 		jtextarea.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -87,33 +80,9 @@ public class ConsultarUsuario extends JInternalFrame implements ActionListener {
 		jtextarea.setAutoscrolls(maximizable);
 		miPanel.add(jtextarea);
 		
-		/*
-		jLabelIamgeTxt = new JLabel("IMAGEN AAAAAAAAAAAAAAAAAAAAAAAAAA: ");
-		jLabelIamgeTxt.setBounds(350, 150, 140, 140);
-		miPanel.add(jLabelIamgeTxt);	
-		*/
-		
 		jLabelImage = new JLabel();
 		jLabelImage.setBounds(350, 150, 140, 140);
 		miPanel.add(jLabelImage);
-
-		// Tabla Funciones de espectulos
-		/*
-		 * DefaultTableModel model = new DefaultTableModel(data, header); tabUsuario =
-		 * new JTable(model); tabUsuario.setPreferredScrollableViewportSize(new
-		 * Dimension(40, 290)); JScrollPane jsPane = new JScrollPane(tabUsuario);
-		 * jsPane.setBounds(10, 180, 365, 118); jsPane.setVisible(false);
-		 * miPanel.add(jsPane, BorderLayout.SOUTH);
-		 */
-		// Click en tabUsuario
-		/*
-		 * tabUsuario.addMouseListener(new MouseAdapter(){ public void
-		 * mouseClicked(MouseEvent evt){ int fila =
-		 * tabUsuario.rowAtPoint(evt.getPoint());
-		 * txtNombre.setText(String.valueOf(tabUsuario.getValueAt(fila, 0)));
-		 * txtApellido.setText(String.valueOf(tabUsuario.getValueAt(fila, 1))); } });
-		 */
-		// iniciaComboBoxU();
 	}
 
 	// Inicializar ComboBox
